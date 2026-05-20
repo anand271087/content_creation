@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1920px; overflow: hidden; background: #08090f; font-family: 'Montserrat', sans-serif; }
+
+  .root {
+    width: 1080px;
+    height: 1920px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 60px;
+  }
+
+  /* Title */
+  .diagram-title {
+    font-size: 46px;
+    font-weight: 900;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 60px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  .diagram-title em { font-style: normal; color: #60A5FA; }
+
+  /* Container for nodes + connectors */
+  .diagram-body {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* Each node row = node box */
+  .diag-node {
+    width: 880px;
+    background: #111827;
+    border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 36px 40px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    position: relative;
+    opacity: 0;
+    transform: translateX(60px);
+  }
+
+  /* Left accent bar — color set per-node via inline style */
+  .node-accent {
+    width: 6px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 20px 0 0 20px;
+    transform-origin: top center;
+    scaleY: 0;
+  }
+
+  .node-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .node-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .node-name {
+    font-size: 36px;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .node-sub {
+    font-size: 26px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    margin-top: 8px;
+    line-height: 1.3;
+  }
+
+  .node-badge {
+    font-size: 24px;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  /* Connector between nodes */
+  .diag-connector {
+    width: 3px;
+    height: 70px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+    position: relative;
+    transform-origin: top center;
+    scaleY: 0;
+    opacity: 0;
+  }
+
+  /* Arrow tip at bottom of connector */
+  .diag-connector::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid rgba(255,255,255,0.2);
+  }
+
+  /* Progress pill when node is "active" */
+  .progress-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16,185,129,0.12);
+    border: 1px solid rgba(16,185,129,0.3);
+    border-radius: 20px;
+    padding: 8px 18px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #10B981;
+    opacity: 0;
+    flex-shrink: 0;
+  }
+  .progress-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10B981;
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+<div
+  id="root"
+  class="root clip"
+  data-composition-id="diagram-flow"
+  data-start="0"
+  data-width="1080"
+  data-height="1920"
+  data-duration="__DURATION__"
+  data-track-index="0"
+>
+  <div class="diagram-title" id="diagTitle">__DIAGRAM_TITLE__</div>
+
+  <div class="diagram-body" id="diagBody">
+    <!-- Injected by generator: alternating .diag-node and .diag-connector divs -->
+    __DIAGRAM_NODES_HTML__
+  </div>
+</div>
+
+<script>
+(function () {
+  window.__timelines = window.__timelines || {};
+  var tl = gsap.timeline({ paused: true });
+
+  // Title
+  tl.to('#diagTitle', { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0);
+
+  // Animate each node + connector in sequence
+  var nodes = document.querySelectorAll('.diag-node');
+  var connectors = document.querySelectorAll('.diag-connector');
+  var pills = document.querySelectorAll('.progress-pill');
+  var accents = document.querySelectorAll('.node-accent');
+
+  nodes.forEach(function (node, i) {
+    var t = 0.4 + i * 0.55;
+
+    // Node slides in from right
+    tl.to(node, { opacity: 1, x: 0, duration: 0.45, ease: 'expo.out' }, t);
+
+    // Accent bar draws down
+    var accent = node.querySelector('.node-accent');
+    if (accent) {
+      tl.fromTo(accent, { scaleY: 0 }, { scaleY: 1, duration: 0.35, ease: 'power2.out', transformOrigin: 'top center' }, t + 0.05);
+    }
+
+    // Last node gets progress pill
+    var pill = node.querySelector('.progress-pill');
+    if (pill) {
+      tl.to(pill, { opacity: 1, duration: 0.3, ease: 'power2.out' }, t + 0.3);
+    }
+
+    // Connector draws after node
+    if (connectors[i]) {
+      tl.to(connectors[i], {
+        opacity: 1,
+        scaleY: 1,
+        duration: 0.35,
+        ease: 'power2.out',
+        transformOrigin: 'top center'
+      }, t + 0.4);
+    }
+  });
+
+  // Subtle hover shimmer on last node
+  var lastNode = nodes[nodes.length - 1];
+  if (lastNode) {
+    var startT = 0.4 + (nodes.length - 1) * 0.55 + 0.5;
+    tl.to(lastNode, {
+      boxShadow: '0 0 40px rgba(99,102,241,0.2)',
+      duration: 0.8,
+      ease: 'sine.inOut',
+      yoyo: true,
+      repeat: -1
+    }, startT);
+  }
+
+  window.__timelines['diagram-flow'] = tl;
+})();
+</script>
+</body>
+</html>

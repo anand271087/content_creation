@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=880, height=1100" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600;700&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 880px; height: 1100px;
+        overflow: hidden;
+        background: #080b06;
+      }
+      #root {
+        position: relative;
+        width: 880px; height: 1100px;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        padding: 60px 80px;
+      }
+      #glow {
+        position: absolute;
+        width: 600px; height: 400px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,180,50,0.12) 0%, transparent 70%);
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      #quote-mark {
+        font-size: 80px;
+        font-family: Georgia, serif;
+        color: rgba(255,180,50,0.3);
+        line-height: 0.8;
+        margin-bottom: 16px;
+        opacity: 0;
+      }
+      #quote-text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 36px; font-weight: 900;
+        color: #ffffff;
+        text-align: center;
+        line-height: 1.35;
+        letter-spacing: -0.3px;
+        opacity: 0;
+      }
+      #quote-line {
+        width: 120px; height: 4px;
+        background: linear-gradient(90deg, rgba(255,180,50,0), rgba(255,180,50,1), rgba(255,180,50,0));
+        border-radius: 2px;
+        margin-top: 36px;
+        opacity: 0;
+      }
+      .word { display: inline; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="880"
+      data-height="1100"
+    >
+      <div id="glow"></div>
+      <div id="quote-mark">"</div>
+      <div id="quote-text"></div>
+      <div id="quote-line"></div>
+    </div>
+
+    <script>
+      window.__SECTION_DATA__ = __SECTION_DATA_PLACEHOLDER__;
+
+      const d = window.__SECTION_DATA__;
+      const quoteText = d.grand_takeaway_line || d.spoken || "";
+
+      // Split into word spans for word-by-word reveal
+      const quoteEl = document.getElementById("quote-text");
+      const words = quoteText.split(" ");
+      quoteEl.innerHTML = words.map((w, i) =>
+        `<span id="w${i}" class="word" style="opacity:0">${w}${i < words.length - 1 ? '&nbsp;' : ''}</span>`
+      ).join("");
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Glow fades in
+      tl.to("#glow", { opacity: 1, scale: 1.2, duration: 1.5, ease: "power2.out" }, 0)
+        // Quote mark slides down
+        .fromTo("#quote-mark",
+          { y: -20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
+          0.2
+        )
+        // Container visible
+        .to("#quote-text", { opacity: 1, duration: 0.1 }, 0.6)
+        // Words stagger in
+        .fromTo(words.map((_, i) => `#w${i}`),
+          { opacity: 0, y: 8 },
+          { opacity: 1, y: 0, duration: 0.35, stagger: 0.12, ease: "power2.out" },
+          0.7
+        )
+        // Line draws in at end
+        .to("#quote-line", { opacity: 1, scaleX: 1, duration: 0.6, ease: "power3.out" },
+          0.7 + words.length * 0.12
+        );
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

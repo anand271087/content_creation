@@ -1,0 +1,14 @@
+{
+  "name": "content-creation-scripts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "screen-broll": "node scripts/screen_broll.mjs",
+    "save-auth": "node scripts/save_browser_auth.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.90.0",
+    "dotenv": "^16.4.5",
+    "playwright": "^1.44.0"
+  }
+}

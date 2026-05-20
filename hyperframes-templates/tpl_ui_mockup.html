@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0a12; font-family: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace; }
+
+  .root {
+    width: 1080px;
+    height: 1920px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    gap: 0;
+  }
+
+  /* ── Browser Chrome ── */
+  .browser-chrome {
+    width: 100%;
+    background: #1e1e2e;
+    border-radius: 24px 24px 0 0;
+    border: 1.5px solid rgba(255,255,255,0.1);
+    border-bottom: none;
+    padding: 22px 28px 18px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  .traffic-lights {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .tl { width: 18px; height: 18px; border-radius: 50%; }
+  .tl.red    { background: #FF5F57; }
+  .tl.yellow { background: #FFBD2E; }
+  .tl.green  { background: #28CA41; }
+
+  .url-bar {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .url-lock { font-size: 22px; opacity: 0.4; }
+  .url-text {
+    font-size: 26px;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Fira Code', monospace;
+    letter-spacing: 0;
+  }
+  .url-accent { color: __ACCENT_COLOR__; opacity: 0.9; }
+
+  /* ── App Body ── */
+  .app-body {
+    width: 100%;
+    background: #13131f;
+    border: 1.5px solid rgba(255,255,255,0.1);
+    border-top: none;
+    border-radius: 0 0 24px 24px;
+    display: flex;
+    height: 1200px;
+    overflow: hidden;
+    opacity: 0;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 80px;
+    background: #0f0f1a;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 0;
+    gap: 28px;
+    flex-shrink: 0;
+  }
+  .sb-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: rgba(255,255,255,0.3);
+    cursor: pointer;
+  }
+  .sb-icon.active {
+    background: rgba(255,255,255,0.08);
+    color: __ACCENT_COLOR__;
+  }
+
+  /* Canvas */
+  .canvas {
+    flex: 1;
+    position: relative;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+
+  /* Grid dots background */
+  .canvas::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  /* ── Workflow Nodes ── */
+  .workflow-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .wf-node {
+    width: 200px;
+    background: #1a1a2e;
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .wf-node.active-node {
+    border-color: __ACCENT_COLOR__;
+    box-shadow: 0 0 30px __ACCENT_COLOR__40;
+  }
+
+  .node-icon-wrap {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    background: rgba(255,255,255,0.06);
+  }
+  .active-node .node-icon-wrap { background: __ACCENT_COLOR__22; }
+
+  .node-label {
+    font-family: 'Montserrat', -apple-system, sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .node-status {
+    font-family: 'Fira Code', monospace;
+    font-size: 20px;
+    color: rgba(255,255,255,0.35);
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 6px;
+  }
+  .active-node .node-status { color: __ACCENT_COLOR__; background: __ACCENT_COLOR__15; }
+
+  /* Running indicator */
+  .run-dot {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: __ACCENT_COLOR__;
+    opacity: 0;
+  }
+
+  /* SVG connector canvas */
+  .svg-connectors {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .connector-path {
+    fill: none;
+    stroke: rgba(255,255,255,0.2);
+    stroke-width: 2.5;
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    marker-end: url(#arrowhead);
+  }
+
+  /* Execution log strip */
+  .exec-log {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    background: #0a0a14;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 20px 28px;
+    font-family: 'Fira Code', monospace;
+    font-size: 22px;
+    color: rgba(255,255,255,0.4);
+    opacity: 0;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .log-prompt { color: __ACCENT_COLOR__; }
+  .log-text { color: rgba(255,255,255,0.6); }
+
+  /* Tool name badge */
+  .tool-badge {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    background: __ACCENT_COLOR__22;
+    border: 1px solid __ACCENT_COLOR__55;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: __ACCENT_COLOR__;
+    opacity: 0;
+  }
+
+  /* Status bar */
+  .status-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 40px;
+    opacity: 0;
+  }
+  .status-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+  }
+  .status-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .status-dot.green { background: #10B981; }
+  .status-dot.yellow { background: #F59E0B; }
+  .status-dot.blue { background: __ACCENT_COLOR__; }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+<div
+  id="root"
+  class="root clip"
+  data-composition-id="ui-mockup"
+  data-start="0"
+  data-width="1080"
+  data-height="1920"
+  data-duration="__DURATION__"
+  data-track-index="0"
+>
+  <!-- Browser Chrome -->
+  <div class="browser-chrome" id="chrome">
+    <div class="traffic-lights">
+      <div class="tl red"></div>
+      <div class="tl yellow"></div>
+      <div class="tl green"></div>
+    </div>
+    <div class="url-bar">
+      <span class="url-lock">🔒</span>
+      <span class="url-text"><span class="url-accent">__TOOL_URL_ACCENT__</span>__TOOL_URL_REST__</span>
+    </div>
+  </div>
+
+  <!-- App Body -->
+  <div class="app-body" id="appBody">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sb-icon active">⚡</div>
+      <div class="sb-icon">📋</div>
+      <div class="sb-icon">🔗</div>
+      <div class="sb-icon">⚙️</div>
+    </div>
+
+    <!-- Canvas -->
+    <div class="canvas">
+      <div class="tool-badge" id="toolBadge">__TOOL_NAME__</div>
+
+      <!-- SVG connectors overlay -->
+      <svg class="svg-connectors" viewBox="0 0 900 1200" preserveAspectRatio="none">
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="rgba(255,255,255,0.25)" />
+          </marker>
+        </defs>
+        <!-- Arrow 1: node1 → node2 -->
+        <path class="connector-path" id="conn1" d="M 295,480 L 455,480" />
+        <!-- Arrow 2: node2 → node3 -->
+        <path class="connector-path" id="conn2" d="M 590,480 L 750,480" />
+      </svg>
+
+      <!-- Workflow Row -->
+      <div class="workflow-row">
+        <!-- Node 1 -->
+        <div class="wf-node" id="node1">
+          <div class="run-dot" id="dot1"></div>
+          <div class="node-icon-wrap">__NODE_1_ICON__</div>
+          <div class="node-label">__NODE_1__</div>
+          <div class="node-status">ready</div>
+        </div>
+
+        <!-- Spacer for arrows -->
+        <div style="width:110px;"></div>
+
+        <!-- Node 2 -->
+        <div class="wf-node active-node" id="node2">
+          <div class="run-dot" id="dot2"></div>
+          <div class="node-icon-wrap">__NODE_2_ICON__</div>
+          <div class="node-label">__NODE_2__</div>
+          <div class="node-status">running</div>
+        </div>
+
+        <!-- Spacer for arrows -->
+        <div style="width:110px;"></div>
+
+        <!-- Node 3 -->
+        <div class="wf-node" id="node3">
+          <div class="run-dot" id="dot3"></div>
+          <div class="node-icon-wrap">__NODE_3_ICON__</div>
+          <div class="node-label">__NODE_3__</div>
+          <div class="node-status">waiting</div>
+        </div>
+      </div>
+
+      <!-- Execution log -->
+      <div class="exec-log" id="execLog">
+        <span class="log-prompt">$</span>
+        <span class="log-text" id="logText">__LOG_LINE__</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status bar below browser -->
+  <div class="status-bar" id="statusBar">
+    <div class="status-item"><div class="status-dot green"></div>Workflow Active</div>
+    <div class="status-item"><div class="status-dot blue"></div>__TOOL_NAME__</div>
+    <div class="status-item"><div class="status-dot yellow"></div>Live</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  window.__timelines = window.__timelines || {};
+  var tl = gsap.timeline({ paused: true });
+
+  // 1. Browser chrome slides down
+  tl.to('#chrome', { opacity: 1, y: 0, duration: 0.45, ease: 'expo.out' }, 0.1);
+
+  // 2. App body fades in
+  tl.to('#appBody', { opacity: 1, duration: 0.35, ease: 'power2.out' }, 0.4);
+
+  // 3. Tool badge
+  tl.to('#toolBadge', { opacity: 1, duration: 0.3, ease: 'power2.out' }, 0.6);
+
+  // 4. Node 1 drops in
+  tl.to('#node1', { opacity: 1, y: 0, duration: 0.4, ease: 'back.out(1.7)' }, 0.8);
+  tl.to('#dot1', { opacity: 1, duration: 0.2 }, 1.0);
+  tl.to('#dot1', { opacity: 0, duration: 0.3 }, 1.4);
+
+  // 5. Connector 1 draws
+  tl.to('#conn1', { strokeDashoffset: 0, duration: 0.4, ease: 'power2.out' }, 1.1);
+
+  // 6. Node 2 drops in (active/highlighted)
+  tl.to('#node2', { opacity: 1, y: 0, duration: 0.4, ease: 'back.out(1.7)' }, 1.4);
+  tl.to('#dot2', { opacity: 1, duration: 0.2 }, 1.6);
+
+  // 7. Connector 2 draws
+  tl.to('#conn2', { strokeDashoffset: 0, duration: 0.4, ease: 'power2.out' }, 1.9);
+
+  // 8. Node 3 drops in
+  tl.to('#node3', { opacity: 1, y: 0, duration: 0.4, ease: 'back.out(1.7)' }, 2.2);
+
+  // 9. Exec log appears
+  tl.to('#execLog', { opacity: 1, duration: 0.3, ease: 'power2.out' }, 2.6);
+
+  // 10. Node 2 dot pulses (active process indicator)
+  tl.to('#dot2', {
+    scale: 1.6,
+    opacity: 0.6,
+    duration: 0.5,
+    ease: 'sine.inOut',
+    yoyo: true,
+    repeat: -1
+  }, 1.8);
+
+  // 11. Status bar
+  tl.to('#statusBar', { opacity: 1, duration: 0.4, ease: 'sine.inOut' }, 3.0);
+
+  // 12. Subtle node 2 glow pulse
+  tl.to('#node2', {
+    boxShadow: '0 0 50px __ACCENT_COLOR__55',
+    duration: 0.8,
+    ease: 'sine.inOut',
+    yoyo: true,
+    repeat: -1
+  }, 2.0);
+
+  window.__timelines['ui-mockup'] = tl;
+})();
+</script>
+</body>
+</html>

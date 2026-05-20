@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=880, height=1100" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 880px; height: 1100px; overflow: hidden; background: #0d1117; }
+      #root {
+        position: relative; width: 880px; height: 1100px;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center; padding: 50px 60px;
+      }
+      /* subtle grid bg */
+      #grid-bg {
+        position: absolute; inset: 0; pointer-events: none;
+        background-image:
+          linear-gradient(rgba(48,160,90,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(48,160,90,0.04) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+      #terminal-window {
+        width: 780px; position: relative;
+        background: #161b22;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.08);
+        overflow: hidden; opacity: 0;
+        box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(48,160,90,0.1);
+      }
+      #titlebar {
+        background: #21262d; padding: 14px 20px;
+        display: flex; align-items: center; gap: 8px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .dot { width: 12px; height: 12px; border-radius: 50%; }
+      .dot-r { background: #ff5f57; }
+      .dot-y { background: #ffbd2e; }
+      .dot-g { background: #28c840; }
+      #win-title {
+        font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+        color: rgba(255,255,255,0.35); margin: 0 auto; letter-spacing: 0.5px;
+      }
+      #body { padding: 30px 36px 36px; min-height: 300px; }
+      .t-line {
+        font-family: 'JetBrains Mono', 'Courier New', monospace;
+        font-size: 22px; line-height: 1.75; display: flex; align-items: baseline;
+      }
+      .prompt { color: #3fb950; margin-right: 8px; flex-shrink: 0; }
+      .cmd-text { color: #e6edf3; }
+      .out { color: rgba(230,237,243,0.55); font-size: 20px; opacity: 1; }
+      .out-ok { color: #3fb950; }
+      .out-info { color: rgba(77,171,247,0.8); }
+      #cursor {
+        display: inline-block; width: 2px; height: 22px;
+        background: #3fb950; margin-left: 2px; vertical-align: middle;
+      }
+      #line-group { display: flex; flex-direction: column; gap: 0; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="880"
+      data-height="1100"
+    >
+      <div id="grid-bg"></div>
+      <div id="terminal-window">
+        <div id="titlebar">
+          <div class="dot dot-r"></div>
+          <div class="dot dot-y"></div>
+          <div class="dot dot-g"></div>
+          <div id="win-title">terminal — automatewithanand</div>
+        </div>
+        <div id="body">
+          <div class="t-line">
+            <span class="prompt">$</span>
+            <span id="cmd-text" class="cmd-text"></span><span id="cursor"></span>
+          </div>
+          <div id="line-group"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__SECTION_DATA__ = __SECTION_DATA_PLACEHOLDER__;
+
+      const d = window.__SECTION_DATA__;
+      const lines = d.on_screen_text || [];
+      const dur = d.duration_sec || 8;
+
+      // Main command from first on_screen_text (lowercase, safe chars)
+      const rawCmd = (lines[0] || d.spoken.split(".")[0]).replace(/[^a-zA-Z0-9 _\-\.\/]/g, "").toLowerCase();
+      const cmdEl = document.getElementById("cmd-text");
+
+      // Output lines from remaining items
+      const outputItems = lines.slice(1);
+      const group = document.getElementById("line-group");
+
+      outputItems.forEach((text, i) => {
+        const row = document.createElement("div");
+        row.className = "t-line";
+        const isOk = text.includes("✓") || text.toLowerCase().startsWith("done") || text.toLowerCase().startsWith("success");
+        const isInfo = text.startsWith("→") || text.startsWith("#");
+        row.innerHTML = `<span class="${isOk ? 'out-ok' : isInfo ? 'out-info' : 'out'}" id="out-${i}" style="opacity:0">${text}</span>`;
+        group.appendChild(row);
+      });
+
+      // Success line
+      const successRow = document.createElement("div");
+      successRow.className = "t-line";
+      successRow.innerHTML = `<span class="out-ok" id="out-success" style="opacity:0">✓ Complete</span>`;
+      group.appendChild(successRow);
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Window slides up + fades in
+      tl.fromTo("#terminal-window",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" },
+        0.1
+      );
+
+      // Type each character
+      const chars = rawCmd.split("");
+      const charDelay = Math.min(0.055, (dur * 0.3) / Math.max(chars.length, 1));
+      chars.forEach((ch, i) => {
+        tl.call(() => { cmdEl.textContent += ch; }, [], 0.7 + i * charDelay);
+      });
+
+      // Blink cursor during typing
+      tl.to("#cursor", {
+        opacity: 0, duration: 0.18,
+        repeat: Math.ceil(chars.length * 0.5),
+        yoyo: true
+      }, 0.7);
+
+      const typeDone = 0.7 + chars.length * charDelay;
+      tl.to("#cursor", { opacity: 0, duration: 0.1 }, typeDone + 0.1);
+
+      // Output lines stagger in
+      outputItems.forEach((_, i) => {
+        tl.to(`#out-${i}`, { opacity: 1, duration: 0.3, ease: "power2.out" }, typeDone + 0.25 + i * 0.35);
+      });
+      tl.to("#out-success", { opacity: 1, duration: 0.4, ease: "power2.out" }, typeDone + 0.35 + outputItems.length * 0.35);
+      tl.to({}, { duration: 0.001 }, dur - 0.001);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Terminal</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0d1117;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 880px;
+    height: 1100px;
+    overflow: hidden;
+    font-family: 'Fira Code', 'JetBrains Mono', 'Cascadia Code', 'SF Mono', 'Consolas', monospace;
+  }
+
+  .window {
+    width: 860px;
+    height: 1060px;
+    background: #0d1117;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow:
+      0 24px 80px rgba(0,0,0,0.7),
+      0 0 0 1px rgba(255,255,255,0.05),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* macOS-style titlebar */
+  .titlebar {
+    height: 52px;
+    background: linear-gradient(180deg, #1e222a 0%, #191d23 100%);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    flex-shrink: 0;
+    gap: 10px;
+    position: relative;
+  }
+
+  .dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+  .dot-red    { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green  { background: #28c840; }
+
+  .title-text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.45);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  /* Terminal body */
+  .terminal-body {
+    flex: 1;
+    padding: 24px 28px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: #0d1117;
+  }
+
+  /* Prompt line */
+  .prompt-line {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 6px;
+    flex-shrink: 0;
+  }
+
+  .prompt-user  { color: #58a6ff; font-size: 17px; font-weight: 600; }
+  .prompt-at    { color: #8b949e; font-size: 17px; }
+  .prompt-host  { color: #3fb950; font-size: 17px; font-weight: 600; }
+  .prompt-path  { color: #8b949e; font-size: 17px; }
+  .prompt-arrow { color: #f78166; font-size: 18px; font-weight: 700; margin: 0 6px 0 4px; }
+
+  .command-text {
+    color: #e6edf3;
+    font-size: 17px;
+    word-break: break-word;
+    white-space: pre-wrap;
+    line-height: 1.5;
+  }
+
+  /* Cursor */
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    height: 18px;
+    background: #58a6ff;
+    vertical-align: text-bottom;
+    margin-left: 1px;
+    opacity: 1;
+    animation: blink 1.1s step-end infinite;
+  }
+  .cursor.hidden { display: none; }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  /* Output area */
+  .output {
+    margin-top: 10px;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .output-line {
+    font-size: 15.5px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /* ANSI color classes */
+  .c-default  { color: #e6edf3; }
+  .c-dim      { color: #8b949e; }
+  .c-success  { color: #3fb950; }
+  .c-warning  { color: #d29922; }
+  .c-error    { color: #f85149; }
+  .c-info     { color: #58a6ff; }
+  .c-accent   { color: #bc8cff; }
+  .c-cyan     { color: #39d3f2; }
+  .c-orange   { color: #ffa657; }
+
+  /* Section header inside output */
+  .output-line.section-header {
+    color: #58a6ff;
+    font-weight: 700;
+    font-size: 16px;
+    margin-top: 4px;
+  }
+
+  /* Separator line */
+  .output-line.separator {
+    color: #21262d;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    display: inline-block;
+    color: #3fb950;
+  }
+</style>
+</head>
+<body>
+<div class="window" id="terminal-window">
+  <div class="titlebar">
+    <div class="dot dot-red"></div>
+    <div class="dot dot-yellow"></div>
+    <div class="dot dot-green"></div>
+    <div class="title-text" id="title-text">zsh — 88×32</div>
+  </div>
+  <div class="terminal-body">
+    <div class="prompt-line" id="prompt-line">
+      <span class="prompt-user">anand</span>
+      <span class="prompt-at">@</span>
+      <span class="prompt-host">macbook</span>
+      <span class="prompt-path"> ~/projects</span>
+      <span class="prompt-arrow">❯</span>
+      <span class="command-text" id="command-text"></span>
+      <span class="cursor" id="cursor"></span>
+    </div>
+    <div class="output" id="output"></div>
+  </div>
+</div>
+
+<script>
+// ─── State ───────────────────────────────────────────────────────────────────
+let _commandText = '';
+let _outputLines = [];
+
+// ─── Public API (called by run_terminal_demo.mjs via page.evaluate) ──────────
+
+window.termAPI = {
+
+  /** Set the titlebar text */
+  setTitle(text) {
+    document.getElementById('title-text').textContent = text;
+  },
+
+  /** Append one character to the command */
+  typeChar(ch) {
+    _commandText += ch;
+    document.getElementById('command-text').textContent = _commandText;
+  },
+
+  /** Set full command text at once (used for initial state restore) */
+  setCommand(text) {
+    _commandText = text;
+    document.getElementById('command-text').textContent = text;
+  },
+
+  /** Hide the blinking cursor (command running) */
+  hideCursor() {
+    document.getElementById('cursor').classList.add('hidden');
+  },
+
+  /** Show the blinking cursor */
+  showCursor() {
+    document.getElementById('cursor').classList.remove('hidden');
+  },
+
+  /** Append one output line */
+  appendLine(text, colorClass) {
+    const div = document.createElement('div');
+    div.className = 'output-line ' + (colorClass || 'c-default');
+    div.textContent = text;
+    document.getElementById('output').appendChild(div);
+    _outputLines.push({ text, colorClass });
+  },
+
+  /** Clear all output */
+  clearOutput() {
+    document.getElementById('output').innerHTML = '';
+    _outputLines = [];
+  },
+
+  /** Clear command + output — reset to empty prompt */
+  reset() {
+    _commandText = '';
+    _outputLines = [];
+    document.getElementById('command-text').textContent = '';
+    document.getElementById('output').innerHTML = '';
+    document.getElementById('cursor').classList.remove('hidden');
+  },
+
+  /** Restore full state (used after page reload edge cases) */
+  restore(cmd, lines) {
+    this.reset();
+    this.setCommand(cmd);
+    for (const { text, colorClass } of lines) {
+      this.appendLine(text, colorClass);
+    }
+  },
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=880, height=1100" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Inter:wght@400;600&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 880px; height: 1100px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #060e1c 0%, #0d1b2e 60%, #050b14 100%);
+      }
+      #root {
+        position: relative;
+        width: 880px; height: 1100px;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        padding: 80px 70px;
+      }
+      #eyebrow {
+        font-family: 'Inter', sans-serif;
+        font-size: 18px; font-weight: 600;
+        letter-spacing: 4px; text-transform: uppercase;
+        color: #E31A1A;
+        margin-bottom: 32px;
+        opacity: 0;
+      }
+      #main-text {
+        font-family: 'Montserrat', 'Impact', sans-serif;
+        font-size: 82px; font-weight: 900;
+        text-transform: uppercase;
+        color: #ffffff;
+        line-height: 1.05;
+        text-align: center;
+        letter-spacing: -1px;
+        opacity: 0;
+        transform-origin: center bottom;
+      }
+      #accent-line {
+        width: 80px; height: 5px;
+        background: #E31A1A;
+        border-radius: 3px;
+        margin-top: 28px;
+        transform-origin: left center;
+        opacity: 0;
+      }
+      #sub-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 26px; font-weight: 600;
+        color: rgba(255,255,255,0.55);
+        text-align: center;
+        margin-top: 28px;
+        line-height: 1.4;
+        max-width: 680px;
+        opacity: 0;
+      }
+      #bg-glow {
+        position: absolute;
+        width: 500px; height: 500px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(227,26,26,0.08) 0%, transparent 70%);
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="880"
+      data-height="1100"
+    >
+      <div id="bg-glow"></div>
+      <div id="eyebrow"></div>
+      <div id="main-text"></div>
+      <div id="accent-line"></div>
+      <div id="sub-text"></div>
+    </div>
+
+    <script>
+      window.__SECTION_DATA__ = __SECTION_DATA_PLACEHOLDER__;
+
+      const d = window.__SECTION_DATA__;
+      const lines = d.on_screen_text || [];
+      const label = d.label || "";
+
+      document.getElementById("eyebrow").textContent = label;
+      document.getElementById("main-text").textContent = lines[0] || d.spoken.split(" ").slice(0, 5).join(" ").toUpperCase();
+      document.getElementById("sub-text").textContent = lines.slice(1).join("  ·  ") || "";
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.to("#bg-glow", { opacity: 1, scale: 1.3, duration: 1.5, ease: "power2.out" }, 0)
+        .to("#eyebrow", { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.1)
+        .fromTo("#main-text",
+          { y: 60, opacity: 0, scale: 0.85 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.5)" },
+          0.3
+        )
+        .fromTo("#accent-line",
+          { scaleX: 0, opacity: 0 },
+          { scaleX: 1, opacity: 1, duration: 0.5, ease: "power3.out" },
+          0.85
+        )
+        .to("#sub-text", { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 1.0);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

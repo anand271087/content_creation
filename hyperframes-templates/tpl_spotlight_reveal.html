@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=880, height=1100" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600;700&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 880px; height: 1100px; overflow: hidden; background: #000000; }
+      #root { position: relative; width: 880px; height: 1100px; }
+
+      /* Text layer — sits below the mask */
+      #reveal-content {
+        position: absolute; inset: 0;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        padding: 80px 80px;
+        background: linear-gradient(160deg, #080610 0%, #040208 100%);
+      }
+      #pre-label {
+        font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600;
+        letter-spacing: 6px; text-transform: uppercase;
+        color: rgba(255,255,255,0.3); margin-bottom: 32px;
+        opacity: 0;
+      }
+      #reveal-text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 68px; font-weight: 900;
+        color: #ffffff; text-align: center;
+        line-height: 1.15; letter-spacing: -1.5px;
+        text-shadow: 0 0 60px rgba(255,255,255,0.2);
+        opacity: 0;
+      }
+      #reveal-sub {
+        font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 600;
+        color: rgba(255,255,255,0.45); text-align: center;
+        margin-top: 32px; line-height: 1.45; max-width: 620px;
+        opacity: 0;
+      }
+
+      /* Black overlay with a radial "hole" (spotlight) */
+      #spotlight-mask {
+        position: absolute; inset: 0; pointer-events: none; z-index: 20;
+        background: radial-gradient(
+          circle at 50% 50%,
+          transparent 0px,
+          transparent 0px,
+          rgba(0,0,0,0.97) 0px
+        );
+      }
+
+      /* Warm rim glow around spotlight */
+      #spotlight-glow {
+        position: absolute; z-index: 15;
+        width: 500px; height: 500px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,200,80,0.06) 0%, transparent 70%);
+        top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+        pointer-events: none; opacity: 0;
+      }
+
+      /* Dust particles — thin lines radiating from center */
+      #dust {
+        position: absolute; inset: 0; z-index: 18; pointer-events: none; opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="880"
+      data-height="1100"
+    >
+      <div id="reveal-content">
+        <div id="pre-label"></div>
+        <div id="reveal-text"></div>
+        <div id="reveal-sub"></div>
+      </div>
+      <div id="spotlight-glow"></div>
+      <svg id="dust" viewBox="0 0 880 1100" xmlns="http://www.w3.org/2000/svg">
+        <line x1="440" y1="550" x2="440" y2="100" stroke="rgba(255,200,80,0.06)" stroke-width="1"/>
+        <line x1="440" y1="550" x2="440" y2="1000" stroke="rgba(255,200,80,0.06)" stroke-width="1"/>
+        <line x1="440" y1="550" x2="100" y2="550" stroke="rgba(255,200,80,0.06)" stroke-width="1"/>
+        <line x1="440" y1="550" x2="780" y2="550" stroke="rgba(255,200,80,0.06)" stroke-width="1"/>
+        <line x1="440" y1="550" x2="180" y2="250" stroke="rgba(255,200,80,0.04)" stroke-width="1"/>
+        <line x1="440" y1="550" x2="700" y2="850" stroke="rgba(255,200,80,0.04)" stroke-width="1"/>
+        <line x1="440" y1="550" x2="700" y2="250" stroke="rgba(255,200,80,0.04)" stroke-width="1"/>
+        <line x1="440" y1="550" x2="180" y2="850" stroke="rgba(255,200,80,0.04)" stroke-width="1"/>
+      </svg>
+      <div id="spotlight-mask"></div>
+    </div>
+
+    <script>
+      window.__SECTION_DATA__ = __SECTION_DATA_PLACEHOLDER__;
+
+      const d = window.__SECTION_DATA__;
+      const lines = d.on_screen_text || [];
+      const dur = d.duration_sec || 8;
+
+      document.getElementById("pre-label").textContent = d.label || "";
+      document.getElementById("reveal-text").textContent = lines[0] || d.grand_takeaway_line || d.spoken.split(".")[0];
+      document.getElementById("reveal-sub").textContent = lines[1] || "";
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      const maskEl = document.getElementById("spotlight-mask");
+
+      // Animate spotlight by growing the transparent circle radius in the gradient
+      const spotObj = { r: 0 };
+      tl.to(spotObj, {
+        r: 420,
+        duration: 1.4,
+        ease: "power2.out",
+        onUpdate: () => {
+          const r = Math.round(spotObj.r);
+          maskEl.style.background = `radial-gradient(
+            circle at 50% 50%,
+            transparent 0px,
+            transparent ${r}px,
+            rgba(0,0,0,0.97) ${r}px
+          )`;
+        }
+      }, 0.3)
+
+      .to("#spotlight-glow", { opacity: 1, scale: 1, duration: 1.4, ease: "power2.out" }, 0.3)
+      .to("#dust", { opacity: 1, duration: 0.8, ease: "power2.out" }, 0.5)
+
+      // Content reveals as spotlight opens
+      .to("#pre-label", { opacity: 1, duration: 0.5, ease: "power2.out" }, 0.8)
+      .fromTo("#reveal-text",
+        { scale: 0.85, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.7, ease: "back.out(1.6)" },
+        1.0
+      )
+      .to("#reveal-sub", { opacity: 1, duration: 0.6, ease: "power2.out" }, 1.5)
+
+      // Spotlight breathes — subtle pulse
+      .to(spotObj, {
+        r: 440,
+        duration: 1.5,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true,
+        onUpdate: () => {
+          const r = Math.round(spotObj.r);
+          maskEl.style.background = `radial-gradient(
+            circle at 50% 50%,
+            transparent 0px,
+            transparent ${r}px,
+            rgba(0,0,0,0.97) ${r}px
+          )`;
+        }
+      }, 1.8)
+
+      .to({}, { duration: 0.001 }, dur - 0.001);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

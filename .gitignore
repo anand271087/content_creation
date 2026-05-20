@@ -1,0 +1,69 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Generated assets (large media + run-specific files — never committed)
+assets/broll/
+assets/avatar/
+assets/captions/
+assets/final/
+assets/analysis/
+assets/diagrams/
+assets/social/
+assets/screen_screenshots/
+assets/screen_timelines/
+assets/.screen_screenshots_tmp/
+assets/transcripts/
+assets/.browser_auth/
+assets/.screen_screenshots/
+assets/script_data.json
+assets/script_data.json.bak
+assets/heygen_input.txt
+assets/transcript.txt
+assets/transcript_raw.txt
+assets/remotion_props.json
+assets/remotion_debug_props.json
+assets/tts_preview.txt
+
+# Music placeholders — gitignored by default; commit only if you want them shared
+assets/music/*.mp3
+
+# Top-level run artifacts
+videos/
+logs/
+*.log
+pipeline_state.json
+transcript.txt
+
+# Auto-generated analyses + per-run script archives
+scripts/generated/
+scripts_json/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+
+# Node
+node_modules/
+remotion/node_modules/
+remotion/out/
+remotion/build/
+remotion/.next/
+
+# Build / framework caches
+.cache/
+.remotion/
+.next/
+.turbo/
+
+# Editor / OS / local agent state
+.DS_Store
+.vscode/
+.idea/
+*.swp
+.claude/settings.local.json

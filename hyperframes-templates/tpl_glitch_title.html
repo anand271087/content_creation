@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=880, height=1100" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Inter:wght@600&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 880px; height: 1100px; overflow: hidden; background: #020204; }
+      #root {
+        position: relative; width: 880px; height: 1100px;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+      }
+
+      /* Scanlines overlay */
+      #scanlines {
+        position: absolute; inset: 0; pointer-events: none; z-index: 50; opacity: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 3px,
+          rgba(0,0,0,0.35) 3px,
+          rgba(0,0,0,0.35) 4px
+        );
+      }
+      /* Noise vignette */
+      #vignette {
+        position: absolute; inset: 0; pointer-events: none; z-index: 10;
+        background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.75) 100%);
+        opacity: 0;
+      }
+      /* Red accent strip */
+      #accent-strip {
+        position: absolute; left: 0; top: 460px;
+        width: 0; height: 8px;
+        background: #E31A1A; z-index: 20; opacity: 0;
+      }
+      /* Main text layer — white */
+      #main-text {
+        font-family: 'Montserrat', 'Impact', sans-serif;
+        font-size: 88px; font-weight: 900;
+        text-transform: uppercase; color: #ffffff;
+        text-align: center; line-height: 1.05;
+        letter-spacing: -2px; max-width: 760px;
+        position: relative; z-index: 30; opacity: 0;
+      }
+      /* Glitch shadow layers */
+      #glitch-r {
+        position: absolute; z-index: 28;
+        font-family: 'Montserrat', 'Impact', sans-serif;
+        font-size: 88px; font-weight: 900;
+        text-transform: uppercase; color: rgba(255,30,30,0.75);
+        text-align: center; line-height: 1.05;
+        letter-spacing: -2px; max-width: 760px;
+        opacity: 0; pointer-events: none;
+        mix-blend-mode: screen;
+      }
+      #glitch-b {
+        position: absolute; z-index: 27;
+        font-family: 'Montserrat', 'Impact', sans-serif;
+        font-size: 88px; font-weight: 900;
+        text-transform: uppercase; color: rgba(30,120,255,0.65);
+        text-align: center; line-height: 1.05;
+        letter-spacing: -2px; max-width: 760px;
+        opacity: 0; pointer-events: none;
+        mix-blend-mode: screen;
+      }
+      #sub-text {
+        font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 600;
+        letter-spacing: 6px; text-transform: uppercase;
+        color: rgba(255,255,255,0.45); text-align: center;
+        margin-top: 32px; position: relative; z-index: 30; opacity: 0;
+      }
+      #label-bar {
+        position: absolute; bottom: 120px; left: 0; right: 0;
+        text-align: center; z-index: 30;
+        font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+        letter-spacing: 6px; text-transform: uppercase;
+        color: rgba(227,26,26,0.6); opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="880"
+      data-height="1100"
+    >
+      <div id="scanlines"></div>
+      <div id="vignette"></div>
+      <div id="accent-strip"></div>
+      <div id="glitch-r"></div>
+      <div id="glitch-b"></div>
+      <div id="main-text"></div>
+      <div id="sub-text"></div>
+      <div id="label-bar"></div>
+    </div>
+
+    <script>
+      window.__SECTION_DATA__ = __SECTION_DATA_PLACEHOLDER__;
+
+      const d = window.__SECTION_DATA__;
+      const lines = d.on_screen_text || [];
+      const dur = d.duration_sec || 8;
+
+      const mainText = (lines[0] || d.spoken.split(".")[0]).toUpperCase();
+      document.getElementById("main-text").textContent = mainText;
+      document.getElementById("glitch-r").textContent = mainText;
+      document.getElementById("glitch-b").textContent = mainText;
+      document.getElementById("sub-text").textContent = lines[1] || "";
+      document.getElementById("label-bar").textContent = d.label || "";
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Vignette + scanlines on
+      tl.to("#vignette", { opacity: 1, duration: 0.4 }, 0)
+        .to("#scanlines", { opacity: 1, duration: 0.3 }, 0)
+
+        // Text slams in
+        .fromTo("#main-text",
+          { scale: 1.15, opacity: 0, skewX: 3 },
+          { scale: 1, opacity: 1, skewX: 0, duration: 0.45, ease: "back.out(1.8)" },
+          0.2
+        )
+
+        // RGB split layers appear — offset horizontally
+        .to("#glitch-r", { opacity: 1, x: 5, duration: 0.1 }, 0.2)
+        .to("#glitch-b", { opacity: 1, x: -5, duration: 0.1 }, 0.2)
+
+        // Glitch burst 1 — fast horizontal jerk
+        .to("#main-text", { x: -8, duration: 0.05, ease: "none" }, 0.65)
+        .to("#glitch-r", { x: 14, duration: 0.05 }, 0.65)
+        .to("#glitch-b", { x: -14, duration: 0.05 }, 0.65)
+        .to("#main-text", { x: 5, duration: 0.04, ease: "none" }, 0.70)
+        .to("#main-text", { x: 0, duration: 0.06, ease: "none" }, 0.74)
+        .to("#glitch-r", { x: 5, duration: 0.06 }, 0.74)
+        .to("#glitch-b", { x: -5, duration: 0.06 }, 0.74)
+
+        // Red accent strip sweeps across
+        .to("#accent-strip", { opacity: 1, width: 880, duration: 0.3, ease: "power3.out" }, 0.55)
+        .to("#accent-strip", { opacity: 0, duration: 0.2, ease: "power2.in" }, 0.85)
+
+        // Sub text fades in
+        .to("#sub-text", { opacity: 1, duration: 0.5, ease: "power2.out" }, 0.9)
+        .to("#label-bar", { opacity: 1, duration: 0.5, ease: "power2.out" }, 1.1)
+
+        // Glitch burst 2 — late  (around 2/3 through clip)
+        .to("#main-text", { x: 6, skewX: -2, duration: 0.05 }, dur * 0.65)
+        .to("#glitch-r", { x: 12, duration: 0.05 }, dur * 0.65)
+        .to("#glitch-b", { x: -12, duration: 0.05 }, dur * 0.65)
+        .to("#main-text", { x: 0, skewX: 0, duration: 0.08 }, dur * 0.65 + 0.05)
+        .to("#glitch-r", { x: 5, duration: 0.08 }, dur * 0.65 + 0.05)
+        .to("#glitch-b", { x: -5, duration: 0.08 }, dur * 0.65 + 0.05)
+
+        // RGB layers fade out slightly at rest
+        .to(["#glitch-r", "#glitch-b"], { opacity: 0.4, duration: 0.5 }, 1.5)
+        .to({}, { duration: 0.001 }, dur - 0.001);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0a12; font-family: 'Montserrat', sans-serif; }
+
+  .root {
+    width: 1080px;
+    height: 1920px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 80px;
+  }
+
+  /* Warm gradient background */
+  .bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(255,107,0,0.12) 0%, rgba(255,215,0,0.05) 40%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Main card */
+  .ig-card {
+    width: 100%;
+    background: rgba(20, 20, 30, 0.95);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 40px;
+    padding: 80px 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  .ig-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.6), rgba(255,107,0,0.6), transparent);
+  }
+
+  /* Avatar row */
+  .avatar-row {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+  }
+
+  .avatar-circle {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FF6B00, #FFD700, #FF3D00);
+    padding: 4px;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  .avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #1a1a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+  }
+
+  .handle-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .handle-name {
+    font-size: 44px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: -1px;
+  }
+
+  .handle-category {
+    font-size: 30px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* Value props */
+  .value-lines {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .value-line {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  .value-check {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(16,185,129,0.2);
+    border: 2px solid rgba(16,185,129,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .value-text {
+    font-size: 34px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.2;
+  }
+
+  /* Follow button */
+  .follow-btn {
+    width: 100%;
+    height: 110px;
+    border-radius: 55px;
+    background: linear-gradient(90deg, #FF6B00, #FFD700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  .follow-btn-text {
+    font-size: 46px;
+    font-weight: 900;
+    color: #000000;
+    letter-spacing: 1px;
+  }
+
+  .follow-btn-icon {
+    font-size: 40px;
+  }
+
+  /* Save nudge */
+  .save-nudge {
+    font-size: 30px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    opacity: 0;
+  }
+
+  .save-nudge strong {
+    color: rgba(255,215,0,0.85);
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+<div
+  id="root"
+  class="root clip"
+  data-composition-id="ig-cta"
+  data-start="0"
+  data-width="1080"
+  data-height="1920"
+  data-duration="__DURATION__"
+  data-track-index="0"
+>
+  <div class="bg-gradient"></div>
+
+  <div class="ig-card" id="igCard">
+    <!-- Avatar row -->
+    <div class="avatar-row">
+      <div class="avatar-circle" id="avatarCircle">
+        <div class="avatar-inner">🤖</div>
+      </div>
+      <div class="handle-block">
+        <div class="handle-name">@automatewithanand</div>
+        <div class="handle-category">AI Automation · Builds every week</div>
+      </div>
+    </div>
+
+    <!-- Value props -->
+    <div class="value-lines">
+      <div class="value-line" id="vl1">
+        <div class="value-check">✓</div>
+        <div class="value-text">__VALUE_1__</div>
+      </div>
+      <div class="value-line" id="vl2">
+        <div class="value-check">✓</div>
+        <div class="value-text">__VALUE_2__</div>
+      </div>
+      <div class="value-line" id="vl3">
+        <div class="value-check">✓</div>
+        <div class="value-text">__VALUE_3__</div>
+      </div>
+    </div>
+
+    <!-- Follow button -->
+    <div class="follow-btn" id="followBtn">
+      <span class="follow-btn-icon">+</span>
+      <span class="follow-btn-text">FOLLOW</span>
+    </div>
+
+    <!-- Save nudge -->
+    <div class="save-nudge" id="saveNudge">
+      <strong>Save this</strong> — you'll want to come back 🔖
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  window.__timelines = window.__timelines || {};
+  var tl = gsap.timeline({ paused: true });
+
+  // Card entrance
+  tl.to('#igCard', { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 0);
+
+  // Avatar pop
+  tl.to('#avatarCircle', { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(1.7)' }, 0.3);
+
+  // Value lines stagger
+  tl.to('#vl1', { opacity: 1, x: 0, duration: 0.35, ease: 'power2.out' }, 0.7);
+  tl.to('#vl2', { opacity: 1, x: 0, duration: 0.35, ease: 'power2.out' }, 0.9);
+  tl.to('#vl3', { opacity: 1, x: 0, duration: 0.35, ease: 'power2.out' }, 1.1);
+
+  // Follow button bounce in
+  tl.to('#followBtn', { opacity: 1, scale: 1, duration: 0.5, ease: 'elastic.out(1, 0.3)' }, 1.5);
+
+  // Button glow pulse
+  tl.to('#followBtn', {
+    boxShadow: '0 0 60px rgba(255,107,0,0.5)',
+    duration: 0.6,
+    ease: 'sine.inOut',
+    yoyo: true,
+    repeat: -1
+  }, 2.2);
+
+  // Save nudge fade in
+  tl.to('#saveNudge', { opacity: 1, duration: 0.5, ease: 'sine.inOut' }, 2.0);
+
+  window.__timelines['ig-cta'] = tl;
+})();
+</script>
+</body>
+</html>

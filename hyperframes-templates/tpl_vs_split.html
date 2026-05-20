@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=880, height=1100" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@600&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 880px; height: 1100px; overflow: hidden; background: #080808; }
+      #root { position: relative; width: 880px; height: 1100px; overflow: hidden; }
+
+      #left {
+        position: absolute; left: 0; top: 0;
+        width: 440px; height: 1100px;
+        background: linear-gradient(160deg, #1c0808 0%, #100303 100%);
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        padding: 60px 44px;
+        opacity: 0; transform: translateX(-40px);
+      }
+      #right {
+        position: absolute; right: 0; top: 0;
+        width: 440px; height: 1100px;
+        background: linear-gradient(200deg, #030f1a 0%, #020d18 100%);
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        padding: 60px 44px;
+        opacity: 0; transform: translateX(40px);
+      }
+
+      .side-tag {
+        font-family: 'Inter', sans-serif;
+        font-size: 13px; font-weight: 600;
+        letter-spacing: 5px; text-transform: uppercase;
+        margin-bottom: 24px; opacity: 0;
+      }
+      #left .side-tag { color: rgba(227,26,26,0.8); }
+      #right .side-tag { color: rgba(77,171,247,0.8); }
+
+      .side-icon {
+        font-size: 56px; margin-bottom: 20px; opacity: 0;
+      }
+
+      .side-main {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 36px; font-weight: 900;
+        text-transform: uppercase; text-align: center;
+        line-height: 1.2; letter-spacing: -0.5px;
+        opacity: 0;
+      }
+      #left .side-main { color: rgba(255,100,100,0.85); }
+      #right .side-main { color: #ffffff; }
+
+      .side-sub {
+        font-family: 'Inter', sans-serif;
+        font-size: 19px; font-weight: 600;
+        text-align: center; margin-top: 18px;
+        line-height: 1.45; opacity: 0;
+      }
+      #left .side-sub { color: rgba(227,26,26,0.5); }
+      #right .side-sub { color: rgba(77,171,247,0.65); }
+
+      #divider {
+        position: absolute; left: 50%; top: 0;
+        width: 2px; height: 0;
+        background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.7) 20%, rgba(255,255,255,0.7) 80%, transparent 100%);
+        transform: translateX(-50%); z-index: 10;
+      }
+      #vs-badge {
+        position: absolute; left: 50%; top: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        width: 68px; height: 68px; border-radius: 50%;
+        background: #ffffff;
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px; font-weight: 900; color: #111;
+        z-index: 20;
+        box-shadow: 0 0 40px rgba(255,255,255,0.5), 0 4px 20px rgba(0,0,0,0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="880"
+      data-height="1100"
+    >
+      <div id="left">
+        <div class="side-tag">BEFORE</div>
+        <div class="side-icon" id="left-icon">❌</div>
+        <div class="side-main" id="left-main"></div>
+        <div class="side-sub" id="left-sub"></div>
+      </div>
+      <div id="right">
+        <div class="side-tag">AFTER</div>
+        <div class="side-icon" id="right-icon">✅</div>
+        <div class="side-main" id="right-main"></div>
+        <div class="side-sub" id="right-sub"></div>
+      </div>
+      <div id="divider"></div>
+      <div id="vs-badge">VS</div>
+    </div>
+
+    <script>
+      window.__SECTION_DATA__ = __SECTION_DATA_PLACEHOLDER__;
+
+      const d = window.__SECTION_DATA__;
+      const lines = d.on_screen_text || [];
+      const dur = d.duration_sec || 8;
+
+      document.getElementById("left-main").textContent = lines[0] || "OLD WAY";
+      document.getElementById("left-sub").textContent = lines[1] || "";
+      document.getElementById("right-main").textContent = lines[2] || "NEW WAY";
+      document.getElementById("right-sub").textContent = lines[3] || "";
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.to("#left", { x: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 0)
+        .to("#right", { x: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 0.08)
+        .to("#divider", { height: 1100, duration: 0.65, ease: "power2.inOut" }, 0.45)
+        .fromTo("#vs-badge",
+          { scale: 0 },
+          { scale: 1, duration: 0.5, ease: "back.out(2.5)" },
+          0.95
+        )
+        .to("#left .side-tag", { opacity: 1, duration: 0.35 }, 0.55)
+        .to("#right .side-tag", { opacity: 1, duration: 0.35 }, 0.65)
+        .to("#left-icon", { opacity: 1, duration: 0.3 }, 0.7)
+        .to("#right-icon", { opacity: 1, duration: 0.3 }, 0.8)
+        .fromTo("#left-main", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "back.out(1.5)" }, 0.85)
+        .fromTo("#right-main", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "back.out(1.5)" }, 0.95)
+        .to("#left-sub", { opacity: 1, duration: 0.4 }, 1.2)
+        .to("#right-sub", { opacity: 1, duration: 0.4 }, 1.3)
+        .to({}, { duration: 0.001 }, dur - 0.001);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

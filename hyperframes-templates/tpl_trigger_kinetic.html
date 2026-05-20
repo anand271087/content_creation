@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=880, height=1100" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 880px; height: 1100px;
+        overflow: hidden;
+        background: #050810;
+      }
+      #root {
+        position: relative;
+        width: 880px; height: 1100px;
+        display: flex; align-items: center; justify-content: center;
+      }
+      svg#burst {
+        position: absolute;
+        top: 0; left: 0;
+        width: 880px; height: 1100px;
+        pointer-events: none;
+      }
+      #flash {
+        position: absolute;
+        inset: 0;
+        background: #fff;
+        opacity: 0;
+        pointer-events: none;
+      }
+      #key-text {
+        position: relative;
+        font-family: 'Montserrat', 'Impact', sans-serif;
+        font-size: 90px; font-weight: 900;
+        text-transform: uppercase;
+        color: #ffffff;
+        text-align: center;
+        line-height: 1;
+        letter-spacing: -2px;
+        max-width: 740px;
+        padding: 0 40px;
+        opacity: 0;
+        z-index: 10;
+        text-shadow: 0 0 40px rgba(255,255,255,0.4);
+      }
+      #sub-key {
+        position: absolute;
+        bottom: 180px;
+        left: 0; right: 0;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 22px; font-weight: 900;
+        color: #E31A1A;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        opacity: 0;
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="880"
+      data-height="1100"
+    >
+      <svg id="burst" viewBox="0 0 880 1100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Radial burst lines from center -->
+        <g id="burst-lines" stroke="white" stroke-width="1.5" opacity="0">
+          <line x1="440" y1="550" x2="440" y2="80" />
+          <line x1="440" y1="550" x2="440" y2="1020" />
+          <line x1="440" y1="550" x2="80" y2="550" />
+          <line x1="440" y1="550" x2="800" y2="550" />
+          <line x1="440" y1="550" x2="158" y2="218" />
+          <line x1="440" y1="550" x2="722" y2="882" />
+          <line x1="440" y1="550" x2="158" y2="882" />
+          <line x1="440" y1="550" x2="722" y2="218" />
+          <line x1="440" y1="550" x2="100" y2="380" />
+          <line x1="440" y1="550" x2="780" y2="720" />
+          <line x1="440" y1="550" x2="260" y2="120" />
+          <line x1="440" y1="550" x2="620" y2="980" />
+        </g>
+        <!-- Expanding ring -->
+        <circle id="ring1" cx="440" cy="550" r="80" fill="none" stroke="rgba(227,26,26,0.6)" stroke-width="3" opacity="0" />
+        <circle id="ring2" cx="440" cy="550" r="160" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" opacity="0" />
+        <circle id="ring3" cx="440" cy="550" r="280" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" opacity="0" />
+      </svg>
+
+      <div id="flash"></div>
+      <div id="key-text"></div>
+      <div id="sub-key"></div>
+    </div>
+
+    <script>
+      window.__SECTION_DATA__ = __SECTION_DATA_PLACEHOLDER__;
+
+      const d = window.__SECTION_DATA__;
+      const lines = d.on_screen_text || [];
+
+      document.getElementById("key-text").textContent = lines[0] || d.label.toUpperCase();
+      document.getElementById("sub-key").textContent = lines[1] || "";
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Flash + burst at t=0.1
+      tl.to("#flash", { opacity: 0.85, duration: 0.06 }, 0.1)
+        .to("#flash", { opacity: 0, duration: 0.3 }, 0.16)
+        .to("#burst-lines", { opacity: 0.7, duration: 0.05 }, 0.1)
+        .to("#burst-lines", { opacity: 0, duration: 0.4, ease: "power2.out" }, 0.15)
+        // Rings expand outward
+        .fromTo("#ring1",
+          { attr: { r: 0 }, opacity: 0.8 },
+          { attr: { r: 200 }, opacity: 0, duration: 0.6, ease: "power2.out" },
+          0.1
+        )
+        .fromTo("#ring2",
+          { attr: { r: 0 }, opacity: 0.5 },
+          { attr: { r: 320 }, opacity: 0, duration: 0.8, ease: "power2.out" },
+          0.15
+        )
+        .fromTo("#ring3",
+          { attr: { r: 0 }, opacity: 0.3 },
+          { attr: { r: 450 }, opacity: 0, duration: 1.0, ease: "power2.out" },
+          0.2
+        )
+        // Key text slams in
+        .fromTo("#key-text",
+          { scale: 1.4, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" },
+          0.25
+        )
+        .to("#sub-key", { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.8);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

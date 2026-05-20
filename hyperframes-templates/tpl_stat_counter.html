@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=880, height=1100" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@400;600&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 880px; height: 1100px; overflow: hidden; background: #050a14; }
+      #root {
+        position: relative;
+        width: 880px; height: 1100px;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+      }
+      #glow-burst {
+        position: absolute;
+        width: 700px; height: 700px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,190,40,0.14) 0%, transparent 65%);
+        top: 50%; left: 50%; transform: translate(-50%, -50%);
+        opacity: 0; pointer-events: none;
+      }
+      #ring {
+        position: absolute;
+        width: 380px; height: 380px; border-radius: 50%;
+        border: 2px solid rgba(255,190,40,0.2);
+        top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0; pointer-events: none;
+      }
+      #context-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 18px; font-weight: 600;
+        letter-spacing: 5px; text-transform: uppercase;
+        color: rgba(255,190,40,0.7);
+        margin-bottom: 20px; opacity: 0;
+      }
+      #stat-number {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 170px; font-weight: 900;
+        color: #ffffff; line-height: 1; letter-spacing: -8px;
+        text-align: center; opacity: 0;
+        text-shadow: 0 0 100px rgba(255,190,40,0.6);
+      }
+      #stat-unit {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 40px; font-weight: 900;
+        color: #FFB800; letter-spacing: 4px;
+        text-transform: uppercase; margin-top: 6px; opacity: 0;
+      }
+      #stat-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 28px; font-weight: 600;
+        color: rgba(255,255,255,0.5); text-align: center;
+        margin-top: 36px; letter-spacing: 1px;
+        text-transform: uppercase; max-width: 680px;
+        line-height: 1.4; opacity: 0;
+      }
+      #bottom-line {
+        width: 120px; height: 4px;
+        background: linear-gradient(90deg, transparent, #FFB800, transparent);
+        border-radius: 2px; margin-top: 44px; opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="880"
+      data-height="1100"
+    >
+      <div id="glow-burst"></div>
+      <div id="ring"></div>
+      <div id="context-label"></div>
+      <div id="stat-number"></div>
+      <div id="stat-unit"></div>
+      <div id="stat-label"></div>
+      <div id="bottom-line"></div>
+    </div>
+
+    <script>
+      window.__SECTION_DATA__ = __SECTION_DATA_PLACEHOLDER__;
+
+      const d = window.__SECTION_DATA__;
+      const lines = d.on_screen_text || [];
+      const dur = d.duration_sec || 8;
+
+      // Split first item into number + unit (e.g. "90 DAYS" → "90" + "DAYS")
+      const raw = (lines[0] || d.label).toUpperCase();
+      const numMatch = raw.match(/^([\d,\.x%]+)(.*)/);
+      if (numMatch) {
+        document.getElementById("stat-number").textContent = numMatch[1];
+        document.getElementById("stat-unit").textContent = numMatch[2].trim();
+      } else {
+        document.getElementById("stat-number").textContent = raw;
+      }
+      document.getElementById("stat-label").textContent = lines[1] || "";
+      document.getElementById("context-label").textContent = d.label || "";
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.to("#glow-burst", { opacity: 1, scale: 1.3, duration: 0.8, ease: "power2.out" }, 0)
+        .to("#ring", { opacity: 1, scale: 1.4, duration: 1.2, ease: "power2.out" }, 0)
+        .to("#context-label", { opacity: 1, duration: 0.5, ease: "power2.out" }, 0.2)
+        // Number slams in from above — scale punch
+        .fromTo("#stat-number",
+          { scale: 2.2, opacity: 0, y: -20 },
+          { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: "back.out(2)" },
+          0.3
+        )
+        // Glow pulse on slam
+        .to("#glow-burst", { scale: 1.6, opacity: 0.7, duration: 0.15, ease: "power2.in" }, 0.3)
+        .to("#glow-burst", { scale: 1.2, opacity: 0.15, duration: 0.5, ease: "power2.out" }, 0.45)
+        .to("#stat-unit", { opacity: 1, duration: 0.4, ease: "power2.out" }, 0.8)
+        .to("#stat-label", { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 1.0)
+        .to("#bottom-line", { opacity: 1, scaleX: 1, duration: 0.6, ease: "power3.out" }, 1.3)
+        .to({}, { duration: 0.001 }, dur - 0.001);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

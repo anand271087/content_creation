@@ -1,0 +1,358 @@
+[
+  {
+    "date": "2026-03-22 11:02",
+    "topic": "Build a 3D Animated Website Like Apple's in 30 Minutes Using AI",
+    "script_dsscl_final": 9.62,
+    "video_dsscl_final": 8.86,
+    "video_passed": false,
+    "strengths": [
+      "Extremely strong hook: 'Looks like Apple's. Built in 30 mins. With AI.' is a perfect pattern interrupt with a clear curiosity gap",
+      "High save factor: specific tool named (Claude Code), concrete workflow (drop product video → full site out), zero-to-hero narrative",
+      "Sharp contrast framing: Amateur = 3 weeks + 1 lakh + generic vs Pro = 30 mins + free — this is textbook share-worthy comparison",
+      "Punchy on-screen text: mostly 3-5 words per card, Hormozi-style bold caps, good pacing rhythm",
+      "Identity signal is strong: targets Indian professionals who feel ripped off by agencies — high 'this is me' resonance",
+      "Real numbers used: 1 lakh rupees, 3 weeks, 30 minutes — adds credibility and debate fuel"
+    ],
+    "weaknesses": [
+      "Avatar lighting is poor: heavy yellow/warm cast from below, dark background makes face muddy — loses perceived authority and production value",
+      "B-roll is mostly AI-generated stock (blender render, generic laptop shots, red-tinted paper) — feels disconnected from the actual build being described; no screen recording of the actual Claude Code workflow shown",
+      "No grand takeaway frame: the video ends with a follow CTA but lacks a single quotable screenshot-worthy closing line — 'Save this' is weak compared to what could be a punchy one-liner",
+      "Frame 5 B-roll has garbled/nonsensical text on screen (fake code list) — attentive viewers will notice this and it undermines credibility",
+      "Caption sync appears functional but the yellow highlight word styling is inconsistent — some frames highlight verbs, others highlight nouns, no clear emphasis logic",
+      "CTA is generic 'Follow @automatewithanand' — no specific next step like 'comment CLAUDE for the prompt' or 'link in bio for the template'",
+      "No actual result shown: the Apple-quality website is promised in the hook but never revealed in a full-screen showcase moment — this breaks the curiosity loop payoff"
+    ],
+    "script_feedback": "Hook is A-tier but the payoff is missing — you must show the final website in a full-screen reveal moment (frame 9-11 area) with a slow scroll or before/after split. The grand takeaway needs to be rewritten as a single sticky sentence, e.g., 'One prompt replaced a 1 lakh agency. Claude Code is the new web designer.' Add a specific engagement CTA: 'Comment WEBSITE and I'll send you the exact prompt.' The amateur vs pro framing is excellent but needs one more concrete data point — mention the exact prompt length or number of lines Claude generated to make it feel undeniably real.",
+    "visual_feedback": "Avatar needs urgent lighting fix: add a key light at eye level and reduce the warm color temperature — current look feels amateur which contradicts the 'pro' positioning of the content. B-roll should be replaced with actual screen recordings of Claude Code terminal, the prompt being typed, and the website rendering live — this is the money shot and it's completely absent. The fake code/text in frame 5 B-roll is a credibility killer; use real terminal output or blur it. Final CTA frame (frame 12) has overlapping text ('SAVE THIS' bleeding into 'FOLLOW') — clean the z-layering. Consider adding a 2-second full-screen website reveal with a subtle zoom to deliver on the hook promise."
+  },
+  {
+    "date": "2026-03-26 07:12",
+    "topic": "3 Levels of AI: Why You're Still the Bottleneck",
+    "script_dsscl_final": 9.54,
+    "video_dsscl_final": 8.04,
+    "video_passed": false,
+    "strengths": [
+      "Strong conceptual framework — Calculator vs Tool vs Employee vs Teammate progression creates a clear mental model that rewards rewatching",
+      "N8N template mention and agent-level explanation gives concrete save-worthy value",
+      "Level-based structure (Level 1, Level 2 implied) creates natural curiosity loop progression",
+      "Real use case teased — founder in Bengaluru, days it processed — adds specificity",
+      "CTA is present with follow prompt and save this callout"
+    ],
+    "weaknesses": [
+      "Hook is weak — opening frame shows generic hands on keyboard with Calculator/Tool/Employee text; no clear pattern interrupt or scroll-stopping visual tension",
+      "B-roll is generic stock footage throughout — hands typing, man at laptop, abstract network graphs — none custom or screen-recorded showing actual n8n workflows",
+      "Avatar energy is flat — low vocal energy implied by neutral expressions across all frames, minimal hand gestures, dim lighting with no key light on face",
+      "Grand takeaway frame is missing — no single screenshot-worthy quotable sentence displayed prominently; Save This frame is buried under follow CTA overlay",
+      "On-screen text inconsistency — some frames have 5+ words, font weight varies, bottom caption text competes with avatar space",
+      "Comment trigger is weak — no polarizing opinion, no direct question posed to viewer, Comment Agent label is confusing rather than debate-inducing",
+      "The Bengaluru founder story is teased but never lands — no rupees saved, no hours freed, no specific outcome shown"
+    ],
+    "script_feedback": "Hook needs complete rework: open with a specific outcome statement like 'A founder in Bengaluru replaced 3 employees with one n8n workflow — here is the exact template.' Current Calculator/Tool/Employee opening is too abstract and educational-feeling, not scroll-stopping. The level framework is good but needs concrete anchors at each level: Level 1 ChatGPT as calculator — you copy paste, Level 2 as tool — you prompt engineer, Level 3 as employee — it runs n8n workflows while you sleep. Grand takeaway must be one punchy sentence: 'Stop prompting. Start delegating. Build the agent.' The Bengaluru founder proof point needs real numbers: '47 leads processed in 3 days, zero manual input, ₹0 extra cost.' End CTA should say 'Comment AGENT and I will send you this n8n template' to drive both comments and saves.",
+    "visual_feedback": "B-roll needs to be actual screen recordings of n8n workflows, not generic stock network visualizations — the current abstract node graphs look AI-generated and untrustworthy. Avatar lighting is too dim; add a key light at 45 degrees to create depth and energy. Eye contact is inconsistent — several frames show eyes looking off-camera. Caption style attempts Hormozi formatting but word highlighting is inconsistent (some orange, some red, some yellow with no clear hierarchy). The split-screen layout with B-roll top and avatar bottom is functional but the B-roll panel shows the same n8n template visual for 6+ consecutive frames with only color shifts, creating visual fatigue. Final CTA frame is cluttered — the FOLLOW overlay, @handle, tagline, and ONE PERSON COMMENT text all compete. Simplify to one action per frame."
+  },
+  {
+    "date": "2026-03-29 11:03",
+    "topic": "OpenAI Took the Pentagon Deal. Anthropic Didn't. Here's What That Means For You.",
+    "script_dsscl_final": 9.61,
+    "video_dsscl_final": 7.98,
+    "video_passed": false,
+    "strengths": [
+      "Clear 3-level framework creates structured info density that rewards rewatching",
+      "Level progression (Level 1/2/3) is a proven curiosity loop format that holds attention",
+      "Specific tool mention (n8n) and 'Bengaluru founder' case study adds save-worthy credibility",
+      "Hormozi-style captions with red highlight words are punchy and legible",
+      "CTA explicitly asks for comment ('Comment: Agent') and offers a template — strong save trigger"
+    ],
+    "weaknesses": [
+      "Hook (Frame 1) is generic — hand on keyboard + 'CALCULATOR' text is a weak pattern interrupt; doesn't stop the scroll for the target demo",
+      "B-roll is largely AI-generated stock imagery (man at laptop, cityscape silhouette) — feels templated and disconnected from actual speech content",
+      "Avatar lighting is flat and dim in every talking-head frame; low energy facial expression, minimal hand gestures visible, no direct eye contact intensity",
+      "Grand takeaway is split across frames 9-10 ('Not a tool. A teammate.') but never appears as a single bold screenshot-worthy frame — it's buried in the flow",
+      "The 'Bengaluru founder' trigger (Frame 8) uses an obviously AI-generated face which undercuts trust and relatability",
+      "No specific numbers anywhere — no rupees saved, no hours reclaimed, no metric that makes the share feel urgent",
+      "Level 2 explanation ('prompt it gives') is vague — viewer doesn't learn what changed or what to do differently"
+    ],
+    "script_feedback": "Hook needs a broader TAM opener — replace 'calculator' metaphor with something like 'Most of you are using ChatGPT like an intern. Here are 3 levels to make it your cofounder.' Level 2 is the weakest section: instead of 'prompt it gives,' show a concrete before/after (e.g., 'Level 2: You give it a system prompt. It writes 40 cold emails in your voice in 12 minutes.'). The Bengaluru founder trigger needs real specifics: 'A Bengaluru SaaS founder gave an AI agent access to his CRM. It wrote follow-ups, sent 87 emails, and closed ₹4.2L in pipeline — in one weekend.' Grand takeaway MUST be a single frame, single sentence, screenshot-bait: 'Stop prompting. Start delegating.' or 'AI isn't your tool. It's your first hire that works 24/7.' Currently it's split and diluted across two frames.",
+    "visual_feedback": "B-roll quality is mid — the network/node graphics (Frames 3-6) are passable but the AI-generated people (Frames 8-9) look uncanny and hurt credibility. Replace with real screen recordings of n8n workflows or actual ChatGPT conversations. Avatar section needs urgent improvement: add a key light at 45 degrees, increase background separation (even a simple RGB strip), and coach for more animated delivery — current energy reads as monotone/flat. Caption text is well-formatted but the red highlight keyword selection is inconsistent (e.g., 'ON' highlighted in 'STUCK ON LEVEL' adds no emphasis value). Final CTA frame (Frame 12) is cluttered — 'SAVE THIS / FOLLOW / @automatewithanand / AI AUTOMATION' competes with the talking head below. Simplify to one action per frame. The 'LOT BIGGER' text at the very bottom is cut off and unreadable."
+  },
+  {
+    "date": "2026-03-30 07:19",
+    "topic": "AI Automation Will Replace Your Job in 2026 — Unless You Do This",
+    "script_dsscl_final": 9.57,
+    "video_dsscl_final": 7.98,
+    "video_passed": false,
+    "strengths": [
+      "Clear 3-level framework creates structured info density that rewards rewatching",
+      "Level progression (Level 1/2/3) is a proven curiosity loop format that holds attention",
+      "Specific tool mention (n8n) and 'Bengaluru founder' case study adds save-worthy credibility",
+      "Hormozi-style captions with red highlight words are punchy and legible",
+      "CTA explicitly asks for comment ('Comment: Agent') and offers a template — strong save trigger"
+    ],
+    "weaknesses": [
+      "Hook (Frame 1) is generic — hand on keyboard + 'CALCULATOR' text is a weak pattern interrupt; doesn't stop the scroll for the target demo",
+      "B-roll is largely AI-generated stock imagery (man at laptop, cityscape silhouette) — feels templated and disconnected from actual speech content",
+      "Avatar lighting is flat and dim in every talking-head frame; low energy facial expression, minimal hand gestures visible, no direct eye contact intensity",
+      "Grand takeaway is split across frames 9-10 ('Not a tool. A teammate.') but never appears as a single bold screenshot-worthy frame — it's buried in the flow",
+      "The 'Bengaluru founder' trigger (Frame 8) uses an obviously AI-generated face which undercuts trust and relatability",
+      "No specific numbers anywhere — no rupees saved, no hours reclaimed, no metric that makes the share feel urgent",
+      "Level 2 explanation ('prompt it gives') is vague — viewer doesn't learn what changed or what to do differently"
+    ],
+    "script_feedback": "Hook needs a broader TAM opener — replace 'calculator' metaphor with something like 'Most of you are using ChatGPT like an intern. Here are 3 levels to make it your cofounder.' Level 2 is the weakest section: instead of 'prompt it gives,' show a concrete before/after (e.g., 'Level 2: You give it a system prompt. It writes 40 cold emails in your voice in 12 minutes.'). The Bengaluru founder trigger needs real specifics: 'A Bengaluru SaaS founder gave an AI agent access to his CRM. It wrote follow-ups, sent 87 emails, and closed ₹4.2L in pipeline — in one weekend.' Grand takeaway MUST be a single frame, single sentence, screenshot-bait: 'Stop prompting. Start delegating.' or 'AI isn't your tool. It's your first hire that works 24/7.' Currently it's split and diluted across two frames.",
+    "visual_feedback": "B-roll quality is mid — the network/node graphics (Frames 3-6) are passable but the AI-generated people (Frames 8-9) look uncanny and hurt credibility. Replace with real screen recordings of n8n workflows or actual ChatGPT conversations. Avatar section needs urgent improvement: add a key light at 45 degrees, increase background separation (even a simple RGB strip), and coach for more animated delivery — current energy reads as monotone/flat. Caption text is well-formatted but the red highlight keyword selection is inconsistent (e.g., 'ON' highlighted in 'STUCK ON LEVEL' adds no emphasis value). Final CTA frame (Frame 12) is cluttered — 'SAVE THIS / FOLLOW / @automatewithanand / AI AUTOMATION' competes with the talking head below. Simplify to one action per frame. The 'LOT BIGGER' text at the very bottom is cut off and unreadable."
+  },
+  {
+    "date": "2026-03-30 07:39",
+    "topic": "AI Automation Will Replace Your Job in 2026 — Unless You Do This",
+    "script_dsscl_final": 9.57,
+    "video_dsscl_final": 7.98,
+    "video_passed": false,
+    "strengths": [
+      "Clear 3-level framework creates structured info density that rewards rewatching",
+      "Level progression (Level 1/2/3) is a proven curiosity loop format that holds attention",
+      "Specific tool mention (n8n) and 'Bengaluru founder' case study adds save-worthy credibility",
+      "Hormozi-style captions with red highlight words are punchy and legible",
+      "CTA explicitly asks for comment ('Comment: Agent') and offers a template — strong save trigger"
+    ],
+    "weaknesses": [
+      "Hook (Frame 1) is generic — hand on keyboard + 'CALCULATOR' text is a weak pattern interrupt; doesn't stop the scroll for the target demo",
+      "B-roll is largely AI-generated stock imagery (man at laptop, cityscape silhouette) — feels templated and disconnected from actual speech content",
+      "Avatar lighting is flat and dim in every talking-head frame; low energy facial expression, minimal hand gestures visible, no direct eye contact intensity",
+      "Grand takeaway is split across frames 9-10 ('Not a tool. A teammate.') but never appears as a single bold screenshot-worthy frame — it's buried in the flow",
+      "The 'Bengaluru founder' trigger (Frame 8) uses an obviously AI-generated face which undercuts trust and relatability",
+      "No specific numbers anywhere — no rupees saved, no hours reclaimed, no metric that makes the share feel urgent",
+      "Level 2 explanation ('prompt it gives') is vague — viewer doesn't learn what changed or what to do differently"
+    ],
+    "script_feedback": "Hook needs a broader TAM opener — replace 'calculator' metaphor with something like 'Most of you are using ChatGPT like an intern. Here are 3 levels to make it your cofounder.' Level 2 is the weakest section: instead of 'prompt it gives,' show a concrete before/after (e.g., 'Level 2: You give it a system prompt. It writes 40 cold emails in your voice in 12 minutes.'). The Bengaluru founder trigger needs real specifics: 'A Bengaluru SaaS founder gave an AI agent access to his CRM. It wrote follow-ups, sent 87 emails, and closed ₹4.2L in pipeline — in one weekend.' Grand takeaway MUST be a single frame, single sentence, screenshot-bait: 'Stop prompting. Start delegating.' or 'AI isn't your tool. It's your first hire that works 24/7.' Currently it's split and diluted across two frames.",
+    "visual_feedback": "B-roll quality is mid — the network/node graphics (Frames 3-6) are passable but the AI-generated people (Frames 8-9) look uncanny and hurt credibility. Replace with real screen recordings of n8n workflows or actual ChatGPT conversations. Avatar section needs urgent improvement: add a key light at 45 degrees, increase background separation (even a simple RGB strip), and coach for more animated delivery — current energy reads as monotone/flat. Caption text is well-formatted but the red highlight keyword selection is inconsistent (e.g., 'ON' highlighted in 'STUCK ON LEVEL' adds no emphasis value). Final CTA frame (Frame 12) is cluttered — 'SAVE THIS / FOLLOW / @automatewithanand / AI AUTOMATION' competes with the talking head below. Simplify to one action per frame. The 'LOT BIGGER' text at the very bottom is cut off and unreadable."
+  },
+  {
+    "date": "2026-03-30 15:39",
+    "topic": "AI Automation Will Replace Your Job in 2026 — Unless You Do This",
+    "script_dsscl_final": 9.57,
+    "video_dsscl_final": 7.98,
+    "video_passed": false,
+    "strengths": [
+      "Clear 3-level framework creates structured info density that rewards rewatching",
+      "Level progression (Level 1/2/3) is a proven curiosity loop format that holds attention",
+      "Specific tool mention (n8n) and 'Bengaluru founder' case study adds save-worthy credibility",
+      "Hormozi-style captions with red highlight words are punchy and legible",
+      "CTA explicitly asks for comment ('Comment: Agent') and offers a template — strong save trigger"
+    ],
+    "weaknesses": [
+      "Hook (Frame 1) is generic — hand on keyboard + 'CALCULATOR' text is a weak pattern interrupt; doesn't stop the scroll for the target demo",
+      "B-roll is largely AI-generated stock imagery (man at laptop, cityscape silhouette) — feels templated and disconnected from actual speech content",
+      "Avatar lighting is flat and dim in every talking-head frame; low energy facial expression, minimal hand gestures visible, no direct eye contact intensity",
+      "Grand takeaway is split across frames 9-10 ('Not a tool. A teammate.') but never appears as a single bold screenshot-worthy frame — it's buried in the flow",
+      "The 'Bengaluru founder' trigger (Frame 8) uses an obviously AI-generated face which undercuts trust and relatability",
+      "No specific numbers anywhere — no rupees saved, no hours reclaimed, no metric that makes the share feel urgent",
+      "Level 2 explanation ('prompt it gives') is vague — viewer doesn't learn what changed or what to do differently"
+    ],
+    "script_feedback": "Hook needs a broader TAM opener — replace 'calculator' metaphor with something like 'Most of you are using ChatGPT like an intern. Here are 3 levels to make it your cofounder.' Level 2 is the weakest section: instead of 'prompt it gives,' show a concrete before/after (e.g., 'Level 2: You give it a system prompt. It writes 40 cold emails in your voice in 12 minutes.'). The Bengaluru founder trigger needs real specifics: 'A Bengaluru SaaS founder gave an AI agent access to his CRM. It wrote follow-ups, sent 87 emails, and closed ₹4.2L in pipeline — in one weekend.' Grand takeaway MUST be a single frame, single sentence, screenshot-bait: 'Stop prompting. Start delegating.' or 'AI isn't your tool. It's your first hire that works 24/7.' Currently it's split and diluted across two frames.",
+    "visual_feedback": "B-roll quality is mid — the network/node graphics (Frames 3-6) are passable but the AI-generated people (Frames 8-9) look uncanny and hurt credibility. Replace with real screen recordings of n8n workflows or actual ChatGPT conversations. Avatar section needs urgent improvement: add a key light at 45 degrees, increase background separation (even a simple RGB strip), and coach for more animated delivery — current energy reads as monotone/flat. Caption text is well-formatted but the red highlight keyword selection is inconsistent (e.g., 'ON' highlighted in 'STUCK ON LEVEL' adds no emphasis value). Final CTA frame (Frame 12) is cluttered — 'SAVE THIS / FOLLOW / @automatewithanand / AI AUTOMATION' competes with the talking head below. Simplify to one action per frame. The 'LOT BIGGER' text at the very bottom is cut off and unreadable."
+  },
+  {
+    "date": "2026-04-14 05:48",
+    "topic": "Gemini 3.1 Just Commoditized Web Design — Here's What That Means For You",
+    "script_dsscl_final": 9.54,
+    "video_dsscl_final": 6.08,
+    "video_passed": false,
+    "strengths": [
+      "Touches on a genuinely anxiety-inducing topic (AI disrupting jobs) which triggers emotional engagement",
+      "Hormozi-style bold captions with keyword highlighting in orange are present and legible",
+      "Clear CTA end card with handle and follow prompt",
+      "Speaker maintains consistent eye contact and calm authority throughout"
+    ],
+    "weaknesses": [
+      "Hook is extremely weak — 'GOT DISRUPTED AND' is mid-sentence, gives no reason to stop scrolling, no pattern interrupt, no bold claim, no number, no face of shock",
+      "B-roll is generic stock (laptop screen, hand on keyboard, person at desk) with zero specificity — no actual AI tool shown, no before/after, no screen recording",
+      "No specific tool, framework, or concrete takeaway is named anywhere — nothing to save or bookmark",
+      "Grand takeaway frame is missing entirely; last substantive frame says 'THE SKILL ISN'T' which is incomplete and not screenshot-worthy",
+      "Pacing feels slow and lecture-like — no tempo change, no visual surprise, no pattern interrupt mid-video to sustain double-watch",
+      "Frame 7 is completely black — either a rendering error or dead air that kills retention",
+      "Subtitle fragments ('OF STUFF A', 'THAT SHOULD MAKE', '3.1 ACTUALLY') lack context in isolation, suggesting the script meanders without punchy standalone lines",
+      "No share trigger — no identity-based statement like 'Tag a developer who thinks they're safe' or relatable meme moment"
+    ],
+    "script_feedback": "The script needs a complete restructure. Hook (first 1.5s) must open with a specific, bold, falsifiable claim: e.g., 'A junior designer in Pune just lost a ₹8L/year job to one AI tool — here's which one.' The body needs exactly 3 triggers with real specifics: name the AI tool (e.g., Framer AI, v0.dev, Locofy), cite a real metric ('built a pixel-perfect landing page in 47 seconds'), and contrast old vs new ('what took a junior dev 3 days now takes 3 minutes'). The grand takeaway must be a single quotable sentence printed on screen for 2+ seconds: e.g., 'The skill isn't coding — it's knowing which AI to use and when.' The current script is vague, uses filler phrases like 'of stuff a' and '3.1 actually' without grounding them in anything concrete. Kill the meandering — every sentence must either shock, teach, or provoke.",
+    "visual_feedback": "B-roll needs to be replaced entirely with screen recordings of actual AI tools generating websites, side-by-side comparisons, or at minimum high-quality relevant footage — not generic stock of hands on keyboards. The completely black Frame 7 is a critical error that will crater retention. Avatar lighting is flat and slightly underexposed on the left side; add a key light at 45 degrees. Speaker energy is too subdued for a disruption/urgency topic — needs more vocal variation, hand gestures, or lean-in moments. Caption text is functional but could benefit from larger font size and a subtle background blur behind text for better contrast. End CTA card is decent but should include a specific value promise ('Follow for weekly AI tool breakdowns') rather than just 'AI Automation · New Builds Every Week' which is vague."
+  },
+  {
+    "date": "2026-04-15 05:19",
+    "topic": "A junior designer just lost her forty-five thousand rupee job because Claude built a pixel-perfect website in thirty minutes",
+    "script_dsscl_final": 9.52,
+    "video_dsscl_final": 7.08,
+    "video_passed": false,
+    "strengths": [
+      "Clear comparison diagram in frame 5 showing typing 12+ hours vs Claude+Stitch deployed in 30 minutes is highly save-worthy and concrete",
+      "Captions are Hormozi-style with keyword highlighting in orange, readable and punchy at 3-5 words per line",
+      "Topic hits a real pain point — junior designers and front-end devs being disrupted by AI tools, which triggers identity-level engagement",
+      "CTA end card is clean with follow prompt and niche positioning (AI Automation, new builds every week)"
+    ],
+    "weaknesses": [
+      "Hook is weak — 'got disrupted and' is mid-sentence entry with no pattern interrupt, no shocking stat, no visual disruption to stop the scroll",
+      "Zero B-roll in the top half for 9 out of 12 frames — it is just a static talking head against a dark curtain with no visual variety, killing rewatch and retention",
+      "Lighting is flat and slightly underexposed on the left side of the face, making the avatar feel low-energy and amateur",
+      "Frame 9 shows a beautiful landscape image that has zero relevance to web design or AI automation — confusing B-roll choice",
+      "Grand takeaway is missing — no single quotable screenshot-worthy sentence; the video drifts from disruption to skill to funeral to website that sells without a clear punchline",
+      "No specific tool demo or screen recording shown — Claude and Stitch are mentioned in the diagram but never visually demonstrated",
+      "The word 'funeral' in frame 10 is attention-getting but feels hyperbolic without proof or emotional payoff"
+    ],
+    "script_feedback": "Hook must be rewritten: open with a concrete shock stat like 'A junior designer just lost her ₹45K/month job because Claude built a pixel-perfect landing page in 30 minutes.' Current hook drops viewers mid-thought with no open loop. The comparison diagram (frame 5) is the strongest moment — move it to the first 3 seconds as visual proof. Grand takeaway needs a single quotable line like 'The skill isn't designing the page — it's knowing what page to build and for whom.' Currently the video cycles through too many half-ideas (disruption, difference, pixel-perfect, funeral, skill) without landing one hard. Add a specific real example: name the website, show the before/after, mention the client or niche. 'Website that sells' on the CTA frame is generic — make it specific like 'I built a ₹2L landing page in 30 minutes using Claude + Stitch — here's how.'",
+    "visual_feedback": "Avatar energy is low — eyes are slightly downcast, hands are fidgeting in a small range, and the dark curtain backdrop with flat lighting makes the frame feel like a 2021 Zoom call, not a 2025 creator reel. Lighting needs a key light from the right and a subtle rim light to separate from background. B-roll is critically missing — 9 of 12 frames are identical talking head shots with only caption changes. Need screen recordings of Claude generating code, Stitch deploying, the final landing page with scroll animations. The landscape photo in frame 9 is completely off-topic and damages credibility. Caption text is well-styled but the dark background sometimes makes the grey caption box blend — consider a slightly brighter or colored background bar. End CTA card is functional but the laptop image is dim and generic; replace with an actual screenshot of a deployed site."
+  },
+  {
+    "date": "2026-04-16 12:55",
+    "topic": "OpenAI Sided With the Pentagon. Claude Went #1 on the App Store.",
+    "script_dsscl_final": 9.53,
+    "video_dsscl_final": 6.95,
+    "video_passed": false,
+    "strengths": [
+      "Anthropic vs Pentagon standoff topic has genuine curiosity and controversy appeal",
+      "Captions are large, bold, Hormozi-style with highlighted keyword per line — readable on mobile",
+      "Multiple distinct topics (Anthropic/Pentagon, ChatGPT uninstalls, Claude downloads) create info density",
+      "CTA at end with follow graphic is clean and branded"
+    ],
+    "weaknesses": [
+      "Hook is generic — 'AI This Week' is a category label, not a pattern interrupt or open loop; no specific shocking stat or claim in frame 1",
+      "B-roll is low quality sketch-style diagrams (frames 2-3, 5-6) — feels like rough whiteboard notes, not polished infographics",
+      "Stock-looking AI-generated image of woman with laptop (frames 8-9) has no relevance to speaker or topic, breaks trust",
+      "No single grand takeaway frame — video ends on a follow CTA without a quotable screenshot-worthy line",
+      "Avatar lighting is flat and slightly underexposed with dark curtain background; low energy body language, minimal gestures",
+      "No specific tool, workflow, or actionable tip is given — video is news recap without a concrete save-worthy takeaway",
+      "Pacing feels like a listicle summary rather than a story arc; no tension build or payoff structure"
+    ],
+    "script_feedback": "Hook must be rewritten entirely — replace 'AI This Week' with the single most shocking stat upfront, e.g., 'The Pentagon just threatened to blacklist Anthropic — here's why that changes everything for you.' The Anthropic/Pentagon segment is the strongest story but needs stakes personalized to the viewer ('this affects every AI tool you use'). The ChatGPT uninstalls / Claude downloads segment needs hard numbers with source and timeframe. There is no grand takeaway — add a single punchy closing line like 'The AI cold war just started, and your favorite tools are the battlefield.' The CTA asks to comment 'stack' but gives no reason why — tie it to a specific deliverable or resource. Entire script lacks a 'why should I care' bridge for working professionals in India.",
+    "visual_feedback": "Avatar needs better lighting — add a key light on the face; the dark curtain background is flat and low-production. Sketch diagrams in frames 2-3 and 5-6 should be replaced with clean, branded infographic cards with consistent fonts and colors. The AI-generated stock woman image in frames 8-9 is a trust killer — replace with actual app screenshots, data charts, or screen recordings. On-screen text overlays are the strongest visual element but the highlighted word choice is sometimes arbitrary (e.g., 'THE' highlighted in frame 4). End card with follow CTA is decent but the dimmed overlay makes the speaker almost invisible — either go full graphic or keep speaker well-lit. Overall production feels rushed; needs a consistent visual template across all B-roll segments."
+  },
+  {
+    "date": "2026-04-28 05:32",
+    "topic": "Your ChatGPT Memory Doesn't Have to Die When You Switch to Claude",
+    "script_dsscl_final": 9.62,
+    "video_dsscl_final": 6.3,
+    "video_passed": false,
+    "strengths": [
+      "Addresses a genuine pain point: ChatGPT context loss and starting over every session",
+      "Comparison table (Without Import vs With Import) is a bookmark-worthy visual with concrete benefits",
+      "Clear step-by-step structure hinted: open Claude.ai, go to settings, click add, run the prompt",
+      "Specific tools named: Claude.ai and ChatGPT, giving save-worthy actionable content"
+    ],
+    "weaknesses": [
+      "Hook is extremely weak — 'years of chat' with a plain talking head does not stop the scroll; no pattern interrupt, no shocking stat, no visual disruption",
+      "B-roll is essentially non-existent — dark slides with bold text and the same talking head; no screen recordings, no live demo of the import process",
+      "Avatar energy is flat throughout: low facial expression variance, muted lighting, no hand gesture variation, eyes frequently half-closed or looking away",
+      "On-screen captions are basic white-on-dark with one orange highlight word — not true Hormozi-style (no box, no animation, no size variation for emphasis)",
+      "Grand takeaway frame is missing entirely — video ends on a generic 'FOLLOW @automatewithanand' card with no quotable one-liner",
+      "The comparison table text is tiny and unreadable at mobile scroll speed; it needs to be broken into animated bullet reveals",
+      "No real numbers anywhere: no time saved, no before/after metric, no specific use case with rupees or hours",
+      "CTA is a cold 'follow me' rather than a warm tool-specific close like 'save this, open Claude tonight, paste the prompt from my bio'",
+      "Six Weeks / Forty Hours slide has no context at mobile speed — unclear what it refers to without audio",
+      "No face in frames 2, 5, 8, 9 — kills retention; algorithm penalizes faceless segments in talking-head format"
+    ],
+    "script_feedback": "Hook must be rewritten completely. Replace 'years of chat' with something like 'I imported 847 ChatGPT conversations into Claude in 90 seconds — here is what happened.' The comparison table content is strong but needs to be spoken as a dramatic before/after with specific numbers: 'Without import: 10 minutes wasted every single prompt. With import: zero setup, output in 8 seconds.' The 'six weeks / forty hours' slide is confusing without narration context — if it means training time saved, say it explicitly: 'That is 40 hours of context Claude now knows without you typing a word.' Grand takeaway is completely absent — end with a single quotable line like 'Stop training AI from scratch every morning. Import once, benefit forever.' CTA should be 'Save this reel. Link to the import prompt is in my bio. Do it tonight.' Add a relatable frustration trigger early: 'You know that feeling when ChatGPT forgets everything you told it yesterday?' to drive comments.",
+    "visual_feedback": "Production quality is below threshold for virality. Lighting on avatar is dim and yellowish — needs a key light at 45 degrees and a subtle fill. Background dark curtain is flat and adds no visual interest; even a simple RGB strip or bookshelf would help. Comparison table needs to be full-screen with animated bullet point reveals, not a static tiny image in the top half. All instructional steps (open Claude, go to settings, click add) desperately need actual screen recording B-roll — the current dark placeholder slides with text kill retention and credibility. Captions need upgrade: add a dark background box, increase font size by 30%, use bold white with orange/yellow keyword highlights, and add subtle pop animation on each word. Avatar should be framed chest-up with more headroom removed. The follow CTA card at the end is generic — replace with a branded outro that includes the tool name and a save-trigger visual like a bookmark icon."
+  },
+  {
+    "date": "2026-05-10 06:16",
+    "topic": "Anthropic's Secret Design Tool Just Leaked as Open-Source — And It Costs Zero",
+    "script_dsscl_final": 9.61,
+    "video_dsscl_final": 7.64,
+    "video_passed": false,
+    "strengths": [
+      "Specific tool named — Open Design — gives a concrete, saveable takeaway",
+      "Strong niche hook: 'Anthropic uses internally' creates insider-knowledge curiosity",
+      "Multiple screen recordings of the actual tool/GitHub repo add credibility",
+      "Cost anchor of $1.20 per build is a specific, attention-grabbing number",
+      "CTA is explicit: comment 'Open Design' to get the link, driving engagement loop",
+      "Covers pain point well: Claude Design is rented/locked, this is open-source alternative"
+    ],
+    "weaknesses": [
+      "Hook frame 1 is visually flat — static talking head with dark curtain, no pattern interrupt or motion to stop scroll",
+      "On-screen text captions are inconsistent in word count — 'FEATURES RESPONSIVE MODERN' is 3 separate ideas crammed, loses punch",
+      "Avatar lighting is underexposed throughout; dark blue curtain blends with dark background making the presenter look low-energy",
+      "No single grand takeaway frame with a quotable one-liner — the message is spread across too many ideas",
+      "B-roll screen recordings are too small and unreadable at phone scale; viewer cannot actually see what Open Design looks like",
+      "Frame 7 'CLAUDE DESIGN: RENTED.' appears on blank black screen with no visual anchor — dead air moment",
+      "Final CTA frame has competing visual layers: follow overlay + 'in 6 months' caption + dimmed presenter — cluttered",
+      "No face zoom, no emoji, no color flash in first 0.5s — scroll-stop power is weak for Reels algorithm"
+    ],
+    "script_feedback": "Hook needs a broader TAM rewrite — instead of 'Anthropic uses internally' (only resonates with AI-deep audience), try 'Anthropic's secret design tool just leaked as open-source — and it costs $0.' This widens curiosity. The middle section jumps between too many selling points (export, restrictions, cost, model support) without a clear 3-act structure. Recommend: Act 1 — Problem (Claude Design is locked, $200/mo, no export). Act 2 — Solution (Open Design, free, self-hosted, works with Claude Code + Cursor + Gemini). Act 3 — Proof (show a real build, show the $1.20 cost receipt, show the exported code). Grand takeaway needs one screenshot-worthy sentence, e.g., 'You now own what Anthropic rents you.' The comment trigger 'Open Design' is good but add urgency: 'Comment OPENDESIGN — I'll DM the GitHub link before they hit 10k stars.' Add a specific real-world example: 'I built a full SaaS landing page in 14 minutes for ₹100 using this.'",
+    "visual_feedback": "Avatar lighting is the biggest production gap — the dark curtain setup makes every talking-head frame look like a 2021 YouTube tutorial, not a 2025 viral reel. Recommend ring light or key light at 45° with a clean light-grey or branded backdrop. B-roll screen recordings need to be zoomed in 2-3x and shown as smooth scroll animations, not static full-page screenshots — at 1080x1920 the text is illegible. The $1.20 BUILD frame (frame 6) has a glitch/chromatic aberration effect that feels stock and disconnected from the rest of the clean aesthetic. Caption styling is functional but not Hormozi-tier — needs larger font, consistent 3-word-max per line, and the highlighted word should be yellow or green (not just orange-red which blends with the dark frames). Frame 7 is a dead black screen with small grey text — either animate it or replace with a split-screen comparison (Claude Design locked vs Open Design free). Final frame stacks too many CTAs; separate 'follow' from the content close."
+  },
+  {
+    "date": "2026-05-11 06:22",
+    "topic": "I Automated MyFitnessPal From Telegram in 15 Minutes — Zero Code, One HAR File",
+    "script_dsscl_final": 9.53,
+    "video_dsscl_final": 6.35,
+    "video_passed": false,
+    "strengths": [
+      "Concrete tool stack shown: Printing Press, Claude Code, HAR files, CLI generation — save-worthy for devs",
+      "Shows a real workflow: capture HAR from MyFitnessPal, feed to Claude Code, get a CLI — this is specific and actionable",
+      "Three-way comparison frame (API vs MCP vs CLI) is a genuinely useful mental model that could earn bookmarks",
+      "Mentions Telegram automation which is relatable for Indian audience automation use cases"
+    ],
+    "weaknesses": [
+      "Hook is extremely weak — 'DEVELOPER TO AUTOMATE' is generic jargon, no pattern interrupt, no curiosity gap, no number, no stakes. Scroll-past guaranteed for 80% of viewers",
+      "B-roll is mostly dark GitHub README screenshots that are completely illegible at phone size — viewers cannot read any of the repository text, making it useless visual filler",
+      "No grand takeaway frame exists — video ends on 'AUTOMATION STACK' text over an unreadable GitHub page, zero quotable payoff",
+      "On-screen caption text is fragmented and incoherent across frames: 'FOR MY FITNESS', 'FOR ONE REQUEST', 'CLI FOR YOU', 'ALL AS HAR' — these feel like random subtitle fragments, not punchy overlay text",
+      "Avatar energy is flat — neutral expression, closed eyes in frame 1, low lighting, dark curtain background gives zero visual energy",
+      "No specific numbers: no time saved, no lines of code eliminated, no cost comparison — nothing concrete to trigger 'wow I need this'",
+      "CTA is a generic 'comment right now' — no specific reason given, no engagement hook like 'which API would you want a CLI for?'"
+    ],
+    "script_feedback": "Hook must be rewritten entirely. Lead with outcome: 'I automated my entire fitness tracking from my phone in 47 seconds — zero code, just one command.' Then show the before/after. The middle section comparing API vs MCP vs CLI is the strongest part but needs a voiceover line like 'API burns tokens, MCP bloats your context, but a CLI? One command, minimum tokens, done.' The fitness app example is good but never lands — show the actual CLI running, show the Telegram message triggering it, show the result. End with a quotable grand takeaway: 'Stop building apps. Print CLIs.' Add real numbers: 'This replaced 200 lines of Python with one HAR file.' The Telegram angle is buried — lead with it or cut it. CTA should be: 'Drop the app you want a CLI for — I'll show you how in the next video.'",
+    "visual_feedback": "B-roll is the biggest visual failure — dark GitHub README screenshots are unreadable on mobile and appear in 7 of 12 frames. Replace with: screen recordings of the actual CLI running in terminal with large readable font, side-by-side before/after of API code vs CLI one-liner, animated diagram of the HAR-to-CLI pipeline. Avatar lighting needs a key light on face — the dark curtain and dim room make him look like a silhouette. Caption style attempts Hormozi-style word highlighting (orange on white) but the subtitle phrases are fragmented and don't form punchy standalone statements. Each caption overlay should be a complete thought: 'NO CODE NEEDED' not 'FOR MY FITNESS'. The comparison frame (API/MCP/CLI) is the only well-designed visual — use that design language for all explainer frames. Text legibility score: 3/10 on the B-roll screens."
+  },
+  {
+    "date": "2026-05-18 07:10",
+    "topic": "Claude vs ChatGPT 2026: The OS Has Won",
+    "script_dsscl_final": 9.5,
+    "video_dsscl_final": 7.32,
+    "video_passed": false,
+    "strengths": [
+      "Comparison format (ChatGPT vs Codex vs Claude) creates natural curiosity loop",
+      "Same workflow / same prompt / two tools structure is a clean narrative framework",
+      "Specific claim — 'dead in 4 days' — adds urgency and emotional punch",
+      "Claude wins with 1M token context is a concrete, saveable data point",
+      "On-screen text uses Hormozi-style bold captions with keyword highlighting in orange"
+    ],
+    "weaknesses": [
+      "Hook frame 'ONE FACT CHECK' is vague — doesn't name the tools, the stakes, or the audience; low scroll-stop power",
+      "No B-roll at all — every non-talking frame is a static dark card with text; feels like a slideshow, not a reel",
+      "Avatar lighting is flat and underlit; dark curtain background adds no energy or brand signal",
+      "Eye contact is inconsistent — frames 7 and 11 show closed or downcast eyes",
+      "Grand takeaway frame (12) is cluttered: 'Start with ChatGPT / Ask Claude / Dump Everything / Paste into ChatGPT / 2 minutes' layered over a follow CTA — impossible to screenshot cleanly",
+      "No specific numbers: no cost, no time saved, no real project or client scenario — hurts Save score",
+      "CTA is generic 'Follow @automatewithanand' with no emotional close or tool link",
+      "Frame 9 ('THE OS IS') is an incomplete sentence on a nearly blank screen — pacing feels rushed and unfinished",
+      "No real-world demo or screen recording of either tool — purely verbal claims reduce credibility"
+    ],
+    "script_feedback": "Hook needs a total rewrite — open with the payoff or a shocking number: 'I ran the exact same prompt through ChatGPT, Codex, and Claude. One tool died in 4 days.' That front-loads the comparison and stakes. The middle section comparing same workflow / same prompt is structurally sound but needs specificity: name the actual task (e.g., 'fact-check a 12-source Twitter thread on RBI policy'), show a real tweet URL, and give measurable outcomes (time, accuracy, token usage). The 'dead in 4 days' claim needs context — what died? The workflow? The output quality? Codex access? Clarify. Grand takeaway should be a single, clean, screenshot-worthy sentence like: 'Claude researches. ChatGPT writes. Together: 2-minute fact checks.' Currently the final frame tries to say 5 things at once. Drop the multi-step stack and commit to one quotable line. Add a comment trigger: 'Which combo are you using? Drop it below.' Currently zero debate prompt exists.",
+    "visual_feedback": "Avatar needs better key lighting — a ring light or softbox from camera-left would dramatically improve skin tone and energy perception. The dark curtain background is flat; consider a subtle branded backdrop or depth-of-field shelf setup. Static text cards (frames 2, 3, 4, 6, 8) need visual hierarchy improvement — the dark card with two tool rows is repetitive across 5 frames and visually monotonous. Add screen recordings of actual ChatGPT/Claude/Codex interfaces running the prompt to replace at least 3 of these static cards. Caption text is legible but the orange highlight keyword sometimes competes with the white text — consider a subtle dark background bar behind captions for contrast. Frame 9 is nearly fully black with tiny text — wasted screen real estate. Frame 12 is the weakest: overlapping text layers (ChatGPT title, follow CTA, bullet points, and 'KLEE' watermark?) create visual noise. Simplify to one clean grand takeaway line + handle."
+  },
+  {
+    "date": "2026-05-19 07:04",
+    "topic": "OpenAI Codex Mobile: Your Mac Codes While You're Gone",
+    "script_dsscl_final": 9.52,
+    "video_dsscl_final": 6.85,
+    "video_passed": false,
+    "strengths": [
+      "Specific tool named (OpenAI Codex) makes it bookmark-worthy for devs",
+      "Clear structural flow: problem → architecture → benefits → setup → CTA",
+      "On-screen text captions are large, bold, Hormozi-style with red highlight words",
+      "Concrete setup time mentioned (5 minutes) adds credibility and save value",
+      "Three-step framework slide (Zero Tokens, Phone = Thin Remote, Free Control) is clean"
+    ],
+    "weaknesses": [
+      "Hook is weak — 'One Codex Workflow' is vague, doesn't create curiosity or pattern interrupt for non-dev audience",
+      "No B-roll whatsoever — entire video alternates between talking head and dark UI mockup slides, zero screen recordings or live demos",
+      "Avatar lighting is flat and underlit, dark curtain background looks low-budget, no energy or gesture variation across frames",
+      "Grand takeaway frame is missing — no single quotable screenshot-worthy sentence",
+      "UI mockup slides feel generic/templated, not actual Codex product screenshots, reducing credibility",
+      "CTA is split across two frames ('Comment Codex Below' + follow screen) — neither is warm or compelling",
+      "TAM is narrow — 'Mac = Compute, Phone = Remote' only resonates with Mac-owning developers, excludes 80%+ of Indian audience",
+      "No relatable frustration or debate trigger — 'frozen waiting on' is buried and abstract, no real pain scenario painted",
+      "Pacing feels uniform — no speed ramp, no visual surprise, no reason to double-watch"
+    ],
+    "script_feedback": "Hook must be rewritten for broader TAM: try 'I build full apps from my phone now — zero tokens, zero cloud bills' with a phone-in-hand visual. The middle section needs a concrete before/after: 'Last Tuesday I shipped a FastAPI endpoint from the Mumbai metro — 4 minutes, ₹0 spent.' Grand takeaway is completely absent — add a single frame: 'Your Mac is the server. Your phone is the IDE. Codex is the glue.' This becomes the screenshot moment. The CTA 'Comment Codex Below' is generic engagement bait — replace with 'DM me CODEX and I'll send the exact setup guide' to drive saves and shares. Add one debate trigger: 'This kills VS Code remote — change my mind' to spike comments.",
+    "visual_feedback": "Avatar needs front key light — face is muddy and flat against the dark curtain. Replace curtain with a desk setup or screen-record background for credibility. UI mockup slides are templated dark cards with no actual product screenshots — swap with real Codex CLI or ChatGPT Codex interface screen recordings to prove the workflow. Text overlays are legible but every frame uses the same red-highlight style with no hierarchy — vary font size for emphasis words. There is no B-roll at all: add phone POV of firing a Codex task, Mac terminal building in real-time, split-screen phone/Mac. The follow CTA frame (frame 12) dims the avatar to near-black which feels abrupt — keep consistent lighting and add a warm smile or nod."
+  }
+]

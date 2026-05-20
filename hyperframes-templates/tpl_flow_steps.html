@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=880, height=1100" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 880px; height: 1100px; overflow: hidden; background: #060c18; }
+      #root {
+        position: relative; width: 880px; height: 1100px;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        padding: 70px 90px; gap: 0;
+      }
+      /* Subtle grid lines */
+      #bg-lines {
+        position: absolute; inset: 0; pointer-events: none; opacity: 0.4;
+        background-image: linear-gradient(rgba(77,171,247,0.04) 1px, transparent 1px);
+        background-size: 100% 60px;
+      }
+      #section-label {
+        font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+        letter-spacing: 5px; text-transform: uppercase;
+        color: rgba(255,255,255,0.25); margin-bottom: 48px; opacity: 0;
+      }
+      #flow-container {
+        display: flex; flex-direction: column;
+        align-items: center; width: 100%; gap: 0;
+      }
+      .step-box {
+        width: 680px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(77,171,247,0.25);
+        border-radius: 16px;
+        padding: 28px 36px;
+        display: flex; align-items: center; gap: 24px;
+        opacity: 1; /* always visible — GSAP adds entry motion only */
+      }
+      .step-num {
+        flex-shrink: 0;
+        width: 52px; height: 52px; border-radius: 50%;
+        background: #1a3a5c; border: 2px solid #4dabf7;
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 22px; font-weight: 900; color: #74c0fc;
+      }
+      .step-text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 30px; font-weight: 700;
+        color: #ffffff; text-transform: uppercase;
+        letter-spacing: 0.3px; line-height: 1.2;
+      }
+      .arrow-row {
+        display: flex; align-items: center; justify-content: center;
+        height: 44px; opacity: 0;
+      }
+      .arrow-row svg { width: 28px; height: 28px; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="880"
+      data-height="1100"
+    >
+      <div id="bg-lines"></div>
+      <div id="section-label"></div>
+      <div id="flow-container">
+        __ITEMS_HTML_PLACEHOLDER__
+      </div>
+    </div>
+
+    <script>
+      window.__SECTION_DATA__ = __SECTION_DATA_PLACEHOLDER__;
+
+      const d = window.__SECTION_DATA__;
+      const dur = d.duration_sec || 8;
+
+      document.getElementById("section-label").textContent = d.label || "";
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.to("#section-label", { opacity: 1, duration: 0.4, ease: "power2.out" }, 0.1);
+
+      // Animate each step box + arrow in sequence
+      const steps = document.querySelectorAll(".step-box");
+      const arrows = document.querySelectorAll(".arrow-row");
+
+      steps.forEach((_, i) => {
+        tl.from(`#fstep-${i}`, { x: 60, opacity: 0, duration: 0.5, ease: "back.out(1.4)" }, 0.4 + i * 0.55);
+        if (i < arrows.length) {
+          tl.to(`#farrow-${i}`, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0.75 + i * 0.55);
+        }
+      });
+
+      tl.to({}, { duration: 0.001 }, dur - 0.001);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
