@@ -354,5 +354,184 @@
     ],
     "script_feedback": "Hook must be rewritten for broader TAM: try 'I build full apps from my phone now — zero tokens, zero cloud bills' with a phone-in-hand visual. The middle section needs a concrete before/after: 'Last Tuesday I shipped a FastAPI endpoint from the Mumbai metro — 4 minutes, ₹0 spent.' Grand takeaway is completely absent — add a single frame: 'Your Mac is the server. Your phone is the IDE. Codex is the glue.' This becomes the screenshot moment. The CTA 'Comment Codex Below' is generic engagement bait — replace with 'DM me CODEX and I'll send the exact setup guide' to drive saves and shares. Add one debate trigger: 'This kills VS Code remote — change my mind' to spike comments.",
     "visual_feedback": "Avatar needs front key light — face is muddy and flat against the dark curtain. Replace curtain with a desk setup or screen-record background for credibility. UI mockup slides are templated dark cards with no actual product screenshots — swap with real Codex CLI or ChatGPT Codex interface screen recordings to prove the workflow. Text overlays are legible but every frame uses the same red-highlight style with no hierarchy — vary font size for emphasis words. There is no B-roll at all: add phone POV of firing a Codex task, Mac terminal building in real-time, split-screen phone/Mac. The follow CTA frame (frame 12) dims the avatar to near-black which feels abrupt — keep consistent lighting and add a warm smile or nod."
+  },
+  {
+    "date": "2026-05-21 07:16",
+    "topic": "Google Gemini Spark: The AI Agent That Works While Your Phone Is Off",
+    "script_dsscl_final": 9.52,
+    "video_dsscl_final": 6.75,
+    "video_passed": false,
+    "strengths": [
+      "Tool explicitly named — Gemini Spark — gives save-worthy specificity",
+      "Three building blocks framework (Tasks, Skills, Schedules) creates structured takeaway",
+      "Problem-agitation opener with '40 mins lost daily' is relatable for working professionals",
+      "Use case specificity: Monday 9 AM triage, Drive folder, Calendar, email drafting — concrete enough to bookmark"
+    ],
+    "weaknesses": [
+      "Hook is generic — 'Google just launched' is overused and doesn't create a real pattern interrupt or curiosity loop; no stakes, no personal transformation teased",
+      "B-roll frames are low-effort dark-mode mockups with placeholder text (__APP_1__, __TITLE_1__, __BODY_1__) — destroys credibility and feels unfinished",
+      "Avatar energy is flat throughout — neutral expression, minimal hand movement, no vocal emphasis cues visible, same static framing in every talking-head frame",
+      "Caption styling is inconsistent — some frames have grey box captions, some have Hormozi-style bold word highlighting in orange, sizing changes frame to frame",
+      "Grand takeaway frame is cluttered — 'FOLLOW' CTA overlaps 'Gemini Spark' title and schedule text, nothing is screenshot-worthy or quotable",
+      "No share trigger — no identity hook ('If you use Google Workspace, you need this'), no tag-a-friend prompt, no controversy or opinion",
+      "Lighting is dim and unflattering; dark curtain background adds no production value",
+      "No real demo or screen recording of Gemini Spark in action — all conceptual slides, zero proof"
+    ],
+    "script_feedback": "Hook rewrite needed: Replace 'Google just launched' with a specific pain-first hook like 'You lose 40 minutes every Monday morning doing things Gemini can now do at 5 AM while you sleep — here's the exact 3-step setup.' Grand takeaway must be one punchy quotable line, e.g., 'One schedule. Zero Monday chaos. Your week runs itself.' — currently the ending is muddled with a follow CTA overlay. Add a real number trigger: 'I tested this across 14 weeks — saved 3.5 hours per week, ₹0 spent.' The middle section listing Tasks/Skills/Schedules is good structure but needs a concrete walk-through example per block, not just labels. Comment bait is missing — add a polarizing line like 'This replaces your VA for free' or ask 'Would you trust AI to send emails on your behalf?'",
+    "visual_feedback": "B-roll mockups with placeholder text (__APP_1__, __TITLE_1__) are a dealbreaker — either show real Gemini Spark UI or use clean animated graphics. Avatar framing is identical across all 6+ talking-head frames — add at least one zoom-in or angle shift for pacing. Lighting needs a key light on the face; current setup is flat and washed out. Background dark curtain looks low-budget — consider a branded corner or subtle neon accent. Caption font weight and box style should be standardized: bold white with orange keyword highlight on every frame, no grey boxes. The CTA/follow overlay on Frame 12 obscures the content behind it — separate the CTA into its own clean frame. Text legibility on Frame 3 (Gemini Spark title card) is nearly invisible due to white-on-light-grey rendering."
+  },
+  {
+    "date": "2026-05-22 07:46",
+    "topic": "Gemini Omni Flash: Free AI Video on YouTube Shorts — Faceless Channel, Avatar, Cinematic Reels",
+    "script_dsscl_final": 9.62,
+    "video_dsscl_final": 6.25,
+    "video_passed": false,
+    "strengths": [
+      "Covers a genuinely useful topic — AI avatar + voiceover shorts creation — that is highly relevant to the target audience",
+      "Lists concrete superpowers (Reference Anything, Conversational Editing, Your Digital Avatar) giving a saveable framework",
+      "Mentions specific old-stack cost (₹2,000 + 4 hrs) vs new approach, providing a clear before/after contrast",
+      "SyntID watermark mention and 'tested last night' add recency and credibility",
+      "End card with Gemini OmniFlash and clear follow CTA with handle"
+    ],
+    "weaknesses": [
+      "Hook (Frame 1) is extremely weak — 'A FEATURE ON' with a static talking head and no pattern interrupt, no curiosity loop, no big claim; most viewers will scroll past",
+      "Avatar energy is flat throughout — neutral expression, minimal gestures, muted lighting against a dark curtain, no eye-contact intensity or tonal variation visible from frames",
+      "On-screen text is inconsistent: some frames use Hormozi-style bold captions but others (Frame 9 'TO MONSOON NO') appear like auto-caption gibberish, suggesting poor caption sync or speech-to-text errors",
+      "B-roll slides (Frames 2, 3, 6, 8, 12) are plain dark cards with small text — low visual contrast, not thumb-stopping, and feel like placeholder slides rather than polished motion graphics",
+      "No single quotable grand takeaway frame — the closest is 'YOUR AVATAR FILMS WHILE' (Frame 8) but it's incomplete and not screenshot-worthy",
+      "No share trigger — no identity line like 'Tag someone who still pays ₹2K for one short', no relatable frustration articulated sharply enough to forward",
+      "Caption errors ('TO MONSOON NO', 'APP STARTING THIS') destroy credibility and confuse the viewer, breaking any rewatch loop",
+      "Production quality is below benchmark: no color grading, no branded lower third, no animated transitions between talking head and slides",
+      "CTA is generic 'FOLLOW' with handle — no specific action like 'Comment OMNI for the prompt template' is visually emphasized (it's buried in tiny text on the last slide)"
+    ],
+    "script_feedback": "Hook must be rewritten entirely — lead with the outcome and a specific number: 'Google just gave you a free avatar that films shorts while you sleep — I tested it, 4 minutes, zero rupees.' Remove all filler phrasing like 'a feature on.' The old-stack vs new-stack comparison is good but needs sharper delivery: say '₹2,000 and 4 hours for ONE short — that was last week. Now it's free and 4 minutes.' The grand takeaway must be a single punchy sentence on its own frame: 'Your AI avatar films while you type a prompt.' Fix all caption errors — 'MONSOON' and 'APP STARTING THIS' are clearly wrong transcriptions that kill trust. Add a comment trigger: 'Which niche would you use this for? Drop it below.' End CTA should verbally say 'Comment OMNI and I'll DM you the exact prompt I used' — make this the loudest moment in the video.",
+    "visual_feedback": "Avatar needs dramatically better lighting — add a key light from 45 degrees to create depth and energy on the face; the current flat dark look feels low-effort. Swap the dark curtain for a cleaner background or add a subtle branded gradient in post. B-roll slides need motion: animate bullet points flying in, use brand colors (not just dark grey), increase font size by 40%, and add iconography. Captions must be manually reviewed — the auto-generated ones have multiple errors that are visible on screen. Add a branded lower-third with name and handle that persists across talking-head segments. The end card is cluttered with overlapping text (FOLLOW banner over Gemini OmniFlash copy); simplify to one clear CTA with large text. Consider adding a 0.5s zoom-cut every 3-4 seconds on the talking head to simulate energy and maintain pacing."
+  },
+  {
+    "date": "2026-05-25 07:07",
+    "topic": "Google's 5-Model Media Stack — Most Creators Don't Know It Exists",
+    "script_dsscl_final": 9.57,
+    "video_dsscl_final": 7.68,
+    "video_passed": false,
+    "strengths": [
+      "Clear save-worthy structure: 5 tools, zero rupees, one stack — highly bookmarkable",
+      "Specific tools named (Veo 3, Imagen 4, Lyria 2, Gemini) with use cases makes it reference material",
+      "Text overlays are punchy and mostly 3-5 words with Hormozi-style bold captions",
+      "The list-based frame (Frame 7/8) with numbered items is visually scannable and save-triggering"
+    ],
+    "weaknesses": [
+      "Hook is weak — 'NEW MEDIA STACK' with eyes closed and no pattern interrupt does not stop the scroll; no curiosity loop or bold claim with stakes",
+      "No B-roll at all — entire video alternates between talking head and static info cards; no screen recordings, tool demos, or output examples shown",
+      "Avatar energy is low throughout — neutral expression, minimal hand gestures, flat vocal energy implied by body language, no lean-in moments",
+      "Lighting is dim and grey, backdrop is a plain dark curtain — feels low-budget rather than intentionally minimal",
+      "No grand takeaway frame — the video ends with a generic follow CTA rather than a single quotable screenshot-worthy sentence",
+      "Comment triggers are absent — no opinion, no hot take, no 'which tool do you use?' prompt, no controversy or relatable frustration",
+      "Frame 10 mentions '30-second cinematic' but never shows the output — massive missed payoff that kills rewatch motivation"
+    ],
+    "script_feedback": "Hook must be rewritten with broader TAM and stakes: try 'Google just killed ₹15,000/month in creator subscriptions — here's the free stack that replaces everything' instead of the vague 'NEW MEDIA STACK'. The promise of a 30-second cinematic ad is teased but never delivered — show the actual output or the video feels incomplete and kills rewatch. Grand takeaway should be a single quotable line like 'Gemini just became a free Adobe suite for Indian creators' instead of a follow CTA. Add a comment trigger: 'Drop your niche below and I'll prompt the Veo 3 clip for you' or 'Which tool surprised you most?'. Include real numbers — 'I made this ₹0 ad in 4 minutes for a chai brand in Pune' — to ground the value and boost shareability.",
+    "visual_feedback": "No B-roll or screen recordings shown despite discussing 5 specific tools — at minimum show Gemini interface, a Veo 3 output clip, an Imagen 4 generated image, and a Lyria 2 music snippet. Avatar lighting is underexposed with a grey-green cast; add a key light at 45 degrees and increase warmth. Eye contact breaks frequently (eyes closed in Frame 1, looking down in multiple frames). Info card frames (2-4, 7-9) are clean but static — add subtle animations or progressive reveals to maintain pacing. Captions are legible but the red highlight word choice feels random rather than emphasizing the key value word. The follow CTA end card (Frame 12) has poor contrast with yellow text over a dimly lit face — use a solid background or higher contrast treatment."
+  },
+  {
+    "date": "2026-05-26 06:05",
+    "topic": "Accio Work: Alibaba's Free AI Agent Team That Runs on Your Laptop",
+    "script_dsscl_final": 9.53,
+    "video_dsscl_final": 6.8,
+    "video_passed": false,
+    "strengths": [
+      "Specific tool named (Accio Work) with concrete features (4 built-in agents, free, local, private) making it save-worthy",
+      "Solo founder problem framing taps into relatable pain point for target audience",
+      "Clear structural flow: problem → tool → demo → CTA"
+    ],
+    "weaknesses": [
+      "Hook is extremely weak — 'Tool that does' is generic and does not stop the scroll; no pattern interrupt, no curiosity gap, no bold claim",
+      "B-roll screens are dark, static UI mockups with no actual product demo or screen recording — feels like a slideshow, not proof",
+      "Avatar lighting is poor — face is underlit with harsh yellow cast, low energy in expression and body language, minimal eye contact intensity",
+      "No grand takeaway frame — video jumps from content straight to a follow CTA without a single quotable screenshot-worthy line",
+      "On-screen text inconsistently sized and not punchy — 'PRE-BUILT SPECIALISTS A' is cut off, 'PROMPT MAKE THIS' is grammatically awkward",
+      "Captions are semi-Hormozi style but color highlighting (orange word) lacks consistency in emphasis logic — highlighted words don't always carry the emotional weight",
+      "No specific numbers or results — no time saved, no revenue impact, no before/after comparison to drive shares or comments"
+    ],
+    "script_feedback": "Hook must be rewritten entirely. Replace 'Tool that does' with a specific, bold, scroll-stopping claim like 'This free tool gave me a 4-person team in 30 seconds' — include a number, a timeframe, and an outcome in the first 2 seconds. The solo founder problem setup (frame 2) should come AFTER the hook, not be implied by the hook. The middle section needs a live screen recording walkthrough — show the actual prompt being typed and the Q1-Q4 strategy output appearing in real time, not static UI cards. The 'summer products' example (frame 8) feels random and disconnected from the solo founder narrative — pick one consistent use case (e.g., 'I run a D2C brand alone, here is how Accio Work replaced my strategist, researcher, designer, and writer'). Grand takeaway is completely missing — add a single frame with a quotable line like 'One founder. Four agents. Zero payroll.' before the CTA. The CTA itself is too generic ('Follow') — replace with 'Save this, download Accio Work tonight, and fire your imaginary team by morning.'",
+    "visual_feedback": "Avatar lighting needs significant improvement — invest in a key light at 45 degrees to eliminate the muddy yellow cast and dark eye sockets. Background dark curtain is acceptable but adds no visual interest; consider subtle branded background or depth-of-field separation. B-roll UI screens are the biggest visual failure: they are static mockup cards on a dark background with no motion, no cursor, no transitions — they look like they were made in Canva, not captured from a real product. Replace with actual screen recordings with subtle zoom-ins on key features. Text overlays are inconsistently formatted — some frames have 2-line text, some have cut-off text ('PRE-BUILT SPECIALISTS A'), and the font weight competes with the UI cards behind it. Caption bar at the bottom needs a consistent semi-transparent background for legibility across all frames. The follow/CTA end card (frame 12) dims the entire image making the presenter barely visible — keep lighting consistent and overlay CTA text with better contrast."
+  },
+  {
+    "date": "2026-05-27 06:06",
+    "topic": "Claude Code Managed Agents: The AGI-Style Memory Architecture That Will Make the Next Wave of Millionaires",
+    "script_dsscl_final": 9.52,
+    "video_dsscl_final": 6.8,
+    "video_passed": false,
+    "strengths": [
+      "Clear topic positioning around Claude Code Managed Agents — a timely and niche-relevant subject",
+      "Save-worthy list frame (Frame 4) with 5 numbered features is bookmark-friendly",
+      "Actionable build roadmap shown (Frames 9-10): Vertical Agent → Company Brain → Sleep Cycle gives a concrete 3-step path",
+      "On-screen captions are present on every frame providing continuous text reinforcement"
+    ],
+    "weaknesses": [
+      "Hook is extremely weak — Frame 1 opens with 'ONE CLAUDE MANAGED' which is mid-sentence, creates zero pattern interrupt, no surprising stat, no contrarian claim, no identity callout",
+      "Frame 2 ('LAPTOP CLOSED') is confusing out of context and kills momentum instead of building curiosity; the open loop is unclear",
+      "No specific numbers anywhere — no cost savings, no time saved, no revenue, no before/after metric to anchor credibility",
+      "Avatar energy is flat across all frames — neutral expression, minimal gestures, low vocal energy signaled by body language, no lean-ins or emphatic hand movements",
+      "Lighting is mediocre with harsh side-casting shadow, dark curtain background feels low-budget and undifferentiated",
+      "Grand takeaway frame is completely absent — the video ends on a generic 'FOLLOW @automatewithanand' CTA with 'IN 12 MONTHS' which is vague and not screenshot-worthy",
+      "B-roll frames (2, 4, 5, 9, 10) are static dark UI mockups with small text, not engaging motion graphics or screen recordings of actual Claude usage",
+      "Caption styling is inconsistent — some frames use white-on-dark with red highlight, others use different sizes and placements, not a cohesive Hormozi-style system",
+      "No relatable frustration or villain established — who is this solving pain for? No 'You're still doing X manually?' moment",
+      "Share factor is low — no quotable one-liner, no identity signal like 'If you're a solo founder doing DevOps, stop'"
+    ],
+    "script_feedback": "Hook must be completely rewritten. Open with a specific, shocking claim: 'One Claude agent replaced my entire DevOps team — here's the 3 builds that did it' or 'I closed my laptop at 6 PM and Claude shipped 47 commits overnight.' The 'laptop closed' concept is actually compelling but it's buried and unexplained. Frame it as the payoff of a sleep cycle agent with real numbers — '₹0 infra cost, 47 commits, zero human hours.' The 5-feature list (Frame 4) should be narrated with a specific use case per point, not just read aloud. Grand takeaway needs to be a single punchy sentence: 'Claude Managed Agents let you build a company that codes while you sleep — no servers, no DevOps, just API calls.' End CTA should name the exact tool and action: 'Save this, open Claude Code, and start with Build 1 tonight.' Add a comment trigger: 'Comment AGENT and I'll send you the exact prompt I used for the sleep cycle.'",
+    "visual_feedback": "Avatar needs dramatically better lighting — add a key light at 45 degrees and a subtle fill to eliminate the flat, underlit look. Background should be swapped for a clean desk setup with a monitor showing Claude Code or a branded gradient wall. Energy must increase: lean forward on key points, use deliberate hand gestures to count off the 3 builds, look directly into lens with intensity on the hook. B-roll frames need to be actual screen recordings or animated diagrams showing the agent flow, not static dark cards with tiny text that's unreadable on mobile. Caption system needs standardization: pick one style (white bold with orange/red keyword highlight), consistent size (minimum 60pt equivalent), always centered in the lower third with a semi-transparent background bar. The list frame (Frame 4) has good structure but text is too small — make it 3 items maximum with larger font. Final CTA frame is too dark and the 'IN 12 MONTHS' text competes with the follow overlay — simplify to one clear action."
+  },
+  {
+    "date": "2026-05-29 07:19",
+    "topic": "GWS CLI + Claude Code: One Prompt Runs Your Entire Google Workspace",
+    "script_dsscl_final": 9.52,
+    "video_dsscl_final": 6.4,
+    "video_passed": false,
+    "strengths": [
+      "Specific tool named — Claude Code — gives clear save signal",
+      "Concrete install promise (5 min, 3 prompts, first week) adds bookmark value",
+      "Problem-agitate sequence (six API configs, broken auth, people gave up) builds relatable frustration",
+      "CTA is specific — comment WORKSPACE — low friction engagement trigger",
+      "Recipes/multi-step workflow mention gives advanced users a reason to save"
+    ],
+    "weaknesses": [
+      "Hook is extremely weak — 'ONE INSTALL ONE' is vague, no pattern interrupt, no scroll-stopper",
+      "No B-roll at all — entire video is static talking head against a dark curtain with zero visual variety",
+      "On-screen text is inconsistent — some frames have 3+ words overlaid in hard-to-read grey-on-grey styling",
+      "Avatar energy is flat — neutral expression, minimal hand gestures, dim lighting, no eye-pop or vocal energy cues",
+      "No grand takeaway frame — no single quotable screenshot-worthy line anywhere in the video",
+      "Frame 2 info card appears once and is never reinforced — feels disconnected from the talking head segments",
+      "Captions are Hormozi-style bold but color highlighting (orange word) feels random, not emphasizing the right power words",
+      "Production value is low — dark curtain background, poor lighting on face, lavalier mic visible, no color grading",
+      "No specific results or numbers — missing rupees saved, hours saved, or concrete before/after outcome",
+      "Frame 10 text 'GWSCLIGITHUB' is confusing and unreadable — unclear what tool/repo is being referenced"
+    ],
+    "script_feedback": "Hook must be rewritten completely — lead with a specific pain point and a number: 'I replaced 6 API configs with one terminal command in 4 minutes.' The problem-agitate section (broken auth, people gave up) is decent but needs a real story: 'Last Tuesday a freelancer in Pune DMd me — he spent 11 hours on auth flows. I sent him 3 prompts.' Grand takeaway is missing — add a single-line frame like 'Claude Code is the IDE you command, not click.' The CTA mentions commenting WORKSPACE but never explains what the viewer gets — say 'Comment WORKSPACE and I'll DM you the 3-prompt starter kit + my CLAUDE.md file.' Replace vague references like 'reasoning everything below' with concrete outputs: 'It read 14 files, wrote 3 endpoints, and pushed to GitHub — zero clicks.'",
+    "visual_feedback": "Background is a wrinkled dark curtain with zero depth or brand identity — use a desk setup, monitor with Claude Code terminal visible, or at minimum a solid colored backdrop with ring light. Lighting is underexposed on the face, creating a flat, low-energy look. Add at minimum a key light at 45 degrees. B-roll is completely absent — insert screen recordings of Claude Code terminal, the actual install command running, the recipe YAML file, or a split-screen of before (6 API tabs) vs after (one terminal). The single info-card frame (Frame 2) is well-designed but jarring because the rest of the video has none — either commit to graphic overlays throughout or use consistent screen recordings. Caption text legibility is acceptable but the grey/white caption bar blends into the hoodie — add a darker semi-transparent background strip. The orange highlight word selection seems random (ONE, COMMAND, WORKFLOW, IN, BELOW, YOUR, PRIORITY, MY, THE, WORKSPACE, DONE) — highlight only the verb or the tool name for consistency. Avatar needs more energy — lean forward, use wider hand gestures, vary vocal tone. The follow/CTA end frame (Frame 12) is too dark and the yellow FOLLOW text competes with the dimmed face."
+  },
+  {
+    "date": "2026-05-30 06:49",
+    "topic": "n8n Is Not Dying — But This Shift Will Catch Most Operators Off Guard",
+    "script_dsscl_final": 9.6,
+    "video_dsscl_final": 7.62,
+    "video_passed": false,
+    "strengths": [
+      "Clear tool named — n8n positioned against Claude Code creates a strong opinion-driven narrative that invites engagement",
+      "Save-worthy list format — 3 use cases for n8n (multi-system orchestration, on-premise deployments, high-volume cron jobs) gives concrete bookmark value",
+      "Debate-triggering framing — 'N8N still owns this' and 'Agents can't webhook into CRM' are strong opinion stakes that provoke comments",
+      "190K GitHub stars stat adds social proof and credibility early"
+    ],
+    "weaknesses": [
+      "Hook is weak — 'Something is happening' is vague, overused, and lacks pattern interrupt; no specificity, no stakes, no number",
+      "B-roll is entirely static slides with no actual screen recordings, tool demos, or n8n workflow visuals — zero proof of claim",
+      "Avatar lighting is flat and underexposed on the left side; dark shirt against dark curtain creates no visual separation",
+      "On-screen text is inconsistent — some frames have 2-3 word punchy captions, others cram 4-5 words awkwardly; 'CALENDAR DOC DRAFTS' is confusing without context",
+      "Grand takeaway frame is missing — 'FRAMEWORK ARE UNTOUCHABLE' has a grammar error and is not screenshot-worthy",
+      "CTA is generic 'FOLLOW @automatewithanand' with no specific action, no lead magnet, no DM trigger beyond a vague '6-Task Audit → DM'",
+      "No face-to-camera energy shift or tonal climax — avatar energy stays monotone across all talking head frames",
+      "Captions are not true Hormozi-style — no color contrast hierarchy, no animated word-by-word reveal, just static subtitle bars"
+    ],
+    "script_feedback": "Hook must be rewritten with specificity: swap 'Something is happening' for 'Claude Code just mass-replaced 12 no-code tools — but it can't touch these 3 n8n workflows.' The middle section listing conversational tasks / adaptive logic / single-user productivity is abstract — replace with concrete scenarios: 'When a Razorpay webhook hits at 2AM and needs to update HubSpot + Slack + Google Sheet in sequence — Claude Code hallucates the API call, n8n runs it in 0.3s.' Grand takeaway needs a single quotable rewrite: 'AI agents replace prompts. n8n replaces plumbing. Learn the difference or lose both.' The CTA should be: 'Comment STACK and I'll DM you my 6-task automation audit template — free.'",
+    "visual_feedback": "Avatar needs a key light from camera-right to separate face from the dark curtain; consider a subtle colored backlight for depth. Slide frames (2, 3, 4, 5, 6, 10) look like generic Canva templates — replace with actual n8n workflow screenshots, live node editor recordings, or side-by-side comparisons of Claude Code terminal vs n8n canvas. Caption bar should use white bold text with a single red/orange highlight word per phrase, animated word-by-word with slight scale bounce — current static gray bars feel flat. The '190K GitHub Stars' frame needs the n8n logo and a live GitHub screenshot for credibility. Final CTA frame is too dark — face is barely visible; needs brightness boost and the CTA text should be larger with a clear visual arrow or button graphic pointing to profile."
   }
 ]

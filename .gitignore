@@ -14,6 +14,7 @@ assets/social/
 assets/screen_screenshots/
 assets/screen_timelines/
 assets/.screen_screenshots_tmp/
+assets/infographic/
 assets/transcripts/
 assets/.browser_auth/
 assets/.screen_screenshots/
@@ -67,3 +68,4 @@ remotion/.next/
 .idea/
 *.swp
 .claude/settings.local.json
+.claude/scheduled_tasks.lock

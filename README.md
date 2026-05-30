@@ -297,6 +297,95 @@ HeyGen sometimes returns `MOVIO_PAYMENT_INSUFFICIENT_CREDIT` (you're out of cred
 
 ---
 
+## Infographic mode (alternative to the reel)
+
+Sometimes a hand-sketched infographic outperforms the video on LinkedIn or as the carousel cover on Instagram. This project ships a separate "signature sketch infographic" generator that talks to **Nano Banana (Google Gemini 3.1 Flash Image) directly** — no Kie.ai middleman.
+
+### Setup
+
+```bash
+pip install google-genai pillow      # already in requirements.txt
+echo "GEMINI_API_KEY=AIza..." >> .env  # get a key at https://aistudio.google.com/apikey
+```
+
+### Generate
+
+```bash
+# From the most recent script_data.json (auto-derives title + sides + stack):
+python3 scripts/generate_infographic.py
+
+# Or, fully manual:
+python3 scripts/generate_infographic.py \
+  --topic "<one-line topic>" \
+  --title "<hook title>" \
+  --left-header "<left header>" --left "<A,B,C>" \
+  --right-header "<right header>" --right "<D,E,F>" \
+  --rule-left "<arrow left>" --rule-right "<arrow right>" \
+  --stack "<tool1,tool2,tool3>"
+
+# Pick a signature style (cream paper canvas stays locked across all):
+python3 scripts/generate_infographic.py --style auto            # recommender picks based on script tone + Stage 6 signals
+python3 scripts/generate_infographic.py --style architect       # default — calm authority
+python3 scripts/generate_infographic.py --style field-journal   # warmer, freehand, personal
+python3 scripts/generate_infographic.py --style marker-board    # bold, contrarian, decision-framework
+
+# See what the recommender would pick (no API call):
+python3 scripts/recommend_infographic_style.py
+python3 scripts/recommend_infographic_style.py --json    # machine-readable
+```
+
+### How `--style auto` decides
+
+[scripts/recommend_infographic_style.py](scripts/recommend_infographic_style.py) reads `assets/script_data.json` + (if present) `assets/analysis/video_analysis.json` and applies these rules in order — first match wins:
+
+| Style | Triggers |
+|---|---|
+| **marker-board** | `format_used` is "Counterintuitive Truth", "Before AI vs After", "Manual vs Automated", "Old School vs New School"; OR hook contains contrarian phrases ("is dying", "not dying", "everyone is wrong", "nobody knows", "stop X", "quietly shipped"); OR Stage 6 Comment score ≥ 8 |
+| **field-journal** | Hook starts first-person ("I set up", "Last weekend I", "I built"); OR `tone` field includes "personal", "vulnerable", "warm", "reflection" |
+| **architect** | Default — everything else (explainers, frameworks, thought-leadership) |
+
+### Signature styles
+
+The cream paper background, four-zone composition, and the warm/cool ink meaning are locked across all three. Only the line work, palette, and lettering vary.
+
+| `--style` | Inks (changing / stable) | Visual feel | Best for |
+|---|---|---|---|
+| `architect` | terracotta-orange / teal-blue | Ruler-perfect, faint pencil grid, neat printed lettering | Thought-leadership, frameworks, calm authority |
+| `field-journal` | burnt-sienna / dusty indigo | Loose freehand, no grid, cursive labels with corrections, corner brackets | Personal stories, reflections, "figuring this out with you" |
+| `marker-board` | vivid coral red-orange / deep petrol teal | Bold marker strokes, no grid, **filled solid color pills** for emphasis labels | Contrarian takes, decision frameworks — highest scroll-stop |
+
+### Outputs (in `assets/infographic/`)
+
+| File | Spec |
+|---|---|
+| `linkedin.png` | 4:5, ~1080×1350 — LinkedIn feed safe |
+| `instagram.png` | 9:16, ~1080×1920 — IG story / Reel cover |
+| `caption.md` | 6-part LinkedIn caption per the skill formula (hook → reframe → framework → proof → line → CTA) |
+| `prompts.json` | Exact prompts used, for debugging or re-runs |
+
+### How consistency works
+
+Per the skill spec, the LinkedIn 4:5 image is generated **first**. That PNG is then passed as a **reference image** to the Instagram 9:16 call — this is the main consistency lever, far more reliable than text alone. Both outputs share the same locked signature look (cream paper, terracotta-orange ink for "changing", teal-blue ink for "stable", four-zone composition, neat hand-lettering, no logos).
+
+### Cost
+
+| Image size | Per image | LinkedIn + Instagram |
+|---|---|---|
+| 1K (default) | $0.067 | **~$0.13** per post |
+| 2K | $0.101 | ~$0.20 per post |
+
+Skips Kie.ai's markup, gives you direct status visibility, and pays Google's published rate.
+
+### Claude Code skill
+
+The skill spec lives at `.claude/skills/signature-sketch-infographic.md`. Claude Code auto-invokes it when you say things like:
+- "make this into a graphic"
+- "build a LinkedIn infographic for the n8n script"
+- "give me a Nano Banana prompt"
+- "carousel cover for tomorrow's post"
+
+---
+
 ## Architecture deep-dive
 
 See [CLAUDE.md](CLAUDE.md) for the full architecture document, including:

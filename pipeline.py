@@ -689,8 +689,8 @@ def main() -> int:
         _hf_rendered = set()
         for sid in _clip_sections:
             mp4 = Path(f"assets/broll/{sid}.mp4")
-            # Hyperframes clips are ≤ 500KB; Kling clips are typically 1–3MB
-            if mp4.exists() and mp4.stat().st_size < 500_000:
+            # Hyperframes clips are typically 100-800KB depending on section length; Kling clips are 1-3MB
+            if mp4.exists() and mp4.stat().st_size < 900_000:
                 _hf_rendered.add(sid)
         _kling_clips = _clip_sections - _hf_rendered
         if _kling_clips:
