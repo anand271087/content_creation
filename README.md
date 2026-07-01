@@ -81,7 +81,9 @@ Copy `.env.example` to `.env` and fill in:
 | `HEYGEN_API_KEY` | Stage 3 (avatar) | https://app.heygen.com → API |
 | `HEYGEN_VOICE_ID` | Stage 3 | HeyGen voice library |
 | `HEYGEN_AVATAR_ID` | Stage 3 | HeyGen avatar library |
-| `WHISPER_MODEL` | Stage 5 (captions) | Use `medium` (default) or `large-v3` for best accuracy on proper nouns |
+| `STT_PROVIDER` | Stage 5 (captions) | `whisper` (default, free, slower) or `elevenlabs` (cloud, ~$0.013/reel, better on proper nouns) |
+| `ELEVENLABS_API_KEY` | Stage 5 — required when `STT_PROVIDER=elevenlabs` | Get one at https://elevenlabs.io/app/settings/api-keys (free tier: ~10k chars/month STT ≈ 2-3 reels) |
+| `WHISPER_MODEL` | Stage 5 (when `STT_PROVIDER=whisper`) | `medium` (default) or `large-v3` for best accuracy on proper nouns |
 | `BROLL_MODEL` | Stage 2 fallback | Default: `kling-2.6/text-to-video` |
 
 ---
@@ -481,7 +483,7 @@ python3 scripts/verify_assets_in_video.py --strict    # exit 1 if any MISSING/TI
 | `Remotion MEDIA_ELEMENT_ERROR Code 4` on b-roll | Kling generates H264 High/Main profile, Chromium rejects it | Stage 2 re-encodes every clip after download (baseline profile). If you see this, manually `ffmpeg -i in.mp4 -c:v libx264 -profile:v baseline -level 3.1 -pix_fmt yuv420p out.mp4` |
 | Video abruptly cuts at 60s | `sync_broll_to_speech.py` not run, OR `durationInFrames` hardcoded | Stage 5 auto-syncs and Root.tsx uses `calculateMetadata`. Re-run Stage 5. |
 | Old avatar reused in a new topic's video | Stale-asset guard didn't trip | `rm assets/avatar/avatar_video.mp4` and re-run |
-| Whisper misidentifies proper nouns ("Claude" → "clot") | `small.en` model is inaccurate | Set `WHISPER_MODEL=large-v3` in `.env` (downloads ~1.5 GB first run) |
+| Whisper misidentifies proper nouns ("Claude" → "clot") | `small.en` model is inaccurate | **Preferred:** set `STT_PROVIDER=elevenlabs` + `ELEVENLABS_API_KEY` (~$0.013/reel, much better on proper nouns). **Free fallback:** set `WHISPER_MODEL=large-v3` (~1.5 GB download). |
 | Stage 4 music API failed | Kie.ai transient | Pre-baked silent placeholders + ffmpeg sub-bass stings work as fallback. Run pipeline with `--skip-music` and pre-place them. |
 | Caption shows "FOLLOW -UPS" split | Whisper splits hyphenated words | `HormoziCaptions.tsx` already merges these. If it still leaks, check `extractWords()` |
 | HeyGen `MOVIO_PAYMENT_INSUFFICIENT_CREDIT` | Out of credits | Top up at app.heygen.com |

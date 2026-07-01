@@ -1,46 +1,46 @@
 ## Accumulated Rules from Past Runs
 
-**Rule 1: Rewrite the Hook Around a Specific Outcome, Number, and Stakes**
-The opening line must contain at least one concrete number (time, cost, commits, hours saved), a named tool or outcome, and a clear stakes statement — never open with vague phrases like "One Codex Workflow," "Something is happening," "Google just launched," or "Tool that does," as these appeared as scroll-past failures in every single run.
+**Rule 1: Hook Must Open With a Specific Number, Stat, or Shocking Claim in Frame 1**
+Every hook must contain at least one concrete number or provocative claim visible on screen within the first 1.5 seconds (e.g., "₹0 model just beat GPT-4o" or "I cut 6 hours of Naukri scrolling to 6 minutes") — generic openers like "X just released" or "Before [Tool]" have scored below 7.5 on video DSSCL in every single run and cause immediate scroll-past on silent autoplay.
 
-**Rule 2: Never Use Placeholder or Unreadable B-Roll**
-Every non-talking-head frame must show either a real screen recording, an actual product screenshot, or a clean animated graphic — static dark Canva mockups, placeholder text like `__APP_1__`, unreadable GitHub README screenshots, and generic UI cards appeared as the single most repeated visual failure across all 10 runs and must never be used.
+**Rule 2: Never Use Mid-Sentence Caption Fragments as the First On-Screen Text**
+The first caption or text overlay must be a complete, standalone thought of 3–5 words that makes sense with zero audio context — fragments like "WEIGHT MODEL YOU," "LOOPS I SPENT," or "A CALCULATOR MINE" are incoherent to muted autoplay viewers and have appeared as a failure in Runs 1–9; write the full sentence first, then select the 3–5 most punchy words as the visible hook text.
 
-**Rule 3: Include Exactly One Grand Takeaway Frame Before the CTA**
-The second-to-last frame must contain a single, complete, quotable sentence of 8 words or fewer that can be screenshotted standalone — examples: "One founder. Four agents. Zero payroll." or "Your Mac is the server. Your phone is the IDE." — the video must never end by jumping directly from content to a follow CTA without this frame.
+**Rule 3: Every Script Must Include Exactly One Grand Takeaway Frame With a Single Quotable One-Liner**
+Before writing the CTA, write one full-screen frame containing a single bold sentence of 10 words or fewer that summarizes the entire video's value (e.g., "Three files. Permanent memory. Zero re-explaining." or "Route by task complexity, not by habit") — the absence of this frame has been cited as a weakness in Runs 1, 2, 3, 5, 7, 9, and 10, making the video impossible to screenshot or share as a standalone image.
 
-**Rule 4: Standardize Captions as White Bold Text with One Orange/Red Highlight Word**
-Every caption frame must use white bold text, a semi-transparent dark background bar behind the text, and exactly one keyword per phrase highlighted in orange or red — mixed grey boxes, inconsistent font sizes, randomly highlighted words, and cut-off phrases like "PRE-BUILT SPECIALISTS A" or "FOR MY FITNESS" must never appear.
+**Rule 4: Script Must Specify B-Roll Type for Every Non-Avatar Frame**
+For each talking-head segment, the script must explicitly label the required B-roll as one of: screen recording of the named tool, terminal/code output, side-by-side comparison, animated text reveal, or real UI screenshot — writing "show a dark card with text" is not acceptable; B-roll absence or dark static mockup cards have been the single most repeated visual failure across all 10 runs.
 
-**Rule 5: Never Allow Caption Sync Errors or Gibberish Overlays on Screen**
-All on-screen caption text must be manually reviewed before rendering — fragments like "TO MONSOON NO," "APP STARTING THIS," and "ALL AS HAR" that appeared in Runs 1 and 5 destroy viewer trust instantly and make the video unshareable; if auto-generated captions are used they must be fully corrected before final output.
+**Rule 5: Name One Specific Tool With a Concrete 3-Step Action the Viewer Can Take Tonight**
+Every script must name at least one real, verifiable tool (e.g., Claude Code, n8n, Google Flow) and provide a numbered 3-step micro-workflow the viewer can execute within 24 hours — vague references to unnamed tools or unverified model names (e.g., "Mythos 5," "Fable 5" in Run 5) destroy credibility and generate negative comments instead of saves.
 
-**Rule 6: Every Script Must Include at Least One Specific Rupee or Time Metric**
-The script must state at least one concrete before/after number anchored to the Indian audience — e.g., "₹2,000 and 4 hours for one short vs ₹0 and 4 minutes," "saved 3.5 hours per week," "47 commits overnight" — videos with zero specific numbers consistently scored below 7.0 on video DSSCL across all 10 runs.
+**Rule 6: CTA Must Name a Specific Freebie and a Keyword-Comment Trigger**
+The closing CTA frame must follow this exact formula: "Comment [KEYWORD] and I'll DM you [specific deliverable]" (e.g., "Comment CLAUDE and I'll send you my exact .claude.md file") — generic "Follow @automatewithanand" CTAs with no incentive have appeared as a weakness in Runs 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10 and produce near-zero comment engagement.
 
-**Rule 7: Replace Generic CTAs with a Specific DM or Comment Trigger That Names the Reward**
-The CTA must follow this format exactly: "Comment [KEYWORD] and I'll DM you [specific deliverable]" — e.g., "Comment WORKSPACE and I'll DM you the 3-prompt starter kit" — generic CTAs like "Follow @automatewithanand," "Comment right now," and "Follow for more" appeared as failures in every run and generate zero engagement signal.
+**Rule 7: Include at Least One Rupee-Denominated or Hours-Saved Proof Point in the Body**
+The script body must contain at least one concrete Indian-market metric expressed in rupees saved or hours reduced (e.g., "saved ₹3.2L/month," "cut 4 hours to 27 minutes") — this metric must appear on screen as a text overlay, not only in spoken audio, because it is the primary save and share trigger for the 22–45 Indian professional audience stated in the channel brief.
 
-**Rule 8: Include One Debate or Comment-Bait Line in the Middle Section**
-The script must contain one polarizing or opinion-driven sentence designed to provoke disagreement or tag-a-friend behavior — e.g., "This kills VS Code remote — change my mind," "This replaces your VA for free," or "Would you trust AI to send emails on your behalf?" — all 10 runs lacked this and consistently received low comment-trigger scores.
+**Rule 8: Never Include Placeholder Text, Incomplete Labels, or Cut-Off Words in Any Frame**
+Every frame must be reviewed so that no text reads as placeholder (e.g., "Step 3" with no content), truncated word (e.g., "EXPENSIV" cut off), or duplicate overlay (e.g., "ZERO COST NOW" appearing twice) before the script is finalized — such errors appeared in Runs 4, 5, and 10 and were specifically cited as credibility-destroying by reviewers.
 
-**Rule 9: The Hook Must Name the Tool and the Audience's Pain in the First 5 Words**
-The first spoken sentence must contain the tool name or outcome category AND a pain point or transformation — never begin with abstract labels like "ONE CLAUDE MANAGED," "NEW MEDIA STACK," or "A FEATURE ON" — the hook is the only frame that determines whether 80% of viewers continue watching.
+**Rule 9: The Script Must Open a Curiosity Loop in Frame 1 and Close It Explicitly Before the CTA**
+If a framework, list, or revelation is teased in the hook (e.g., "The Four C's," "3-Layer Method," "One Good Loop"), the script must include a dedicated frame that fully reveals and names every item in that framework before the CTA — broken or unrevealed loops (Runs 1, 7, 9) frustrate viewers and reduce completion rate.
 
-**Rule 10: Avatar Must Have a Key Light at 45 Degrees — No Dark Curtain Backgrounds**
-Every talking-head frame must show the presenter's face clearly lit by a key light at 45 degrees from camera-left or camera-right — the dark curtain background with flat or underexposed lighting appeared in all 10 runs as a repeated credibility killer; replace with a desk setup, branded backdrop, or depth-of-field shelf environment.
+**Rule 10: Every Script Must Be Verified as On-Topic for AI Automation Before Finalizing**
+Before the script is written, confirm the topic directly involves an AI tool, automation workflow, or AI productivity outcome relevant to Indian working professionals — Run 8 (sodium diacetate supply chain) was a complete niche mismatch with zero AI automation content, scored 6.35 on video DSSCL, and would have been avoided by a one-sentence topic audit: "Does this script show an Indian professional using an AI tool to save time or money?"
 
-**Rule 11: The Three-Part Comparison or Framework Must Be Demonstrated With a Real Example, Not Just Labels**
-Any framework slide (e.g., API vs MCP vs CLI, Tasks/Skills/Schedules, n8n vs Claude Code) must be accompanied by one concrete scenario showing the difference in action — listing labels without a use case or live demo appeared as a weakness in Runs 1, 3, 4, and 10 and causes viewers to scroll past the most save-worthy content.
+**Rule 11: Caption Style Must Follow Word-by-Word Hormozi Format With Power Words Highlighted, Not Prepositions**
+Every caption must use bold white text with a single color highlight (orange or yellow) on the most information-dense word in the phrase — the highlighted word must be a noun, number, or verb, never a preposition or article (e.g., highlight "₹16,000" not "IN"; highlight "FASTER" not "IS") — incorrect highlighting on filler words appeared in Runs 2 and 7 and reduces the perceived energy of the caption.
 
-**Rule 12: No Frame May Contain Fewer Than 3 Words or an Incomplete Sentence as the Sole On-Screen Text**
-Frames like "THE OS IS," "LAPTOP CLOSED," and "FOR ONE REQUEST" appeared across multiple runs as jarring, context-free fragments that kill pacing — every text-only frame must display a complete standalone thought that makes sense without audio.
+**Rule 12: The Script Must Include a Specific Before/After Comparison With Real Numbers**
+Every script must contain one explicit before/after statement structured as "[Old way] took [X hours/₹Y] → [New way with AI tool] takes [X minutes/₹Z]" with both numbers stated on screen — vague comparisons like "4× workload" (Run 5) or "more efficient" without quantification appeared as weaknesses in Runs 1, 2, 4, 5, 7, and 10 and are insufficient to trigger saves or shares.
 
-**Rule 13: The Grand Takeaway Frame Must Never Be Overlaid With a Follow CTA or Other Competing Text**
-The quotable one-liner frame and the follow CTA must always appear on separate frames — overlapping "FOLLOW @handle" text on top of the content summary frame appeared in Runs 2, 4, 5, and 6 and makes both elements unreadable and unscreenshottable.
+**Rule 13: Avatar Lighting and Background Must Be Specified in the Script as a Production Note**
+Every script must include a production note block stating: key light at 45 degrees, fill light on camera-right, background must be a visible desk/monitor setup or clean branded backdrop — "dark curtain with single-source lighting" was cited as a credibility-reducing failure in every single run (1–10) and must be explicitly forbidden as a default setup rather than left to production discretion.
 
-**Rule 14: Show the Promised Output or Demo Inside the Video — Never Tease Without Delivering**
-If the script promises a cinematic ad, a CLI running, a Codex agent committing code, or a Gemini Spark schedule executing, the video must show that actual output via screen recording or rendered result — teasing an output and never showing it (as in Runs 3, 5, and 6) kills rewatch motivation and destroys the save-worthy payoff the script built toward.
+**Rule 14: No Single Info Card May Contain More Than 5 Words Per Line or More Than 4 Bullet Points**
+Every text card or info-list frame must be limited to a maximum of 5 words per line and 4 bullet points total, with font size large enough to be legible on a 375px-wide mobile screen — overloaded cards (Run 1 Frame 9, Run 8 Runs 8–11, Run 7) have been cited repeatedly as unreadable on mobile and not screenshot-worthy despite containing strong information.
 
-**Rule 15: Avatar Must Vary Body Language — At Least One Lean-In, One Hand Gesture, and One Zoom Cut Per Video**
-The script must include blocking notes directing the presenter to lean forward on the hook payoff, use hand gestures when counting frameworks, and the editor must add at least one 0.5-second zoom-cut on the talking head every 3–4 seconds — flat, static, unchanging framing across all frames appeared as a repeated energy failure in every single run.
+**Rule 15: Include at Least One Social Proof Signal With a Specific Person, City, or Outcome Metric**
+The script must include one social proof statement naming a specific type of person, a recognizable Indian city, and a concrete result (e.g., "A DevOps engineer in Chennai cut 6 hours of job searching to 6 minutes and got 3 callbacks in one week") — abstract claims like "10,000 creators" with no supporting visual or "4× workload" with no context appeared as trust-reducing weaknesses in Runs 3, 5, and 8.

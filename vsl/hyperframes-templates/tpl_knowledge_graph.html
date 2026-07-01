@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>__COMP_ID__</title>
+<script src="./gsap.min.js"></script>
+<style>
+  :root { --bg:__BG__; --bg2:__BG_SECONDARY__; --text:__TEXT__; --primary:__PRIMARY__; --accent:__ACCENT__; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100%; height:100%; background: var(--bg); overflow:hidden;
+    font-family:"Inter", system-ui, sans-serif; color: var(--text); }
+  #root { width:1920px; height:1080px; position:relative; overflow:hidden;
+    background:
+      radial-gradient(900px 700px at 50% 55%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 60%),
+      linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  }
+  .header { position:absolute; top: 70px; left: 0; right:0; text-align:center; }
+  .pill { display:inline-block; font-size: 18px; font-weight: 800;
+          letter-spacing: 0.36em; text-transform:uppercase;
+          background: var(--accent); color: var(--bg);
+          padding: 9px 18px; border-radius: 999px; opacity:0; }
+  .title { font-size: 64px; font-weight: 900; letter-spacing: -0.012em;
+           text-transform: uppercase; margin-top: 14px; opacity:0; }
+
+  .graph { position:absolute; left:0; right:0; top: 0; bottom:0; }
+  .center-node {
+    position:absolute; left: 50%; top: 56%;
+    transform: translate(-50%, -50%);
+    width: 320px; height: 320px; border-radius: 50%;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--primary) 30%, transparent), color-mix(in srgb, var(--primary) 12%, transparent));
+    border: 2px solid color-mix(in srgb, var(--primary) 80%, #fff 0%);
+    box-shadow: 0 0 60px color-mix(in srgb, var(--primary) 50%, transparent);
+    opacity: 0; transform-origin: 50% 50%;
+    z-index: 3;
+  }
+  .center-node .center-label {
+    font-size: 32px; font-weight: 900; letter-spacing: 0.02em;
+    text-transform: uppercase; text-align: center; padding: 0 24px;
+  }
+  .center-node .center-sub {
+    font-size: 14px; letter-spacing: 0.32em; color: var(--accent);
+    text-transform: uppercase; margin-top: 8px;
+  }
+
+  .branch {
+    position:absolute;
+    width: 360px; min-height: 180px;
+    padding: 22px 24px;
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    opacity: 0;
+    z-index: 2;
+  }
+  .branch .branch-title {
+    font-size: 22px; font-weight: 900; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .branch .leaf {
+    font-size: 24px; font-weight: 700; color: rgba(255,255,255,0.92);
+    line-height: 1.36;
+    padding: 4px 0; opacity: 0;
+  }
+  /* 3 branch positions — triangle around the center node, but shifted LEFT so
+     none collide with the bottom-right avatar PIP (PIP zone: x=1568-1920, y=796-1080). */
+  .branch.b0 { top: 270px; left: 50%; transform: translateX(-50%); }
+  .branch.b1 { top: 770px; left:  60px; }
+  /* b2 was at right:90px → would land in PIP zone. Shift well left of x=1568. */
+  .branch.b2 { top: 360px; right: 380px; }
+
+  .edges { position:absolute; inset:0; z-index: 1; }
+  .edges line { stroke: color-mix(in srgb, var(--primary) 60%, transparent); stroke-width: 2;
+                stroke-dasharray: 800; stroke-dashoffset: 800; }
+</style>
+</head>
+<body>
+<div id="root"
+     data-composition-id="__COMP_ID__"
+     data-start="0" data-width="1920" data-height="1080"
+     data-duration="__DURATION__">
+  <div class="header">
+    <div class="clip pill"  id="pill"  data-start="0" data-duration="__DURATION__" data-track-index="0">__PILL__</div>
+    <div class="clip title" id="title" data-start="0" data-duration="__DURATION__" data-track-index="1">__TITLE__</div>
+  </div>
+
+  <svg class="edges" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+    <line class="clip edge" id="e0" data-start="0" data-duration="__DURATION__" data-track-index="2" x1="960" y1="430"  x2="960" y2="500"/>
+    <line class="clip edge" id="e1" data-start="0" data-duration="__DURATION__" data-track-index="3" x1="845" y1="650"  x2="350"  y2="770"/>
+    <line class="clip edge" id="e2" data-start="0" data-duration="__DURATION__" data-track-index="4" x1="1075" y1="600" x2="1180" y2="430"/>
+  </svg>
+
+  <div class="graph">
+    <div class="center-node clip" id="center" data-start="0" data-duration="__DURATION__" data-track-index="5">
+      <div class="center-label">__CENTER_LABEL__</div>
+    </div>
+    __BRANCHES_HTML__
+  </div>
+</div>
+<script>
+  window.__timelines = window.__timelines || {};
+  const tl = gsap.timeline({ paused: true });
+  const D = parseFloat(document.getElementById("root").getAttribute("data-duration")) || 14;
+  gsap.set("#pill",   { opacity: 0, y: -8 });
+  gsap.set("#title",  { opacity: 0, y: -10 });
+  gsap.set("#center", { opacity: 0, scale: 0.85 });
+  gsap.set(".branch", { opacity: 0, y: 18, scale: 0.95 });
+  gsap.set(".branch .leaf", { opacity: 0, x: -8 });
+  gsap.set(".edge",   { strokeDashoffset: 800 });
+
+  tl.to("#pill",   { opacity: 1, y: 0, duration: 0.4,  ease: "power2.out" }, 0);
+  tl.to("#title",  { opacity: 1, y: 0, duration: 0.45, ease: "expo.out"  }, 0.12);
+  tl.to("#center", { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 0.4);
+
+  const branches = document.querySelectorAll(".branch");
+  const edges    = document.querySelectorAll(".edge");
+  branches.forEach((b, i) => {
+    tl.to(edges[i],    { strokeDashoffset: 0, duration: 0.7, ease: "power3.out" }, 0.9 + i * 0.7);
+    tl.to(b,           { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.3)" }, 1.05 + i * 0.7);
+    tl.to(b.querySelectorAll(".leaf"), { opacity:1, x:0, duration: 0.35, ease:"power2.out", stagger: 0.1 }, 1.35 + i * 0.7);
+  });
+  tl.to({}, { duration: Math.max(0.2, D - tl.duration() - 0.05) });
+  window.__timelines["__COMP_ID__"] = tl;
+</script>
+</body>
+</html>

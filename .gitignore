@@ -69,3 +69,21 @@ remotion/.next/
 *.swp
 .claude/settings.local.json
 .claude/scheduled_tasks.lock
+
+# VSL (long-form) — generated binaries and per-run outputs
+vsl/output/
+vsl/assets/avatar/
+vsl/assets/broll/
+vsl/assets/slides/
+vsl/assets/captions/
+vsl/assets/screenrec/
+vsl/assets/music/
+vsl/assets/compose_tmp/
+vsl/assets/diagrams/
+vsl/assets/avatar_bg.png
+vsl/segments.json
+vsl/state.json
+vsl/brand.json
+
+# Ad-hoc debug/experiment area — never committed
+scratchpad/

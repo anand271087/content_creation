@@ -4,8 +4,6 @@ import { ReelCompositionProps } from "./types";
 import { AvatarPanel } from "./components/AvatarPanel";
 import { BrollClipCard } from "./components/BrollClipCard";
 import { HormoziCaptions } from "./components/HormoziCaptions";
-import { LowerThird } from "./components/LowerThird";
-import { EndCard } from "./components/EndCard";
 import { SectionFlash } from "./components/SectionFlash";
 import { RhythmCuts } from "./components/RhythmCuts";
 import { ArollParticles } from "./components/ArollParticles";
@@ -48,9 +46,6 @@ export const ReelComposition: React.FC<ReelCompositionProps> = ({
         screenTimelines={screenTimelines}
       />
 
-      {/* Lower third: handle slides in for first 8s */}
-      <LowerThird handle="@automatewithanand" showUntilSec={8} />
-
       {/* Hormozi captions — positioned in white safe zone at bottom */}
       <HormoziCaptions captionsData={captionsData} fps={fps} sections={scriptData.sections} />
 
@@ -63,13 +58,6 @@ export const ReelComposition: React.FC<ReelCompositionProps> = ({
 
       {/* Black flash at major chapter breaks (flash_before: true sections) — zIndex=100 */}
       <SectionFlash sections={scriptData.sections} fps={fps} />
-
-      {/* End card: FOLLOW overlay for last 2s */}
-      <EndCard
-        handle="@automatewithanand"
-        totalDurationSec={totalDurationSec / PLAYBACK_RATE}
-        showLastSec={2}
-      />
 
       {/* ── AUDIO ── */}
 

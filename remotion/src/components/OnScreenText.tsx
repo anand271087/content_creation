@@ -29,6 +29,8 @@ const ACCENT_COLOR: Record<string, string> = {
 const textStyle: React.CSSProperties = {
   fontFamily: "Montserrat, sans-serif",
   fontWeight: 900,
+  // fontSize is set per-word dynamically by computeFontSize() based on text length
+  // so long lines never overflow the 1080-wide canvas. Default kept as a safe fallback.
   fontSize: 52,
   color: "white",
   textShadow:
@@ -39,6 +41,18 @@ const textStyle: React.CSSProperties = {
   lineHeight: 1.2,
   margin: 0,
   padding: "0 24px",
+  whiteSpace: "nowrap",
+};
+
+// Auto-fit font size so the text always fits within ~990px of canvas width.
+// Extrabold uppercase Montserrat ≈ 0.62 * fontSize per char; pick the largest
+// fontSize that keeps width <= TARGET_W. Clamped to a viewer-readable range.
+const TARGET_W = 990; // 1080 - 2*24px padding - 42px slack
+const CHAR_RATIO = 0.62;
+const computeFontSize = (text: string): number => {
+  const len = Math.max(1, text.length);
+  const maxBySize = Math.floor(TARGET_W / (len * CHAR_RATIO));
+  return Math.max(34, Math.min(72, maxBySize));
 };
 
 interface WordItemProps {
@@ -105,6 +119,7 @@ const WordItem: React.FC<WordItemProps> = ({
     <div
       style={{
         ...textStyle,
+        fontSize: computeFontSize(text),
         color,
         opacity,
         transform: `scale(${scale})`,

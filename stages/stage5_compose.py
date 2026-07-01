@@ -68,13 +68,82 @@ def _h264_encoder_flags() -> list[str]:
 
 
 # ---------------------------------------------------------------------------
-# Step 1 — Whisper captions
+# Step 1 — Speech-to-text (Whisper default, ElevenLabs Scribe via env flag)
 # ---------------------------------------------------------------------------
+
+ELEVENLABS_TIMEOUT_SEC = 10 * 60   # plenty for a sub-3-min mp3 upload + transcription
+ELEVENLABS_HELPER = ROOT / "scripts" / "transcribe_elevenlabs.py"
+
+
+def _run_elevenlabs_scribe() -> None:
+    """Shell out to scripts/transcribe_elevenlabs.py.
+
+    Writes CAPTIONS_JSON in Whisper-shaped JSON via the helper's adapter so
+    downstream sync + Remotion code stays untouched.
+    """
+    if not ELEVENLABS_HELPER.exists():
+        raise RuntimeError(
+            f"ElevenLabs helper missing: {ELEVENLABS_HELPER}. "
+            "Set STT_PROVIDER=whisper to use the local fallback."
+        )
+
+    cmd = [
+        sys.executable,
+        str(ELEVENLABS_HELPER),
+        str(AVATAR_VIDEO),
+        "--output", str(CAPTIONS_JSON),
+    ]
+    logger.info("Running ElevenLabs Scribe: %s", " ".join(cmd))
+
+    try:
+        proc = subprocess.run(
+            cmd,
+            cwd=str(ROOT),
+            capture_output=True,
+            text=True,
+            timeout=ELEVENLABS_TIMEOUT_SEC,
+        )
+    except subprocess.TimeoutExpired:
+        raise RuntimeError(
+            f"ElevenLabs Scribe timed out after {ELEVENLABS_TIMEOUT_SEC}s"
+        )
+
+    if proc.stdout:
+        for line in proc.stdout.splitlines():
+            logger.debug("[elevenlabs] %s", line)
+    if proc.stderr:
+        for line in proc.stderr.splitlines():
+            logger.debug("[elevenlabs stderr] %s", line)
+
+    if proc.returncode != 0:
+        raise RuntimeError(
+            f"ElevenLabs Scribe exited with code {proc.returncode}.\n"
+            f"Set STT_PROVIDER=whisper to use the local fallback while you "
+            f"investigate.\nstderr: {proc.stderr[-1000:] if proc.stderr else ''}"
+        )
+
+    if not CAPTIONS_JSON.exists() or CAPTIONS_JSON.stat().st_size == 0:
+        raise RuntimeError(
+            f"ElevenLabs Scribe returned successfully but captions file is "
+            f"missing or empty: {CAPTIONS_JSON}"
+        )
+
+    logger.info(
+        "ElevenLabs captions written — %d bytes → %s",
+        CAPTIONS_JSON.stat().st_size,
+        CAPTIONS_JSON,
+    )
+
 
 def _run_whisper() -> None:
     """
-    Run Whisper on the avatar video to produce word-level captions.
-    Output: assets/captions/avatar_video.json
+    Produce word-level captions for the avatar video.
+    Output: assets/captions/avatar_video.json (Whisper-shaped JSON either way).
+
+    The provider is selected by the STT_PROVIDER env var:
+      - "elevenlabs"      → shell out to scripts/transcribe_elevenlabs.py
+      - anything else     → run local Whisper subprocess (default fallback)
+
     Raises RuntimeError on failure.
     """
     if not AVATAR_VIDEO.exists():
@@ -88,12 +157,17 @@ def _run_whisper() -> None:
         captions_mtime = CAPTIONS_JSON.stat().st_mtime
         avatar_mtime = AVATAR_VIDEO.stat().st_mtime
         if avatar_mtime <= captions_mtime:
-            logger.info("Captions already exist and are up to date — skipping Whisper")
+            logger.info("Captions already exist and are up to date — skipping transcription")
             return
-        logger.info("Avatar is newer than captions — re-running Whisper")
+        logger.info("Avatar is newer than captions — re-running transcription")
         CAPTIONS_JSON.unlink()
 
     CAPTIONS_DIR.mkdir(parents=True, exist_ok=True)
+
+    provider = os.getenv("STT_PROVIDER", "whisper").strip().lower()
+    if provider == "elevenlabs":
+        _run_elevenlabs_scribe()
+        return
 
     whisper_model = os.getenv("WHISPER_MODEL", "small.en")
 
@@ -326,13 +400,18 @@ def _run_remotion() -> None:
 
     logger.info("Remotion ProRes render complete — %d bytes → %s", remotion_raw.stat().st_size, remotion_raw)
 
-    # Re-encode ProRes → H264 baseline MP4 (universally compatible)
-    logger.info("Re-encoding ProRes → H264 baseline MP4 …")
+    # Re-encode ProRes → H264 MP4 — v2 polish port from VSL pipeline.
+    # CRF 17 + preset slow + unsharp = noticeably crisper face/text than the old
+    # CRF 18 baseline + fast preset. Larger file (~30-40%) but worth it for a reel.
+    # Note: we keep main profile (not baseline) for better quality; broll re-encodes
+    # already use baseline so playback compatibility is preserved.
+    logger.info("Re-encoding ProRes → H264 MP4 (CRF 17, preset slow, unsharp) …")
     reencode_cmd = [
         "ffmpeg",
         "-i", str(remotion_raw),
-        "-c:v", "libx264", "-profile:v", "baseline", "-level", "3.1",
-        "-pix_fmt", "yuv420p", "-crf", "18", "-movflags", "+faststart",
+        "-vf", "unsharp=5:5:0.9:5:5:0.0",
+        "-c:v", "libx264", "-preset", "slow",
+        "-pix_fmt", "yuv420p", "-crf", "17", "-movflags", "+faststart",
         "-c:a", "aac", "-b:a", "192k", "-ac", "2", "-ar", "48000",
         "-y", str(FINAL_REEL),
     ]

@@ -240,11 +240,14 @@ OUTPUT_SCHEMA = """
 
 # ── Reference files ────────────────────────────────────────────────────────────
 
-def load_reference_files() -> tuple[str, str]:
-    """Load both GOAT framework reference files."""
+def load_reference_files() -> tuple[str, str, str]:
+    """Load GOAT framework reference files + Harsha skill overlay (5 hook formulas,
+    7 templates, Value Loops, micro-hook cadence, CTA scaling by content type).
+
+    Returns (hooks_content, formats_content, harsha_overlay).
+    """
     hooks_path = SCRIPTS_DIR / "english-hooks.md"
     formats_path = SCRIPTS_DIR / "content-formats.md"
-
     if not hooks_path.exists():
         raise FileNotFoundError(f"Hook bank not found: {hooks_path}")
     if not formats_path.exists():
@@ -253,9 +256,25 @@ def load_reference_files() -> tuple[str, str]:
     hooks_content = hooks_path.read_text(encoding="utf-8")
     formats_content = formats_path.read_text(encoding="utf-8")
 
+    # Harsha skill overlay — three files: the SKILL card + hook formulas + templates.
+    # If the dir is absent (fresh clone) we log a warning and continue (overlay is optional).
+    harsha_dir = SCRIPTS_DIR / "harsha_skill"
+    harsha_overlay = ""
+    if harsha_dir.exists():
+        parts = []
+        for name in ("SKILL.md", "hook-formulas.md", "templates.md"):
+            fpath = harsha_dir / name
+            if fpath.exists():
+                parts.append(f"── {name} ────────────────\n{fpath.read_text(encoding='utf-8')}")
+        harsha_overlay = "\n\n".join(parts)
+        log.info("Loaded Harsha skill overlay (%d chars): SKILL + hook-formulas + templates.",
+                 len(harsha_overlay))
+    else:
+        log.warning("Harsha skill dir missing at %s — running without overlay.", harsha_dir)
+
     log.info("Loaded hook bank (%d chars) and format bank (%d chars).",
              len(hooks_content), len(formats_content))
-    return hooks_content, formats_content
+    return hooks_content, formats_content, harsha_overlay
 
 
 def load_accumulated_rules() -> str:
@@ -277,6 +296,7 @@ def build_initial_prompt(
     formats_content: str,
     accumulated_rules: str = "",
     research_context: dict | None = None,
+    harsha_overlay: str = "",
 ) -> str:
     if topic:
         content_block = f"TOPIC: {topic}"
@@ -325,6 +345,57 @@ def build_initial_prompt(
         lines.append("")
         research_block = "\n".join(lines) + "\n"
 
+    harsha_block = ""
+    if harsha_overlay:
+        harsha_block = f"""
+=== HARSHA'S SCRIPTWRITING METHOD — apply on top of the GOAT framework ===
+The GOAT 10-section structure below is unchanged. But when writing each section,
+also obey Harsha's method (short-form virality craft). This overlay is *additive*,
+not a replacement. The two work together: GOAT gives you the skeleton; Harsha gives
+you the muscle.
+
+Key overlays to apply while writing:
+1. HOOK (section 'hook') — pick from Harsha's 5 formulas AND from the 200-hook bank.
+   Prefer NEGATIVE / CONTRARIAN / CURIOSITY-GAP hooks; they outperform positive hooks
+   by 40–60%. Test the finalised hook against Scroll-Stop, Clarity, Curiosity,
+   Relevance, and Uniqueness before committing.
+2. TEMPLATE — pick one of Harsha's 7 templates (Problem-Solution, Myth-Busting,
+   Behind-the-Scenes, List/Tips, Transformation, Q&A, Mistake-Lesson) as the
+   underlying narrative shape for body_1 + body_2 + bridge. Record which template
+   in the top-level "template_used" field.
+3. VALUE LOOPS in every body section — every point must be a full loop:
+   WHAT it is → HOW to do it → WHY it matters. Never leave 'why' implied.
+4. MICRO-HOOKS every 8–10 seconds — Harsha's trigger_1/2/3 slots are already
+   micro-hooks. Reinforce them: use lines like "But here's what most people miss…",
+   "Wait, it gets better…", "The last one changes everything…" as connectors.
+5. CTA scales with content_type. Detect the content_type and set the field in the
+   top-level JSON:
+     - "Virality"    → soft CTA in emotion_save ("Follow if…", "Save this")
+     - "Authority"   → save CTA ("Save this — you'll want it when you build yours")
+     - "Conversion"  → keyword CTA feeding the ManyChat funnel ("Comment [KEYWORD]
+                       and I'll send you [resource]"). Use for anything selling calls.
+6. INVERTED PYRAMID — order points by 2nd-best first, best second, then descending.
+   Never open the body with your strongest point; save it for body_2 or trigger_3.
+7. CONDENSATION — obey Harsha's One-Sentence Rule (each section describes ONE clear
+   idea in a sentence), 10-Second Rule (compress until removing another word breaks
+   meaning), Clarity Test (a first-time viewer must "get it" without pausing).
+
+New top-level fields to include in the output JSON:
+- "content_type":   one of "Virality" | "Authority" | "Conversion"
+- "hook_formula":   one of "Negative" | "Curiosity Gap" | "Direct Challenge" |
+                    "Contrarian" | "But Wait Flip" | "Other (from 200-bank)"
+- "template_used":  one of "Problem-Solution" | "Myth-Busting" | "Behind-the-Scenes"
+                    | "List/Tips" | "Transformation" | "Question-Answer" |
+                    "Mistake-Lesson"
+
+The three reference files below encode the full method. Read them and apply their
+rules while writing every section.
+
+{harsha_overlay}
+
+=== END HARSHA'S METHOD ===
+"""
+
     return f"""You are an Instagram scriptwriting expert who creates viral short-form video scripts (30–90 seconds) for @automatewithanand, targeting AI automation content.
 
 AUDIENCE PERSONA:
@@ -362,7 +433,7 @@ NON-NEGOTIABLE WRITING RULES:
 - Max 12 words per sentence. Count them. Split anything longer into two sentences.
 - Read it out loud test — every line must sound like something you'd actually say to a friend. If it sounds like a LinkedIn post, rewrite it.
 
-{research_block}{rules_block}VOICE & ORIGINALITY RULES — scored as V (minimum 8.5 to pass):
+{research_block}{rules_block}{harsha_block}VOICE & ORIGINALITY RULES — scored as V (minimum 8.5 to pass):
 
 HOOK — use the 200-hook bank below as your primary source (Step 1 instructions unchanged).
 After selecting the best hook from the bank, apply this filter before finalising:
@@ -575,7 +646,17 @@ STEP-BY-STEP INSTRUCTIONS:
    - bgm_dip: true only for trigger_1, trigger_2, trigger_3
    - bgm_track: 1 for sections 0–35s, 2 for sections 35–120s
    - bgm_transition_here: true ONLY for grand_takeaway section
-   - broll_type priority: "terminal" for CLI tool demos > "screen" for ANY named tool/model/website > "text_card" for sections that enumerate 3–5 numbered items > "diagram" for process/concept/stats/comparisons > "clip" for hook/triggers/grand_takeaway/emotion_save only. Maximise terminal, screen, text_card, and diagram — minimise Kling clip generation.
+   - ⚠️ broll_type ALLOWLIST (HARD RULE — v2 polish port from the VSL pipeline):
+     ONLY THREE VALUES ARE PERMITTED:  "clip" | "diagram" | "text_card"
+     • "clip"      — for hook, all 3 triggers, grand_takeaway, emotion_save, AND any other section where a cinematic broll fits (default for most sections)
+     • "diagram"   — for sections that explain a process/comparison/architecture/stats (uses the diagram_prompt field)
+     • "text_card" — for sections that enumerate 3–5 short numbered/bulleted items (uses card_lines field)
+     The legacy values "screen" and "terminal" are BANNED.  They produced low-quality
+     screen-recording fallbacks and a watermark-style terminal mock that broke retention.
+     Do NOT emit broll_type: "screen" under any circumstance.  Do NOT emit broll_type: "terminal".
+     Do NOT emit screen_capture or terminal_command/terminal_tool/terminal_output fields.
+     If a section talks about a tool/model/website, choose "clip" with a clear cinematic
+     broll_prompt OR "diagram" with a diagram_prompt — never "screen" or "terminal".
    - flash_before: true for trigger_1, trigger_2, trigger_3 — creates a 2-frame black flash before the section (visual chapter break/reset)
    - broll_prompt: MUST include "absolutely no text overlays, no watermarks, no subtitles, no captions, no Chinese text, no Japanese text, no Korean text, no foreign language text, English only if any text appears, pure cinematic footage only" in EVERY section's broll_prompt
 
@@ -742,8 +823,43 @@ def extract_json_from_response(text: str) -> dict:
 
 # ── Validation ─────────────────────────────────────────────────────────────────
 
+def _sanitize_banned_broll_types(script_json: dict) -> int:
+    """v2 polish port — Stage 1's prompt now bans `screen` and `terminal`, but if a model
+    still emits them, defensively rewrite to `diagram` so downstream stages don't render
+    the low-quality fallbacks. Returns the count of sanitized sections (for logging)."""
+    sanitized = 0
+    for section in script_json.get("sections", []):
+        bt = section.get("broll_type")
+        if bt in ("screen", "terminal"):
+            logger.warning("[%s] sanitizing banned broll_type=%r → 'diagram'", section.get("id"), bt)
+            section["broll_type"] = "diagram"
+            # Strip type-specific fields that no longer apply.
+            section.pop("screen_capture", None)
+            for k in ("terminal_tool", "terminal_command", "terminal_output"):
+                section.pop(k, None)
+            # If no diagram_prompt exists, derive one from on_screen_text / spoken.
+            if not section.get("diagram_prompt"):
+                lines = section.get("on_screen_text", []) or []
+                if lines:
+                    section["diagram_prompt"] = (
+                        "Clean dark diagram with " + str(len(lines)) +
+                        " labeled boxes: " + ", ".join(lines[:5])
+                    )
+                else:
+                    section["diagram_prompt"] = (
+                        "Clean dark concept diagram illustrating: " +
+                        (section.get("spoken", "")[:120] or section.get("label", ""))
+                    )
+            sanitized += 1
+    return sanitized
+
+
 def validate_script_json(script_json: dict) -> list[str]:
     """Return list of validation errors (empty = valid)."""
+    # Sanitize before validation so banned types don't trip downstream checks.
+    n = _sanitize_banned_broll_types(script_json)
+    if n:
+        logger.info("Sanitizer: rewrote %d banned broll_type section(s) to 'diagram'.", n)
     errors = []
 
     # Required top-level keys
@@ -974,11 +1090,11 @@ def run_stage1(topic: str = None, transcript: str = None, video_feedback: dict =
                      topic, "provided" if transcript else "none")
 
         # Load reference files
-        hooks_content, formats_content = load_reference_files()
+        hooks_content, formats_content, harsha_overlay = load_reference_files()
         accumulated_rules = load_accumulated_rules()
 
         # Build initial prompt — if video_feedback provided, prepend it as context
-        initial_prompt = build_initial_prompt(topic, transcript, hooks_content, formats_content, accumulated_rules, research_context)
+        initial_prompt = build_initial_prompt(topic, transcript, hooks_content, formats_content, accumulated_rules, research_context, harsha_overlay=harsha_overlay)
         if video_feedback:
             vfb_prefix = build_video_feedback_prompt(
                 video_dsscl_score=video_feedback["dsscl_scores"]["final"],

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>__COMP_ID__</title>
+<script src="./gsap.min.js"></script>
+<style>
+  :root { --bg:__BG__; --bg2:__BG_SECONDARY__; --text:__TEXT__; --primary:__PRIMARY__; --accent:__ACCENT__;
+          --danger:#ff3b3b; --card-bd: rgba(255,255,255,0.10); --card-bg: rgba(255,255,255,0.03); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100%; height:100%; background: var(--bg); overflow:hidden;
+    font-family:"Inter", system-ui, sans-serif; color: var(--text); }
+  #root { width:1920px; height:1080px; position:relative; overflow:hidden;
+    background:
+      radial-gradient(900px 700px at 12% 18%, color-mix(in srgb, var(--__ACCENT_KEY__) 9%, transparent), transparent 60%),
+      linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  }
+  .header {
+    position:absolute; top: 84px; left: 130px; right: 130px;
+    display:flex; align-items:center; gap: 24px;
+  }
+  .header .pill {
+    font-size: 18px; font-weight: 800; letter-spacing: 0.32em; text-transform: uppercase;
+    background: var(--__ACCENT_KEY__); color: var(--bg);
+    padding: 10px 18px; border-radius: 999px;
+    opacity:0;
+  }
+  .header .title {
+    font-size: 78px; font-weight: 900; letter-spacing: -0.012em; text-transform: uppercase;
+    opacity:0;
+  }
+  .underbar {
+    position:absolute; top: 195px; left: 130px;
+    width: 120px; height: 6px; background: var(--__ACCENT_KEY__);
+    opacity:0; transform-origin: left center;
+  }
+  .grid {
+    /* RIGHT margin = 440px reserves the bottom-right corner for the avatar PIP
+       (PIP_W=320 + 32px right margin + 88px safety = 440). Items wrap inside the
+       remaining space and never collide with the PIP. */
+    position:absolute; left: 130px; right: 440px; top: 280px; bottom: 90px;
+    display:grid; grid-template-columns: __GRID_COLS__; gap: 22px;
+    align-content: start;
+  }
+  .item {
+    display:flex; align-items:center; gap: 28px;
+    padding: 28px 32px;
+    background: var(--card-bg);
+    border: 1.5px solid var(--card-bd);
+    border-left: 6px solid var(--__ACCENT_KEY__);
+    border-radius: 18px;
+    opacity:0;
+  }
+  .item .num {
+    flex: 0 0 auto;
+    width: 84px; height: 84px; border-radius: 22px;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 36px; font-weight: 900;
+    background: color-mix(in srgb, var(--__ACCENT_KEY__) 18%, transparent);
+    border: 2px solid color-mix(in srgb, var(--__ACCENT_KEY__) 65%, transparent);
+    color: var(--__ACCENT_KEY__);
+  }
+  .item .text {
+    font-size: 36px; font-weight: 700; line-height: 1.18; letter-spacing: -0.005em;
+    color: rgba(255,255,255,0.94);
+  }
+</style>
+</head>
+<body>
+<div id="root"
+     data-composition-id="__COMP_ID__"
+     data-start="0" data-width="1920" data-height="1080"
+     data-duration="__DURATION__">
+  <div class="header">
+    <div class="clip pill"  id="pill"  data-start="0" data-duration="__DURATION__" data-track-index="0">__PILL__</div>
+    <div class="clip title" id="title" data-start="0" data-duration="__DURATION__" data-track-index="1">__TITLE__</div>
+  </div>
+  <div class="clip underbar" id="bar" data-start="0" data-duration="__DURATION__" data-track-index="2"></div>
+  <div class="grid">
+    __ITEMS_HTML__
+  </div>
+</div>
+<script>
+  window.__timelines = window.__timelines || {};
+  const tl = gsap.timeline({ paused: true });
+  const D = parseFloat(document.getElementById("root").getAttribute("data-duration")) || 12;
+  gsap.set("#pill",  { opacity: 0, y: -8 });
+  gsap.set("#title", { opacity: 0, y: -8 });
+  gsap.set("#bar",   { opacity: 0, scaleX: 0 });
+  gsap.set(".item",  { opacity: 0, x: -36 });
+
+  tl.to("#pill",  { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0);
+  tl.to("#title", { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 0.12);
+  tl.to("#bar",   { opacity: 1, scaleX: 1, duration: 0.45, ease: "power3.out" }, 0.28);
+  tl.to(".item",  { opacity: 1, x: 0, duration: 0.5, ease: "back.out(1.4)", stagger: 0.18 }, 0.5);
+
+  tl.to({}, { duration: Math.max(0.2, D - tl.duration() - 0.05) });
+  window.__timelines["__COMP_ID__"] = tl;
+</script>
+</body>
+</html>

@@ -73,8 +73,8 @@ export const BrollClipCard: React.FC<BrollClipCardProps> = ({
           width: BOX_WIDTH, height: BOX_HEIGHT,
           borderRadius: BOX_RADIUS, overflow: "hidden",
           backgroundColor: "#000", zIndex: 20,
-          border: "2px solid rgba(255,255,255,0.75)",
-          boxShadow: "0 12px 48px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.1)",
+          border: "4px solid #2979ff",
+          boxShadow: "0 0 24px rgba(41,121,255,0.50), 0 12px 48px rgba(0,0,0,0.75)",
         }}>
           <Video
             src={staticFile(`${assetsDir}/broll/${activeSection.id}.mp4`)}
@@ -114,8 +114,8 @@ export const BrollClipCard: React.FC<BrollClipCardProps> = ({
           width: BOX_WIDTH, height: BOX_HEIGHT,
           borderRadius: BOX_RADIUS, overflow: "hidden",
           backgroundColor: "#0d1117", zIndex: 20,
-          border: "2px solid rgba(255,255,255,0.75)",
-          boxShadow: "0 12px 48px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.1)",
+          border: "4px solid #2979ff",
+          boxShadow: "0 0 24px rgba(41,121,255,0.50), 0 12px 48px rgba(0,0,0,0.75)",
         }}>
           <div style={{
             position: "absolute", inset: 0,

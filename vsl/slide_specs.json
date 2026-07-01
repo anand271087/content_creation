@@ -1,0 +1,258 @@
+{
+  "_description": "Single source of truth for every slide rendered by Hyperframes. slide_id -> template + props + duration. Edit text here; re-run render_slides.mjs to update.",
+
+  "_template_notes": {
+    "tpl_glitch_title": "Big full-screen title with glitch/slam reveal. Use for hook H1/H2/H3 and title cards.",
+    "tpl_hook_slam":    "Aggressive full-screen text slam. Alternative for hook slides.",
+    "tpl_notification_stack": "Chat-bubble style stack. Use for H4 'looks fake / AI slop' objection.",
+    "tpl_quote_reveal": "Single-line statement reveal. Use for ICP one-liner B1.",
+    "tpl_body_card":    "Bulleted card with title + items. Use for pain bullets B2 and benefits B12.",
+    "tpl_data_chart":   "Bar chart. Use for B3 Presence/Effort comparison.",
+    "tpl_flow_steps":   "Horizontal step icons. Use for B4, B6, B8, B9.",
+    "tpl_knowledge_graph": "Concept map with branches. Use for B7 Strategy graph.",
+    "tpl_diagram_flow": "Cyclical/flow diagram. Use for B11 Funnel cycle."
+  },
+
+  "title_cards": {
+    "TC_REVEAL": {
+      "template": "tpl_glitch_title",
+      "duration_sec": 1.2,
+      "props": { "title": "THE REVEAL", "subtitle": "" },
+      "accent": "accent"
+    },
+    "TC_PROOF": {
+      "template": "tpl_glitch_title",
+      "duration_sec": 1.2,
+      "props": { "title": "THE PROOF", "subtitle": "" },
+      "accent": "primary"
+    },
+    "TC_SYSTEM": {
+      "template": "tpl_glitch_title",
+      "duration_sec": 1.2,
+      "props": { "title": "THE SYSTEM", "subtitle": "3 STEPS" },
+      "accent": "primary"
+    },
+    "TC_FUNNEL": {
+      "template": "tpl_glitch_title",
+      "duration_sec": 1.2,
+      "props": { "title": "THE FUNNEL", "subtitle": "VIEWS → CALLS" },
+      "accent": "accent"
+    }
+  },
+
+  "hook": {
+    "H1": {
+      "template": "tpl_hook_slam",
+      "duration_sec": 4.5,
+      "props": {
+        "lines": ["NEVER", "FILM ANOTHER", "VIDEO AGAIN."],
+        "icon": "play"
+      },
+      "accent": "primary"
+    },
+    "H2": {
+      "template": "tpl_hook_slam",
+      "duration_sec": 4.5,
+      "props": {
+        "lines": ["30+ VIDEOS", "A MONTH.", "ZERO CAMERA TIME."],
+        "icon": "calendar"
+      },
+      "accent": "primary"
+    },
+    "H3": {
+      "template": "tpl_hook_slam",
+      "duration_sec": 4.5,
+      "props": {
+        "lines": ["FRESH AD CREATIVES", "EVERY WEEK.", "NO FILMING."],
+        "icon": "spark"
+      },
+      "accent": "accent"
+    },
+    "H4": {
+      "template": "tpl_notification_stack",
+      "duration_sec": 8.0,
+      "props": {
+        "title": "BUT...",
+        "messages": [
+          { "voice": "viewer", "text": "this looks fake…" },
+          { "voice": "viewer", "text": "this is just AI slop." },
+          { "voice": "you",    "text": "done right, they NEVER see AI." }
+        ]
+      },
+      "accent": "primary"
+    }
+  },
+
+  "body": {
+    "B1": {
+      "template": "tpl_quote_reveal",
+      "duration_sec": 4.0,
+      "props": {
+        "quote": "FOR FOUNDERS WHO KNOW THEY SHOULD BE VISIBLE — BUT CAN'T STAND BEING ON CAMERA.",
+        "attribution": ""
+      },
+      "accent": "accent"
+    },
+    "B2": {
+      "template": "tpl_body_card",
+      "duration_sec": 12.0,
+      "props": {
+        "title": "THE REAL PROBLEM",
+        "items": [
+          { "icon": "clock",   "text": "TOO BUSY TO FILM AND EDIT EVERY DAY" },
+          { "icon": "camera-off", "text": "HATE BEING ON CAMERA" },
+          { "icon": "trending-down", "text": "INVISIBLE = CUSTOMERS GO TO COMPETITORS" },
+          { "icon": "burn",    "text": "THE CONTENT GAME BURNS FOUNDERS OUT" }
+        ],
+        "accent_color": "danger"
+      },
+      "accent": "danger"
+    },
+    "B3": {
+      "template": "tpl_data_chart",
+      "duration_sec": 8.0,
+      "props": {
+        "title": "THE AI AVATAR SYSTEM",
+        "subtitle": "SCALE PRESENCE WITHOUT SCALING EFFORT",
+        "bars": [
+          { "label": "PRESENCE", "value": 100, "color": "primary" },
+          { "label": "EFFORT",   "value": 8,   "color": "danger" }
+        ]
+      },
+      "accent": "primary"
+    },
+    "B4": {
+      "template": "tpl_flow_steps",
+      "duration_sec": 8.0,
+      "props": {
+        "title": "3 CORE COMPONENTS",
+        "steps": [
+          { "n": "01", "label": "FACE",      "sub": "clone your look",      "icon": "user" },
+          { "n": "02", "label": "VOICE",     "sub": "clone your sound",     "icon": "mic" },
+          { "n": "03", "label": "EXPERTISE", "sub": "clone your words",     "icon": "brain" }
+        ]
+      },
+      "accent": "primary"
+    },
+    "B6": {
+      "template": "tpl_flow_steps",
+      "duration_sec": 8.0,
+      "props": {
+        "title": "THE 3-STEP SYSTEM",
+        "steps": [
+          { "n": "01", "label": "STRATEGY",  "sub": "niche + pillars + types",   "icon": "compass" },
+          { "n": "02", "label": "CLONING",   "sub": "face + voice + expertise",  "icon": "copy" },
+          { "n": "03", "label": "EXECUTION", "sub": "content + funnel + calls",  "icon": "rocket" }
+        ]
+      },
+      "accent": "accent"
+    },
+    "B7": {
+      "template": "tpl_knowledge_graph",
+      "duration_sec": 14.0,
+      "props": {
+        "title": "CONTENT STRATEGY",
+        "center": "YOUR NICHE",
+        "branches": [
+          { "label": "3 PILLARS",     "leaves": ["theme 1", "theme 2", "theme 3"] },
+          { "label": "VAC TYPES",     "leaves": ["VIRALITY", "AUTHORITY", "CONVERSION"] },
+          { "label": "STRUCTURE",     "leaves": ["HOOK", "BODY", "CTA"] }
+        ]
+      },
+      "accent": "primary"
+    },
+    "B8": {
+      "template": "tpl_flow_steps",
+      "duration_sec": 5.0,
+      "props": {
+        "title": "EVERY VIDEO",
+        "steps": [
+          { "n": "1", "label": "HOOK", "sub": "first 3 seconds",   "icon": "magnet" },
+          { "n": "2", "label": "BODY", "sub": "deliver the value", "icon": "box" },
+          { "n": "3", "label": "CTA",  "sub": "clear next step",   "icon": "target" }
+        ]
+      },
+      "accent": "accent"
+    },
+    "B9": {
+      "template": "tpl_flow_steps",
+      "duration_sec": 6.0,
+      "props": {
+        "title": "THE AVATAR BUILD",
+        "steps": [
+          { "n": "01", "label": "HEYGEN",     "sub": "FACE clone",     "icon": "camera" },
+          { "n": "02", "label": "ELEVENLABS", "sub": "VOICE clone",    "icon": "mic" },
+          { "n": "03", "label": "CLAUDE",     "sub": "SCRIPTS in your voice", "icon": "brain" }
+        ]
+      },
+      "accent": "primary"
+    },
+    "B11": {
+      "template": "tpl_diagram_flow",
+      "duration_sec": 14.0,
+      "props": {
+        "title": "THE FUNNEL",
+        "nodes": [
+          { "id": "comment", "label": "COMMENT",       "icon": "message" },
+          { "id": "mc",      "label": "MANYCHAT",      "icon": "bot" },
+          { "id": "qual",    "label": "n8n + AI",      "sub": "qualify lead",  "icon": "filter" },
+          { "id": "book",    "label": "BOOKED CALL",   "icon": "calendar-check" }
+        ],
+        "edges": [
+          { "from": "comment", "to": "mc" },
+          { "from": "mc",      "to": "qual" },
+          { "from": "qual",    "to": "book" }
+        ]
+      },
+      "accent": "primary"
+    },
+    "B12": {
+      "template": "tpl_body_card",
+      "duration_sec": 12.0,
+      "props": {
+        "title": "WHY IT WORKS",
+        "items": [
+          { "n": "01", "text": "REMOVES POSTING BURNOUT" },
+          { "n": "02", "text": "KILLS CAMERA FEAR" },
+          { "n": "03", "text": "SAVES HOURS EVERY WEEK" },
+          { "n": "04", "text": "CONSISTENT VISIBILITY" },
+          { "n": "05", "text": "SCALES WITHOUT SACRIFICING YOUR LIFE" }
+        ],
+        "accent_color": "primary"
+      },
+      "accent": "primary"
+    },
+    "O1": {
+      "_note": "Split-screen offer slide. Left half is reserved for the avatar overlay at compose time; right half shows 'What's Included'.",
+      "template": "tpl_split_offer",
+      "duration_sec": 58.0,
+      "props": {
+        "title": "WHAT WE BUILD",
+        "items": [
+          { "n": "01", "label": "RESEARCH YOUR LOOK & FORMAT" },
+          { "n": "02", "label": "ARRANGE THE SHOOT — ONCE" },
+          { "n": "03", "label": "BUILD YOUR AVATAR + VOICE" },
+          { "n": "04", "label": "BUILD YOUR LEAD FUNNEL" },
+          { "n": "05", "label": "WEEKLY SCRIPTS · VIDEOS · POSTS" },
+          { "n": "06", "label": "YOU JUST APPROVE THE SCRIPT" }
+        ]
+      },
+      "accent": "primary"
+    },
+    "R1": {
+      "_note": "Split-screen CTA slide. Left half avatar overlay at compose time; right half is the 'Book a Call' card.",
+      "template": "tpl_split_cta",
+      "duration_sec": 45.0,
+      "props": {
+        "headline_line1": "BOOK",
+        "headline_line2": "A CALL.",
+        "meta": [
+          "30-MINUTE CALL",
+          "NO PRESSURE · ZERO PITCH",
+          "@AUTOMATEWITHANAND"
+        ]
+      },
+      "accent": "primary"
+    }
+  }
+}

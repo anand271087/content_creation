@@ -46,7 +46,7 @@ _sh = logging.StreamHandler(sys.stdout)
 _sh.setFormatter(_fmt)
 logger.addHandler(_sh)
 
-CLAUDE_MODEL = "claude-sonnet-4-20250514"
+CLAUDE_MODEL = "claude-sonnet-4-5"
 
 
 def _build_prompt(script: dict) -> str:

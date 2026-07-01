@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>__COMP_ID__</title>
+<script src="./gsap.min.js"></script>
+<style>
+  :root {
+    --bg: __BG__; --bg2: __BG_SECONDARY__;
+    --text: __TEXT__; --primary: __PRIMARY__; --accent: __ACCENT__;
+    --bubble-viewer-bg: rgba(255,255,255,0.06);
+    --bubble-viewer-bd: rgba(255,255,255,0.10);
+    --bubble-you-bg: color-mix(in srgb, __PRIMARY__ 38%, #000 62%);
+    --bubble-you-bd: color-mix(in srgb, __PRIMARY__ 70%, #fff 0%);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100%; height:100%; background: var(--bg); overflow:hidden;
+    font-family: "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text); }
+  #root {
+    width:1920px; height:1080px; position:relative; overflow:hidden;
+    background:
+      radial-gradient(900px 700px at 25% 30%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 60%),
+      linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  }
+  .frame {
+    position:absolute; inset: 60px 120px;
+    display:flex; flex-direction:column;
+    gap: 28px;
+    justify-content:center;
+  }
+  .title-row {
+    display:flex; align-items:center; gap: 16px;
+    margin-bottom: 12px;
+  }
+  .title-pill {
+    font-size: 18px; letter-spacing: 0.34em; text-transform: uppercase;
+    color: var(--bg); background: var(--accent);
+    padding: 8px 16px; border-radius: 999px; font-weight: 800;
+  }
+  .title {
+    font-size: 64px; font-weight: 900; letter-spacing: -0.012em;
+  }
+  .messages {
+    display:flex; flex-direction:column; gap: 36px;   /* roomier — bubbles never touch */
+    max-width: 1100px;
+  }
+  .bubble {
+    display:inline-block;
+    padding: 24px 32px;
+    font-size: 44px; font-weight: 700; line-height: 1.22;
+    border-radius: 28px; max-width: 1100px;
+    opacity: 0;
+    backdrop-filter: blur(8px);
+  }
+  .bubble.viewer {
+    background: var(--bubble-viewer-bg);
+    border: 1px solid var(--bubble-viewer-bd);
+    align-self: flex-start;
+    border-bottom-left-radius: 10px;
+  }
+  .bubble.you {
+    background: var(--bubble-you-bg);
+    border: 1.5px solid var(--bubble-you-bd);
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 22px 60px -28px var(--primary);
+  }
+  .small-label {
+    font-size: 18px; color: rgba(255,255,255,0.45); letter-spacing: 0.28em;
+    text-transform: uppercase; margin-bottom: -8px; padding: 0 10px;
+  }
+  .row { display:flex; flex-direction:column; }
+  .row.viewer { align-items: flex-start; }
+  .row.you    { align-items: flex-end;  }
+</style>
+</head>
+<body>
+<div id="root"
+     data-composition-id="__COMP_ID__"
+     data-start="0" data-width="1920" data-height="1080"
+     data-duration="__DURATION__">
+  <div class="frame">
+    <div class="title-row">
+      <div class="clip title-pill" id="pill" data-start="0" data-duration="__DURATION__" data-track-index="0">OBJECTION</div>
+      <div class="clip title"      id="title" data-start="0" data-duration="__DURATION__" data-track-index="1">__TITLE__</div>
+    </div>
+    <div class="messages">
+      __MESSAGES_HTML__
+    </div>
+  </div>
+</div>
+<script>
+  window.__timelines = window.__timelines || {};
+  const tl = gsap.timeline({ paused: true });
+  const D = parseFloat(document.getElementById("root").getAttribute("data-duration")) || 8;
+  gsap.set(["#pill", "#title"], { opacity: 0, y: -8 });
+  gsap.set(".bubble", { y: 18, opacity: 0 });
+
+  tl.to("#pill",  { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0);
+  tl.to("#title", { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 0.15);
+
+  // Per-bubble reveal — IDs are b0, b1, b2...
+  const bubbles = document.querySelectorAll(".bubble");
+  const startBase = 0.55;
+  const stagger   = 0.78;
+  bubbles.forEach((el, i) => {
+    tl.to(el, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.6)" }, startBase + i * stagger);
+  });
+
+  // Hold final
+  tl.to({}, { duration: Math.max(0.2, D - tl.duration() - 0.05) });
+  window.__timelines["__COMP_ID__"] = tl;
+</script>
+</body>
+</html>

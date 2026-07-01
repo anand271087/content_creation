@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>__COMP_ID__</title>
+<script src="./gsap.min.js"></script>
+<style>
+  :root { --bg:__BG__; --bg2:__BG_SECONDARY__; --text:__TEXT__; --primary:__PRIMARY__; --accent:__ACCENT__; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100%; height:100%; background: var(--bg); overflow:hidden;
+    font-family:"Inter", system-ui, sans-serif; color: var(--text); }
+  #root { width:1920px; height:1080px; position:relative; overflow:hidden;
+    background:
+      radial-gradient(900px 700px at 50% 30%, color-mix(in srgb, var(--primary) 10%, transparent), transparent 60%),
+      linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  }
+  .header { position:absolute; top: 100px; left: 0; right: 0; text-align:center; }
+  .pill { display:inline-block; font-size: 18px; font-weight: 800;
+          letter-spacing: 0.36em; text-transform:uppercase;
+          background: var(--accent); color: var(--bg);
+          padding: 10px 18px; border-radius: 999px; opacity:0; }
+  .title { font-size: 88px; font-weight: 900; letter-spacing: -0.012em;
+           text-transform: uppercase; margin-top: 24px; opacity:0; }
+  .underbar { display:block; margin: 18px auto 0; width: 120px; height: 6px;
+              background: var(--primary); opacity:0; transform-origin: center; }
+  .row {
+    position:absolute; left: 60px; right: 60px; top: 440px;
+    /* Reserve right 380px (PIP zone) so the steps row doesn't reach into the corner. */
+    padding-right: 380px;
+    display:flex; align-items: stretch; justify-content: flex-start; gap: 24px;
+  }
+  .step {
+    flex: 1 1 0;
+    max-width: 400px;
+    min-width: 280px;
+    padding: 32px 28px;
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(255,255,255,0.10);
+    border-radius: 20px;
+    text-align: center;
+    opacity: 0;
+    position: relative;
+  }
+  .step .num {
+    font-size: 18px; letter-spacing: 0.36em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 12px;
+  }
+  .step .name { font-size: 54px; font-weight: 900; letter-spacing: -0.01em;
+                color: var(--text); margin-bottom: 10px; text-transform: uppercase; }
+  .step .sub  { font-size: 22px; color: rgba(255,255,255,0.62);
+                letter-spacing: 0.02em; line-height: 1.3; }
+  .arrow {
+    display:flex; align-items:center; justify-content:center;
+    width: 56px; flex: 0 0 auto;
+    color: var(--primary); opacity:0;
+  }
+  .arrow svg { width: 56px; height: 56px; }
+</style>
+</head>
+<body>
+<div id="root"
+     data-composition-id="__COMP_ID__"
+     data-start="0" data-width="1920" data-height="1080"
+     data-duration="__DURATION__">
+  <div class="header">
+    <div class="clip pill"     id="pill"  data-start="0" data-duration="__DURATION__" data-track-index="0">__PILL__</div>
+    <div class="clip title"    id="title" data-start="0" data-duration="__DURATION__" data-track-index="1">__TITLE__</div>
+    <div class="clip underbar" id="bar"   data-start="0" data-duration="__DURATION__" data-track-index="2"></div>
+  </div>
+  <div class="row">
+    __STEPS_HTML__
+  </div>
+</div>
+<script>
+  window.__timelines = window.__timelines || {};
+  const tl = gsap.timeline({ paused: true });
+  const D = parseFloat(document.getElementById("root").getAttribute("data-duration")) || 8;
+  gsap.set("#pill",     { opacity: 0, y: -8 });
+  gsap.set("#title",    { opacity: 0, y: -10 });
+  gsap.set("#bar",      { opacity: 0, scaleX: 0 });
+  gsap.set(".step",     { opacity: 0, y: 24, scale: 0.96 });
+  gsap.set(".arrow",    { opacity: 0, x: -10 });
+
+  tl.to("#pill",  { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0);
+  tl.to("#title", { opacity: 1, y: 0, duration: 0.5, ease: "expo.out"  }, 0.12);
+  tl.to("#bar",   { opacity: 1, scaleX: 1, duration: 0.45, ease: "power3.out" }, 0.32);
+
+  const steps = document.querySelectorAll(".step");
+  const arrows = document.querySelectorAll(".arrow");
+  steps.forEach((step, i) => {
+    tl.to(step, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.4)" }, 0.6 + i * 0.35);
+    if (i < arrows.length) {
+      tl.to(arrows[i], { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" }, 0.78 + i * 0.35);
+    }
+  });
+  tl.to({}, { duration: Math.max(0.2, D - tl.duration() - 0.05) });
+  window.__timelines["__COMP_ID__"] = tl;
+</script>
+</body>
+</html>

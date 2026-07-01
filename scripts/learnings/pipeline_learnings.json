@@ -533,5 +533,258 @@
     ],
     "script_feedback": "Hook must be rewritten with specificity: swap 'Something is happening' for 'Claude Code just mass-replaced 12 no-code tools — but it can't touch these 3 n8n workflows.' The middle section listing conversational tasks / adaptive logic / single-user productivity is abstract — replace with concrete scenarios: 'When a Razorpay webhook hits at 2AM and needs to update HubSpot + Slack + Google Sheet in sequence — Claude Code hallucates the API call, n8n runs it in 0.3s.' Grand takeaway needs a single quotable rewrite: 'AI agents replace prompts. n8n replaces plumbing. Learn the difference or lose both.' The CTA should be: 'Comment STACK and I'll DM you my 6-task automation audit template — free.'",
     "visual_feedback": "Avatar needs a key light from camera-right to separate face from the dark curtain; consider a subtle colored backlight for depth. Slide frames (2, 3, 4, 5, 6, 10) look like generic Canva templates — replace with actual n8n workflow screenshots, live node editor recordings, or side-by-side comparisons of Claude Code terminal vs n8n canvas. Caption bar should use white bold text with a single red/orange highlight word per phrase, animated word-by-word with slight scale bounce — current static gray bars feel flat. The '190K GitHub Stars' frame needs the n8n logo and a live GitHub screenshot for credibility. Final CTA frame is too dark — face is barely visible; needs brightness boost and the CTA text should be larger with a clear visual arrow or button graphic pointing to profile."
+  },
+  {
+    "date": "2026-06-01 06:29",
+    "topic": "Claude Opus 4.8 as Your AI Operating System — The Four C's Framework",
+    "script_dsscl_final": 9.52,
+    "video_dsscl_final": 6.8,
+    "video_passed": false,
+    "strengths": [
+      "Clear tool named — Claude Code with specific 3-step action plan (CLAUDE.MD, SKILL.MD, ONE MCP)",
+      "Save-worthy info card in Frame 4 listing 5 concrete improvements (61% cheaper, 3X cheaper fast mode, 2.5X speed increase)",
+      "The Four C's framework teased creates a curiosity loop mid-video",
+      "Direct CTA — comment 'OS' below — lowers friction for engagement"
+    ],
+    "weaknesses": [
+      "Hook is extremely weak — 'Before Claude Code' with talking head against a dark curtain has zero pattern interrupt, no visual shock, no number, no controversy",
+      "B-roll is non-existent — dark static cards with small text replace what should be screen recordings, tool demos, or kinetic visuals; top half is wasted",
+      "Info density is scattered — jumps from Notion AI to Claude 4.8 dropping to Four C's to a warning to 20 lines to skills.md without a clear narrative spine, making rewatch unlikely",
+      "Avatar energy is flat — low lighting, minimal gestures, no change in expression or vocal emphasis visible across frames, dark curtain background feels low-effort",
+      "Caption styling is basic black bar with white/orange text — not Hormozi-style bold kinetic captions, poor contrast on some frames",
+      "Grand takeaway frame (Frame 9) is cluttered — 'Start with Claude Code' plus 4 bullet points plus bottom text bar compete for attention, nothing is screenshot-worthy as a single quotable line",
+      "Frame 7 'But here's the thing / IS THE WARNING' is vague — no specific stakes, no numbers, no consequence stated",
+      "The Four C's are teased but never fully revealed in visible frames — broken curiosity loop that frustrates rather than rewards"
+    ],
+    "script_feedback": "Hook must be rewritten entirely: open with a specific, shocking stat like 'Claude Code just made my ₹2L/month automation stack free — here's the 3-file setup.' The narrative needs a single spine: Problem (AI tools forget you daily) → Proof (6 apps, 6 memories, all reset) → Solution (Claude Code's memory system via CLAUDE.MD + SKILL.MD + 1 MCP) → Result (specific outcome: 'I built a full client dashboard in 47 minutes'). The Four C's framework is promising but must be fully delivered on screen with each C named and explained in under 2 seconds each. The 'warning' section (Frame 7) needs teeth: 'If you skip CLAUDE.MD, Claude treats you like a stranger every session — you lose 40 minutes of context-setting per day.' Grand takeaway should be one line: 'Three files. Permanent memory. Zero re-explaining.' End CTA should say 'Save this, comment OS, I'll DM you the exact CLAUDE.MD template I use.'",
+    "visual_feedback": "Avatar lighting is too dim and flat — add a key light at 45 degrees and a subtle blue/orange rim light to match the card color palette. Replace dark curtain with a minimal desk setup showing a terminal or monitor with Claude Code running. B-roll cards need motion — use animated text reveals, code scrolling, or split-screen with actual terminal footage. The info card (Frame 4) is the best visual but uses tiny text that's unreadable on mobile at a glance; increase font size 2X and animate each point appearing sequentially. Captions should switch to bold white with word-by-word color highlight (Hormozi/CapCut style) instead of static bars. Frame 9 CTA card is overloaded — reduce to 'CLAUDE.MD → SKILL.MD → 1 MCP' with large bold type, remove the surrounding circle gradient. Overall the video feels like a podcast clip, not a reel — needs 3-4 visual scene changes in the first 3 seconds to stop the scroll."
+  },
+  {
+    "date": "2026-06-03 06:03",
+    "topic": "MiniMax M3: The First Open-Weight Model With Frontier Coding, 1M Context, and Native Multimodal",
+    "script_dsscl_final": 9.54,
+    "video_dsscl_final": 6.62,
+    "video_passed": false,
+    "strengths": [
+      "Names a specific model (MiniMax M3) which gives the video concrete identity",
+      "Includes benchmark scores (83 on BrowseComp, 37.1 on another) which add credibility",
+      "Touches a hot-button topic — open-weight models catching up to closed models — which has debate potential",
+      "Terminal screenshot in frame 4 adds a builder/hacker credibility signal"
+    ],
+    "weaknesses": [
+      "Hook is extremely weak — 'WEIGHT MODEL YOU' is mid-sentence, no pattern interrupt, no scroll-stopping visual or stat in first 1.5s",
+      "No clear single grand takeaway frame — the video drifts across multiple talking points (price, benchmarks, open-weight mode, context window, cheaper engine) without a punchy thesis sentence",
+      "B-roll screens (frames 2, 4, 5, 8, 12) feel templated and generic dark-UI mockups with low information density; none show an actual product demo or real workflow",
+      "Avatar lighting is flat and yellowish against a wrinkled dark curtain — low production polish compared to top Indian AI creators",
+      "On-screen caption text changes every frame but phrases like 'SHOP SWAPPED THEIR' and 'CHEAPER ENGINE UNDERNEATH' are incomplete mid-sentence fragments that don't work as standalone scroll-pause moments",
+      "CTA frame (12) is cluttered — Claude Code, follow handle, three 'ways', and 'OPENED UP' all compete; no single clear action",
+      "No rupee-value hook or time-saved stat in the first two frames to lock the Indian professional audience",
+      "Sixteen thousand rupees mention (frame 2) appears too early without context — viewer doesn't know what it costs or saves yet"
+    ],
+    "script_feedback": "Hook must open with a single shocking stat or claim visible on screen in frame 1, e.g., '₹0 model just beat GPT-4o on BrowseComp.' Currently the hook drops the viewer mid-sentence ('WEIGHT MODEL YOU') with zero context. Restructure: (1) Hook = one bold claim with a number, (2) Proof = show the benchmark table side-by-side, not a generic UI card, (3) So-what = 'Claude Code users: swap to M3, save ₹16K/month, lose nothing,' (4) Grand takeaway = one quotable screenshot-worthy line like 'Open-weight just made closed-source optional.' Currently there is no single memorable sentence. Also, 'shop swapped their cheaper engine underneath' is a metaphor that doesn't land for a tech audience — replace with a concrete before/after: 'I ran the same 400-line refactor in Claude Code with M3 vs Opus — M3 finished 2× faster at 1/8 the cost.'",
+    "visual_feedback": "Avatar needs better lighting — a key light at 45° would eliminate the flat yellow cast. Replace the wrinkled curtain with a clean dark backdrop or a subtle bookshelf/monitor setup for credibility. B-roll screens should show real terminal output, actual benchmark leaderboard screenshots, or a side-by-side cost comparison table — the current dark-card mockups look auto-generated and add no new information. Caption text legibility is acceptable but the Hormozi-style highlight word (orange) sometimes lands on prepositions ('IN', 'IS') instead of power words — highlight the noun or number instead. The CTA frame (12) must be simplified to one line: 'Follow @automatewithanand for weekly AI automation builds' with no competing text layers. Current frame has at least 6 text elements fighting for attention."
+  },
+  {
+    "date": "2026-06-05 06:01",
+    "topic": "Google Flow Just Went Free — 50 Cinematic Clips a Day, Every Feature, Zero Rupees",
+    "script_dsscl_final": 9.54,
+    "video_dsscl_final": 6.42,
+    "video_passed": false,
+    "strengths": [
+      "Concrete feature list shown on screen (Veo 3.1, Nano Banana Pro, Gemini Omni Flash, SceneBuilder, 2K upscaling) makes it bookmark-worthy",
+      "Specific free offer — 50 credits daily — gives a clear actionable hook",
+      "Multiple list frames (features + flow tools) add save-worthy info density",
+      "CTA is specific: comment 'Flow' to get access to Google Flow"
+    ],
+    "weaknesses": [
+      "Hook is extremely weak — Frame 1 is just a talking head with 'THE AI FILMMAKING' text; no pattern interrupt, no shocking stat, no before/after, no curiosity loop opened",
+      "No B-roll whatsoever — entire video alternates between static talking head and plain text cards on dark backgrounds; zero visual variety or proof shots",
+      "Avatar lighting is poor — single harsh side light creates unflattering orange cast, dark curtain background looks low-budget and undermines credibility",
+      "On-screen captions appear to be auto-generated fragments that don't form coherent phrases ('NOUNS GENERATE YOU', 'ACCOUNT THE FREE', 'IS VO 3') — confusing rather than reinforcing",
+      "No grand takeaway frame — the final frame is a generic follow CTA with 'SHORT SHIPS TONIGHT' which is vague and not quotable",
+      "Text cards use generic dark backgrounds with no branding consistency; list cards switch to white background breaking visual flow",
+      "No social proof shown — '10,000 CREATORS' is mentioned but Frame 7 shows a nearly blank dark card with a dim glow, no screenshots, no testimonials",
+      "Energy and pacing feel flat — speaker gestures are minimal, no vocal emphasis visible through body language, same flat composition throughout"
+    ],
+    "script_feedback": "Hook must be rewritten entirely: open with a specific outcome — e.g., 'Google just gave filmmakers 50 free AI video credits daily — here's how to claim yours in 90 seconds.' The '10,000 creators' claim needs proof: show a dashboard screenshot, a Discord member count, or a testimonial clip. The feature list (Veo 3.1, SceneBuilder, etc.) is strong but needs a single killer demo clip — even a 2-second generated video sample would 10x shareability. Grand takeaway should be one quotable line like 'Google Flow is the free Runway competitor nobody is talking about' — currently missing entirely. The CTA 'comment Flow' is decent but should also verbally state the specific benefit: 'Comment FLOW and I'll DM you the link + my prompt library free.' Add real numbers: 'I generated a 30-second cinematic clip in 4 minutes with zero budget' to trigger comment debate.",
+    "visual_feedback": "Avatar needs 3-point lighting or at minimum a key + fill to eliminate the harsh orange side-cast; replace dark curtain with a branded background or green-screen a relevant environment. B-roll is completely absent — insert at least 3-4 screen recordings showing the Google Flow interface, a generated video clip, and the credit dashboard. Text cards need consistent branding: use one background style, add the @automatewithanand watermark, and increase font size. Captions are broken and incoherent — switch to manually timed Hormozi-style 2-3 word punch captions that match speech cadence exactly. The '10,000 creators' frame (Frame 7) is essentially a blank dark screen with a dim light — replace with an actual community screenshot or animated counter. Final CTA frame typography is weak; 'FOLLOW' in white with a small yellow triangle lacks energy — use a full-screen bold text with contrasting colors and the specific tool name visible."
+  },
+  {
+    "date": "2026-06-08 06:32",
+    "topic": "Stop Scrolling Naukri for 6 Hours — Claude Finds Your 5 Best Jobs in 60 Seconds",
+    "script_dsscl_final": 9.52,
+    "video_dsscl_final": 7.22,
+    "video_passed": false,
+    "strengths": [
+      "Specific tool named (Claude AI) with free Chrome extension setup — highly bookmark-worthy",
+      "Concrete filters given: under 50 applicants, last 24 hours — actionable and save-worthy",
+      "Real result mentioned: Chennai DevOps friend, 6 hours to 6 minutes, 3 callbacks on Tuesday — social proof with specifics",
+      "3-step workflow graphic (The Honest Limit → And The Next Move → Step 3) creates structure viewers want to revisit"
+    ],
+    "weaknesses": [
+      "Hook uses 'Nokri manually in' — Hindi-English mix is niche and the first frame lacks a strong pattern interrupt or visual disruption to stop the scroll",
+      "B-roll is entirely absent — top half in talking-head frames is just a dark curtain with zero visual interest, no screen recordings, no LinkedIn screenshots, no tool demos",
+      "Avatar lighting is harsh single-source from the left, casting heavy shadows on the right side of face — looks low-budget and reduces trust signals",
+      "Graphic slides (frames 3, 4, 5, 6, 10) use different design systems — inconsistent branding, some have rounded cards, others have glowing text, no unified template",
+      "Grand takeaway frame is missing — there is no single screenshot-worthy quotable sentence; the closest is the Claude AI card but it reads like a bullet list not a punchline",
+      "CTA frame (frame 12) is generic 'Follow @automatewithanand' with no emotion save or warm close — no specific next step like 'DM me NAUKRI for the prompt'",
+      "Step 3 in the workflow diagram literally says 'Step 3' as a placeholder — feels unfinished and erodes credibility",
+      "Caption text legibility varies — some frames have white on dark which works, but 'ME THE APPLY' in frame 5 is confusing out of context"
+    ],
+    "script_feedback": "Hook needs complete rework: open with a specific pain number like 'You applied to 200 jobs last month and got 0 callbacks — here is why' to broaden TAM beyond Hindi speakers. The middle section has strong bones (Claude AI, filters, prompt structure) but the workflow explanation is rushed and the 3-step graphic has a literal placeholder 'Step 3' which kills trust. Grand takeaway must be a single punchy sentence like '6 hours of Naukri scrolling replaced by 6 minutes of Claude prompting — 3 callbacks in one week.' The honest limit section is confusing — state clearly what the tool cannot do (e.g., 'It won't fill company portal forms for you — you still do that manually'). End with a specific CTA: 'Comment PROMPT and I will DM you the exact Claude prompt I used' to drive comments and DMs.",
+    "visual_feedback": "B-roll is the biggest production gap — every talking-head segment needs a top-half screen recording showing LinkedIn filters being set, Claude extension being installed, or the actual prompt being typed. The dark curtain background with single-source harsh lighting looks amateur; add a ring light or second fill light at minimum. Graphic cards need a single consistent template: same border radius, same font, same color system across all info slides. The 'Step 3' placeholder in the workflow diagram must be replaced with actual content before publishing. Caption style is close to Hormozi format but word groupings are awkward ('ME THE APPLY', 'NOKRI MANUALLY IN') — rewrite captions as complete thought chunks of 3-4 words that make sense independently. Avatar energy is flat — more hand gestures, slight lean-in during key reveals, and direct camera eye contact during the hook would significantly improve retention."
+  },
+  {
+    "date": "2026-06-10 05:24",
+    "topic": "Fable 5 Is Free Until June 22 — Then It Costs 2× Opus",
+    "script_dsscl_final": 9.55,
+    "video_dsscl_final": 5.88,
+    "video_passed": false,
+    "strengths": [
+      "Hook frame 1 uses brand name 'Anthropic just released' which triggers curiosity for AI audience",
+      "Mentions specific model tiers (Mythos 5, Fable 5, Opus) giving concrete info density",
+      "Pricing anchors ($10 flat plan) provide a save-worthy data point",
+      "Captions follow bold keyword-highlight style with orange emphasis words"
+    ],
+    "weaknesses": [
+      "Hook is generic 'X just released' format — no pattern interrupt, no stakes, no personal angle to stop the scroll",
+      "B-roll is entirely dark UI mockups with minimal visual variety — no screen recordings, no real product demos, no split-screen comparisons",
+      "Model names 'Mythos 5' and 'Fable 5' appear fabricated or speculative — this will destroy credibility and trigger negative comments rather than productive debate",
+      "Grand takeaway frame is completely absent — final frame is a generic follow CTA with no quotable one-liner",
+      "Avatar lighting is inconsistent (warm in frames 8-11, blue-dark in frame 1), low energy, minimal gesturing, no direct camera eye contact in several frames",
+      "On-screen text in frames 5-6 is cluttered with duplicated 'ZERO COST NOW' lines overlapping each other",
+      "No specific real tool, workflow, or use-case demonstrated — nothing concretely bookmark-worthy",
+      "CTA is a cold 'follow' card with no emotional close, no specific tool named, no next-step promised",
+      "Subtitle text at bottom ('FLAT PLAN AT', 'WHEN CAPACITY ALLOWS', 'LOAD SEE WHERE') reads as sentence fragments that are disjointed without audio"
+    ],
+    "script_feedback": "The script desperately needs restructuring. Hook should be rewritten with a personal outcome or shocking stat: 'Anthropic is now giving away their best model FREE — here is exactly who qualifies and how to lock it in.' The body mentions model names that sound fictional (Mythos, Fable) — if these are real leaked names, cite the source on screen; if speculative, label clearly or replace with confirmed info. Add at least one concrete trigger with real numbers: 'I ran Claude Opus for 14 days on a client project in Bangalore — saved ₹47,000 in developer hours.' The grand takeaway must be a single screenshot-worthy sentence like 'Anthropic just made the $200/month model free — but only if you move before June 22.' Currently the video ends with zero memorable line. The '4× workload' frame needs context — 4× compared to what? Add a before/after or a real workflow example.",
+    "visual_feedback": "B-roll is the weakest element. Dark UI cards with text bullets feel like a slide deck, not a reel. Replace with actual Claude.ai screen recordings, side-by-side model output comparisons, or at minimum animated graphics showing pricing tiers. Text overlaps in frames 5-6 where 'ZERO COST NOW' appears twice — fix layering. Avatar footage has inconsistent color grading between the talking-head segments; apply a single LUT. The presenter's energy is flat — needs more forward lean, hand gestures, and direct lens eye contact. Caption styling is acceptable but the fragmented phrases at bottom are confusing without audio sync — ensure each subtitle frame is a complete thought. The final CTA card is visually dead: black screen with small yellow text. Replace with a bold branded card showing the specific tool/link/next video promise. Overall production feels rushed and placeholder-quality."
+  },
+  {
+    "date": "2026-06-13 05:26",
+    "topic": "Stop Chatting With Claude Fable 5. Wire It Into an Agent.",
+    "script_dsscl_final": 9.54,
+    "video_dsscl_final": 7.67,
+    "video_passed": false,
+    "strengths": [
+      "Clear framework structure with 4Cs (Context, Connections, Capabilities, Cadence) is inherently saveable",
+      "Specific tool named — Claude Code with .claude.md — gives actionable depth",
+      "Grand takeaway frame 'CHAT BOX = WASTED. WIRE IT. BUILD.' is punchy and quotable",
+      "Build list in frame 9 (Lead-Gen Agent, Content Swarm, Claude.md Brain) adds concrete save value",
+      "Hormozi-style captions with color-highlighted keywords are present and legible"
+    ],
+    "weaknesses": [
+      "Hook (frame 1) 'SUBSCRIPTION JUST GOT' is vague — no pattern interrupt, no specific number, no polarizing claim; does not stop the scroll for non-Claude users",
+      "B-roll is nearly nonexistent — top half is consistently the same dark curtain backdrop with zero visual variety, no screen recordings, no demos, no tool UI walkthrough",
+      "Avatar energy is flat — neutral expression, minimal gestures, same framing across every talking-head frame with no camera angle change or zoom punch-in",
+      "Lighting is poor and inconsistent — warm tungsten on face with dark unlit background looks low-budget, frame 12 face is partially in shadow",
+      "Frame 4 mentions 'BANGALORE HSR BUILD' which is hyperlocal and alienates 95% of the audience without context",
+      "No open loop or curiosity gap in the first 1.5 seconds — the word 'subscription' alone is not emotionally charged enough",
+      "CTA frame 12 is generic 'FOLLOW' with no specific reason or incentive beyond 'new builds every week'",
+      "Text overlay 'IT ON A' (frame 3) is a sentence fragment that adds no meaning on its own — pacing of caption reveals feels disjointed"
+    ],
+    "script_feedback": "Hook needs a complete rewrite: open with a specific, painful number — e.g., 'I pay ₹1,700/mo for Claude Pro and was using it like a chatbot. Here's how I turned it into 3 revenue agents.' The Bangalore HSR reference should be cut or reframed as 'I tested this at an IRL build session with 40 devs' for broader relatability. The 4C framework is strong but needs a one-line setup: 'Anthropic's own engineer shared a 4-step system called the 4Cs.' Grand takeaway 'CHAT BOX = WASTED' lands but needs a follow-up line with a concrete result — 'I saved 11 hours/week after wiring Claude Code to my repo.' The 3 builds (Lead-Gen Agent, Content Swarm, Claude.md Brain) should each get a one-sentence outcome line with a metric. CTA should say 'Comment CLAUDE and I'll send you my exact .claude.md file' to drive comments and DMs.",
+    "visual_feedback": "Avatar needs dramatic improvement: add a ring light or key light at 45 degrees, replace the dark curtain with a visible desk/monitor setup showing Claude Code running. Insert 2-3 seconds of actual screen recording of Claude Code terminal or .claude.md file as B-roll between talking-head segments. Use zoom punch-ins on the avatar during key phrases ('not a chatbot', 'wasted') to simulate energy. Caption fragments like 'IT ON A' should be replaced with complete thought units — minimum 3-word phrases that make sense in isolation. The framework slide (frames 5-7) is clean but static — animate each numbered item appearing sequentially. Frame 12 follow CTA text is small and competes with the 'WINDOW' caption — simplify to one clear action."
+  },
+  {
+    "date": "2026-06-15 05:26",
+    "topic": "Karpathy's 3-Layer Method That 2-3× Claude's Output",
+    "script_dsscl_final": 9.52,
+    "video_dsscl_final": 6.35,
+    "video_passed": false,
+    "strengths": [
+      "Clear structured framework shown (3-point lists are bookmark-friendly)",
+      "Specific tool named — Claude Code — gives save-worthy specificity",
+      "Multi-layered concept (Spec → Verifier → Environment) adds info density",
+      "CTA at the end with follow handle and actionable next step (open Claude tonight)"
+    ],
+    "weaknesses": [
+      "Hook is extremely weak — 'A calculator mine' is confusing, not a pattern interrupt, does not stop the scroll for the target audience",
+      "No clear open loop in the first 2 frames; viewer has zero reason to stay",
+      "Avatar energy is flat — clasped hands, neutral expression, no gestures, low vocal energy implied by posture",
+      "On-screen text is too dense and not punchy enough — 'SPEC → VERIFIER →' means nothing to a cold viewer without context",
+      "B-roll is just static dark UI cards — no screen recordings, no real code, no live demo, nothing that proves credibility",
+      "No relatable frustration or identity trigger — nothing that says 'this is YOU' to the viewer",
+      "Grand takeaway frame is missing entirely — no single quotable screenshot-worthy sentence",
+      "Boris Cherny name-drop (frame 5) is unexplained and adds confusion, not authority, for cold viewers",
+      "Lighting on avatar is dim and unflattering, grey hoodie blends into dark curtain background",
+      "Caption style is basic bold caps — not true Hormozi-style (no color contrast word-by-word sync, no size variation for emphasis)"
+    ],
+    "script_feedback": "Hook must be completely rewritten. Replace 'A calculator mine' with a concrete pain/result opener like 'I used to spend 4 hours debugging — now Claude Code does it in 12 minutes.' The 3-point frameworks (Uncover the Goal / Work Agile / Be Precise AND Criteria Upfront / Codex as Critic / External Signals) are shown back-to-back with no breathing room — pick ONE framework and go deep with a real example. Add a real build story: 'Last week I built a full invoice parser in 22 minutes using this exact CLAUDE.MD setup — here's the 5-line prompt.' The Boris Cherny reference needs a one-line credibility tag ('ex-Meta engineer who built X') or drop it. Grand takeaway needs a single punchy line like 'Write the spec, not the code' displayed full-screen for 2+ seconds. End CTA should include a specific freebie: 'Comment LAYERS and I'll DM you my exact CLAUDE.MD template.'",
+    "visual_feedback": "Avatar lighting needs a key light — face is underexposed and the grey hoodie disappears into the dark curtain. Consider a brighter background or at minimum a ring light at 45 degrees. B-roll cards are static mockups with no motion or screen recording — add a real terminal session, a live Claude Code interaction, or at minimum animated text reveals. Caption style needs upgrade: use word-by-word highlight (yellow/orange on current word, white on rest) with size pops on key words. The UI cards (frames 2, 8-11) use small text that is unreadable on mobile at a glance — increase font size by 40% and reduce content per card. Frame 5's 'NOTHING BORIS CHERNY' subtitle is visually confusing and looks like an error. The follow CTA (frame 12) fades in over the content card creating visual clutter — give it a clean dedicated frame with high contrast."
+  },
+  {
+    "date": "2026-06-18 05:48",
+    "topic": "Sodium Diacetate 2026: The Cost Wave Most Buyers Will Miss",
+    "script_dsscl_final": 9.5,
+    "video_dsscl_final": 6.35,
+    "video_passed": false,
+    "strengths": [
+      "Data-heavy content with specific numbers ($690M, 47% exports, +18.4%) creates perceived authority",
+      "Structured listicle takeaway frame (5 items: Regional CAGR Forecasts, Cost-Driver Breakdown, 4 Mitigation Strategies, Dual-Sourcing Playbook, Supplier KPI Scorecards) is inherently saveable",
+      "Professional avatar appearance — blazer, white shirt, office setting signals credibility for B2B audience"
+    ],
+    "weaknesses": [
+      "Hook is extremely niche — 'Cost Wave Moving' on a sodium diacetate supply chain topic alienates 95%+ of the target audience (Indian working professionals 22-45 in AI automation); zero pattern interrupt",
+      "No AI automation angle visible — the channel is @automatewithanand about AI automation but the entire video is commodity chemical procurement analysis with no AI tool, workflow, or automation shown",
+      "B-roll is dark generic UI mockups with static text cards, not real tool demos, dashboards, or screen recordings — feels templated and low-effort",
+      "Avatar only appears in Frame 1 with low energy, muted expression, no direct eye contact into camera, then disappears entirely — no personality anchor for remaining 90% of video",
+      "On-screen text is too dense per card (e.g., 'CHINA: 47% OF EXPORTS / MALAYSIA: 37% IMPORTS / LEVERAGE HAS SHIFTED') — not punchy 3-5 word captions",
+      "Grand takeaway frame is a generic 5-item list with no single quotable sentence — not screenshot-worthy",
+      "CTA is a bland 'FOLLOW @automatewithanand / KNOW MORE' overlay with no specific tool named, no link, no emotional close",
+      "Zero comment triggers — no opinion, no controversy, no relatable frustration, no question posed to viewer",
+      "Captions at bottom are subtitle-style but topic is so niche there is no relatability or 'send this to your procurement friend' moment for the stated audience"
+    ],
+    "script_feedback": "This script is fundamentally misaligned with the channel's stated niche (AI automation for Indian professionals). To rescue: 1) Hook must open with a broader pain — 'Your company is bleeding money on raw materials and doesn't even know it. Here's what AI caught in 9 seconds.' 2) Reframe the sodium diacetate case as ONE example output of an AI procurement agent — name the specific tool (e.g., 'I built this in n8n + GPT-4 + a commodity price API'). 3) Grand takeaway needs a single sticky sentence: 'One AI agent replaced a 3-person sourcing team's weekly report — in 9 seconds, for ₹0.' 4) Add a comment trigger: 'Drop your industry below — I'll show what AI finds in YOUR supply chain.' 5) The 5-item list should reference downloadable templates or a specific automation workflow, not abstract consulting terms like 'Supplier KPI Scorecards' with no context.",
+    "visual_feedback": "B-roll is the biggest failure — dark UI cards with white text on black backgrounds look like placeholder slides, not real tool output or dashboards. Replace with: actual screen recordings of an AI agent running a procurement analysis, real commodity price charts with annotations, or a split-screen of manual vs. AI workflow. Avatar needs to be present throughout bottom-third with higher energy, direct camera eye contact, and gestures synced to data callouts. Current Frame 1 avatar has dead eyes and limp hand gesture. Text overlays need to shrink to 3-word max punchy phrases ('China Controls 47%' not full sentences). Caption bar styling is functional but the gray/white on dark blue has low contrast on mobile. The 'FOLLOW' CTA frame (12/12) uses a dated yellow triangle icon that looks like 2019-era content. Listicle frame (8-11) white card on dark background is the strongest visual but is wasted on generic unlabeled items — add icons, tool logos, or color coding."
+  },
+  {
+    "date": "2026-06-22 06:15",
+    "topic": "Stop Prompting Your AI. Build a Loop Instead.",
+    "script_dsscl_final": 9.54,
+    "video_dsscl_final": 7.35,
+    "video_passed": false,
+    "strengths": [
+      "Clear 3-part framework (Goal, Verification Check, Stop Condition) is inherently saveable",
+      "Hook slide 'Stop Prompting. Start Looping.' creates genuine pattern interrupt for AI audience",
+      "Claude Code terminal screenshot in frame 10 adds real-world proof and specificity",
+      "Bengaluru + 27 minutes gives concrete local proof point that resonates with Indian tech audience",
+      "One Good Loop closing frame is a clean memorable takeaway concept"
+    ],
+    "weaknesses": [
+      "Caption text is auto-generated and fragmented — 'LOOPS I SPENT', 'AWAY AND IT', 'AGAIN THAT IS' read as incoherent word salad without audio context, killing rewatch value for muted viewers",
+      "Avatar energy is flat — neutral expression, minimal gesturing, dim single-source lighting, no eye-line variation across all talking-head frames",
+      "No single screenshot-worthy grand takeaway sentence — 'One Good Loop' is too vague without a punchline beneath it",
+      "B-roll slides are text-heavy dark mode cards that all look identical, no visual variety or motion graphics to sustain attention mid-video",
+      "No specific tool CTA beyond a brief Claude Code glimpse — no pinned comment prompt, no 'link in bio', no named workflow",
+      "Hook frame 1 subtitle 'LOOPS I SPENT' is confusing without the full sentence, fails scroll-stop test for silent autoplay"
+    ],
+    "script_feedback": "Hook needs rewriting for broader TAM: instead of jumping into 'loops I spent', open with a pain statement like 'I used to send ChatGPT 47 messages to edit one video. Then I learned one trick.' The 3-part framework is strong but needs a concrete example walked through — show the exact goal, the exact verification check, the exact stop condition for ONE real task (e.g., 'Goal: cut silences under 0.3s. Check: FFprobe silence detection. Stop: zero silences remain.'). Grand takeaway must be a single quotable line: 'One good loop replaces 50 prompts' or 'Stop prompting. Start looping. Ship tonight.' Bengaluru 27 minutes is great but needs the before number — 'What took me 4 hours in Mumbai now takes 27 minutes with one loop in Claude Code.' Add rupee or hour savings for comment bait.",
+    "visual_feedback": "Avatar lighting is underlit on camera-right creating a muddy look — add a key light at 45 degrees or increase existing light intensity. Expression and energy need to escalate across the video, currently monotone throughout all talking-head segments. Caption style uses grey box with mixed white/orange text but the word fragments are nonsensical on muted autoplay — switch to full short phrases synced to speech beats ('Stop prompting' / 'Start looping' / '3 parts'). Dark mode slides all share identical layout and color palette causing visual fatigue by frame 7 — vary background color, add subtle animations, or use icon illustrations for the 3-step list. Claude Code terminal frame is the strongest visual but appears too briefly and text is small on mobile — zoom into the command or use a magnified callout. Final 'One Good Loop' frame needs a stronger visual anchor — animate the circles converging or add a bold subheadline beneath."
+  },
+  {
+    "date": "2026-06-24 06:39",
+    "topic": "Fugu Ultra vs Claude Opus 4.8: The Real Battle Test Result Nobody Expected",
+    "script_dsscl_final": 9.54,
+    "video_dsscl_final": 7.35,
+    "video_passed": false,
+    "strengths": [
+      "Highly save-worthy routing framework: Haiku→Classify, Sonnet→Draft, Opus→Reason is concrete and actionable",
+      "Specific cost comparison (Fugu $50 vs Opus $10, 5x more expensive) gives real numbers that add credibility",
+      "Clear tiered model routing strategy is bookmark-worthy for developers and AI builders",
+      "Mentions Sakana Labs by name which adds specificity and discoverability"
+    ],
+    "weaknesses": [
+      "Hook is extremely weak — '38 AI Tasks' with a static namaste pose does not pattern-interrupt or open a compelling loop; no scroll-stopper element",
+      "Frame 3 is completely black — dead air kills retention and signals editing error; viewers drop off instantly",
+      "No B-roll whatsoever — entire video alternates between talking head and static text cards with no screen recordings, demos, or visual proof",
+      "Avatar energy is flat — low affect, minimal gestures, dimly lit against a plain dark curtain; no warmth or urgency",
+      "On-screen text is cluttered and inconsistent — 'X MORE EXPENSIV' is cut off, subtitle styling varies wildly frame to frame",
+      "No grand takeaway frame — video ends on '12 MONTHS' with no quotable one-liner or screenshot-worthy summary",
+      "No CTA or emotion_save close — no warm sign-off, no 'save this', no specific tool link or next step for viewer",
+      "Caption styling is not Hormozi-style — keyword highlights are orange but sizing and placement feel haphazard, not punchy"
+    ],
+    "script_feedback": "Hook must be rewritten entirely: replace '38 AI Tasks' with a TAM-broadening pain point like 'Your AI bill is 5x too high — here is the routing trick that cuts it by 60%'. The black frame must be removed — never have dead air. The Sakana Labs mention needs context: say what Fugu actually is in one line before comparing cost. The routing framework (Haiku→Classify, Sonnet→Draft, Opus→Reason) is the gold — lead with it earlier, not buried at frame 6. Add a concrete Indian-market example: 'One SaaS founder in Bangalore saved ₹3.2L/month by routing 70% of queries to Haiku'. End with a single quotable grand takeaway: 'Route by task complexity, not by habit — that one rule saves you 60% on AI costs.' Close with a warm CTA: 'Save this for your next Claude Code session.'",
+    "visual_feedback": "Remove the black frame immediately — it reads as a glitch. Replace static text cards with screen recordings of Claude Code, Sakana Labs dashboard, or at minimum animated text builds. Avatar needs better lighting — add a key light from the front to eliminate the flat, dim look. Shoot slightly closer to increase energy and intimacy. Text overlays need consistent sizing: use max 4-5 bold words per line, ensure nothing is cut off ('EXPENSIV' truncation is unacceptable). Add a branded grand takeaway card at the end with the one-liner in large white text on dark background. Caption bar should be centered bottom-third with consistent bold-highlight style on every frame."
   }
 ]

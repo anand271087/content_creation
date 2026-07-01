@@ -266,8 +266,18 @@ HEYGEN_AVATAR_ID_BLUE=cb3a77d6beee47cfb85fe381f13b813b
 HEYGEN_AVATAR_ID_WHITE=6174316859e34fd4801d13fe64afc177
 HEYGEN_AVATAR_ID_BKSHRT=dfffaf1a2186437abca5ca54c57b0c6c
 
-# Whisper model for captions + broll sync. medium is the default (fast, good accuracy).
-# large-v3 gives best accuracy but takes 12-15 min; medium takes ~3 min.
+# Stage 5 speech-to-text provider. Default "whisper" (local, free, slower, mishears
+# proper nouns). Set "elevenlabs" to use ElevenLabs Scribe — cloud API, ~$0.013 per
+# 2-min reel, much better on proper nouns like "Veo 3", "Claude", "n8n".
+STT_PROVIDER=whisper
+
+# Required when STT_PROVIDER=elevenlabs.
+# Get a key at https://elevenlabs.io/app/settings/api-keys
+ELEVENLABS_API_KEY=
+
+# Whisper model (used when STT_PROVIDER=whisper).
+# medium = fast (~3 min), good accuracy.
+# large-v3 = best accuracy on proper nouns (~12-15 min, 1.5 GB download).
 # small.en misidentifies proper nouns (Claude → "clot", n8n → "n 8 n").
 WHISPER_MODEL=medium
 
@@ -1166,7 +1176,7 @@ ffmpeg -version            # verify
 | Video abruptly cuts at 60s | `durationInFrames={1800}` hardcoded OR `sync_broll_to_speech.py` not run | Use `calculateMetadata` in Root.tsx; always run sync before Remotion render |
 | Old avatar used in new video | Pipeline resumed from state; Stage 3 skip guard short-circuits on existing file | Stale-asset guard now deletes the file automatically on mtime mismatch. Manual fix: `rm assets/avatar/avatar_video.mp4` |
 | Old broll used in new video | Same stale-asset issue | Stale-asset guard deletes stale clips automatically. Manual fix: `rm assets/broll/*.mp4` |
-| Captions misidentify words ("clot" instead of "Claude") | Whisper `small.en` inaccurate on proper nouns | Set `WHISPER_MODEL=large-v3` in `.env` |
+| Captions misidentify words ("clot" instead of "Claude") | Whisper `small.en` inaccurate on proper nouns | Preferred: set `STT_PROVIDER=elevenlabs` + `ELEVENLABS_API_KEY` in `.env` (~$0.013/reel). Free fallback: set `WHISPER_MODEL=large-v3`. |
 | Caption shows "FOLLOW -UPS" split | Whisper splits hyphenated words | `extractWords()` merges tokens starting with "-" into previous word |
 | sync_broll_to_speech shows FALLBACK sections | Whisper couldn't match section's first words | Upgrade to `large-v3`; fallback sections use interpolated timestamps |
 | Broll clips show text/watermarks | Prompt doesn't explicitly forbid them | Add "absolutely no text overlays, no watermarks, no subtitles, no captions, pure cinematic footage only" to every broll_prompt |

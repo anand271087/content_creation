@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>__COMP_ID__</title>
+<script src="./gsap.min.js"></script>
+<style>
+  :root { --bg:__BG__; --bg2:__BG_SECONDARY__; --text:__TEXT__; --primary:__PRIMARY__; --accent:__ACCENT__; --danger:#ff3b3b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100%; height:100%; background: var(--bg); overflow:hidden;
+    font-family:"Inter", system-ui, sans-serif; color: var(--text); }
+  #root { width:1920px; height:1080px; position:relative; overflow:hidden;
+    background:
+      radial-gradient(1000px 800px at 80% 20%, color-mix(in srgb, var(--primary) 10%, transparent), transparent 60%),
+      linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  }
+  .header { position:absolute; top: 100px; left: 130px; right:130px; }
+  .pill {
+    display:inline-block; font-size: 18px; font-weight: 800;
+    letter-spacing: 0.32em; text-transform:uppercase;
+    background: var(--accent); color: var(--bg);
+    padding: 10px 18px; border-radius: 999px;
+    opacity:0;
+  }
+  .title { font-size: 92px; font-weight: 900; line-height: 1.05; letter-spacing: -0.014em;
+           text-transform: uppercase; margin-top: 20px; opacity:0; }
+  .sub   { font-size: 28px; font-weight: 500; color: rgba(255,255,255,0.62);
+           letter-spacing: 0.08em; margin-top: 14px; opacity:0; }
+  .chart { position:absolute; left: 130px; right: 440px; bottom: 120px; top: 440px;
+           /* right:440px reserves bottom-right PIP zone */
+           display:flex; flex-direction: column; gap: 60px; justify-content:center; }
+  .row { display:flex; flex-direction:column; gap: 14px; }
+  .row .meta { display:flex; align-items:center; justify-content: space-between;
+               font-size: 32px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+  .row .label { color: rgba(255,255,255,0.9); }
+  .row .value { color: rgba(255,255,255,0.85); font-variant-numeric: tabular-nums; opacity: 0; }
+  .track { position:relative; height: 64px; background: rgba(255,255,255,0.06);
+           border-radius: 16px; overflow:hidden; border: 1px solid rgba(255,255,255,0.08); }
+  .fill  { position:absolute; left:0; top:0; bottom:0; width: 100%;
+           transform-origin: left center; transform: scaleX(0);
+           border-radius: 16px; }
+  .fill.primary { background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%); }
+  .fill.danger  { background: linear-gradient(90deg, var(--danger) 0%, #ff8080 100%); }
+</style>
+</head>
+<body>
+<div id="root"
+     data-composition-id="__COMP_ID__"
+     data-start="0" data-width="1920" data-height="1080"
+     data-duration="__DURATION__">
+  <div class="header">
+    <div class="clip pill"  id="pill"     data-start="0" data-duration="__DURATION__" data-track-index="0">__PILL__</div>
+    <div class="clip title" id="title"    data-start="0" data-duration="__DURATION__" data-track-index="1">__TITLE__</div>
+    <div class="clip sub"   id="subtitle" data-start="0" data-duration="__DURATION__" data-track-index="2">__SUBTITLE__</div>
+  </div>
+  <div class="chart">
+    __ROWS_HTML__
+  </div>
+</div>
+<script>
+  window.__timelines = window.__timelines || {};
+  const tl = gsap.timeline({ paused: true });
+  const D = parseFloat(document.getElementById("root").getAttribute("data-duration")) || 8;
+  gsap.set("#pill",     { opacity: 0, y: -8 });
+  gsap.set("#title",    { opacity: 0, y: -10 });
+  gsap.set("#subtitle", { opacity: 0, y: -4 });
+  gsap.set(".row .label", { opacity: 0, x: -20 });
+  gsap.set(".row .value", { opacity: 0, x: 20 });
+
+  tl.to("#pill",     { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0);
+  tl.to("#title",    { opacity: 1, y: 0, duration: 0.5, ease: "expo.out"  }, 0.1);
+  tl.to("#subtitle", { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 0.32);
+
+  document.querySelectorAll(".row").forEach((row, i) => {
+    const base = 0.7 + i * 0.6;
+    tl.to(row.querySelector(".label"), { opacity:1, x:0, duration: 0.4, ease: "power2.out" }, base);
+    tl.to(row.querySelector(".fill"),  { scaleX: parseFloat(row.dataset.value) / 100,
+        duration: 0.9, ease: "expo.out" }, base + 0.05);
+    tl.to(row.querySelector(".value"), { opacity:1, x:0, duration: 0.4, ease: "power2.out" }, base + 0.4);
+  });
+  tl.to({}, { duration: Math.max(0.2, D - tl.duration() - 0.05) });
+  window.__timelines["__COMP_ID__"] = tl;
+</script>
+</body>
+</html>
