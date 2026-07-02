@@ -256,19 +256,21 @@ def load_reference_files() -> tuple[str, str, str]:
     hooks_content = hooks_path.read_text(encoding="utf-8")
     formats_content = formats_path.read_text(encoding="utf-8")
 
-    # Harsha skill overlay — three files: the SKILL card + hook formulas + templates.
-    # If the dir is absent (fresh clone) we log a warning and continue (overlay is optional).
+    # Harsha skill overlay — SKILL card + hook formulas + templates + viral-density
+    # rule (the last is the Virality-only "gold standard": 4 beats, ≤15s / 35-45 words,
+    # no teaching, CTA carries a promise). If the dir is absent (fresh clone) we log a
+    # warning and continue — overlay is optional.
     harsha_dir = SCRIPTS_DIR / "harsha_skill"
     harsha_overlay = ""
     if harsha_dir.exists():
         parts = []
-        for name in ("SKILL.md", "hook-formulas.md", "templates.md"):
+        for name in ("SKILL.md", "hook-formulas.md", "templates.md", "viral-density.md"):
             fpath = harsha_dir / name
             if fpath.exists():
                 parts.append(f"── {name} ────────────────\n{fpath.read_text(encoding='utf-8')}")
         harsha_overlay = "\n\n".join(parts)
-        log.info("Loaded Harsha skill overlay (%d chars): SKILL + hook-formulas + templates.",
-                 len(harsha_overlay))
+        log.info("Loaded Harsha skill overlay (%d chars) from %d files.",
+                 len(harsha_overlay), len(parts))
     else:
         log.warning("Harsha skill dir missing at %s — running without overlay.", harsha_dir)
 
@@ -374,6 +376,13 @@ Key overlays to apply while writing:
      - "Authority"   → save CTA ("Save this — you'll want it when you build yours")
      - "Conversion"  → keyword CTA feeding the ManyChat funnel ("Comment [KEYWORD]
                        and I'll send you [resource]"). Use for anything selling calls.
+   ⚠️ If content_type == "Virality": ALSO obey viral-density.md (below). Every line
+   must land — max 4 beats total across hook+context+bodies+takeaway, no teaching
+   breakdown (teaching lives in Authority content), CTA carries a promise
+   ("Follow and I'll show you exactly how"). The 10-section GOAT structure still
+   applies as scaffolding, but each section must be compressed so the *spoken*
+   line does one specific job and nothing repeats. Fuse proof + dream into a
+   SINGLE line where possible. Cut anything the script survives without.
 6. INVERTED PYRAMID — order points by 2nd-best first, best second, then descending.
    Never open the body with your strongest point; save it for body_2 or trigger_3.
 7. CONDENSATION — obey Harsha's One-Sentence Rule (each section describes ONE clear
