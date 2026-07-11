@@ -1204,3 +1204,71 @@ ffmpeg -version            # verify
 | On-screen text | Montserrat ExtraBold, max 3–5 words per line, uppercase |
 | Hook bank | 200 templates → `scripts/reference_scripts/english-hooks.md` |
 | Format bank | 47 formats → `scripts/reference_scripts/content-formats.md` |
+
+---
+
+## ═══════════════════════════════════════════
+## SHORT-FORM FORMAT LIBRARY & EDIT DECISION ENGINE
+## ═══════════════════════════════════════════
+
+Built 2026-07 by replicating Dan Martell's proven formats (view data scraped +
+frame-analyzed + transcribed per reel). These standalone compositors BYPASS the
+10-section pipeline. All use existing avatar footage + ffmpeg/PIL — the only
+paid step is one HeyGen render per new script.
+
+### The library
+
+| Script | Format | Script pattern | Status |
+|--------|--------|----------------|--------|
+| `scripts/tier_stack_reel.py` | Bad/Good/Great — 3 blurred logo cards per category, un-blur on spoken word, question pill | "For X: A is bad. B is good. C is great." | Production |
+| `scripts/tier_board_reel.py` | S-F tier board — items float then land in colored rows, accumulate | "[ITEM]. [GRADE]. [one punchy reason]." | Production |
+| `scripts/tier_timeline_reel.py` | Stage/timeline board — left rail of stage badges, items land beside them | "[ITEM]. [STAGE]. [reason]." | Production |
+| `scripts/countdown_reel.py` | Countdown 5→1 + LIVE screen-demo cards + CTA pill | "Number N, [Tool]. [what it does]. [proof number]." | Production |
+| `scripts/checklist_reel.py` | 5-step rainbow checklist — all steps ghosted from t=0, light up per beat | "Step N: [action]" (Authority how-to) | Demo — needs matching HeyGen script |
+| `scripts/sort_board_reel.py` | 3-column sort — Matters/Doesn't/Hurtful headers, items land under columns | "[HABIT]. [Verdict]. [reason]." | Demo — needs matching HeyGen script |
+| `scripts/timer_reel.py` | Live countdown timer card (ffmpeg drawtext expression) + reframe monologue | Time-boxed promise → chained quotables | Demo — needs matching HeyGen script |
+| `scripts/viral_15s.py` | 15s pure-virality cut, Hormozi word captions | Harsha 4-beat (hook/reveal/proof+dream/CTA) | Production |
+| `scripts/authority_stack.py` | Full-frame avatar + logo pops synced to speech | Tier list without board | Production |
+
+### Edit decision engine — given a script/topic, pick the format
+
+1. **Compares tools per category** ("X bad / Y good / Z great") → `tier_stack_reel`
+2. **Grades many items by quality** → `tier_board_reel` (S-F)
+3. **Sequences by WHEN** (life stage / revenue stage / timeline) → `tier_timeline_reel`
+4. **Binary/ternary judgment on habits or beliefs** (matters / doesn't / hurtful) → `sort_board_reel`
+5. **"Top N tools" with proof** → `countdown_reel` (live screen demos mandatory — static cards look fake)
+6. **Step-by-step system / how-to (Authority)** → `checklist_reel`
+7. **Motivational reframe with a time promise** → `timer_reel`
+8. **Pure 15s reveal/intrigue (Virality)** → `viral_15s`
+9. **AI-news long-form** → the original 10-section pipeline (Fri slot)
+
+Tie-breakers (from Dan's own view data): visible-framework formats beat b-roll
+countdowns 5-10× on the SAME topic (his "3 habits" b-roll reel: 18K vs 84K+
+median — the board version of the same content did 5-10×). When two formats
+fit, pick the one whose full board/list at the end is most screenshot-worthy.
+
+### Non-negotiable edit rules (user + mentor approved)
+
+- **No hook on board formats** — first frame already shows the framework (blurred/ghosted = the suspense). Straight into item 1.
+- **Framework visible from frame 1**, reveals synced to Scribe word timestamps (reveal = word_start − 0.15s).
+- **End the instant the last payoff lands.** Board formats: CTA in caption only. Conversion formats: spoken keyword CTA ("Comment X and I'll send…").
+- **Dark pills behind ALL landed text** — raw white text drowns in the warm studio background.
+- **Chest-level crop, 1.66× zoom** (1.87× was rejected as too zoomed). Grey avatar: `crop=650:1156:185:144`. Blue avatar: `crop=591:1050:179:250`. Always verify per avatar — framing differs.
+- **Studio background**: `scripts/replace_background.py --style studio` (RVM matting; also `warm|blue|teal|image`).
+- **Light-leak flash at reveals/cuts** (~0.22s warm wash + brightness pulse) — polish, added after format is locked.
+- **1.3× final speed** (HeyGen speaks ~142wpm; 1.3× ≈ 185wpm = Martell zone), then thumbnail concat.
+- **Contrarian placements are the comment engine** — at least one verdict per reel must make people argue.
+
+### Screen-demo recording (for countdown_reel)
+
+Three tiers — see `scripts/record_tool_demos.mjs`, `scripts/record_logged_in.mjs`, `scripts/capture_window.py`:
+1. Playwright headless on PUBLIC pages (challenge-detection built in; Wayback Machine `web.archive.org/web/<yr>/<url>` beats Cloudflare walls e.g. elevenlabs.io)
+2. Logged-in Chrome profile copy (user quits Chrome first; works for most apps; NOT claude.ai — device-bound sessions)
+3. Real Chrome + AppleScript + `screencapture -R` from READ-BACK window bounds (the claude.ai route; needs VS Code Screen Recording + Accessibility permissions; `screencapture -v` ignores `-l` window flag; verify Chrome frontmost before keystrokes; privacy-crop tabs/bookmarks/sidebar)
+
+### Instagram reference-reel analysis method
+
+GraphQL `doc_id=10015901848480474` + `variables={"shortcode":"..."}` + header
+`x-ig-app-id: 936619743392459` → `video_url` → download IMMEDIATELY (tokens
+expire). Then: 8-12 frames via ffmpeg + Scribe transcription
+(`scripts/transcribe_elevenlabs.py`) → format = layout + script pattern + timing.

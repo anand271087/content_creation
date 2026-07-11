@@ -87,3 +87,20 @@ vsl/brand.json
 
 # Ad-hoc debug/experiment area — never committed
 scratchpad/
+
+# Format-compositor generated assets (rebuilt by their scripts on every run)
+assets/tier_cards/
+assets/logo_cards/
+assets/screen_demos/
+assets/countdown_assets/
+assets/tier_board_assets/
+assets/tier_timeline_assets/
+assets/checklist_assets/
+assets/sortboard_assets/
+assets/timer_assets/
+assets/authority_stack_tmp/
+assets/viral_15s_tmp/
+assets/viral_15s_script.json
+
+# RobustVideoMatting model — download per models/README.md (15MB binary)
+models/*.torchscript

@@ -107,6 +107,21 @@ function pickTemplate(section) {
   // broll_type: "screen" → animated UI mockup (replaces real screen recording)
   if (section.broll_type === "screen") return "tpl_ui_mockup.html";
 
+  // broll_type: "rank" → Dan-Martell ranked list (numbered items stack up + persist)
+  if (section.broll_type === "rank") return "tpl_rank_list.html";
+
+  // broll_type: "tier" → bad/good/great 3-column tier comparison with brand logos
+  if (section.broll_type === "tier") return "tpl_tier_compare.html";
+
+  // broll_type: "question" → pinned IG-style question bubble (Q&A format open loop)
+  if (section.broll_type === "question") return "tpl_question_bubble.html";
+
+  // broll_type: "books" → 3D book covers sliding onto a shelf (book/product lists)
+  if (section.broll_type === "books") return "tpl_book_stack.html";
+
+  // broll_type: "levels" → staircase framework, levels build bottom-up, peak glows
+  if (section.broll_type === "levels") return "tpl_level_climb.html";
+
   // broll_type: "diagram" → knowledge graph for interconnected concepts, else flow diagram
   if (section.broll_type === "diagram") {
     const spoken = (section.spoken || "").toLowerCase();
@@ -136,8 +151,24 @@ function pickTemplate(section) {
   // Horizontal flowchart: pipeline steps or sequential tool chain
   const isPipelineFlow = /\b(pipeline|step[s]?|then|next|claude|deepseek|codex|flow|process|agent|workflow)\b/.test(spoken) && lines.length >= 2;
 
+  // Ranked list: "top N / best X / N habits / N books / ranked" language with 3+ items —
+  // Dan Martell's highest-median evergreen format (items stack + persist)
+  const cardCount = (section.card_lines && section.card_lines.length) || lines.length;
+  const isRankList = /\b(top \d|best \w+ (?:tools|apps|models)|rank|\d (?:habits|tools|moves|rules|steps to)|tier)\b/.test(spoken) && cardCount >= 3;
+
+  // Book list: books named with 3+ items → shelf of 3D covers
+  const isBookList = /\b(books?|read|reading)\b/.test(spoken) && cardCount >= 3;
+
+  // Level framework: "N levels of X" / stages / maturity ladders with 3+ items
+  const isLevelClimb = /\b(\d (?:levels|stages|phases)|level (?:one|two|three|1|2|3)|next level)\b/.test(spoken) && cardCount >= 3;
+
+  // Q&A: section spoken opens with a question aimed at the creator
+  const isQuestion = /^(how|what|why|when|should|can|do|does|is|are)\b.*\?/.test(spoken.trim());
+
   switch (section.id) {
     case "hook":
+      // Q&A reels: pin the question as an IG-comment bubble (open loop stays visible)
+      if (isQuestion) return "tpl_question_bubble.html";
       return "tpl_hook_slam.html";
 
     case "context":
@@ -154,6 +185,9 @@ function pickTemplate(section) {
       return "tpl_glitch_title.html";
 
     case "body_1":
+      if (isBookList)         return "tpl_book_stack.html";
+      if (isLevelClimb)       return "tpl_level_climb.html";
+      if (isRankList)         return "tpl_rank_list.html";
       if (isChartData)        return "tpl_data_chart.html";
       if (isNotificationStack) return "tpl_notification_stack.html";
       if (isVsSplit)          return "tpl_vs_split.html";
@@ -163,6 +197,9 @@ function pickTemplate(section) {
 
     case "body_2":
       // Always visually different from body_1
+      if (isBookList)         return "tpl_book_stack.html";
+      if (isLevelClimb)       return "tpl_level_climb.html";
+      if (isRankList)         return "tpl_rank_list.html";
       if (isChartData)        return "tpl_data_chart.html";
       if (isNotificationStack) return "tpl_notification_stack.html";
       if (isVsSplit)          return "tpl_vs_split.html";
@@ -221,6 +258,9 @@ async function renderSection(section, scriptData) {
     tool_mentioned: section.tool_mentioned || scriptData.tool_mentioned || "",
     grand_takeaway_line: scriptData.grand_takeaway_line || "",
     duration_sec: parseFloat(duration),
+    // Extra fields for template-specific data (e.g. tier_compare needs brand keys)
+    category: section.category || "",
+    brands: section.brands || [],
   };
 
   // Inject data into template HTML

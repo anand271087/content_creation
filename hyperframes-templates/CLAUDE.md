@@ -244,6 +244,11 @@ Templates in `hyperframes-templates/` — used by `generate_hyperframes_broll.mj
 | `tpl_ui_mockup.html` | `broll_type:"screen"` | Animated browser/app frame — replaces real screen recordings |
 | `tpl_diagram_flow.html` | `broll_type:"diagram"` | Node-edge architecture diagram, builds component by component |
 | `tpl_knowledge_graph.html` | `broll_type:"diagram"` + graph keyword | Central node + satellite nodes with animated connection lines |
+| `tpl_tier_compare.html` | `broll_type:"tier"` or `broll_template` | 3-column BAD/GOOD/GREAT brand comparison with logo badges (Dan Martell stack format) |
+| `tpl_rank_list.html` | `broll_type:"rank"` or auto ("top N / best X / N habits" + 3+ items) | Numbered rank list — items stack one-by-one and PERSIST, #1 gets gold glow (Dan Martell's highest-median evergreen format) |
+| `tpl_question_bubble.html` | `broll_type:"question"` or auto (hook opens with a question) | Pinned IG-comment question bubble + optional answer kicker — keeps the Q&A open loop visible (Dan Martell's most common format, 10/30 reels) |
+| `tpl_book_stack.html` | `broll_type:"books"` or auto (books + 3+ items) | CSS 3D book covers sliding onto a shelf with rank chips (his 442K "Best Books" format) |
+| `tpl_level_climb.html` | `broll_type:"levels"` or auto ("N levels/stages" + 3+ items) | Staircase framework — levels build bottom-up, widths climb, peak gets green glow ("4 Levels of Leadership" format) |
 
 ---
 
@@ -296,7 +301,12 @@ hyperframes-templates/
 ├── tpl_ig_cta.html              ← Instagram follow CTA card
 ├── tpl_ui_mockup.html           ← animated browser/app frame (broll_type:"screen")
 ├── tpl_diagram_flow.html        ← architecture diagram, builds node by node (broll_type:"diagram")
-└── tpl_knowledge_graph.html     ← knowledge graph with central + satellite nodes (broll_type:"diagram")
+├── tpl_knowledge_graph.html     ← knowledge graph with central + satellite nodes (broll_type:"diagram")
+├── tpl_tier_compare.html        ← BAD/GOOD/GREAT logo tier comparison (broll_type:"tier")
+├── tpl_rank_list.html           ← numbered rank list, items persist, #1 gold (broll_type:"rank")
+├── tpl_question_bubble.html     ← pinned IG-comment question + answer kicker (broll_type:"question")
+├── tpl_book_stack.html          ← 3D book covers slide onto shelf, rank chips (broll_type:"books")
+└── tpl_level_climb.html         ← staircase levels build bottom-up, peak glows (broll_type:"levels")
 ```
 
 ## broll_type Routing
@@ -308,6 +318,11 @@ Stage 1 script JSON controls which template family runs:
 | `"clip"` *(default)* | ID/content-based auto-select | Normal content sections |
 | `"screen"` | `tpl_ui_mockup.html` | Add when section shows a tool UI — generator detects tool name from `spoken`/`tool_mentioned` and injects color + workflow steps automatically |
 | `"diagram"` | `tpl_diagram_flow.html` or `tpl_knowledge_graph.html` | Add when section explains architecture/process — generator picks knowledge_graph if "graph/wiki/brain/connect" in spoken, else flow diagram. Items from `card_lines` become nodes. |
+| `"rank"` | `tpl_rank_list.html` | Ranked/countdown list — `card_lines` become numbered rows ("Label \| sub-note" splits into two lines), first item = #1 gold. Also auto-selected for body sections when spoken matches "top N / best X tools / N habits" and 3+ items exist. Set `category` for the header. |
+| `"tier"` | `tpl_tier_compare.html` | Bad/good/great 3-column brand comparison — set `category` + `brands: [bad_key, good_key, great_key]` (brand keys: chatgpt, gemini, claude, sora, synthesia, heygen, free_clone, descript, elevenlabs). |
+| `"question"` | `tpl_question_bubble.html` | Pinned Q&A bubble — `on_screen_text[0]` = the question, `[1]` = optional answer teaser, `category` = asker label. Auto-selected on hook when spoken opens with a question. |
+| `"books"` | `tpl_book_stack.html` | Book/product list — `card_lines` = "Title \| author" (max 4), covers auto-colored, slide in one-by-one and persist. Auto-selected when "book/read" + 3+ items. |
+| `"levels"` | `tpl_level_climb.html` | Framework ladder — `card_lines` = levels LOWEST→HIGHEST (max 5), builds bottom-up, last item = glowing peak. Auto-selected when "N levels/stages" + 3+ items. |
 
 **Example Stage 1 JSON fields:**
 ```json

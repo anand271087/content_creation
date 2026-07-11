@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=880, height=1100" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@500;600;700&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 880px; height: 1100px; overflow: hidden; background: #08080c; }
+      #root { position: relative; width: 880px; height: 1100px; overflow: hidden; }
+
+      #root::before {
+        content: "";
+        position: absolute; inset: 0;
+        background:
+          radial-gradient(circle at 75% 15%, rgba(41,121,255,0.10), transparent 50%),
+          radial-gradient(circle at 20% 90%, rgba(255,255,255,0.04), transparent 50%);
+      }
+
+      /* Pinned question bubble — Instagram-comment style */
+      #bubble {
+        position: absolute; left: 70px; right: 70px; top: 150px;
+        background: #ffffff;
+        border-radius: 28px;
+        padding: 34px 38px 30px;
+        box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+        opacity: 0;
+        transform-origin: 50% 0%;
+      }
+      /* speech tail */
+      #bubble::after {
+        content: "";
+        position: absolute; left: 88px; bottom: -20px;
+        border: 22px solid transparent;
+        border-top-color: #ffffff;
+        border-bottom: 0;
+      }
+
+      #bubble-meta {
+        display: flex; align-items: center; gap: 14px;
+        margin-bottom: 18px;
+      }
+      #bubble-avatar {
+        width: 52px; height: 52px; border-radius: 50%;
+        background: linear-gradient(140deg, #fd5949, #d6249f 55%, #285AEB);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 26px;
+      }
+      #bubble-user {
+        font-family: 'Inter', sans-serif;
+        font-size: 21px; font-weight: 700; color: #111827;
+      }
+      #bubble-tag {
+        font-family: 'Inter', sans-serif;
+        font-size: 15px; font-weight: 600; color: #9ca3af;
+        margin-left: auto;
+        background: #f3f4f6; border-radius: 999px; padding: 6px 14px;
+        letter-spacing: 2px; text-transform: uppercase;
+      }
+
+      #question {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 42px; font-weight: 800;
+        line-height: 1.22; letter-spacing: -0.5px;
+        color: #111827;
+      }
+
+      /* Big ANSWER kicker lower on the card zone */
+      #answer-kicker {
+        position: absolute; left: 0; width: 100%;
+        top: 640px;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 30px; font-weight: 900;
+        letter-spacing: 8px; text-transform: uppercase;
+        color: rgba(255,255,255,0.35);
+        opacity: 0;
+      }
+      #answer-line {
+        position: absolute; left: 0; width: 100%;
+        top: 700px;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 52px; font-weight: 900;
+        line-height: 1.15; letter-spacing: -0.5px;
+        color: #ffffff;
+        padding: 0 80px;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="880"
+      data-height="1100"
+    >
+      <div id="bubble">
+        <div id="bubble-meta">
+          <div id="bubble-avatar">💬</div>
+          <div id="bubble-user">viewer question</div>
+          <div id="bubble-tag">Q&amp;A</div>
+        </div>
+        <div id="question"></div>
+      </div>
+      <div id="answer-kicker">THE ANSWER</div>
+      <div id="answer-line"></div>
+    </div>
+
+    <script>
+      window.__SECTION_DATA__ = __SECTION_DATA_PLACEHOLDER__;
+
+      const d = window.__SECTION_DATA__;
+      const dur = d.duration_sec || 8;
+
+      // Data shape:
+      //   on_screen_text[0] = the pinned question (full sentence — this is the open loop)
+      //   on_screen_text[1] = optional answer teaser line shown lower
+      //   d.category (optional) overrides the "viewer question" username line
+      const lines = d.on_screen_text || [];
+      document.getElementById("question").textContent = lines[0] || d.spoken || "The question";
+      const answer = lines[1] || "";
+      document.getElementById("answer-line").textContent = answer;
+      if (d.category) document.getElementById("bubble-user").textContent = d.category;
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Bubble drops in with a spring, hangs (pinned), then answer kicker fades up.
+      tl.fromTo("#bubble",
+          { y: -60, opacity: 0, scale: 0.92 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.55, ease: "back.out(1.6)" }, 0.05)
+        // subtle float so the pinned bubble feels alive (finite repeats — the
+        // renderer replays the timeline deterministically; repeat:-1 breaks it)
+        .to("#bubble", { y: 8, duration: 1.6, ease: "sine.inOut", yoyo: true, repeat: 5 }, 0.7);
+
+      if (answer) {
+        tl.to("#answer-kicker", { opacity: 1, duration: 0.3 }, 1.0)
+          .fromTo("#answer-line",
+            { y: 22, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 1.15);
+      }
+
+      tl.to({}, { duration: 0.001 }, dur - 0.001);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

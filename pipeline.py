@@ -206,6 +206,11 @@ def _build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Skip Stage 8 — skip social media copy generation",
     )
+    parser.add_argument(
+        "--skip-analysis",
+        action="store_true",
+        help="Skip Stage 6 (viral DSSCL video analysis) — needed for Authority/Conversion content",
+    )
 
     return parser
 
@@ -758,7 +763,15 @@ def main() -> int:
     pipeline_iteration = state.get("pipeline_iteration", 1)
     video_feedback = None
 
-    while pipeline_iteration <= MAX_PIPELINE_ITERATIONS:
+    if args.skip_analysis:
+        print()
+        print("── Stage 6: skipped (--skip-analysis) ──")
+        logger.info("Stage 6 skipped via --skip-analysis flag.")
+        state["stage6_passed"] = True
+        state["video_analysis"] = None
+        save_state(state)
+
+    while not args.skip_analysis and pipeline_iteration <= MAX_PIPELINE_ITERATIONS:
         print()
         print(f"── Stage 6: Video Analysis (pipeline iteration {pipeline_iteration}/{MAX_PIPELINE_ITERATIONS}) ──")
 

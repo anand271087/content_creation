@@ -5,9 +5,9 @@ description: >-
   YouTube Shorts, TikTok) for the ZeroHands / @automatewithanand brand, or when
   turning a topic brief into a script. Encodes Harsha Tambraeni's Ultimate Script
   Writing method: the 3-act structure, the 5 hook formulas, inverted-pyramid value
-  delivery, micro-hooks every 8-10 seconds, and CTAs scaled by content type
-  (Virality / Authority / Conversion). Trigger on any request to write, draft,
-  rewrite, or score a reel/short script.
+  delivery, micro-hooks every 8-10 seconds, extreme density on viral scripts, and
+  CTAs scaled by content type (Virality / Authority / Conversion). Trigger on any
+  request to write, draft, rewrite, or score a reel/short script.
 ---
 
 # Viral Script Writer
@@ -30,7 +30,7 @@ missing, infer them (see Step 1) and state the assumption in the output.
 - `hook`: the scripted hook (also note the visual + auditory hook cue)
 - `body`: the value section, written for spoken delivery
 - `cta`: the call to action
-- `runtime_estimate_sec`: target 15-45s for reels
+- `runtime_estimate_sec`: Virality ≤15s (hard cap); Authority/Conversion 20-45s
 - `micro_hooks_used`: list of the re-engagement lines placed in the body
 
 Write `body` and `hook` as **spoken** lines (how Anand actually talks), not prose.
@@ -48,6 +48,9 @@ Write `body` and `hook` as **spoken** lines (how Anand actually talks), not pros
 7. Obey the condensation rules: One-Sentence Rule, 10-Second Rule, Clarity Test.
 8. Never open with "Hey guys", "In this video", "What's up" — banned.
 9. No music-dependent jokes; the script must work on mute (captions carry it).
+10. **Density.** Every line must earn its place — maximum value or intrigue per
+    second, zero dead air. On **Virality** scripts this is the top priority and has a
+    hard spec (see "Viral density spec"). Loose, wordy scripts fail.
 
 ## Process
 
@@ -83,9 +86,39 @@ Test the hook against: Scroll-Stop, Clarity, Curiosity, Relevance, Uniqueness.
   [resource]" — this feeds the ManyChat → booking funnel, so always use a keyword on
   Conversion scripts. Integrate it natively (solve a pain, offer the resource as help).
 
-### Step 6 — Self-check
+### Step 6 — Density pass (REQUIRED, do not skip)
+After drafting, rewrite the whole script tighter. For **every** script:
+- Delete any word or sentence the script survives without (setup lines,
+  throat-clearing like "so here's the thing" / "let me explain", filler adjectives).
+- Compress each sentence: "The reason it works isn't the tool, it's three things"
+  → "It's not the tool. It's three things."
+- Fire lists instead of unfolding them: "bad footage, cheap voice, lazy script — that's why."
+- Make every line do a *different* job (hook / reveal / proof / dream / CTA). No two
+  lines should do the same job.
+- Dense ≠ rushed. Remove waste, don't cram syllables. Every surviving line should
+  still breathe. Aim: "every line is a headline."
+
+**If content_type = Virality, additionally apply the Viral density spec below.**
+
+#### Viral density spec (Virality only)
+Model every viral script on the gold-standard example in
+`references/viral-density.md`. Rules:
+- **Max 15 seconds** (~35-45 words total). Hard cap.
+- **One sentence per beat.** Structure = Hook → Reveal/Payoff → Proof+Dream → CTA.
+  Four beats, roughly four sentences.
+- **Front-load the two most gripping beats** (bold claim + the reveal/intrigue) in
+  the first two lines. Do not ramp up to the reveal — open near it.
+- **Fuse proof and dream into one line** (the mechanism AND why anyone wants it):
+  e.g. "I recorded once, and now this runs every day while I'm with my family."
+- **CTA carries a promise**, not just an ask: "Follow and I'll show you exactly how."
+- **Strip anything that teaches.** A how-to breakdown (e.g. "3 reasons it looks fake")
+  is Authority content, not Virality. A viral script's only jobs are stop-the-scroll
+  and earn the follow — pure intrigue, no lesson.
+
+### Step 7 — Self-check
 Run the script against the Non-negotiable rules and the mistake list in
-`references/templates.md` (Common Mistakes section). Fix before returning.
+`references/templates.md` (Common Mistakes section). For Virality, also confirm the
+Viral density spec (≤15s, one sentence per beat, no teaching). Fix before returning.
 
 ## Brand context (bake into voice)
 

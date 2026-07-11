@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=880, height=1100" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@600;700&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 880px; height: 1100px; overflow: hidden; background: #08080c; }
+      #root { position: relative; width: 880px; height: 1100px; overflow: hidden; }
+
+      #root::before {
+        content: "";
+        position: absolute; inset: 0;
+        background:
+          radial-gradient(circle at 80% 10%, rgba(255,215,0,0.07), transparent 45%),
+          radial-gradient(circle at 15% 85%, rgba(41,121,255,0.08), transparent 50%);
+      }
+
+      #category {
+        position: absolute; left: 0; top: 46px; width: 100%;
+        text-align: center;
+        font-family: 'Inter', sans-serif;
+        font-size: 20px; font-weight: 700;
+        letter-spacing: 6px; text-transform: uppercase;
+        color: rgba(255,255,255,0.5);
+        opacity: 0;
+      }
+      #category-main {
+        position: absolute; left: 0; top: 78px; width: 100%;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 46px; font-weight: 900;
+        letter-spacing: -0.5px; text-transform: uppercase;
+        color: #ffffff;
+        opacity: 0;
+      }
+
+      #list {
+        position: absolute; left: 60px; right: 60px; top: 210px;
+        display: flex; flex-direction: column; gap: 26px;
+      }
+      .row {
+        display: flex; align-items: center; gap: 26px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+        border: 2px solid rgba(255,255,255,0.14);
+        border-radius: 22px;
+        padding: 22px 28px;
+        opacity: 0;
+      }
+      .row.top {
+        background: linear-gradient(90deg, rgba(255,196,0,0.16) 0%, rgba(255,196,0,0.04) 100%);
+        border-color: rgba(255,196,0,0.65);
+      }
+
+      .rank-badge {
+        flex: 0 0 76px;
+        width: 76px; height: 76px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 34px; font-weight: 900;
+        background: rgba(255,255,255,0.10);
+        color: #ffffff;
+        border: 2px solid rgba(255,255,255,0.25);
+      }
+      .row.top .rank-badge {
+        background: linear-gradient(160deg, #ffd700, #f59f00);
+        color: #111;
+        border-color: rgba(255,215,0,0.9);
+        box-shadow: 0 0 30px rgba(255,196,0,0.4);
+      }
+
+      .item-label {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 34px; font-weight: 800;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -0.3px;
+      }
+      .item-sub {
+        font-family: 'Inter', sans-serif;
+        font-size: 19px; font-weight: 600;
+        color: rgba(255,255,255,0.5);
+        margin-top: 6px;
+      }
+      .row.top .item-label { color: #ffe27a; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="880"
+      data-height="1100"
+    >
+      <div id="category">THE LIST</div>
+      <div id="category-main"></div>
+      <div id="list"></div>
+    </div>
+
+    <script>
+      window.__SECTION_DATA__ = __SECTION_DATA_PLACEHOLDER__;
+
+      const d = window.__SECTION_DATA__;
+      const dur = d.duration_sec || 8;
+
+      // Data shape:
+      //   card_lines (preferred) or on_screen_text = list items, in rank order.
+      //   First item = #1 (gold highlight). "Label | sub-note" splits into two lines.
+      //   d.category (optional) = header line, else d.label.
+      const rawItems = (d.card_lines && d.card_lines.length ? d.card_lines : d.on_screen_text) || [];
+      const items = rawItems.slice(0, 5);
+      const header = (d.category || "").toUpperCase() || "RANKED";
+
+      document.getElementById("category-main").textContent = header;
+
+      const list = document.getElementById("list");
+      items.forEach((raw, i) => {
+        const [label, sub] = String(raw).split("|").map(s => s.trim());
+        const row = document.createElement("div");
+        row.className = "row" + (i === 0 ? " top" : "");
+        row.id = "row-" + i;
+        row.innerHTML =
+          '<div class="rank-badge">' + (i + 1) + '</div>' +
+          '<div><div class="item-label"></div>' + (sub ? '<div class="item-sub"></div>' : '') + '</div>';
+        row.querySelector(".item-label").textContent = label || "";
+        if (sub) row.querySelector(".item-sub").textContent = sub;
+        list.appendChild(row);
+      });
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Header lands fast, then items stack up one at a time and PERSIST.
+      // Item cadence spreads across ~70% of the clip so the last item still
+      // gets hold time. Dan-Martell mechanic: each item pop syncs to speech.
+      const n = Math.max(items.length, 1);
+      const revealSpan = Math.max(1.2, dur * 0.7 - 0.5);
+      const step = revealSpan / n;
+
+      tl.to("#category", { opacity: 1, duration: 0.2, ease: "power2.out" }, 0)
+        .fromTo("#category-main",
+          { y: 14, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.3, ease: "back.out(1.6)" }, 0.05);
+
+      items.forEach((_, i) => {
+        const at = 0.45 + i * step;
+        const isTop = i === 0;
+        tl.fromTo("#row-" + i,
+          { x: -46, opacity: 0 },
+          { x: 0, opacity: 1, duration: isTop ? 0.5 : 0.38,
+            ease: isTop ? "back.out(1.8)" : "power3.out" }, at);
+        if (isTop) {
+          // #1 gets a subtle scale pulse after landing
+          tl.fromTo("#row-0",
+            { scale: 1 }, { scale: 1.03, duration: 0.18, ease: "power2.out", yoyo: true, repeat: 1 },
+            at + 0.5);
+        }
+      });
+
+      tl.to({}, { duration: 0.001 }, dur - 0.001);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

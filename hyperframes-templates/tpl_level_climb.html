@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=880, height=1100" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@600;700&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 880px; height: 1100px; overflow: hidden; background: #08080c; }
+      #root { position: relative; width: 880px; height: 1100px; overflow: hidden; }
+
+      #root::before {
+        content: "";
+        position: absolute; inset: 0;
+        background:
+          radial-gradient(circle at 50% 10%, rgba(34,197,94,0.07), transparent 50%),
+          radial-gradient(circle at 50% 95%, rgba(239,68,68,0.06), transparent 45%);
+      }
+
+      #category {
+        position: absolute; left: 0; top: 46px; width: 100%;
+        text-align: center;
+        font-family: 'Inter', sans-serif;
+        font-size: 20px; font-weight: 700;
+        letter-spacing: 6px; text-transform: uppercase;
+        color: rgba(255,255,255,0.5);
+        opacity: 0;
+      }
+      #category-main {
+        position: absolute; left: 0; top: 78px; width: 100%;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 44px; font-weight: 900;
+        letter-spacing: -0.5px; text-transform: uppercase;
+        color: #ffffff;
+        opacity: 0;
+      }
+
+      /* Levels stack bottom-up like a staircase — each level wider + brighter */
+      #levels {
+        position: absolute; left: 70px; right: 70px; bottom: 120px;
+        display: flex; flex-direction: column-reverse; gap: 22px;
+        align-items: center;
+      }
+      .level {
+        display: flex; align-items: center; gap: 22px;
+        border-radius: 18px;
+        padding: 20px 30px;
+        opacity: 0;
+        border: 2px solid rgba(255,255,255,0.16);
+        background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      }
+      /* widths climb: bottom = narrowest */
+      .level[data-i="0"] { width: 62%; }
+      .level[data-i="1"] { width: 74%; }
+      .level[data-i="2"] { width: 86%; }
+      .level[data-i="3"] { width: 98%; }
+      .level[data-i="4"] { width: 100%; }
+
+      .level.peak {
+        background: linear-gradient(90deg, rgba(34,197,94,0.20), rgba(34,197,94,0.05));
+        border-color: rgba(34,197,94,0.7);
+        box-shadow: 0 0 36px rgba(34,197,94,0.25);
+      }
+
+      .lvl-badge {
+        flex: 0 0 62px;
+        width: 62px; height: 62px; border-radius: 16px;
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 28px; font-weight: 900;
+        background: rgba(255,255,255,0.10);
+        color: #fff;
+        border: 2px solid rgba(255,255,255,0.25);
+      }
+      .level.peak .lvl-badge {
+        background: linear-gradient(160deg, #22c55e, #15803d);
+        border-color: rgba(34,197,94,0.9);
+      }
+
+      .lvl-label {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 30px; font-weight: 800;
+        color: #ffffff; line-height: 1.15;
+        letter-spacing: -0.3px;
+      }
+      .lvl-sub {
+        font-family: 'Inter', sans-serif;
+        font-size: 17px; font-weight: 600;
+        color: rgba(255,255,255,0.5);
+        margin-top: 4px;
+      }
+      .level.peak .lvl-label { color: #b5f5cd; }
+
+      /* Climb arrow */
+      #climb-arrow {
+        position: absolute; right: 26px; bottom: 140px;
+        font-size: 44px;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="880"
+      data-height="1100"
+    >
+      <div id="category">THE LEVELS</div>
+      <div id="category-main"></div>
+      <div id="levels"></div>
+      <div id="climb-arrow">⬆️</div>
+    </div>
+
+    <script>
+      window.__SECTION_DATA__ = __SECTION_DATA_PLACEHOLDER__;
+
+      const d = window.__SECTION_DATA__;
+      const dur = d.duration_sec || 8;
+
+      // Data shape:
+      //   card_lines (preferred) or on_screen_text = levels from LOWEST to HIGHEST:
+      //     "Level name | sub-note"
+      //   Last item = the peak (green glow). Levels build bottom-up like a staircase.
+      //   d.category = header (e.g. "4 LEVELS OF LEADERSHIP")
+      const rawItems = (d.card_lines && d.card_lines.length ? d.card_lines : d.on_screen_text) || [];
+      const items = rawItems.slice(0, 5);
+      document.getElementById("category-main").textContent = (d.category || "THE LEVELS").toUpperCase();
+
+      const wrap = document.getElementById("levels");
+      items.forEach((raw, i) => {
+        const [label, sub] = String(raw).split("|").map(s => s.trim());
+        const el = document.createElement("div");
+        el.className = "level" + (i === items.length - 1 ? " peak" : "");
+        el.id = "lvl-" + i;
+        el.setAttribute("data-i", i);
+        el.innerHTML =
+          '<div class="lvl-badge">' + (i + 1) + '</div>' +
+          '<div><div class="lvl-label"></div>' + (sub ? '<div class="lvl-sub"></div>' : '') + '</div>';
+        el.querySelector(".lvl-label").textContent = label || "";
+        if (sub) el.querySelector(".lvl-sub").textContent = sub;
+        wrap.appendChild(el);
+      });
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      const n = Math.max(items.length, 1);
+      const revealSpan = Math.max(1.2, dur * 0.7 - 0.5);
+      const step = revealSpan / n;
+
+      tl.to("#category", { opacity: 1, duration: 0.2, ease: "power2.out" }, 0)
+        .fromTo("#category-main",
+          { y: 14, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.3, ease: "back.out(1.6)" }, 0.05);
+
+      // Levels climb bottom-up; the peak lands last with a spring + glow
+      items.forEach((_, i) => {
+        const at = 0.45 + i * step;
+        const isPeak = i === items.length - 1;
+        tl.fromTo("#lvl-" + i,
+          { y: 34, opacity: 0 },
+          { y: 0, opacity: 1, duration: isPeak ? 0.55 : 0.38,
+            ease: isPeak ? "back.out(1.8)" : "power3.out" }, at);
+        if (isPeak) {
+          tl.fromTo("#lvl-" + i, { scale: 1 },
+            { scale: 1.04, duration: 0.18, ease: "power2.out", yoyo: true, repeat: 1 }, at + 0.55)
+            .fromTo("#climb-arrow", { opacity: 0, y: 16 },
+            { opacity: 0.85, y: 0, duration: 0.4, ease: "back.out(2)" }, at + 0.3);
+        }
+      });
+
+      tl.to({}, { duration: 0.001 }, dur - 0.001);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

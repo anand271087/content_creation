@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=880, height=1100" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@600;700&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 880px; height: 1100px; overflow: hidden; background: #0a0a10; }
+      #root { position: relative; width: 880px; height: 1100px; overflow: hidden; }
+
+      #root::before {
+        content: "";
+        position: absolute; inset: 0;
+        background:
+          radial-gradient(circle at 50% 0%, rgba(255,196,0,0.06), transparent 55%),
+          radial-gradient(circle at 50% 100%, rgba(120,80,20,0.10), transparent 50%);
+      }
+
+      #category {
+        position: absolute; left: 0; top: 46px; width: 100%;
+        text-align: center;
+        font-family: 'Inter', sans-serif;
+        font-size: 20px; font-weight: 700;
+        letter-spacing: 6px; text-transform: uppercase;
+        color: rgba(255,255,255,0.5);
+        opacity: 0;
+      }
+      #category-main {
+        position: absolute; left: 0; top: 78px; width: 100%;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 44px; font-weight: 900;
+        letter-spacing: -0.5px; text-transform: uppercase;
+        color: #ffffff;
+        opacity: 0;
+      }
+
+      #shelf-zone {
+        position: absolute; left: 60px; right: 60px; top: 190px; bottom: 150px;
+        display: flex; flex-direction: column; gap: 30px;
+        justify-content: center;
+      }
+
+      .book-row {
+        display: flex; align-items: center; gap: 30px;
+        opacity: 0;
+      }
+
+      /* CSS 3D-ish book cover */
+      .book {
+        flex: 0 0 150px;
+        width: 150px; height: 210px;
+        border-radius: 6px 14px 14px 6px;
+        position: relative;
+        box-shadow: 10px 12px 30px rgba(0,0,0,0.55);
+        display: flex; align-items: center; justify-content: center;
+        padding: 16px 14px 16px 22px;
+        transform: perspective(600px) rotateY(-14deg);
+      }
+      /* spine */
+      .book::before {
+        content: "";
+        position: absolute; left: 0; top: 0; bottom: 0;
+        width: 12px;
+        background: rgba(0,0,0,0.30);
+        border-radius: 6px 0 0 6px;
+      }
+      /* page edge highlight */
+      .book::after {
+        content: "";
+        position: absolute; right: 3px; top: 4px; bottom: 4px;
+        width: 3px;
+        background: rgba(255,255,255,0.35);
+        border-radius: 2px;
+      }
+      .book-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 21px; font-weight: 900;
+        line-height: 1.15; text-align: center;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: -0.2px;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      }
+
+      .book-info { flex: 1; }
+      .rank-chip {
+        display: inline-block;
+        font-family: 'Inter', sans-serif;
+        font-size: 15px; font-weight: 700;
+        letter-spacing: 3px; text-transform: uppercase;
+        color: #ffd700;
+        background: rgba(255,215,0,0.12);
+        border: 1px solid rgba(255,215,0,0.4);
+        border-radius: 999px;
+        padding: 5px 14px;
+        margin-bottom: 12px;
+      }
+      .book-label {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 34px; font-weight: 800;
+        color: #ffffff; line-height: 1.15;
+        letter-spacing: -0.3px;
+      }
+      .book-sub {
+        font-family: 'Inter', sans-serif;
+        font-size: 19px; font-weight: 600;
+        color: rgba(255,255,255,0.5);
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="880"
+      data-height="1100"
+    >
+      <div id="category">READ THESE</div>
+      <div id="category-main"></div>
+      <div id="shelf-zone"></div>
+    </div>
+
+    <script>
+      window.__SECTION_DATA__ = __SECTION_DATA_PLACEHOLDER__;
+
+      const d = window.__SECTION_DATA__;
+      const dur = d.duration_sec || 8;
+
+      // Data shape:
+      //   card_lines (preferred) or on_screen_text = books/items in rank order:
+      //     "Title | author-or-note"  → cover shows Title, row shows Title + note
+      //   d.category = header (e.g. "3 BOOKS THE TOP 1% READ")
+      const COVER_COLORS = [
+        "linear-gradient(150deg, #b45309, #7c2d12)",
+        "linear-gradient(150deg, #1d4ed8, #172554)",
+        "linear-gradient(150deg, #15803d, #052e16)",
+        "linear-gradient(150deg, #7e22ce, #3b0764)",
+        "linear-gradient(150deg, #be123c, #4c0519)",
+      ];
+
+      const rawItems = (d.card_lines && d.card_lines.length ? d.card_lines : d.on_screen_text) || [];
+      const items = rawItems.slice(0, 4);
+      document.getElementById("category-main").textContent = (d.category || "THE LIST").toUpperCase();
+
+      const shelf = document.getElementById("shelf-zone");
+      items.forEach((raw, i) => {
+        const [title, sub] = String(raw).split("|").map(s => s.trim());
+        const row = document.createElement("div");
+        row.className = "book-row";
+        row.id = "book-" + i;
+        row.innerHTML =
+          '<div class="book" style="background:' + COVER_COLORS[i % COVER_COLORS.length] + '">' +
+            '<div class="book-title"></div>' +
+          '</div>' +
+          '<div class="book-info">' +
+            '<div class="rank-chip">#' + (i + 1) + '</div>' +
+            '<div class="book-label"></div>' +
+            (sub ? '<div class="book-sub"></div>' : '') +
+          '</div>';
+        row.querySelector(".book-title").textContent = title || "";
+        row.querySelector(".book-label").textContent = title || "";
+        if (sub) row.querySelector(".book-sub").textContent = sub;
+        shelf.appendChild(row);
+      });
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      const n = Math.max(items.length, 1);
+      const revealSpan = Math.max(1.2, dur * 0.7 - 0.5);
+      const step = revealSpan / n;
+
+      tl.to("#category", { opacity: 1, duration: 0.2, ease: "power2.out" }, 0)
+        .fromTo("#category-main",
+          { y: 14, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.3, ease: "back.out(1.6)" }, 0.05);
+
+      items.forEach((_, i) => {
+        const at = 0.45 + i * step;
+        // Book slides in from the right with a slight settle — like being placed on a shelf
+        tl.fromTo("#book-" + i,
+          { x: 90, opacity: 0, rotate: 2 },
+          { x: 0, opacity: 1, rotate: 0, duration: 0.5, ease: "back.out(1.4)" }, at);
+      });
+
+      tl.to({}, { duration: 0.001 }, dur - 0.001);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

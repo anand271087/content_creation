@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=880, height=1100" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@600&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 880px; height: 1100px; overflow: hidden; background: #08080c; }
+      #root { position: relative; width: 880px; height: 1100px; overflow: hidden; }
+
+      #root::before {
+        content: "";
+        position: absolute; inset: 0;
+        background:
+          radial-gradient(circle at 20% 20%, rgba(239,68,68,0.08), transparent 45%),
+          radial-gradient(circle at 80% 20%, rgba(250,204,21,0.06), transparent 45%),
+          radial-gradient(circle at 50% 80%, rgba(34,197,94,0.10), transparent 55%);
+      }
+
+      #category {
+        position: absolute; left: 0; top: 48px; width: 100%;
+        text-align: center;
+        font-family: 'Inter', sans-serif;
+        font-size: 22px; font-weight: 600;
+        letter-spacing: 6px; text-transform: uppercase;
+        color: rgba(255,255,255,0.55);
+        opacity: 0;
+      }
+      #category-main {
+        position: absolute; left: 0; top: 82px; width: 100%;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 52px; font-weight: 900;
+        letter-spacing: -1px; text-transform: uppercase;
+        color: #ffffff;
+        opacity: 0;
+      }
+
+      .col {
+        position: absolute;
+        top: 200px;
+        width: 260px; height: 820px;
+        border-radius: 24px;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: flex-start;
+        padding: 30px 20px 24px;
+        opacity: 0;
+      }
+      #col-bad   { left: 30px;  background: linear-gradient(180deg, rgba(239,68,68,0.14) 0%, rgba(239,68,68,0.05) 100%); border: 2px solid rgba(239,68,68,0.45); }
+      #col-good  { left: 310px; background: linear-gradient(180deg, rgba(250,204,21,0.12) 0%, rgba(250,204,21,0.04) 100%); border: 2px solid rgba(250,204,21,0.45); }
+      #col-great { left: 590px; background: linear-gradient(180deg, rgba(34,197,94,0.16) 0%, rgba(34,197,94,0.05) 100%); border: 2px solid rgba(34,197,94,0.55); }
+
+      .tier-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 14px; font-weight: 600;
+        letter-spacing: 4px; text-transform: uppercase;
+        margin-bottom: 18px;
+        opacity: 0;
+      }
+      #col-bad   .tier-label { color: rgba(239,68,68,0.9); }
+      #col-good  .tier-label { color: rgba(250,204,21,0.9); }
+      #col-great .tier-label { color: rgba(34,197,94,1.0); }
+
+      .logo-badge {
+        width: 150px; height: 150px; border-radius: 24px;
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 22px;
+        opacity: 0;
+        background: rgba(255,255,255,0.98);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      }
+      #col-bad   .logo-badge { border: 2px solid rgba(239,68,68,0.55); }
+      #col-good  .logo-badge { border: 2px solid rgba(250,204,21,0.55); }
+      #col-great .logo-badge { border: 2px solid rgba(34,197,94,0.7); box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 0 40px rgba(34,197,94,0.35); }
+      .logo-badge svg { width: 96px; height: 96px; }
+
+      .brand-name {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 30px; font-weight: 900;
+        text-align: center;
+        line-height: 1.1; letter-spacing: -0.3px;
+        opacity: 0;
+      }
+      #col-bad   .brand-name { color: rgba(255,140,140,0.9); text-decoration: line-through; text-decoration-thickness: 3px; }
+      #col-good  .brand-name { color: rgba(255,225,120,1.0); }
+      #col-great .brand-name { color: #ffffff; text-shadow: 0 0 18px rgba(34,197,94,0.55); }
+
+      .tier-verdict {
+        margin-top: 22px;
+        font-family: 'Inter', sans-serif;
+        font-size: 12px; font-weight: 600;
+        letter-spacing: 3px; text-transform: uppercase;
+        padding: 7px 14px;
+        border-radius: 999px;
+        opacity: 0;
+      }
+      #col-bad   .tier-verdict { color: rgba(239,68,68,1); background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.35); }
+      #col-good  .tier-verdict { color: rgba(250,204,21,1); background: rgba(250,204,21,0.15); border: 1px solid rgba(250,204,21,0.35); }
+      #col-great .tier-verdict { color: rgba(34,197,94,1);  background: rgba(34,197,94,0.18);  border: 1px solid rgba(34,197,94,0.45); }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="880"
+      data-height="1100"
+    >
+      <div id="category">FOR</div>
+      <div id="category-main"></div>
+
+      <div class="col" id="col-bad">
+        <div class="tier-label">Bad</div>
+        <div class="logo-badge" id="logo-bad"></div>
+        <div class="brand-name" id="brand-bad"></div>
+        <div class="tier-verdict">Avoid</div>
+      </div>
+
+      <div class="col" id="col-good">
+        <div class="tier-label">Good</div>
+        <div class="logo-badge" id="logo-good"></div>
+        <div class="brand-name" id="brand-good"></div>
+        <div class="tier-verdict">Okay</div>
+      </div>
+
+      <div class="col" id="col-great">
+        <div class="tier-label">Great</div>
+        <div class="logo-badge" id="logo-great"></div>
+        <div class="brand-name" id="brand-great"></div>
+        <div class="tier-verdict">Winner</div>
+      </div>
+    </div>
+
+    <script>
+      window.__SECTION_DATA__ = __SECTION_DATA_PLACEHOLDER__;
+
+      // ── Brand SVG marks — recognizable glyphs in each brand's signature color ─
+      // Deliberately stylized (not exact logo copies) — safe for editorial use,
+      // renders deterministically in Chromium (no external deps).
+      const BRAND_LOGOS = {
+        chatgpt: {
+          name: "ChatGPT",
+          svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#10A37F" d="M50 8c-9 0-17 5-21 13-9 0-16 7-16 16 0 4 1 8 4 11-3 3-4 7-4 11 0 9 7 16 16 16 4 8 12 13 21 13s17-5 21-13c9 0 16-7 16-16 0-4-1-8-4-11 3-3 4-7 4-11 0-9-7-16-16-16-4-8-12-13-21-13zm-2 20l14 8v16l-14 8-14-8V36l14-8zm2 4-9 5v11l9 5 9-5V37l-9-5z"/>
+          </svg>`,
+        },
+        gemini: {
+          name: "Gemini",
+          svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g-gem" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#4285F4"/>
+                <stop offset=".45" stop-color="#9B72CB"/>
+                <stop offset=".85" stop-color="#D96570"/>
+                <stop offset="1" stop-color="#F19E39"/>
+              </linearGradient>
+            </defs>
+            <path fill="url(#g-gem)" d="M50 6c1 20 18 38 44 44-26 6-43 24-44 44-1-20-18-38-44-44 26-6 43-24 44-44z"/>
+          </svg>`,
+        },
+        claude: {
+          name: "Claude",
+          svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <g fill="#D97757">
+              <path d="M50 6l6 20 20 6-20 6-6 20-6-20-20-6 20-6z"/>
+              <circle cx="50" cy="50" r="5"/>
+            </g>
+          </svg>`,
+        },
+        sora: {
+          name: "Sora",
+          svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="g-sora" cx="0.5" cy="0.5" r="0.5">
+                <stop offset="0" stop-color="#000"/>
+                <stop offset="1" stop-color="#333"/>
+              </radialGradient>
+            </defs>
+            <circle cx="50" cy="50" r="42" fill="url(#g-sora)"/>
+            <circle cx="50" cy="50" r="18" fill="none" stroke="#fff" stroke-width="4"/>
+            <circle cx="50" cy="50" r="4" fill="#fff"/>
+          </svg>`,
+        },
+        synthesia: {
+          name: "Synthesia",
+          svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g-syn" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#5B21B6"/>
+                <stop offset="1" stop-color="#8B5CF6"/>
+              </linearGradient>
+            </defs>
+            <path fill="url(#g-syn)" d="M50 10L86 30v40L50 90 14 70V30z"/>
+            <text x="50" y="60" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-size="34" fill="#fff">S</text>
+          </svg>`,
+        },
+        heygen: {
+          name: "HeyGen",
+          svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="80" height="80" rx="18" fill="#2563EB"/>
+            <text x="50" y="66" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-size="52" fill="#fff">H</text>
+            <circle cx="76" cy="76" r="5" fill="#38BDF8"/>
+          </svg>`,
+        },
+        free_clone: {
+          name: "Free Clone",
+          svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <g fill="#9CA3AF">
+              <rect x="40" y="18" width="20" height="42" rx="10"/>
+              <path d="M28 50c0 12 10 22 22 22s22-10 22-22h-6c0 9-7 16-16 16s-16-7-16-16z"/>
+              <rect x="47" y="72" width="6" height="10"/>
+              <rect x="34" y="82" width="32" height="4" rx="2"/>
+            </g>
+          </svg>`,
+        },
+        descript: {
+          name: "Descript",
+          svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="80" height="80" rx="18" fill="#8B5CF6"/>
+            <g fill="#fff">
+              <rect x="26" y="46" width="6" height="8" rx="2"/>
+              <rect x="36" y="38" width="6" height="24" rx="2"/>
+              <rect x="46" y="30" width="6" height="40" rx="2"/>
+              <rect x="56" y="38" width="6" height="24" rx="2"/>
+              <rect x="66" y="46" width="6" height="8" rx="2"/>
+            </g>
+          </svg>`,
+        },
+        elevenlabs: {
+          name: "ElevenLabs",
+          svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="80" height="80" rx="18" fill="#111827"/>
+            <g fill="#fff">
+              <rect x="30" y="30" width="14" height="40" rx="2"/>
+              <rect x="56" y="30" width="14" height="40" rx="2"/>
+            </g>
+          </svg>`,
+        },
+      };
+
+      function resolveBrand(key) {
+        if (!key) return null;
+        const k = String(key).toLowerCase().replace(/[\s-]/g, "_");
+        return BRAND_LOGOS[k] || null;
+      }
+
+      function paint(colId, brandId, textId, key, fallback) {
+        const brand = resolveBrand(key);
+        if (brand) {
+          document.getElementById(brandId).innerHTML = brand.svg;
+          document.getElementById(textId).textContent = brand.name;
+        } else {
+          document.getElementById(brandId).innerHTML = "";
+          document.getElementById(textId).textContent = fallback || "";
+        }
+      }
+
+      const d = window.__SECTION_DATA__;
+      const dur = d.duration_sec || 8;
+
+      // Preferred data shape: { category: "SCRIPTING", brands: ["chatgpt","gemini","claude"] }
+      // Backward-compat: on_screen_text = [category, bad_key, good_key, great_key]
+      const category = (d.category || (d.on_screen_text || [])[0] || "STACK").toUpperCase();
+      const brands = d.brands || (d.on_screen_text || []).slice(1, 4);
+
+      document.getElementById("category-main").textContent = category;
+      paint("col-bad",   "logo-bad",   "brand-bad",   brands[0], brands[0]);
+      paint("col-good",  "logo-good",  "brand-good",  brands[1], brands[1]);
+      paint("col-great", "logo-great", "brand-great", brands[2], brands[2]);
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Timing tuned so ALL THREE columns are fully revealed by ~1.2s.
+      // Body sections are short (~2-3s at natural speed, ~1.5-2s at 1.5625× fast).
+      tl.to("#category",      { opacity: 1, duration: 0.2, ease: "power2.out" }, 0)
+        .fromTo("#category-main",
+          { y: 14, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.3, ease: "back.out(1.6)" },
+          0.05)
+
+        .fromTo("#col-bad",   { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.28, ease: "power3.out" }, 0.20)
+        .fromTo("#col-good",  { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.28, ease: "power3.out" }, 0.35)
+        .fromTo("#col-great", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "back.out(1.5)" }, 0.55)
+
+        .to("#col-bad .tier-label",   { opacity: 1, duration: 0.18 }, 0.30)
+        .to("#col-good .tier-label",  { opacity: 1, duration: 0.18 }, 0.45)
+        .to("#col-great .tier-label", { opacity: 1, duration: 0.18 }, 0.70)
+
+        .fromTo("#logo-bad",   { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.28, ease: "back.out(2)" }, 0.35)
+        .fromTo("#logo-good",  { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.28, ease: "back.out(2)" }, 0.50)
+        .fromTo("#logo-great", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.42, ease: "elastic.out(1, 0.4)" }, 0.75)
+
+        .fromTo("#brand-bad",   { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.22, ease: "power2.out" }, 0.50)
+        .fromTo("#brand-good",  { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.22, ease: "power2.out" }, 0.65)
+        .fromTo("#brand-great", { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.28, ease: "back.out(1.5)" }, 0.90)
+
+        .to("#col-bad .tier-verdict",   { opacity: 1, duration: 0.2 }, 0.65)
+        .to("#col-good .tier-verdict",  { opacity: 1, duration: 0.2 }, 0.80)
+        .to("#col-great .tier-verdict", { opacity: 1, duration: 0.25 }, 1.10)
+
+        .to({}, { duration: 0.001 }, dur - 0.001);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
