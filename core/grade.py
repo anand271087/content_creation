@@ -20,6 +20,11 @@ PRESETS = {
     "videographer": "eq=saturation=1.22:contrast=1.05:brightness=0.01,"
                     "colorbalance=rm=0.03:bm=-0.02",
     "subtle":       "eq=saturation=1.10:contrast=1.02",
+    # For UPSCALED sources (letterboxed looks): stronger color + unsharp to
+    # recover crispness lost in the 1.8-2x scale-up
+    "bright_sharp": "eq=saturation=1.30:contrast=1.08:brightness=0.005,"
+                    "colorbalance=rm=0.02:bm=-0.02,"
+                    "unsharp=5:5:0.9:5:5:0.35",
     "none":         "null",
 }
 

@@ -40,7 +40,8 @@ CROP_TIGHT = None   # tighter head framing for the split's bottom band
 CREAM = (250, 249, 246)
 CARD_X, CARD_Y, CARD_W, CARD_H = 70, 120, 940, 760
 VID_X, VID_Y, VID_W, VID_H = 80, 150, 920, 700
-MINI_Y = 1020                      # tight face band top during splits
+MINI_Y = 1210                      # tight face band top during splits
+FULL_Y = 373                       # padded editorial fullface top
 CAP_Y = 940                        # caption line between card and face
 
 # (phase key, start anchor word, demo file or None, caption phrases)
@@ -55,6 +56,13 @@ PHASES = [
     ("cta",    "comment", None,              ['comment "APP"']),
 ]
 SLASH_ANCHOR = "coding"            # red slash lands on this word
+
+
+def cream_base() -> Path:
+    img = Image.new("RGBA", (W, H), (*CREAM, 255))
+    out = ASSET_DIR / "cream_base.png"
+    img.save(out)
+    return out
 
 
 def cream_panel() -> Path:
@@ -123,8 +131,8 @@ def compute_windows(words, duration):
 
 
 def build(avatar: Path, captions: Path, out: Path,
-          crop_full: str = "crop=591:1050:179:250,scale=1080:1920",
-          crop_tight: str = "crop=650:542:150:330,scale=1080:900") -> Path:
+          crop_full: str = "crop=560:608:250:656,scale=1080:1174",
+          crop_tight: str = "crop=608:400:226:664,scale=1080:710") -> Path:
     ASSET_DIR.mkdir(parents=True, exist_ok=True)
     duration = duration_of(avatar)
     words = normalize(load_words(captions))
@@ -133,13 +141,17 @@ def build(avatar: Path, captions: Path, out: Path,
         log.info("%-7s %6.2f → %6.2f", k, s, e)
 
     slash_t = next((w["start"] - 0.1 for w in words if clean(w["word"]) == SLASH_ANCHOR), 1.0)
-    grade = grade_chain("videographer")
+    grade = grade_chain("bright_sharp")
 
     panel = cream_panel()
     slash = red_slash()
 
-    inputs = ["-i", str(avatar), "-i", str(panel), "-i", str(slash)]
-    n_in = 3
+    # cream base as a REAL video stream — a still-PNG main input silently
+    # breaks timed overlays drawn on top of it
+    cream_src = f"color=0xFAF9F6:s={W}x{H}:r=30:d={duration:.3f}"
+    inputs = ["-i", str(avatar), "-f", "lavfi", "-i", cream_src,
+              "-i", str(panel), "-i", str(slash)]
+    n_in = 4
     # split windows = phases with a demo
     split_phases = [(k, d) for k, _a, d, _c in PHASES if d]
     split_enable = "+".join(f"between(t\\,{win[k][0]:.2f}\\,{win[k][1]:.2f})"
@@ -147,14 +159,16 @@ def build(avatar: Path, captions: Path, out: Path,
 
     parts = [
         f"[0:v]split=2[fa][fb]",
+        # editorial padded fullface: wide in-band crop on cream (arms never cut)
         f"[fa]{crop_full},{grade}[full]",
         f"[fb]{crop_tight},{grade}[mini]",
-        # cream panel over everything during split windows
-        f"[full][1:v]overlay=x=0:y=0:enable='{split_enable}'[p1]",
-        # tight face band at the bottom during splits
-        f"[p1][mini]overlay=x=0:y={MINI_Y}:enable='{split_enable}'[p2]",
+        # cream base canvas for every frame
+        f"[1:v][full]overlay=x=0:y={FULL_Y}:enable='not({split_enable})'[p1]",
+        # card panel + tight face band during splits
+        f"[p1][2:v]overlay=x=0:y=0:enable='{split_enable}'[p2]",
+        f"[p2][mini]overlay=x=0:y={MINI_Y}:enable='{split_enable}'[p3]",
     ]
-    prev = "p2"
+    prev = "p3"
 
     # demo videos inside the card per phase
     for k, demo in split_phases:
@@ -164,8 +178,9 @@ def build(avatar: Path, captions: Path, out: Path,
             log.warning("missing demo %s", demo)
             continue
         inputs += ["-i", str(demo_p)]
-        parts.append(f"[{n_in}:v]scale={VID_W}:{VID_H}:force_original_aspect_ratio=increase,"
-                     f"crop={VID_W}:{VID_H},setpts=PTS-STARTPTS+{s:.2f}/TB[d{n_in}]")
+        parts.append(f"[{n_in}:v]scale={VID_W}:{VID_H}:force_original_aspect_ratio=decrease,"
+                     f"pad={VID_W}:{VID_H}:(ow-iw)/2:(oh-ih)/2:color=white,"
+                     f"setpts=PTS-STARTPTS+{s:.2f}/TB[d{n_in}]")
         parts.append(f"[{prev}][d{n_in}]overlay=x={VID_X}:y={VID_Y}"
                      f":enable='between(t\\,{s:.2f}\\,{e:.2f})'[o{n_in}]")
         prev = f"o{n_in}"
@@ -173,7 +188,7 @@ def build(avatar: Path, captions: Path, out: Path,
 
     # red slash over the hook card, from the negation word to hook end
     hs, he = win["hook"]
-    parts.append(f"[{prev}][2:v]overlay=x={CARD_X}:y={CARD_Y}"
+    parts.append(f"[{prev}][3:v]overlay=x={CARD_X}:y={CARD_Y}"
                  f":enable='between(t\\,{slash_t:.2f}\\,{he:.2f})'[oslash]")
     prev = "oslash"
 
@@ -189,7 +204,7 @@ def build(avatar: Path, captions: Path, out: Path,
             yellow = (k == "cta")
             cp = caption(text, cap_idx, yellow=yellow)
             cw, ch = Image.open(cp).size
-            y = CAP_Y if _d else 1560           # on split: between card and face
+            y = CAP_Y if _d else 1620           # split: between card and face; fullface: cream below
             inputs += ["-i", str(cp)]
             parts.append(f"[{prev}][{n_in}:v]overlay=x={(W - cw) // 2}:y={y}"
                          f":enable='between(t\\,{starts[j]:.2f}\\,{ends[j]:.2f})'[c{n_in}]")
