@@ -273,8 +273,8 @@ def main() -> int:
         from stages.stage6_analyse import run_stage6
         from stages.stage7_learnings import run_stage7
         from stages.stage8_social import run_stage8
-        from scripts.pre_evaluate_script import run_pre_evaluate
-        from scripts.check_broll_quality import check_broll_quality
+        from qa.pre_evaluate_script import run_pre_evaluate
+        from broll.check_broll_quality import check_broll_quality
         from scripts.generate_diagrams import run_generate_diagrams
     except ImportError as exc:
         logger.error("Could not import stage module: %s", exc)
@@ -541,7 +541,7 @@ def main() -> int:
         if _needs_choreo:
             print(f"\n▶ Stage 2b.5: Generating choreography for {len(_needs_choreo)} screen section(s)...")
             _choreo_result = _sp.run(
-                ["node", "scripts/screen_choreography.mjs"],
+                ["node", "broll/screen_choreography.mjs"],
                 cwd=PROJECT_ROOT,
                 capture_output=True, text=True,
                 timeout=120,
@@ -561,7 +561,7 @@ def main() -> int:
     if _screen_sections:
         print(f"\n▶ Stage 2c: Capturing {len(_screen_sections)} screen broll(s)...")
         _screen_result = _sp.run(
-            ["node", "scripts/screen_broll.mjs"],
+            ["node", "broll/screen_broll.mjs"],
             cwd=PROJECT_ROOT,
             capture_output=True, text=True,
             timeout=300,
@@ -579,7 +579,7 @@ def main() -> int:
     if _terminal_sections:
         print(f"\n▶ Stage 2c.5: Rendering {len(_terminal_sections)} terminal broll(s)...")
         _terminal_result = _sp.run(
-            ["node", "scripts/run_terminal_demo.mjs"],
+            ["node", "broll/run_terminal_demo.mjs"],
             cwd=PROJECT_ROOT,
             capture_output=True, text=True,
             timeout=180,
@@ -602,7 +602,7 @@ def main() -> int:
     if _clip_sections and not state["stage2_complete"]:
         print(f"\n▶ Stage 2d: Rendering {len(_clip_sections)} Hyperframes broll(s)...")
         _hf_result = _sp.run(
-            ["node", "scripts/generate_hyperframes_broll.mjs"],
+            ["node", "broll/generate_hyperframes_broll.mjs"],
             cwd=PROJECT_ROOT,
             timeout=600,
         )
@@ -701,7 +701,7 @@ def main() -> int:
         if _kling_clips:
             print("\n── Broll Quality Check: Screening Kling clips for watermarks ──")
             try:
-                from scripts.regenerate_broll import regenerate as regenerate_sections
+                from broll.regenerate_broll import regenerate as regenerate_sections
                 broll_check = check_broll_quality(section_ids=list(_kling_clips))
                 if broll_check["success"]:
                     failed_clips = [s for s in broll_check.get("failed_sections", []) if s in _kling_clips]
@@ -857,7 +857,7 @@ def main() -> int:
         # Stage 2d (re-run) — Hyperframes brolls with --force to replace previous iteration
         print(f"  Re-rendering Hyperframes brolls (iteration {pipeline_iteration})...")
         _hf_rerun = _sp.run(
-            ["node", "scripts/generate_hyperframes_broll.mjs", "--force"],
+            ["node", "broll/generate_hyperframes_broll.mjs", "--force"],
             cwd=PROJECT_ROOT,
             timeout=600,
         )

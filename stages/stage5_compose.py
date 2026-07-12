@@ -72,7 +72,7 @@ def _h264_encoder_flags() -> list[str]:
 # ---------------------------------------------------------------------------
 
 ELEVENLABS_TIMEOUT_SEC = 10 * 60   # plenty for a sub-3-min mp3 upload + transcription
-ELEVENLABS_HELPER = ROOT / "scripts" / "transcribe_elevenlabs.py"
+ELEVENLABS_HELPER = ROOT / "speech" / "transcribe_elevenlabs.py"
 
 
 def _run_elevenlabs_scribe() -> None:
@@ -598,7 +598,7 @@ def run_stage5() -> dict:
         }
 
     # ---- Step 1.5: Sanitize captions (fix Whisper mishears + vulgar words) ----
-    sys.path.insert(0, str(ROOT / "scripts"))
+    sys.path.insert(0, str(ROOT / "speech"))
     try:
         from sanitize_captions import sanitize
         sanitize(CAPTIONS_JSON)
@@ -630,7 +630,7 @@ def run_stage5() -> dict:
         logger.info("Step 1.7/3 — SKIPPING broll sync (SKIP_BROLL_SYNC=1)")
     else:
         try:
-            sys.path.insert(0, str(ROOT / "scripts"))
+            sys.path.insert(0, str(ROOT / "speech"))
             from sync_broll_to_speech import sync as _sync_broll
             logger.info("Step 1.7/3 — Syncing broll timestamps to Whisper speech")
             _sync_broll(dry_run=False)

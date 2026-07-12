@@ -34,7 +34,7 @@ import anthropic
 from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parent.parent
-REF_DIR = ROOT / "scripts" / "reference_scripts" / "harsha_skill"
+REF_DIR = ROOT / "reference" / "harsha_skill"
 SCRIPT_OUT = ROOT / "assets" / "script_data.json"
 
 for d in (SCRIPT_OUT.parent,):

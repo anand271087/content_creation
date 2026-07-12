@@ -22,7 +22,7 @@ load_dotenv()
 PROJECT_ROOT = Path(__file__).parent.parent
 LOGS_DIR = PROJECT_ROOT / "logs"
 ASSETS_DIR = PROJECT_ROOT / "assets"
-SCRIPTS_DIR = PROJECT_ROOT / "scripts" / "reference_scripts"
+SCRIPTS_DIR = PROJECT_ROOT / "reference"
 RULES_PATH = PROJECT_ROOT / "scripts" / "learnings" / "accumulated_rules.md"
 OUTPUT_PATH = ASSETS_DIR / "script_data.json"
 

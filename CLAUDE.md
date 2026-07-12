@@ -100,11 +100,11 @@ cd remotion && npx remotion studio
 # Align broll section timestamps to actual Whisper speech — run after stage5 Whisper step,
 # before Remotion render, whenever you have a new avatar video.
 # Updates: start_sec/end_sec per section, bgm_dip_timestamps, bgm_transition_sec, total_duration_sec
-python3 scripts/sync_broll_to_speech.py
-python3 scripts/sync_broll_to_speech.py --dry-run   # preview without writing
+python3 speech/sync_broll_to_speech.py
+python3 speech/sync_broll_to_speech.py --dry-run   # preview without writing
 
 # Regenerate specific broll clips (watermark, wrong scene, etc.)
-python3 scripts/regenerate_broll.py body_1 emotion_save
+python3 broll/regenerate_broll.py body_1 emotion_save
 
 # Generate DSSCL analysis doc with per-score commentary
 # Writes: scripts/generated/script_analysis.md + script_data_snapshot.json
@@ -112,13 +112,13 @@ python3 -c "exec(open('scripts/generate_analysis.py').read())"  # (inline, see s
 
 # Pre-evaluate script quality BEFORE spending on HeyGen/Kie.ai (cheap text-only check)
 # Returns DSSCL score + issues list + go/no-go — runs automatically in pipeline after Stage 1
-python3 scripts/pre_evaluate_script.py
-python3 scripts/pre_evaluate_script.py assets/script_data.json   # explicit path
+python3 qa/pre_evaluate_script.py
+python3 qa/pre_evaluate_script.py assets/script_data.json   # explicit path
 
 # Check broll clip quality AFTER Stage 2 — screens for watermarks and generic stock footage
 # Returns failed section IDs — runs automatically in pipeline before Stage 5 render
-python3 scripts/check_broll_quality.py
-python3 scripts/check_broll_quality.py hook body_1 trigger_2     # check specific clips
+python3 broll/check_broll_quality.py
+python3 broll/check_broll_quality.py hook body_1 trigger_2     # check specific clips
 ```
 
 ## Architecture Overview
@@ -178,7 +178,7 @@ npx claude-code-templates@latest --skill development/senior-backend
 
 # 3. Viral Script Generator (GOAT Framework)
 #    Fully embedded in this CLAUDE.md — see Stage 1 section below.
-#    Reference files live in scripts/reference_scripts/
+#    Reference files live in reference/
 ```
 
 ---
@@ -330,8 +330,8 @@ to grow faster, earn more, and break free from limitations.
 Before generating any script content, read both files:
 
 ```
-scripts/reference_scripts/english-hooks.md    ← 200 hook templates with blanks
-scripts/reference_scripts/content-formats.md  ← 47 content format structures
+reference/english-hooks.md    ← 200 hook templates with blanks
+reference/content-formats.md  ← 47 content format structures
 ```
 
 **Hook selection:**
@@ -862,7 +862,7 @@ whisper assets/avatar/avatar_video.mp4 \
   --word_timestamps True
 
 # Step 2: Align broll section timestamps to actual speech
-python3 scripts/sync_broll_to_speech.py
+python3 speech/sync_broll_to_speech.py
 
 # Step 3: Remotion render (scriptData + captionsData both inlined into props)
 npx remotion render remotion/src/index.ts ReelComposition \
@@ -1202,8 +1202,8 @@ ffmpeg -version            # verify
 | Visual style | Black + White + one accent (Red = danger / Blue = solution) |
 | Caption style | Hormozi: bold white, 4px black stroke, max 3 words per frame |
 | On-screen text | Montserrat ExtraBold, max 3–5 words per line, uppercase |
-| Hook bank | 200 templates → `scripts/reference_scripts/english-hooks.md` |
-| Format bank | 47 formats → `scripts/reference_scripts/content-formats.md` |
+| Hook bank | 200 templates → `reference/english-hooks.md` |
+| Format bank | 47 formats → `reference/content-formats.md` |
 
 ---
 
@@ -1220,15 +1220,15 @@ paid step is one HeyGen render per new script.
 
 | Script | Format | Script pattern | Status |
 |--------|--------|----------------|--------|
-| `scripts/tier_stack_reel.py` | Bad/Good/Great — 3 blurred logo cards per category, un-blur on spoken word, question pill | "For X: A is bad. B is good. C is great." | Production |
-| `scripts/tier_board_reel.py` | S-F tier board — items float then land in colored rows, accumulate | "[ITEM]. [GRADE]. [one punchy reason]." | Production |
-| `scripts/tier_timeline_reel.py` | Stage/timeline board — left rail of stage badges, items land beside them | "[ITEM]. [STAGE]. [reason]." | Production |
-| `scripts/countdown_reel.py` | Countdown 5→1 + LIVE screen-demo cards + CTA pill | "Number N, [Tool]. [what it does]. [proof number]." | Production |
-| `scripts/checklist_reel.py` | 5-step rainbow checklist — all steps ghosted from t=0, light up per beat | "Step N: [action]" (Authority how-to) | Demo — needs matching HeyGen script |
-| `scripts/sort_board_reel.py` | 3-column sort — Matters/Doesn't/Hurtful headers, items land under columns | "[HABIT]. [Verdict]. [reason]." | Demo — needs matching HeyGen script |
-| `scripts/timer_reel.py` | Live countdown timer card (ffmpeg drawtext expression) + reframe monologue | Time-boxed promise → chained quotables | Demo — needs matching HeyGen script |
-| `scripts/viral_15s.py` | 15s pure-virality cut, Hormozi word captions | Harsha 4-beat (hook/reveal/proof+dream/CTA) | Production |
-| `scripts/authority_stack.py` | Full-frame avatar + logo pops synced to speech | Tier list without board | Production |
+| `formats/tier_stack.py` | Bad/Good/Great — 3 blurred logo cards per category, un-blur on spoken word, question pill | "For X: A is bad. B is good. C is great." | Production |
+| `formats/tier_board.py` | S-F tier board — items float then land in colored rows, accumulate | "[ITEM]. [GRADE]. [one punchy reason]." | Production |
+| `formats/tier_timeline.py` | Stage/timeline board — left rail of stage badges, items land beside them | "[ITEM]. [STAGE]. [reason]." | Production |
+| `formats/countdown.py` | Countdown 5→1 + LIVE screen-demo cards + CTA pill | "Number N, [Tool]. [what it does]. [proof number]." | Production |
+| `formats/checklist.py` | 5-step rainbow checklist — all steps ghosted from t=0, light up per beat | "Step N: [action]" (Authority how-to) | Demo — needs matching HeyGen script |
+| `formats/sort_board.py` | 3-column sort — Matters/Doesn't/Hurtful headers, items land under columns | "[HABIT]. [Verdict]. [reason]." | Demo — needs matching HeyGen script |
+| `formats/timer.py` | Live countdown timer card (ffmpeg drawtext expression) + reframe monologue | Time-boxed promise → chained quotables | Demo — needs matching HeyGen script |
+| `formats/viral_15s.py` | 15s pure-virality cut, Hormozi word captions | Harsha 4-beat (hook/reveal/proof+dream/CTA) | Production |
+| `formats/authority_stack.py` | Full-frame avatar + logo pops synced to speech | Tier list without board | Production |
 
 ### Edit decision engine — given a script/topic, pick the format
 
@@ -1254,14 +1254,14 @@ fit, pick the one whose full board/list at the end is most screenshot-worthy.
 - **End the instant the last payoff lands.** Board formats: CTA in caption only. Conversion formats: spoken keyword CTA ("Comment X and I'll send…").
 - **Dark pills behind ALL landed text** — raw white text drowns in the warm studio background.
 - **Chest-level crop, 1.66× zoom** (1.87× was rejected as too zoomed). Grey avatar: `crop=650:1156:185:144`. Blue avatar: `crop=591:1050:179:250`. Always verify per avatar — framing differs.
-- **Studio background**: `scripts/replace_background.py --style studio` (RVM matting; also `warm|blue|teal|image`).
+- **Studio background**: `editing/replace_background.py --style studio` (RVM matting; also `warm|blue|teal|image`).
 - **Light-leak flash at reveals/cuts** (~0.22s warm wash + brightness pulse) — polish, added after format is locked.
 - **1.3× final speed** (HeyGen speaks ~142wpm; 1.3× ≈ 185wpm = Martell zone), then thumbnail concat.
 - **Contrarian placements are the comment engine** — at least one verdict per reel must make people argue.
 
 ### Screen-demo recording (for countdown_reel)
 
-Three tiers — see `scripts/record_tool_demos.mjs`, `scripts/record_logged_in.mjs`, `scripts/capture_window.py`:
+Three tiers — see `capture/record_tool_demos.mjs`, `capture/record_logged_in.mjs`, `capture/capture_window.py`:
 1. Playwright headless on PUBLIC pages (challenge-detection built in; Wayback Machine `web.archive.org/web/<yr>/<url>` beats Cloudflare walls e.g. elevenlabs.io)
 2. Logged-in Chrome profile copy (user quits Chrome first; works for most apps; NOT claude.ai — device-bound sessions)
 3. Real Chrome + AppleScript + `screencapture -R` from READ-BACK window bounds (the claude.ai route; needs VS Code Screen Recording + Accessibility permissions; `screencapture -v` ignores `-l` window flag; verify Chrome frontmost before keystrokes; privacy-crop tabs/bookmarks/sidebar)
@@ -1271,4 +1271,69 @@ Three tiers — see `scripts/record_tool_demos.mjs`, `scripts/record_logged_in.m
 GraphQL `doc_id=10015901848480474` + `variables={"shortcode":"..."}` + header
 `x-ig-app-id: 936619743392459` → `video_url` → download IMMEDIATELY (tokens
 expire). Then: 8-12 frames via ffmpeg + Scribe transcription
-(`scripts/transcribe_elevenlabs.py`) → format = layout + script pattern + timing.
+(`speech/transcribe_elevenlabs.py`) → format = layout + script pattern + timing.
+
+### Format #8 — Editorial process walkthrough (nick_saraev style, Danc08PA0kz)
+
+`scripts/process_reel.py` (demo). Bright/editorial opposite of the Dan Martell
+dark-studio boards — and the closest format to this channel's niche (the
+reference reel is literally "build an app with Claude Code").
+
+- Layout alternates every 3-5s: SPLIT (demo card on cream top half, tight face
+  bottom half) ↔ full-frame face ↔ full-frame card.
+- **Red cross slash**: thick red diagonal over a terminal/code screenshot at the
+  negation phrase ("zero CODING skills") — the hook compressed into one image.
+- Phrase-accumulating captions, mixed typography: serif-italic emphasis words +
+  bold sans, mid-frame.
+- Real product demos as proof (terminal running Claude Code, app UI, QR code,
+  approval card) — use the 3-tier screen recording stack.
+- Bright editorial backdrop: `replace_background.py --style editorial`
+  (cream + soft leaf shadow).
+- Script pattern: "You can now X with zero Y" → "Here's the full process" →
+  First/Next/Then/Finally with demos → course/resource pitch → keyword CTA.
+
+#### Format #8 addendum — rrishijain variant (DanB7ViPQrr, "Claude + Arcads paper animations")
+
+Same editorial-walkthrough family; five additional edits to reuse:
+1. **Result-first cold open** — the finished output plays full-frame in the first
+   2s, BEFORE any explanation. For pipeline/tutorial reels: open with the
+   finished reel playing, never with "let me show you how".
+2. **Logo-pairing card** — white card, "✻ Claude + [tool]" logos side by side,
+   shown at open and close. One PIL function; logos in assets/tier_cards/real_logos/.
+3. **Deep real-UI walkthrough incl. the Connectors/MCP modal** — personalized
+   greeting + Add Custom Connector screen + prompts + generated outputs. Use the
+   existing capture stack (capture_window.py); MCP content is squarely this niche.
+4. **Quoted-keyword CTA styling** — comment "Keyword" in yellow serif italic with
+   quotes, while pointing at camera (no solid pill).
+5. **Lowercase phrase captions** — small white lowercase mid-frame phrases; the
+   third top-creator data point moving away from all-caps word-by-word captions
+   on tutorial content.
+Also (not compositable): topic-matched physical props on the desk — note for the
+videographer session.
+
+---
+
+## ═══════════════════════════════════════════
+## REPO LAYOUT (2026-07 reorganization)
+## ═══════════════════════════════════════════
+
+| Dir | Contents |
+|-----|----------|
+| `core/` | Shared library: brand constants, avatar crop presets, Scribe word utils, PIL card builders, OverlayChain (ffmpeg engine), finish chain (1.3x + thumbnail) |
+| `formats/` | One module per reel format + `registry.py` (decision engine). `python3 formats/<name>.py` or `reel.py make <name>` |
+| `capture/` | 3-tier screen recording + `analyze_reference.py` (Instagram reel downloader/dissector) |
+| `speech/` | Scribe transcription, broll-speech sync, caption sanitizer |
+| `broll/` | Hyperframes generator, screen/terminal renderers, infographics, diagrams, broll QA |
+| `editing/` | Background replacement (RVM), viral_edit zoom punches, thumbnail append |
+| `qa/` | pre_stage_check, pre_evaluate_script, verify_assets_in_video |
+| `scripting/` | Script generators (authority_30s) |
+| `reference/` | Hook bank, format bank, harsha_skill (was scripts/reference_scripts) |
+| `stages/` + `pipeline.py` | The 10-section long-form pipeline (unchanged) |
+| `reel.py` | CLI: `list · decide · make · finish · bg · transcribe · capture · analyze` |
+| `.claude/agents/` | reel-analyzer, format-runner, reel-qa subagents |
+
+`scripts/` retains only: learnings/ (stage7 data), generated/, build_docx.py,
+download_broll_tasks.py.
+
+**Verified**: the formats/ rewrite reproduces the approved tier_stack render
+pixel-identically (frame-diff 0.00 at sampled timestamps).

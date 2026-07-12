@@ -22,7 +22,7 @@ import requests
 from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parent.parent
-REF_DIR = ROOT / "scripts" / "reference_scripts" / "harsha_skill"
+REF_DIR = ROOT / "reference" / "harsha_skill"
 OUT_DIR = ROOT / "assets" / "final"
 TMP_DIR = ROOT / "assets" / "viral_15s_tmp"
 SCRIPT_OUT = ROOT / "assets" / "viral_15s_script.json"

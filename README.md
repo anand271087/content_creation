@@ -139,7 +139,7 @@ python3 stages/stage1_script.py --transcript assets/transcript.txt
 ```
 
 This:
-1. Loads `scripts/reference_scripts/english-hooks.md` (200 hook templates) and `content-formats.md` (47 formats)
+1. Loads `reference/english-hooks.md` (200 hook templates) and `content-formats.md` (47 formats)
 2. Calls Claude with the GOAT framework prompt
 3. Iterates on the script until DSSCL ≥ 9.5 (max 5 attempts)
 4. Writes `assets/script_data.json` and prints a preview
@@ -230,7 +230,7 @@ python3 pipeline.py --transcript assets/transcript.txt --skip-music
 After Stage 5 finishes, append the auto-generated thumbnail PNG as a 1.5-second card at the end of both reels:
 
 ```bash
-python3 scripts/append_thumbnail.py
+python3 editing/append_thumbnail.py
 ```
 
 Writes `final_reel_with_thumb.mp4` and `final_reel_fast_with_thumb.mp4` alongside the originals.
@@ -396,7 +396,7 @@ See [CLAUDE.md](CLAUDE.md) for the full architecture document, including:
 - The 10-section reel structure (HOOK → CONTEXT → TRIGGER 1 → BODY 1 → ... → EMOTION_SAVE)
 - Remotion composition layout (avatar bottom 50%, b-roll top 50%, Hormozi-style captions)
 - BGM ducking + sting trigger timing
-- Whisper-aligned section timestamp resync (`scripts/sync_broll_to_speech.py`)
+- Whisper-aligned section timestamp resync (`speech/sync_broll_to_speech.py`)
 - The GOAT framework writing rules
 
 ---
@@ -405,20 +405,20 @@ See [CLAUDE.md](CLAUDE.md) for the full architecture document, including:
 
 ```bash
 # Align b-roll section timestamps to actual Whisper speech (Stage 5 internal)
-python3 scripts/sync_broll_to_speech.py --dry-run    # preview
-python3 scripts/sync_broll_to_speech.py              # apply
+python3 speech/sync_broll_to_speech.py --dry-run    # preview
+python3 speech/sync_broll_to_speech.py              # apply
 
 # Regenerate specific b-roll clips
-python3 scripts/regenerate_broll.py body_1 emotion_save
+python3 broll/regenerate_broll.py body_1 emotion_save
 
 # Pre-evaluate script quality (cheap text-only check) — auto-runs after Stage 1
-python3 scripts/pre_evaluate_script.py
+python3 qa/pre_evaluate_script.py
 
 # Check b-roll clip quality (watermarks, generic stock) — auto-runs before Stage 5
-python3 scripts/check_broll_quality.py
+python3 broll/check_broll_quality.py
 
 # Append thumbnail card at end of both renders
-python3 scripts/append_thumbnail.py
+python3 editing/append_thumbnail.py
 
 # Verify every section's b-roll is present and referenced in the final render
 python3 scripts/verify_assets_in_video.py

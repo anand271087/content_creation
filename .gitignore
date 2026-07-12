@@ -104,3 +104,6 @@ assets/viral_15s_script.json
 
 # RobustVideoMatting model — download per models/README.md (15MB binary)
 models/*.torchscript
+
+# Reference-reel analysis downloads (reproducible via capture/analyze_reference.py)
+assets/reference_analysis/
