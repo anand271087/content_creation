@@ -1,0 +1,122 @@
+<meta charset="utf-8">
+<title>Build an iPhone App with Claude Code — Step-by-Step Guide</title>
+<style>
+  :root { --ink:#111827; --mut:#6b7280; --red:#e11a1a; --yellow:#ffd628; --cream:#faf9f6; --line:#e7e5e0; }
+  * { box-sizing:border-box; }
+  body { font-family:-apple-system, "Helvetica Neue", Arial, sans-serif; background:var(--cream);
+         color:var(--ink); margin:0; line-height:1.65; }
+  .page { max-width:760px; margin:0 auto; padding:56px 28px 80px; }
+  .kicker { font-size:14px; letter-spacing:3px; text-transform:uppercase; color:var(--mut); font-weight:700; }
+  h1 { font-size:44px; line-height:1.12; margin:10px 0 6px; font-weight:900; letter-spacing:-1px; }
+  .sub { font-family:Georgia, serif; font-style:italic; font-size:22px; color:var(--mut); margin:0 0 34px; }
+  .slashbox { position:relative; background:#131318; border-radius:14px; padding:22px 26px; margin:26px 0;
+              font-family:"Courier New", monospace; color:#8ce99a; font-size:15px; overflow:hidden; }
+  .slashbox .grey { color:#9aa0a6; }
+  .slashbox::after { content:""; position:absolute; left:-4%; right:-4%; top:50%; height:14px;
+                     background:var(--red); transform:rotate(-8deg); border-radius:7px; opacity:.92; }
+  h2 { font-size:24px; margin:44px 0 8px; font-weight:900; }
+  .stepnum { display:inline-block; background:var(--ink); color:#fff; font-weight:900; border-radius:10px;
+             padding:2px 12px; margin-right:10px; font-size:18px; }
+  .prompt { background:#fff; border:1px solid var(--line); border-left:5px solid var(--yellow);
+            border-radius:10px; padding:14px 18px; margin:14px 0; font-size:15px; }
+  .prompt b { display:block; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--mut); margin-bottom:6px; }
+  .term { background:#131318; color:#e9ecef; border-radius:10px; padding:14px 18px; margin:14px 0;
+          font-family:"Courier New", monospace; font-size:14px; white-space:pre-wrap; }
+  .tip { background:#fffbe8; border:1px solid #f0e6b8; border-radius:10px; padding:12px 18px; margin:14px 0; font-size:15px; }
+  .tip b { color:#8a6d00; }
+  ul { padding-left:22px; } li { margin:6px 0; }
+  .divider { border:none; border-top:1px solid var(--line); margin:40px 0; }
+  .cta { background:var(--ink); color:#fff; border-radius:16px; padding:28px 30px; margin-top:48px; }
+  .cta h3 { margin:0 0 8px; font-size:22px; }
+  .cta a { color:var(--yellow); font-weight:700; text-decoration:none; }
+  .footer { margin-top:26px; color:var(--mut); font-size:14px; }
+  @media print { body { background:#fff; } .page { padding:24px; } }
+</style>
+
+<div class="page">
+  <div class="kicker">Free guide · @automatewithanand</div>
+  <h1>Build an iPhone App<br>with Claude Code</h1>
+  <p class="sub">zero coding skills required — the exact workflow from the reel</p>
+
+  <div class="slashbox">
+    <span class="grey">$</span> learn_to_code --years 4<br>
+    <span class="grey">$</span> hire_developers --cost "$$$$"<br>
+    <span class="grey">$</span> wait_for_technical_cofounder --forever
+  </div>
+  <p>None of that is required anymore. What follows is the complete process — every prompt, every
+     command, every screen — to go from an idea to a live App Store app using
+     <b>Claude Code</b> as your engineer.</p>
+
+  <h2><span class="stepnum">0</span>Setup (10 minutes, one time)</h2>
+  <ul>
+    <li>Install <b>Claude Code</b>: <span class="term" style="display:inline;padding:2px 8px">npm install -g @anthropic-ai/claude-code</span> (needs Node.js 18+)</li>
+    <li>Create a free <b>Expo</b> account at expo.dev, and install the <b>Expo Go</b> app on your iPhone</li>
+    <li>An <b>Apple Developer</b> account ($99/yr) — only needed at Step 5, so you can start today without it</li>
+  </ul>
+
+  <h2><span class="stepnum">1</span>Let Claude Code set up the project</h2>
+  <p>Open a terminal in an empty folder, run <b>claude</b>, and paste:</p>
+  <div class="prompt"><b>Prompt</b>
+    Set up a new React Native app using Expo for an iPhone + Android app called [YOUR APP NAME].
+    Use TypeScript. Confirm it runs with npx expo start before we continue.
+  </div>
+  <p>Why this stack: <b>one code base, both platforms.</b> Claude Code will install everything,
+     create the project, and fix its own errors as it goes. Just watch it work.</p>
+
+  <h2><span class="stepnum">2</span>Build the simplest version first</h2>
+  <div class="prompt"><b>Prompt</b>
+    Build the simplest possible version of this idea: [DESCRIBE YOUR APP IN 2-3 SENTENCES].
+    One screen only. No login, no settings, no extras. I want to see it working today.
+  </div>
+  <p>Then add features <i>one at a time</i>:</p>
+  <div class="prompt"><b>Prompt (repeat per feature)</b>
+    Add one feature: [FEATURE]. Keep everything else unchanged. Show me what to test when done.
+  </div>
+  <div class="tip"><b>Rule that saves weeks:</b> never ask for two features in one prompt. One feature →
+    test on your phone → next feature. This is how you avoid the "everything is broken" spiral.</div>
+
+  <h2><span class="stepnum">3</span>Test live on your phone</h2>
+  <div class="term">npx expo start</div>
+  <p>A QR code appears in the terminal. Scan it with your iPhone camera — the app opens inside
+     <b>Expo Go</b>, live. Every change Claude makes reloads on your phone in seconds.</p>
+
+  <h2><span class="stepnum">4</span>Claude writes your App Store listing</h2>
+  <div class="prompt"><b>Prompt</b>
+    Write my App Store listing: an app name under 30 characters, a subtitle under 30 characters,
+    a description that sells the outcome (not the features), 100 characters of keywords, and
+    what I should show in 5 screenshots.
+  </div>
+  <div class="tip"><b>Screenshots:</b> take them inside the iOS Simulator (Claude will tell you the exact
+    sizes Apple wants: 6.7" and 5.5" displays), or ask Claude to generate a screenshot script.</div>
+
+  <h2><span class="stepnum">5</span>Submit for review</h2>
+  <div class="prompt"><b>Prompt</b>
+    Prepare this app for App Store submission with EAS. Walk me through eas build and
+    eas submit step by step, including certificates — assume I have never done this before.
+  </div>
+  <ul>
+    <li>Expo's <b>EAS</b> service handles the scary parts (certificates, signing, upload)</li>
+    <li>Fill the App Store Connect form with the listing from Step 4</li>
+    <li>Review typically takes 24–48 hours. When Apple approves — <b>your app is live, worldwide.</b></li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>The 5 mistakes that stall beginners</h2>
+  <ul>
+    <li><b>Building too much before testing</b> — Step 2's one-feature rule exists for a reason</li>
+    <li><b>Vague prompts</b> — "make it better" fails; "make the button full-width and blue" ships</li>
+    <li><b>Skipping the phone test</b> — the simulator lies about feel; Expo Go doesn't</li>
+    <li><b>Fighting errors yourself</b> — paste the full error back into Claude Code; it fixes its own mess</li>
+    <li><b>Waiting for the perfect idea</b> — your first app is for learning the loop, not for glory</li>
+  </ul>
+
+  <div class="cta">
+    <h3>Want the full video walkthrough?</h3>
+    <p>I post one AI automation build every week — real screens, real prompts, no fluff.</p>
+    <p>Follow <a href="https://www.instagram.com/automatewithanand/">@automatewithanand</a> on Instagram
+       · Subscribe on YouTube</p>
+  </div>
+
+  <p class="footer">© 2026 automatewithanand · You're free to share this guide — just keep the credit.</p>
+</div>
