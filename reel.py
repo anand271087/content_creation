@@ -84,6 +84,16 @@ def cmd_capture(args) -> int:
     return subprocess.call(["node", str(ROOT / "capture" / "record_tool_demos.mjs"), *args.keys])
 
 
+def cmd_capture_url(args) -> int:
+    cmd = ["node", str(ROOT / "capture" / "record_url.mjs"), args.url,
+           "--name", args.name, "--secs", str(args.secs)]
+    if args.login:
+        cmd.append("--login")
+    if args.actions:
+        cmd += ["--actions", args.actions]
+    return subprocess.call(cmd)
+
+
 def cmd_analyze(args) -> int:
     return subprocess.call([PY, str(ROOT / "capture" / "analyze_reference.py"), args.url])
 
@@ -156,6 +166,14 @@ def main() -> int:
 
     c = sub.add_parser("capture")
     c.add_argument("keys", nargs="*"); c.set_defaults(fn=cmd_capture)
+
+    cu = sub.add_parser("capture-url")
+    cu.add_argument("url")
+    cu.add_argument("--name", default="demo")
+    cu.add_argument("--secs", type=float, default=10)
+    cu.add_argument("--login", action="store_true")
+    cu.add_argument("--actions", default="")
+    cu.set_defaults(fn=cmd_capture_url)
 
     a = sub.add_parser("analyze"); a.add_argument("url"); a.set_defaults(fn=cmd_analyze)
 

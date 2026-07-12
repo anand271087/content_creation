@@ -8,13 +8,22 @@ stays correct even if the window is moved mid-take, and never includes
 desktop, dock, or other windows.
 
 Usage:
-    python3 scripts/capture_window.py <url> <out.mov> <seconds> [--type "text"]
+    python3 capture/capture_window.py <url> <out.mov> <seconds> [--type "text"]
+    python3 capture/capture_window.py <url> <out.mov> <seconds> \
+        --actions "wait:2; click:600,320; type:hello world; enter; wait:3"
+
+Action DSL (semicolon-separated, runs while recording):
+    wait:<secs>       pause
+    click:<x>,<y>     Quartz CGEvent mouse click, WINDOW-RELATIVE logical pts
+    type:<text>       System Events keystrokes (Chrome verified frontmost)
+    enter             press Return
 
 Flow:
   1. open Chrome to <url>, activate, set bounds, WAIT until bounds are stable
-  2. find the frontmost Chrome window's CGWindowID via Quartz
-  3. screencapture -v -l<ID> -V<secs> (window-locked recording, no shadow)
-  4. optional: type text + Enter (System Events) after capture starts
+  2. verify Chrome frontmost (keystrokes/clicks leak into focused app otherwise)
+  3. region capture from READ-BACK bounds (video -l window flag is silently
+     ignored by macOS screencapture)
+  4. run --type or --actions; warn if the window moved during the take
 """
 from __future__ import annotations
 import subprocess, sys, time
@@ -25,6 +34,38 @@ import Quartz
 def osascript(script: str) -> str:
     r = subprocess.run(["osascript", "-e", script], capture_output=True, text=True)
     return r.stdout.strip()
+
+
+def quartz_click(x_abs: float, y_abs: float) -> None:
+    """Mouse click at ABSOLUTE screen coords (logical points). Uses the same
+    Accessibility permission as keystrokes (granted to VS Code)."""
+    pt = Quartz.CGPointMake(x_abs, y_abs)
+    move = Quartz.CGEventCreateMouseEvent(None, Quartz.kCGEventMouseMoved, pt,
+                                          Quartz.kCGMouseButtonLeft)
+    Quartz.CGEventPost(Quartz.kCGHIDEventTap, move)
+    time.sleep(0.12)
+    for etype in (Quartz.kCGEventLeftMouseDown, Quartz.kCGEventLeftMouseUp):
+        ev = Quartz.CGEventCreateMouseEvent(None, etype, pt, Quartz.kCGMouseButtonLeft)
+        Quartz.CGEventPost(Quartz.kCGHIDEventTap, ev)
+        time.sleep(0.06)
+
+
+def run_actions(spec: str, win_x: int, win_y: int) -> None:
+    """Execute the action DSL; click coords are window-relative logical pts."""
+    for raw in [s.strip() for s in spec.split(";") if s.strip()]:
+        cmd, _, rest = raw.partition(":")
+        if cmd == "wait":
+            time.sleep(float(rest or "1"))
+        elif cmd == "click":
+            rx, ry = [float(v) for v in rest.split(",")]
+            quartz_click(win_x + rx, win_y + ry)
+        elif cmd == "type":
+            safe = rest.replace('"', '\\"')
+            osascript(f'tell application "System Events" to keystroke "{safe}"')
+        elif cmd == "enter":
+            osascript('tell application "System Events" to key code 36')
+        else:
+            print(f"  unknown action: {raw}")
 
 
 def chrome_window_id() -> int | None:
@@ -70,9 +111,11 @@ def main() -> int:
     if len(sys.argv) < 4:
         print(__doc__); return 2
     url, out, secs = sys.argv[1], sys.argv[2], float(sys.argv[3])
-    type_text = None
+    type_text = actions = None
     if "--type" in sys.argv:
         type_text = sys.argv[sys.argv.index("--type") + 1]
+    if "--actions" in sys.argv:
+        actions = sys.argv[sys.argv.index("--actions") + 1]
 
     subprocess.run(["open", "-a", "Google Chrome", url])
     time.sleep(7)
@@ -97,10 +140,13 @@ def main() -> int:
     cap = subprocess.Popen(["screencapture", "-v", "-V", str(secs), "-R", region, out])
     time.sleep(2.5)
 
-    if type_text and wait_chrome_frontmost(3):
-        osascript(f'tell application "System Events" to keystroke "{type_text}"')
-        time.sleep(0.8)
-        osascript('tell application "System Events" to key code 36')
+    if (type_text or actions) and wait_chrome_frontmost(3):
+        if actions:
+            run_actions(actions, x1, y1)
+        else:
+            osascript(f'tell application "System Events" to keystroke "{type_text}"')
+            time.sleep(0.8)
+            osascript('tell application "System Events" to key code 36')
 
     cap.wait()
     # verify the window did not move during the take
