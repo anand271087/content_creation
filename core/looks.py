@@ -52,7 +52,8 @@ LOOKS: dict[str, Look] = {l.key: l for l in [
 
     # ── Blueshrt: navy button-down ────────────────────────────────────────
     Look("blueshrt_window_front", "282cde77828a4694a24426dd47c1b059", "blueshrt", "front",
-         "bright window/glass (standing) — nick_saraev editorial aesthetic", None,
+         "bright window/glass (standing) — nick_saraev editorial aesthetic; "
+         "SOURCE LETTERBOXED, use blueshrt_full/blueshrt_tight presets", "blueshrt_full",
          ["process_walkthrough (format #8)", "countdown"]),
     Look("blueshrt_stone_34", "b0375ab1cb90429881b9861f94d644c9", "blueshrt", "side",
          "grey stone wall + hanging plant (three-quarter)", None,

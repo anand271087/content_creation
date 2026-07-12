@@ -14,6 +14,10 @@ CROPS = {
     "grey_187": "crop=579:1029:221:271,scale=1080:1920",   # tighter (tier_stack/board)
     # Blue striped-sweatshirt avatar (face sits lower/left vs grey)
     "blue_183": "crop=591:1050:179:250,scale=1080:1920",
+    # Blueshrt window look — SOURCE IS LETTERBOXED (landscape band y 656→1264);
+    # crops must stay inside the band (verified 2026-07-12)
+    "blueshrt_full": "crop=342:608:303:656,scale=1080:1920",
+    "blueshrt_tight": "crop=480:400:234:664,scale=1080:900",
     # No crop (already-framed source)
     "none": "null",
 }
