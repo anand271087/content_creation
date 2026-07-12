@@ -1337,3 +1337,37 @@ download_broll_tasks.py.
 
 **Verified**: the formats/ rewrite reproduces the approved tier_stack render
 pixel-identically (frame-diff 0.00 at sampled timestamps).
+
+---
+
+## ═══════════════════════════════════════════
+## AVATAR LOOK LIBRARY (videographer session, 2026-07-12)
+## ═══════════════════════════════════════════
+
+5 outfit groups, 17 trained HeyGen looks — full registry with avatar IDs in
+`core/looks.py`, env vars `HEYGEN_LOOK_*` in .env. `reel.py looks` to list,
+`reel.py render <look> --text "..." --yes` to render (--yes = credit spend).
+
+| Look pair | Setting | Recommended formats |
+|-----------|---------|---------------------|
+| green_bookshelf_front/side | Warm bookshelf set (the Dan Martell aesthetic) | tier_board, tier_timeline, sort_board, tier_stack — **no background replacement needed** |
+| grey_bookshelf_front/side | Bookshelf set, rust chair (seated) | checklist, authority how-to |
+| black_blinds/couch/brick | Black crew: bright blinds, brick couch, brick profile | countdown + screen demos, moody virals |
+| white_darkwall_front/side | Dark wall, warm sconces, red accent | viral_15s, timer, hero hooks |
+| white_chair / blue_chair | Green wingback armchair (seated) | question_bubble, Friday long-form |
+| blueshrt_window/stone | Bright window / stone + plant | format #8 editorial walkthrough |
+
+**Rules for using looks:**
+- Every look's crop is UNVERIFIED until a test render is framed-checked → add a
+  preset to `core/framing.py` and fill `crop=` in `core/looks.py`. Never
+  composite on an unverified crop (face position shifts per setting).
+- Side-angle looks have off-center faces → MIRROR the UI (face right → boards/
+  pills left). `Look.mirror_ui` flags these.
+- **Two-camera jump cuts**: each front/side pair (`core/looks.py pairs()`) can
+  replicate Dan Martell's multi-cam feel — render the SAME script on both
+  angles (2× credits) and alternate cuts at sentence boundaries via Scribe
+  timestamps. Reserve for hero reels.
+- Real environments mean `editing/replace_background.py` is now OPTIONAL —
+  keep it for the branded studio look or messy sources.
+- Rotate looks across the weekly calendar so the feed doesn't look like one
+  recording session.

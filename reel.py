@@ -88,6 +88,45 @@ def cmd_analyze(args) -> int:
     return subprocess.call([PY, str(ROOT / "capture" / "analyze_reference.py"), args.url])
 
 
+def cmd_looks(_args) -> int:
+    from core.looks import LOOKS
+    print(f"{'look':<24} {'angle':<6} {'crop':<10} setting / formats")
+    for l in LOOKS.values():
+        crop = l.crop or "UNVERIFIED"
+        print(f"{l.key:<24} {l.angle:<6} {crop:<10} {l.setting}")
+        print(f"{'':<42} → {', '.join(l.formats)}")
+    return 0
+
+
+def cmd_render(args) -> int:
+    """HeyGen render with a registered look. COSTS CREDITS — requires --yes."""
+    if not args.yes:
+        print("HeyGen renders cost credits. Re-run with --yes to confirm the spend.")
+        return 2
+    from core.looks import get as get_look
+    from formats.viral_15s import submit_heygen, poll_heygen, download, env
+    look = get_look(args.look)
+    text = Path(args.script_file).read_text() if args.script_file else args.text
+    if not text:
+        print("need --text or --script-file")
+        return 2
+    api_key = env("HEYGEN_API_KEY")
+    voice = env("HEYGEN_VOICE_ID")
+    vid = submit_heygen(text, api_key, look.avatar_id, voice)
+    url = poll_heygen(vid, api_key)
+    out = Path(args.out) if args.out else ROOT / "assets" / "avatar" / "avatar_video.mp4"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    bg = out.with_name("avatar_video_bg.mp4")
+    if bg.exists():
+        bg.unlink()          # stale-guard: force fresh background pass
+    download(url, out)
+    print(f"rendered look={look.key} → {out}")
+    if look.crop is None:
+        print("NOTE: this look's crop is UNVERIFIED — extract a test frame and add "
+              "a preset to core/framing.py + core/looks.py before compositing.")
+    return 0
+
+
 def main() -> int:
     p = argparse.ArgumentParser(prog="reel", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -119,6 +158,16 @@ def main() -> int:
     c.add_argument("keys", nargs="*"); c.set_defaults(fn=cmd_capture)
 
     a = sub.add_parser("analyze"); a.add_argument("url"); a.set_defaults(fn=cmd_analyze)
+
+    lk = sub.add_parser("looks"); lk.set_defaults(fn=cmd_looks)
+
+    r = sub.add_parser("render")
+    r.add_argument("look")
+    r.add_argument("--text")
+    r.add_argument("--script-file")
+    r.add_argument("--out")
+    r.add_argument("--yes", action="store_true", help="confirm HeyGen credit spend")
+    r.set_defaults(fn=cmd_render)
 
     args = p.parse_args()
     return args.fn(args)
