@@ -15,14 +15,18 @@ from pathlib import Path
 from core.brand import CRF_FINAL
 from core.cards import light_leak
 from core.framing import crop as crop_chain
+from core.grade import chain as grade_chain
 
 log = logging.getLogger("overlays")
 
 
 class OverlayChain:
-    def __init__(self, base_video: Path, crop_preset: str, workdir: Path):
+    def __init__(self, base_video: Path, crop_preset: str, workdir: Path,
+                 grade: str = "videographer"):
         self.base = Path(base_video)
-        self.crop = crop_chain(crop_preset)
+        # grade the BASE avatar (videographer: "increase the saturation");
+        # overlays/cards render on top ungraded so brand colors stay exact
+        self.crop = crop_chain(crop_preset) + "," + grade_chain(grade)
         self.workdir = Path(workdir)
         self.workdir.mkdir(parents=True, exist_ok=True)
         self.inputs: list[str] = ["-i", str(self.base)]
