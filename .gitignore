@@ -107,3 +107,4 @@ models/*.torchscript
 
 # Reference-reel analysis downloads (reproducible via capture/analyze_reference.py)
 assets/reference_analysis/
+assets/process_assets/
