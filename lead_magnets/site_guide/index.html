@@ -1,0 +1,130 @@
+<meta charset="utf-8">
+<title>Build a Website &amp; Put It Live with Claude Code — Step-by-Step Guide</title>
+<style>
+  :root { --ink:#111827; --mut:#6b7280; --red:#e11a1a; --yellow:#ffd628; --cream:#faf9f6; --line:#e7e5e0; }
+  * { box-sizing:border-box; }
+  body { font-family:-apple-system, "Helvetica Neue", Arial, sans-serif; background:var(--cream);
+         color:var(--ink); margin:0; line-height:1.65; }
+  .page { max-width:760px; margin:0 auto; padding:56px 28px 80px; }
+  .kicker { font-size:14px; letter-spacing:3px; text-transform:uppercase; color:var(--mut); font-weight:700; }
+  h1 { font-size:44px; line-height:1.12; margin:10px 0 6px; font-weight:900; letter-spacing:-1px; }
+  .sub { font-family:Georgia, serif; font-style:italic; font-size:22px; color:var(--mut); margin:0 0 34px; }
+  .slashbox { position:relative; background:#131318; border-radius:14px; padding:22px 26px; margin:26px 0;
+              font-family:"Courier New", monospace; color:#8ce99a; font-size:15px; overflow:hidden; }
+  .slashbox .grey { color:#9aa0a6; }
+  .slashbox::after { content:""; position:absolute; left:-4%; right:-4%; top:50%; height:14px;
+                     background:var(--red); transform:rotate(-8deg); border-radius:7px; opacity:.92; }
+  h2 { font-size:24px; margin:44px 0 8px; font-weight:900; }
+  .stepnum { display:inline-block; background:var(--ink); color:#fff; font-weight:900; border-radius:10px;
+             padding:2px 12px; margin-right:10px; font-size:18px; }
+  .prompt { background:#fff; border:1px solid var(--line); border-left:5px solid var(--yellow);
+            border-radius:10px; padding:14px 18px; margin:14px 0; font-size:15px; }
+  .prompt b { display:block; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--mut); margin-bottom:6px; }
+  .term { background:#131318; color:#e9ecef; border-radius:10px; padding:14px 18px; margin:14px 0;
+          font-family:"Courier New", monospace; font-size:14px; white-space:pre-wrap; }
+  .tip { background:#fffbe8; border:1px solid #f0e6b8; border-radius:10px; padding:12px 18px; margin:14px 0; font-size:15px; }
+  .tip b { color:#8a6d00; }
+  ul { padding-left:22px; } li { margin:6px 0; }
+  .divider { border:none; border-top:1px solid var(--line); margin:40px 0; }
+  .zh { background:#fff; border:2px solid var(--ink); border-radius:16px; padding:28px 30px; margin-top:26px; }
+  .zh h3 { margin:0 0 8px; font-size:22px; }
+  .zh .btn { display:inline-block; background:var(--red); color:#fff; font-weight:900;
+             padding:13px 26px; border-radius:12px; text-decoration:none; margin-top:12px; font-size:17px; }
+  .zh .small { color:var(--mut); font-size:14px; margin-top:10px; }
+  .cta { background:var(--ink); color:#fff; border-radius:16px; padding:28px 30px; margin-top:26px; }
+  .cta h3 { margin:0 0 8px; font-size:22px; }
+  .cta a { color:var(--yellow); font-weight:700; text-decoration:none; }
+  .footer { margin-top:26px; color:var(--mut); font-size:14px; }
+  @media print { body { background:#fff; } .page { padding:24px; } }
+</style>
+
+<div class="page">
+  <div class="kicker">Free guide · @automatewithanand</div>
+  <h1>Build a Website &amp;<br>Put It Live with Claude Code</h1>
+  <p class="sub">zero coding, zero hosting headaches — the exact workflow from the reel</p>
+
+  <div class="slashbox">
+    <span class="grey">$</span> hire_agency --cost "₹80,000" --wait "6 weeks"<br>
+    <span class="grey">$</span> fight_with_wordpress --plugins 23<br>
+    <span class="grey">$</span> learn_web_development --years 2
+  </div>
+  <p>None of that. Below is the complete process — every prompt and command — to go from
+     a blank folder to a <b>live website on the internet</b> in one sitting, with
+     <b>Claude Code</b> doing all the engineering.</p>
+
+  <h2><span class="stepnum">0</span>Setup (10 minutes, one time)</h2>
+  <ul>
+    <li>Install Node.js from nodejs.org (18+), then Claude Code:
+        <span class="term" style="display:inline;padding:2px 8px">npm install -g @anthropic-ai/claude-code</span></li>
+    <li>Create a free <b>Vercel</b> account at vercel.com (free tier is genuinely enough — SSL, global hosting, custom domains)</li>
+  </ul>
+
+  <h2><span class="stepnum">1</span>Describe your business — Claude builds the site</h2>
+  <p>Open a terminal in an empty folder, run <b>claude</b>, and paste:</p>
+  <div class="prompt"><b>Prompt</b>
+    Build a landing page for [YOUR BUSINESS — one plain-English sentence about what you sell
+    and to whom]. I want: a hero section with a strong headline, 3 feature cards, a pricing
+    section, and a footer. Warm modern design, mobile responsive. Use plain HTML and CSS in a
+    single file, then start a local preview server and give me the URL.
+  </div>
+  <div class="tip"><b>Design taste, cheap:</b> add "in the style of stripe.com" (or any site you love)
+    to the prompt. Claude knows what those look like and borrows the vibe, not the code.</div>
+
+  <h2><span class="stepnum">2</span>Review in your browser — change it by talking</h2>
+  <p>Open the preview URL Claude gives you. Then just say what you see wrong:</p>
+  <div class="prompt"><b>Prompts (real examples)</b>
+    Make the headline bigger and the orange darker. ·
+    Add a testimonials section with 3 quotes. ·
+    The pricing feels hidden — move it above the footer and make the number huge.
+  </div>
+  <div class="tip"><b>Rule:</b> one change per prompt, look, then next. You're the art director;
+    Claude is the (very fast) developer.</div>
+
+  <h2><span class="stepnum">3</span>One command puts it live</h2>
+  <div class="prompt"><b>Prompt</b>
+    Deploy this site to Vercel production. Walk me through login if needed.
+  </div>
+  <div class="term">✓ Build completed
+✓ SSL certificate issued
+🌍 Live: https://yourbusiness.vercel.app   ·   cost: ₹0</div>
+  <p>That URL is a real website — anyone in the world can open it, on any device, instantly.</p>
+
+  <h2><span class="stepnum">4</span>Optional finishing moves (each is one prompt)</h2>
+  <ul>
+    <li><b>Custom domain:</b> "Connect mybusiness.com to this Vercel project — walk me through the DNS records."</li>
+    <li><b>Lead capture:</b> "Add an email signup form that saves to a Google Sheet."</li>
+    <li><b>WhatsApp button:</b> "Add a floating WhatsApp chat button linked to my number."</li>
+    <li><b>SEO basics:</b> "Add proper page titles, meta descriptions and an OG image so links preview well."</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>The 5 mistakes that stall beginners</h2>
+  <ul>
+    <li><b>Asking for the whole site in one giant prompt</b> — hero first, then one section at a time</li>
+    <li><b>Describing design in developer words</b> — say "feels cramped" or "too corporate"; Claude translates</li>
+    <li><b>Skipping the phone check</b> — open the live URL on your phone; most visitors are mobile</li>
+    <li><b>Fighting errors yourself</b> — paste any error straight back into Claude Code; it fixes its own mess</li>
+    <li><b>Polishing before publishing</b> — deploy the 80% version today; iterate on the live site tomorrow</li>
+  </ul>
+
+  <div class="zh">
+    <h3>Want this done for you? — Zero Hands</h3>
+    <p><b>Zero Hands</b> is my AI video production studio. We produce studio-quality,
+       presenter-led videos with AI — <b>no cameras, no crews, no filming days</b> — and build
+       the custom automation behind founders who show up online every day.</p>
+    <p>If you're a founder who knows you should be visible but can't keep filming — that's
+       exactly who this is for.</p>
+    <a class="btn" href="https://calendly.com/anand_kaliappan/call">Book a free call →</a>
+    <p class="small">calendly.com/anand_kaliappan/call · zerohands.co</p>
+  </div>
+
+  <div class="cta">
+    <h3>Want the full video walkthrough?</h3>
+    <p>I post one AI automation build every week — real screens, real prompts, no fluff.</p>
+    <p>Follow <a href="https://www.instagram.com/automatewithanand/">@automatewithanand</a> on Instagram
+       · Subscribe on YouTube</p>
+  </div>
+
+  <p class="footer">© 2026 automatewithanand · You're free to share this guide — just keep the credit.</p>
+</div>

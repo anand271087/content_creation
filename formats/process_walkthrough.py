@@ -132,7 +132,13 @@ def compute_windows(words, duration):
 
 def build(avatar: Path, captions: Path, out: Path,
           crop_full: str = "crop=560:608:250:656,scale=1080:1174",
-          crop_tight: str = "crop=608:400:226:664,scale=1080:710") -> Path:
+          crop_tight: str = "crop=608:400:226:664,scale=1080:710",
+          phases=None, slash_anchor: str | None = None) -> Path:
+    global PHASES, SLASH_ANCHOR
+    if phases is not None:
+        PHASES = phases
+    if slash_anchor is not None:
+        SLASH_ANCHOR = slash_anchor
     ASSET_DIR.mkdir(parents=True, exist_ok=True)
     duration = duration_of(avatar)
     words = normalize(load_words(captions))
