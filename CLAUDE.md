@@ -1379,3 +1379,11 @@ synced to speech, accumulate to a full-board payoff. Script: "Stop saying X.
 Start saying Y. [reason]." Saved as template (memory: project_swap_board_format);
 build on request as a 2-column variant of formats/sort_board.py. Decision-engine
 rule: paired good/bad word or option swap → swap_board.
+
+### Analyzed template — contrast_stack (Dan Martell Daxw_ESj8u1)
+"Broke vs Wealthy" A/B contrast: full-frame avatar + keyword-synced PHOTO-card
+pops (one per clause, replace not accumulate), pinned title pill, mid-frame
+single-phrase captions, ends on a card-suppressed grand-takeaway. Fork of
+authority_stack. Saved as template (memory: project_contrast_stack_format);
+build on request. Decision-engine rule: A/B "X does this vs Y does that"
+contrast → contrast_stack. Keep dark pills behind captions (our warm bg).
