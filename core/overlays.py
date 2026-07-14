@@ -33,10 +33,27 @@ class OverlayChain:
         self.items: list[tuple[int, int, int, float, float, str | None]] = []
         self.flash_times: list[float] = []
         self._n_inputs = 1
+        self._sharp = None   # (input_idx, y, crop_str) when letterbox base is used
 
     def add_image(self, png: Path, x: int, y: int, start: float, end: float) -> None:
         self.inputs += ["-i", str(png)]
         self.items.append((self._n_inputs, x, y, start, end, None))
+        self._n_inputs += 1
+
+    def set_letterbox_base(self, band_crop: str, sharp_crop: str, sharp_y: int,
+                           grade: str = "videographer") -> None:
+        """For letterboxed sources (all videographer looks): base becomes a
+        blurred scaled-to-fill wash of the band; a SHARP wider crop of the same
+        footage is overlaid on top, full-duration, so the subject's gestures
+        stay contained (fixes tight-crop drift). `sharp_crop` should be a
+        crop+scale to 1080 width, shorter than 1920; it's placed at sharp_y."""
+        from core.grade import chain as _g
+        g = _g(grade)
+        self.crop = (f"{band_crop},scale=1080:1920:force_original_aspect_ratio=increase,"
+                     f"crop=1080:1920,gblur=sigma=26,{g}")
+        # sharp avatar layer = the base file again, cropped wide + graded
+        self.inputs += ["-i", str(self.base)]
+        self._sharp = (self._n_inputs, sharp_y, f"{sharp_crop},{g}")
         self._n_inputs += 1
 
     def add_video(self, mp4: Path, x: int, y: int, start: float, end: float,
@@ -55,6 +72,11 @@ class OverlayChain:
     def render(self, out: Path, duration: float, preset: str = "fast") -> Path:
         parts = [f"[0:v]{self.crop}[base]"]
         prev = "base"
+        if self._sharp is not None:
+            si, sy, scrop = self._sharp
+            parts.append(f"[{si}:v]{scrop}[sharp]")
+            parts.append(f"[base][sharp]overlay=x=(W-w)/2:y={sy}[based]")
+            prev = "based"
         for n, (i, x, y, s, e, pre) in enumerate(self.items):
             src = f"{i}:v"
             if pre:

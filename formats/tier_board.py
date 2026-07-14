@@ -75,7 +75,9 @@ def row_label(text: str, idx: int) -> Path:
 
 
 def build(avatar: Path, captions: Path, out: Path,
-          items=None, title_lines=None, crop: str = CROP) -> Path:
+          items=None, title_lines=None, crop: str = CROP,
+          letterbox_band: str | None = None, sharp_crop: str | None = None,
+          sharp_y: int = 150) -> Path:
     global ITEMS, TITLE_LINES
     if items is not None:
         ITEMS = items
@@ -86,6 +88,8 @@ def build(avatar: Path, captions: Path, out: Path,
     words = normalize(load_words(captions))
 
     chain = OverlayChain(avatar, crop, ASSET_DIR)
+    if letterbox_band:
+        chain.set_letterbox_base(letterbox_band, sharp_crop, sharp_y)
     title = title_pill(TITLE_LINES, ASSET_DIR / "title_pill.png")
     tw = Image.open(title).width
     chain.add_image(title, (W - tw) // 2, 60, 0.0, duration)
