@@ -1371,3 +1371,11 @@ pixel-identically (frame-diff 0.00 at sampled timestamps).
   keep it for the branded studio look or messy sources.
 - Rotate looks across the weekly calendar so the feed doesn't look like one
   recording session.
+
+### Analyzed template — swap_board (Dan Martell DayaDuKgSfQ)
+2-column "don't say / instead say" paired-reveal board (variant of sort_board):
+each beat drops a matched pair — bad word left (red), better word right (cyan) —
+synced to speech, accumulate to a full-board payoff. Script: "Stop saying X.
+Start saying Y. [reason]." Saved as template (memory: project_swap_board_format);
+build on request as a 2-column variant of formats/sort_board.py. Decision-engine
+rule: paired good/bad word or option swap → swap_board.
