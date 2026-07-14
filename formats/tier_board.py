@@ -74,12 +74,18 @@ def row_label(text: str, idx: int) -> Path:
     return out
 
 
-def build(avatar: Path, captions: Path, out: Path) -> Path:
+def build(avatar: Path, captions: Path, out: Path,
+          items=None, title_lines=None, crop: str = CROP) -> Path:
+    global ITEMS, TITLE_LINES
+    if items is not None:
+        ITEMS = items
+    if title_lines is not None:
+        TITLE_LINES = title_lines
     ASSET_DIR.mkdir(parents=True, exist_ok=True)
     duration = duration_of(avatar)
     words = normalize(load_words(captions))
 
-    chain = OverlayChain(avatar, CROP, ASSET_DIR)
+    chain = OverlayChain(avatar, crop, ASSET_DIR)
     title = title_pill(TITLE_LINES, ASSET_DIR / "title_pill.png")
     tw = Image.open(title).width
     chain.add_image(title, (W - tw) // 2, 60, 0.0, duration)

@@ -18,6 +18,9 @@ CROPS = {
     # crops must stay inside the band (verified 2026-07-12)
     "blueshrt_full": "crop=342:608:303:656,scale=1080:1920",
     "blueshrt_tight": "crop=480:400:234:664,scale=1080:900",
+    # Green bookshelf look — ALSO letterboxed (band 1080x608 @ y656), seated,
+    # face centered x~551; tight 9:16 within band (verified 2026-07-14)
+    "green_bookshelf_full": "crop=342:608:380:656,scale=1080:1920",
     # No crop (already-framed source)
     "none": "null",
 }
