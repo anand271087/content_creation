@@ -26,7 +26,12 @@ def speed_up(src: Path, dst: Path, factor: float = FINAL_SPEED) -> Path:
 
 def append_thumbnail(src: Path, dst: Path, thumb_png: Path = THUMB_PNG,
                      secs: float = 1.5) -> Path:
-    """Concat a still end-card after the reel (YouTube Shorts thumbnail trick)."""
+    """Concat a still end-card after the reel (YouTube Shorts thumbnail trick).
+
+    Uses the concat FILTER with explicit fps/scale/sar normalization on BOTH
+    inputs — the concat DEMUXER mis-times sources of differing framerate
+    (HeyGen renders 25fps; a 30fps card stretched the video ~1.2x). 30fps out.
+    """
     if not thumb_png.exists():
         raise FileNotFoundError(f"thumbnail missing: {thumb_png}")
     with tempfile.TemporaryDirectory() as td:
@@ -38,10 +43,14 @@ def append_thumbnail(src: Path, dst: Path, thumb_png: Path = THUMB_PNG,
             "-r", "30", "-vf", "scale=1080:1920,setsar=1",
             "-c:a", "aac", "-b:a", "192k", "-shortest", str(card),
         ], check=True, capture_output=True)
-        lst = Path(td) / "concat.txt"
-        lst.write_text(f"file '{src.resolve()}'\nfile '{card.resolve()}'\n")
+        # concat FILTER (not demuxer) with per-input normalization → no re-timing
+        fc = ("[0:v]fps=30,scale=1080:1920,setsar=1[v0];"
+              "[1:v]fps=30,scale=1080:1920,setsar=1[v1];"
+              "[0:a]aresample=48000[a0];[1:a]aresample=48000[a1];"
+              "[v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]")
         subprocess.run([
-            "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(lst),
+            "ffmpeg", "-y", "-i", str(src), "-i", str(card),
+            "-filter_complex", fc, "-map", "[v]", "-map", "[a]",
             "-c:v", "libx264", "-preset", "slow", "-crf", str(CRF_FINAL),
             "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", str(dst),
         ], check=True, capture_output=True)
