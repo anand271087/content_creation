@@ -57,11 +57,29 @@ def append_thumbnail(src: Path, dst: Path, thumb_png: Path = THUMB_PNG,
     return dst
 
 
-def finish(raw: Path, out_stem: str | None = None) -> Path:
-    """raw composite → *_fast.mp4 → *_fast_with_thumb.mp4. Returns final path."""
+def upscale_4k(src: Path, dst: Path) -> Path:
+    """Upscale a 1080x1920 master to 4K (2160x3840) with lanczos + a light
+    unsharp — supersampled crispness (user request 2026-07-15). IG downscales
+    on upload, but a 4K master survives the transcode noticeably sharper."""
+    subprocess.run([
+        "ffmpeg", "-y", "-i", str(src),
+        "-vf", "scale=2160:3840:flags=lanczos,unsharp=5:5:0.6:5:5:0.2",
+        "-c:v", "libx264", "-preset", "slow", "-crf", "16",
+        "-pix_fmt", "yuv420p", "-c:a", "copy", str(dst),
+    ], check=True)
+    return dst
+
+
+def finish(raw: Path, out_stem: str | None = None, four_k: bool = False) -> Path:
+    """raw composite → *_fast.mp4 → *_fast_with_thumb.mp4. Returns final path.
+
+    four_k=True adds a final 2160x3840 upscale pass → *_4k.mp4."""
     stem = out_stem or raw.stem
     fast = raw.with_name(f"{stem}_fast.mp4")
     final = raw.with_name(f"{stem}_fast_with_thumb.mp4")
     speed_up(raw, fast)
     append_thumbnail(fast, final)
+    if four_k:
+        master = raw.with_name(f"{stem}_4k.mp4")
+        return upscale_4k(final, master)
     return final

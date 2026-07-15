@@ -1,0 +1,367 @@
+<meta charset="utf-8">
+<title>5 Claude Code Skills That Replaced My Content Team</title>
+<style>
+  :root { --ink:#111827; --mut:#6b7280; --red:#e11a1a; --yellow:#ffd628; --cream:#faf9f6; --line:#e7e5e0; }
+  * { box-sizing:border-box; }
+  body { font-family:-apple-system, "Helvetica Neue", Arial, sans-serif; background:var(--cream);
+         color:var(--ink); margin:0; line-height:1.65; }
+  .page { max-width:780px; margin:0 auto; padding:56px 28px 80px; }
+  .kicker { font-size:14px; letter-spacing:3px; text-transform:uppercase; color:var(--mut); font-weight:700; }
+  h1 { font-size:44px; line-height:1.12; margin:10px 0 6px; font-weight:900; letter-spacing:-1px; }
+  .sub { font-family:Georgia, serif; font-style:italic; font-size:22px; color:var(--mut); margin:0 0 34px; }
+  .slashbox { position:relative; background:#131318; border-radius:14px; padding:22px 26px; margin:26px 0;
+              font-family:"Courier New", monospace; color:#8ce99a; font-size:15px; overflow:hidden; }
+  .slashbox .grey { color:#9aa0a6; }
+  .slashbox::after { content:""; position:absolute; left:-4%; right:-4%; top:50%; height:14px;
+                     background:var(--red); transform:rotate(-8deg); border-radius:7px; opacity:.92; }
+  h2 { font-size:25px; margin:46px 0 8px; font-weight:900; letter-spacing:-.5px; }
+  h2.skill { margin-top:52px; }
+  .stepnum { display:inline-block; background:var(--ink); color:#fff; font-weight:900; border-radius:10px;
+             padding:2px 12px; margin-right:10px; font-size:18px; }
+  .what { font-size:16px; margin:6px 0 4px; }
+  .role { font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--red); font-weight:800; margin:0; }
+  .prompt { background:#fff; border:1px solid var(--line); border-left:5px solid var(--yellow);
+            border-radius:10px; padding:14px 18px; margin:14px 0; font-size:15px; white-space:pre-wrap; }
+  .prompt b { display:block; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--mut); margin-bottom:6px; }
+  .skillmd { background:#fff; border:1px solid var(--line); border-left:5px solid var(--ink);
+             border-radius:10px; padding:14px 18px; margin:14px 0; font-family:"Courier New", monospace;
+             font-size:13.5px; white-space:pre-wrap; }
+  .skillmd b { display:block; font-family:-apple-system,Arial,sans-serif; font-size:12px; letter-spacing:2px;
+               text-transform:uppercase; color:var(--mut); margin-bottom:8px; }
+  .front { color:var(--red); }
+  .term { background:#131318; color:#e9ecef; border-radius:10px; padding:14px 18px; margin:14px 0;
+          font-family:"Courier New", monospace; font-size:14px; white-space:pre-wrap; }
+  .term .c { color:#8ce99a; }
+  .tip { background:#fffbe8; border:1px solid #f0e6b8; border-radius:10px; padding:12px 18px; margin:14px 0; font-size:15px; }
+  .tip b { color:#8a6d00; }
+  .pit { background:#fdecec; border:1px solid #f4c9c9; border-radius:10px; padding:12px 18px; margin:14px 0; font-size:15px; }
+  .pit b { color:var(--red); }
+  ul { padding-left:22px; } li { margin:6px 0; }
+  .divider { border:none; border-top:1px solid var(--line); margin:44px 0; }
+  .quick { background:#fff; border:2px solid var(--ink); border-radius:16px; padding:26px 30px; margin:8px 0 20px; }
+  .quick h3 { margin:0 0 12px; font-size:20px; }
+  .quick ol { margin:0; padding-left:20px; } .quick li { margin:8px 0; font-size:15.5px; }
+  .quick .flow { font-family:"Courier New",monospace; font-size:13px; color:#131318; background:#f3f1ec;
+                 border-radius:8px; padding:12px 14px; margin-top:14px; white-space:pre-wrap; }
+  .cta { background:var(--ink); color:#fff; border-radius:16px; padding:28px 30px; margin-top:48px; }
+  .cta h3 { margin:0 0 8px; font-size:22px; }
+  .cta a { color:var(--yellow); font-weight:700; text-decoration:none; }
+  .footer { margin-top:26px; color:var(--mut); font-size:14px; }
+  code { background:#f3f1ec; border-radius:5px; padding:1px 6px; font-family:"Courier New",monospace; font-size:13.5px; }
+  @media print { body { background:#fff; } .page { padding:24px; } h2.skill { page-break-inside:avoid; } }
+</style>
+
+<div class="page">
+  <div class="kicker">Free guide · @automatewithanand</div>
+  <h1>5 Claude Code Skills<br>That Replaced My Content Team</h1>
+  <p class="sub">no editor, no agency, no crew — the exact system I run my content business on</p>
+
+  <div class="slashbox">
+    <span class="grey">$</span> hire_video_editor --salary "₹₹₹/mo"<br>
+    <span class="grey">$</span> book_content_agency --retainer "₹₹₹₹₹/mo"<br>
+    <span class="grey">$</span> film_edit_post --hours_per_reel 6
+  </div>
+  <p>I fired all of it. I now run the whole thing — idea → script → avatar video → thumbnail →
+     caption → posted — with <b>five Claude Code skills</b> that talk to my own build system.
+     This guide hands you all five: what each one does, the exact <code>SKILL.md</code> you paste
+     into Claude Code, the command to run it, and the traps that waste your first week.</p>
+
+  <h2>Why skills, not prompts</h2>
+  <p>A prompt is a one-time favour. You explain everything, get one answer, and start from zero next time.
+     A <b>skill</b> is a saved instruction file (<code>SKILL.md</code>) that lives in your project. Claude Code
+     loads it automatically, so the model already knows <i>your</i> voice, <i>your</i> format library, and
+     <i>your</i> commands — every time, with no re-explaining. Prompts don't compound. Skills do. That's the
+     whole difference between "I use AI sometimes" and "AI runs my content line."</p>
+  <p>Where a skill lives: create <code>.claude/skills/&lt;skill-name&gt;/SKILL.md</code> in your project.
+     Claude Code auto-discovers it. The frontmatter (<code>name</code> + <code>description</code>) is how the
+     model decides when to fire it. Everything below the frontmatter is the instruction set.</p>
+
+  <div class="quick">
+    <h3>Quickstart — the whole loop on one page</h3>
+    <ol>
+      <li><b>Script Writer</b> turns one idea into a scored viral script in your voice.</li>
+      <li><b>Reel-to-Template</b> steals the <i>structure</i> of any competitor's viral reel — legally.</li>
+      <li><b>Video Builder</b> renders the avatar, adds captions, and composites the finished reel with one command.</li>
+      <li><b>Thumbnail Designer</b> generates the scroll-stopping cover, colour-matched to your set.</li>
+      <li><b>Caption/Post Writer</b> writes the IG caption, hashtags, and the comment-keyword CTA.</li>
+    </ol>
+    <div class="flow">idea
+  → script-writer      →  script.txt   (DSSCL ≥ 9.5)
+  → reel-to-template   →  format + timing to copy   (optional)
+  → video-builder      →  render → captions → composite → 1.3× + thumbnail
+  → thumbnail-designer →  thumbnail.png
+  → caption-writer     →  caption.txt + keyword CTA
+  → POST</div>
+  </div>
+  <p>Below, each skill in full. Every <code>SKILL.md</code> block is copy-paste ready — drop it into
+     <code>.claude/skills/&lt;name&gt;/SKILL.md</code> and it works.</p>
+
+  <hr class="divider">
+
+  <!-- SKILL 1 -->
+  <h2 class="skill"><span class="stepnum">1</span>Script Writer</h2>
+  <p class="role">Skill · turns one idea into a scored viral script</p>
+  <p class="what">You give it a single topic. It picks a proven hook, picks a proven format, writes the full
+     script in your speaking voice, then <b>scores itself</b> and rewrites until it's genuinely postable — before
+     you ever spend a rupee on rendering.</p>
+  <p>Two banks make this work: a <b>hook bank</b> (200 tested hook templates) and a <b>format bank</b> (47 content
+     structures). The skill fills the hook blanks with your topic, wraps it in the GOAT framework, and grades the
+     draft on <b>DSSCL</b>: Double-watch, Share, Save, Comment, Like. If it doesn't clear 9.5/10, it rewrites.</p>
+
+  <div class="skillmd"><b>.claude/skills/script-writer/SKILL.md</b>
+<span class="front">---
+name: script-writer
+description: Turn a single idea into a full viral short-form script in Anand's
+  voice. Use whenever the user gives a topic, hook angle, or "write me a reel about".
+---</span>
+You are the scriptwriter for @automatewithanand — AI automation for founders and
+creators in India. Confident, direct, friend-to-friend. Never corporate.
+
+WORKFLOW
+1. Read reference/english-hooks.md. Pick the 2-3 best-fit hooks for the topic,
+   fill the blanks with automation-specific language, choose the strongest.
+2. Read reference/content-formats.md. Pick the format whose shape matches the goal.
+3. Write the script: hook in the first 3 seconds (open a loop, never close it),
+   no filler, one core idea, spoken 8th-grade English, build to one quotable line.
+4. Score the draft on DSSCL (0-10 each):
+   D Double-watch · S Share · S Save · C Comment · L Like
+   final = D*.30 + Share*.25 + Save*.25 + C*.10 + L*.10
+   Must clear: D>=9, Share>=9, Save>=9, final>=9.5. If not, rewrite. Max 5 tries.
+5. Every script must name ONE specific tool AND end on a comment-keyword CTA.
+
+OUTPUT: the spoken script + the DSSCL scores + the hook # and format # used.
+</div>
+  <p>Run it — open Claude Code in the project and just talk to it:</p>
+  <div class="prompt"><b>Example prompt</b>
+Use the script-writer skill. Topic: "5 Claude Code skills that replaced my
+content team." Hook angle: fear of being out-produced. Keyword CTA: CLAUDE.
+Return the script and the DSSCL scores.</div>
+  <p>Prefer a hands-off run? The same GOAT + DSSCL loop is wired into the pipeline —
+     dry-run it to see the scored script without spending on any API:</p>
+  <div class="term"><span class="c">python3.11</span> pipeline.py --topic "5 Claude Code skills that replaced my content team" --dry-run</div>
+  <div class="tip"><b>Voice trick:</b> paste 3 of your own past captions or a transcript into the skill once and
+     add "match this voice." The scores get honest and the writing stops sounding like an AI intern.</div>
+  <div class="pit"><b>Pitfall 1 — one idea per script.</b> The moment a script tries to teach two things,
+     Save and Double-watch collapse. If DSSCL won't clear 9.5, it's almost always because the idea is two ideas.</div>
+  <div class="pit"><b>Pitfall 2 — never skip the hook bank.</b> A hand-written hook feels fine and dies in the feed.
+     The bank exists because those 200 openings are already proven to stop the scroll.</div>
+
+  <!-- SKILL 2 -->
+  <h2 class="skill"><span class="stepnum">2</span>Reel-to-Template</h2>
+  <p class="role">Skill · reverse-engineers any viral reel into a reusable format</p>
+  <p class="what">See a competitor's reel doing huge numbers? This skill downloads it, pulls out evenly-spaced
+     frames and a word-level transcript, and reduces the whole thing to a <b>reusable template</b> =
+     layout + script pattern + timing. You're not copying their content — you're copying the <i>structure</i>
+     that made it work, and pouring your own topic into it.</p>
+  <p>It works because Instagram exposes a public GraphQL endpoint. One <code>doc_id</code> + the shortcode
+     returns the real <code>video_url</code> — no login. Then ffmpeg grabs the frames and ElevenLabs Scribe
+     transcribes the audio with timestamps, so you can see exactly <i>when</i> each beat lands.</p>
+
+  <div class="skillmd"><b>.claude/skills/reel-to-template/SKILL.md</b>
+<span class="front">---
+name: reel-to-template
+description: Download a competitor's Instagram reel and reduce it to a reusable
+  format = layout + script pattern + timing. Use when the user shares a reel URL
+  and wants to understand or replicate why it works.
+---</span>
+You dissect reference reels into templates this channel can rebuild.
+
+WORKFLOW
+1. Run: python3.11 capture/analyze_reference.py <instagram-url>
+   It downloads reel.mp4, extracts frames f_00..09.png, and writes a Scribe
+   transcript (words.json + transcript.txt) under
+   assets/reference_analysis/<shortcode>/.
+2. Read the frames and the transcript. Produce a TEMPLATE with 3 parts:
+   - LAYOUT: what's on screen each beat (full-frame face / split / card / board),
+     text style, where captions sit, accent colour.
+   - SCRIPT PATTERN: the sentence shape, beat by beat (hook -> reveal -> proof -> CTA).
+   - TIMING: seconds per beat, from the word timestamps. Reveals fire at
+     word_start - 0.15s.
+3. Map it to the closest format in formats/registry.py (run: python3.11 reel.py
+   list). If none fit, describe the new layout precisely enough to build.
+
+RULES: download IMMEDIATELY — signed video URLs expire in minutes. Never reuse the
+competitor's words or footage; only the structure.
+</div>
+  <p>The command the skill runs for you:</p>
+  <div class="term"><span class="c">python3.11</span> reel.py analyze https://www.instagram.com/reel/SHORTCODE/</div>
+  <p>Then hand the frames + transcript back to Claude with the analysis prompt:</p>
+  <div class="prompt"><b>Analysis prompt</b>
+Use the reel-to-template skill on the files in assets/reference_analysis/&lt;shortcode&gt;/.
+Give me: LAYOUT per beat, the SCRIPT PATTERN as a fill-in-the-blank template,
+and TIMING in seconds. Then tell me which format in reel.py list is closest.</div>
+  <div class="tip"><b>Free upgrade:</b> if a Cloudflare wall blocks a page you want to screen-record for the
+     same reel, pull it from the Wayback Machine (<code>web.archive.org/web/&lt;year&gt;/&lt;url&gt;</code>) instead.</div>
+  <div class="pit"><b>Pitfall 1 — the token expires.</b> That <code>video_url</code> is signed and dies in minutes.
+     Download in the same run you fetch it; don't paste it into a browser "to check" first.</div>
+  <div class="pit"><b>Pitfall 2 — copy structure, never content.</b> Templates are legal and smart. Re-using
+     their script lines or clips is neither. Pour your own topic into the shape.</div>
+
+  <!-- SKILL 3 -->
+  <h2 class="skill"><span class="stepnum">3</span>Video Builder</h2>
+  <p class="role">Skill · script in, finished reel out</p>
+  <p class="what">This is the one that replaced the editor. It takes your script and produces the finished,
+     posture-perfect reel: renders a talking-head <b>avatar</b> of you (HeyGen), sets the background and framing,
+     burns in word-level <b>captions</b> (Scribe), composites the chosen <b>format</b> on top, then finishes with a
+     <b>1.3× speed pass and a thumbnail end-card</b> — the last two are what make AI footage feel human and
+     retention-friendly.</p>
+  <p>The trick is picking the right format first. <code>reel.py decide</code> reads your script's shape and tells
+     you which of the format modules fits — visible-framework boards beat plain b-roll 5-10× on the same topic.</p>
+
+  <div class="skillmd"><b>.claude/skills/video-builder/SKILL.md</b>
+<span class="front">---
+name: video-builder
+description: Turn a finished script into a finished reel — avatar render, framing,
+  captions, format compositing, 1.3x speed + thumbnail. Use when a script is ready
+  to become a video.
+---</span>
+You run the build line. The script is already written; you produce the MP4.
+
+WORKFLOW (run in order)
+1. Pick the format from the script shape:
+   python3.11 reel.py decide "<paste the script>"
+2. Render the avatar with a registered look (COSTS CREDITS — needs --yes):
+   python3.11 reel.py render green_bookshelf_front --script-file script.txt --yes
+   -> writes assets/avatar/avatar_video.mp4
+3. Word-level captions via ElevenLabs Scribe:
+   python3.11 reel.py transcribe assets/avatar/avatar_video.mp4 words.json
+4. Composite the chosen format + captions (auto-finishes 1.3x + thumbnail):
+   python3.11 reel.py make <format> --avatar assets/avatar/avatar_video.mp4 \
+       --captions words.json
+   -> writes the composited reel AND the finished reel.
+
+RULES
+- Verify the look's crop before compositing. If reel.py render prints
+  "crop UNVERIFIED", extract one frame, check face position, add a preset to
+  core/framing.py + core/looks.py first. A wrong crop = decapitated avatar.
+- Dark pills sit behind every landed caption/label (white text drowns on the warm set).
+- End the reel the instant the last payoff lands.
+</div>
+  <p>The full command sequence, start to finish:</p>
+  <div class="term"><span class="c"># 1. which format fits this script?</span>
+python3.11 reel.py decide "$(cat script.txt)"
+
+<span class="c"># 2. render the avatar (this one spends HeyGen credits)</span>
+python3.11 reel.py render green_bookshelf_front --script-file script.txt --yes
+
+<span class="c"># 3. word-level captions</span>
+python3.11 reel.py transcribe assets/avatar/avatar_video.mp4 words.json
+
+<span class="c"># 4. composite + auto-finish (1.3x speed + thumbnail end-card)</span>
+python3.11 reel.py make process_walkthrough \
+    --avatar assets/avatar/avatar_video.mp4 --captions words.json</div>
+  <div class="tip"><b>Why 1.3×:</b> HeyGen speaks at ~142 words/min, which reads as sluggish. The finish pass
+     speeds video + audio to ~185 wpm — the pace top creators actually post at. It runs automatically inside
+     <code>reel.py make</code>; use <code>reel.py finish &lt;video&gt;</code> to apply it to any clip manually.</div>
+  <div class="pit"><b>Pitfall 1 — unverified crops decapitate the avatar.</b> Every camera setup frames the face
+     differently. Never composite on a look whose crop you haven't frame-checked once.</div>
+  <div class="pit"><b>Pitfall 2 — <code>--yes</code> costs money.</b> The render step spends real HeyGen credits.
+     Lock the script (DSSCL cleared) before you render — don't render a draft you'll rewrite.</div>
+
+  <!-- SKILL 4 -->
+  <h2 class="skill"><span class="stepnum">4</span>Thumbnail Designer</h2>
+  <p class="role">Skill · generates the scroll-stopping cover</p>
+  <p class="what">The cover decides the click. This skill generates a <code>thumbnail.png</code> keyed to your
+     avatar's background palette: a bold 3-5 word headline, your face, and a small badge — high contrast, readable
+     at thumbnail size. The finish pass then appends it as the end-card, and you upload the same PNG as the reel cover.</p>
+
+  <div class="skillmd"><b>.claude/skills/thumbnail-designer/SKILL.md</b>
+<span class="front">---
+name: thumbnail-designer
+description: Design a scroll-stopping reel cover (thumbnail.png) matched to the
+  avatar's set palette — bold headline + face + badge. Use after the video is built.
+---</span>
+You design covers that win the click at 120px wide.
+
+RECIPE
+1. Read the reel's hook and the look's setting (core/looks.py) to get the
+   background palette. green_bookshelf = warm/amber; white_darkwall = red accent;
+   black_blinds = cool/moody.
+2. Headline: 3-5 words, the single most curiosity-driving phrase from the hook.
+   All caps, heaviest weight, one accent word in the set's accent colour.
+3. Composition: face on one third, headline on the other, small handle badge
+   (@automatewithanand). One accent colour only — pull it from the background.
+4. Contrast: dark scrim behind text over any busy area. Test it shrunk to 120px —
+   if you can't read it small, it fails.
+5. Export 1080x1920 PNG to assets/final/thumbnail.png so core/finish.py appends it.
+
+RULES: never more than 5 words. Never two accent colours. Face must show one
+readable emotion (shock / conviction), not a neutral stare.
+</div>
+  <p>Prompt to fire it:</p>
+  <div class="prompt"><b>Prompt</b>
+Use the thumbnail-designer skill. Hook: "5 Claude Code skills that replaced my
+content team." Look: green_bookshelf_front (warm amber set). Give me the headline
+(max 5 words, one accent word), the layout, and export
+assets/final/thumbnail.png at 1080x1920.</div>
+  <div class="tip"><b>Palette match:</b> pulling the accent straight from the background is what makes the cover
+     look designed instead of slapped-on. Warm set → amber/red accent; cool set → electric blue.</div>
+  <div class="pit"><b>Pitfall 1 — too many words.</b> More than 5 words and nobody reads it mid-scroll. Cut until it hurts.</div>
+  <div class="pit"><b>Pitfall 2 — a neutral face.</b> A calm expression reads as boring. Pick the frame with real emotion.</div>
+
+  <!-- SKILL 5 -->
+  <h2 class="skill"><span class="stepnum">5</span>Caption / Post Writer</h2>
+  <p class="role">Skill · writes the caption, hashtags, and keyword CTA</p>
+  <p class="what">The last mile. This skill writes the Instagram caption in your voice, a tight hashtag set,
+     and — the part that actually grows the account — the <b>comment-keyword CTA</b> that turns viewers into DMs.
+     ("Comment CLAUDE and I'll send you the full guide.") Every comment also boosts the reel's reach, so the CTA
+     does double duty.</p>
+
+  <div class="skillmd"><b>.claude/skills/caption-writer/SKILL.md</b>
+<span class="front">---
+name: caption-writer
+description: Write the Instagram caption, hashtags, and comment-keyword CTA for a
+  finished reel, in Anand's voice, ready to paste. Use as the final step before posting.
+---</span>
+You write the post copy for @automatewithanand. Confident, direct, no corporate tone.
+
+OUTPUT (in this order)
+1. HOOK LINE: first line repeats the reel's promise in fresh words — this is all
+   most people read before "...more".
+2. BODY: 2-4 short lines of real value or a mini-list. No fluff, no "In today's video".
+3. CTA: one comment-keyword line. Format:
+   "Comment <KEYWORD> and I'll DM you the full guide." Exactly ONE keyword.
+4. HASHTAGS: 5-8, mix of broad (#ai #automation) and niche
+   (#claudecode #contentautomation #aivideos). No 30-tag walls.
+
+RULES: one keyword only (two confuses the auto-DM). End on a question sometimes —
+replies boost reach. Never write more than ~4 lines of body; the reel is the content.
+</div>
+  <p>The caption template it produces looks like this:</p>
+  <div class="prompt"><b>Caption template</b>
+I run my entire content business with 5 Claude Code skills. No editor. No agency.
+
+Script → avatar video → thumbnail → caption → posted. One person, one afternoon.
+
+The full setup — every SKILL.md and command — is in a free guide.
+Comment <b>CLAUDE</b> and I'll DM it to you 👇
+
+#ai #automation #claudecode #contentautomation #aivideos #contentcreator</div>
+  <div class="tip"><b>Deliverability:</b> when someone comments the keyword, reply to their comment as well as
+     DMing the link. The reply signals a real conversation and gets your DM out of the "requests" folder.</div>
+  <div class="pit"><b>Pitfall 1 — two keywords.</b> If the CTA says "comment CLAUDE or GUIDE," your auto-DM tool
+     misfires and people get nothing. Exactly one keyword, every time.</div>
+  <div class="pit"><b>Pitfall 2 — a caption that repeats the reel.</b> The caption should <i>extend</i> the reel
+     (a bonus line, a question) — not transcribe it. Give a reason to read past "...more".</div>
+
+  <hr class="divider">
+
+  <h2>The 5 mistakes that stall beginners</h2>
+  <ul>
+    <li><b>Using prompts instead of skills</b> — if you re-explain your voice and commands every time, you never compound. Save the five <code>SKILL.md</code> files once.</li>
+    <li><b>Rendering before the script clears DSSCL</b> — Skill 1 is free, HeyGen credits are not. Never render a draft you'll rewrite.</li>
+    <li><b>Compositing on an unverified crop</b> — a wrong crop decapitates the avatar. Frame-check each look once, add the preset, then build.</li>
+    <li><b>Skipping the 1.3× finish</b> — un-sped AI footage feels slow and gets scrolled. The finish pass is not optional polish; it's the retention.</li>
+    <li><b>Two keywords in the CTA</b> — it breaks the auto-DM and kills the whole point of the funnel. One keyword, always.</li>
+  </ul>
+
+  <div class="cta">
+    <h3>This is the exact system I post with every week</h3>
+    <p>Five skills, one person, zero crew. I share the real builds — screens, prompts, and the misses too —
+       one automation every week.</p>
+    <p>Follow <a href="https://www.instagram.com/automatewithanand/">@automatewithanand</a> on Instagram
+       · Subscribe on YouTube · Comment <b>CLAUDE</b> on the reel if you want the next guide first.</p>
+  </div>
+
+  <p class="footer">© 2026 automatewithanand · You're free to share this guide — just keep the credit.</p>
+</div>

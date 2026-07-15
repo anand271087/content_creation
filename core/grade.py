@@ -25,6 +25,12 @@ PRESETS = {
     "bright_sharp": "eq=saturation=1.30:contrast=1.08:brightness=0.005,"
                     "colorbalance=rm=0.02:bm=-0.02,"
                     "unsharp=5:5:0.9:5:5:0.35",
+    # Max punch (user request 2026-07-15): "increase saturation, make sharp,
+    # everything to 4k". Strong color + aggressive unsharp; pair with a 4K
+    # upscale in the finish pass for a crisp master.
+    "sharp_4k":     "eq=saturation=1.42:contrast=1.10:brightness=0.006,"
+                    "colorbalance=rm=0.03:bm=-0.02,"
+                    "unsharp=7:7:1.2:7:7:0.5",
     "none":         "null",
 }
 
