@@ -54,22 +54,73 @@ def _reencode(raw: Path, out: Path) -> Path:
     return out
 
 
-def _call(payload: dict, out: Path) -> dict:
+def _extract_video(data: dict) -> str | None:
+    """REST responses carry the video inside steps[] → model_output →
+    content[] → {type: video, data: <base64>} — `output_video` is SDK-only."""
+    ov = (data.get("output_video") or {}).get("data")
+    if ov:
+        return ov
+    for step in data.get("steps") or []:
+        if step.get("type") != "model_output":
+            continue
+        for c in step.get("content") or []:
+            if c.get("type") == "video" and c.get("data"):
+                return c["data"]
+    return None
+
+
+def _call(payload: dict, out: Path, poll_secs: int = 10,
+          timeout_secs: int = 900) -> dict:
+    import time
     r = requests.post(f"{BASE}?key={_key()}", json=payload, timeout=900)
     if r.status_code != 200:
         raise RuntimeError(f"Omni API {r.status_code}: {r.text[:400]}")
     data = r.json()
-    vid = (data.get("output_video") or {}).get("data")
+    iid = data.get("id")
+    log.info("interaction %s status=%s", iid, data.get("status"))
+    print(f"INTERACTION_ID: {iid}", flush=True)   # surfaced early — edits need it
+    deadline = time.time() + timeout_secs
+    while _extract_video(data) is None:
+        status = data.get("status")
+        if status in ("failed", "cancelled"):
+            raise RuntimeError(f"interaction {iid} {status}: "
+                               f"{json.dumps(data)[:400] if 'json' in dir() else status}")
+        if status == "completed":
+            raise RuntimeError(f"interaction {iid} completed but no video in "
+                               f"steps — possibly safety-blocked; rephrase")
+        if time.time() > deadline:
+            raise RuntimeError(f"interaction {iid} timed out after {timeout_secs}s "
+                               f"(status={status}) — re-poll later with fetch({iid!r})")
+        time.sleep(poll_secs)
+        g = requests.get(f"{BASE}/{iid}?key={_key()}", timeout=60)
+        if g.status_code != 200:
+            raise RuntimeError(f"poll {iid} → {g.status_code}: {g.text[:200]}")
+        data = g.json()
+        log.info("poll %s status=%s", iid, data.get("status"))
+    out.parent.mkdir(parents=True, exist_ok=True)
+    raw = out.with_suffix(".raw.mp4")
+    raw.write_bytes(base64.b64decode(_extract_video(data)))
+    _reencode(raw, out)
+    raw.unlink()
+    log.info("omni video → %s (interaction %s)", out.name, iid)
+    return {"id": iid, "path": out}
+
+
+def fetch(interaction_id: str, out: Path) -> dict:
+    """Recover a finished interaction's video by id (stored 55 days)."""
+    g = requests.get(f"{BASE}/{interaction_id}?key={_key()}", timeout=60)
+    if g.status_code != 200:
+        raise RuntimeError(f"fetch {interaction_id} → {g.status_code}: {g.text[:200]}")
+    data = g.json()
+    vid = _extract_video(data)
     if not vid:
-        raise RuntimeError(f"no output_video in response (keys: {list(data)}); "
-                           f"possibly safety-blocked — rephrase the prompt")
+        raise RuntimeError(f"{interaction_id} has no video (status={data.get('status')})")
     out.parent.mkdir(parents=True, exist_ok=True)
     raw = out.with_suffix(".raw.mp4")
     raw.write_bytes(base64.b64decode(vid))
     _reencode(raw, out)
     raw.unlink()
-    log.info("omni video → %s (interaction %s)", out.name, data.get("id"))
-    return {"id": data.get("id"), "path": out}
+    return {"id": interaction_id, "path": out}
 
 
 def generate(prompt: str, out: Path, aspect: str = "9:16",
