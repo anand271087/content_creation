@@ -26,6 +26,23 @@ Vendored from [krusemediallc/arcads-claude-code](https://github.com/krusemediall
 
 ## THIS REPO's integration rules (@automatewithanand pipeline)
 
+> **DECISION 2026-07-16: Anand will NOT buy an Arcads plan — the API costs too
+> much. Treat every Arcads endpoint in this skill as UNAVAILABLE.** This skill
+> and its siblings survive as prompt/workflow libraries wired to the backends
+> this repo already pays for:
+> - image generation (Nano Banana templates, thumbnails, storyboards) →
+>   **Kie.ai nano-banana-2** (routing block in nano-banana-image-ad/SKILL.md)
+> - talking-head video → **HeyGen** (existing pipeline)
+> - b-roll / scene video (Kling recipes) → **Kie.ai kling-2.6** (Stage 2)
+> - Pixar/claymation recipes (`.claude/shared/skills/{pixar-style-ad,
+>   claymation-ad}`): storyboard stills via Kie.ai nano-banana-2, animate via
+>   Kie.ai kling-2.6 image-to-video (their Seedance i2v step maps 1:1 to the
+>   nano-banana → Kling I2V two-step already in Stage 2)
+> - Seedance/Sora/Veo prompt files: keep for prompting technique; no backend here
+> - meta-ad-builder: dormant until Meta Marketing API creds exist
+> If Anand ever activates an Arcads plan, delete this block and the routing
+> notes revert to upstream behavior.
+
 This skill was adapted into the content-creation repo. Differences from upstream:
 
 - **No `MASTER_CONTEXT.md` here** — where this skill says MASTER_CONTEXT.md,

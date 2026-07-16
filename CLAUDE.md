@@ -1388,14 +1388,18 @@ rule: paired good/bad word or option swap → swap_board.
   Starter templates: spring_label (pill with back.out overshoot), countup
   (rolling number + underline). Template authoring rules + house motion
   grammar in the SKILL.md. Proven on black_couch 2026-07-16.
-- **arcads-external-api** — vendored (MIT) from krusemediallc/arcads-claude-code:
-  full Arcads API skill (UGC actors + Seedance 2.0/Sora 2/Veo 3.1/Kling 3.0/
-  Nano Banana via one API) with per-model prompt libraries, analyze-video and
-  clone-ad sub-workflows. Repo integration rules at top of its SKILL.md
-  (H264-baseline re-encode, transcribe→format-library flow, palette rule,
-  HeyGen=Anand's face / Arcads=other actors). **Dormant until an Arcads Pro
-  plan is active** — `ARCADS_*` slots in .env are empty; always confirm credit
-  estimates before firing generations.
+- **Arcads pack (vendored, MIT, krusemediallc/arcads-claude-code)** — FULL pack
+  now in: `arcads-external-api` (API skill + per-model prompt libraries +
+  analyze-video/clone-ad), `nano-banana-image-ad` + `chatgpt-image-ad` +
+  `image-ad-clone` (37-template static-ad library in
+  `.claude/shared/skills/image-ad-prompting/`), `generate-youtube-thumbnail`
+  (5 CTR formulas), plus shared recipes (pixar-style-ad, claymation-ad,
+  meta-ad-builder, caption-video) in `.claude/shared/skills/`.
+  **DECISION 2026-07-16: no Arcads plan — the Arcads API is never called.**
+  Every skill carries a "THIS REPO" routing block: image gen → Kie.ai
+  nano-banana-2, b-roll/animate → Kie.ai kling-2.6 I2V, talking heads →
+  HeyGen, UI-mockup templates → HTML/PIL. The pack is used as a prompt +
+  workflow library on backends this repo already pays for.
 
 ### Analyzed template — contrast_stack (Dan Martell Daxw_ESj8u1)
 "Broke vs Wealthy" A/B contrast: full-frame avatar + keyword-synced PHOTO-card
