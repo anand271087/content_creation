@@ -1380,6 +1380,23 @@ Start saying Y. [reason]." Saved as template (memory: project_swap_board_format)
 build on request as a 2-column variant of formats/sort_board.py. Decision-engine
 rule: paired good/bad word or option swap → swap_board.
 
+### Project skills (.claude/skills/) — added 2026-07-16
+
+- **motion-design** — animated overlays ON avatar footage: `core/motion.py`
+  renders GSAP scenes (motion/templates/) on magenta via the hyperframes CLI;
+  `OverlayChain.add_video(..., chroma=MAGENTA)` keys them transparent.
+  Starter templates: spring_label (pill with back.out overshoot), countup
+  (rolling number + underline). Template authoring rules + house motion
+  grammar in the SKILL.md. Proven on black_couch 2026-07-16.
+- **arcads-external-api** — vendored (MIT) from krusemediallc/arcads-claude-code:
+  full Arcads API skill (UGC actors + Seedance 2.0/Sora 2/Veo 3.1/Kling 3.0/
+  Nano Banana via one API) with per-model prompt libraries, analyze-video and
+  clone-ad sub-workflows. Repo integration rules at top of its SKILL.md
+  (H264-baseline re-encode, transcribe→format-library flow, palette rule,
+  HeyGen=Anand's face / Arcads=other actors). **Dormant until an Arcads Pro
+  plan is active** — `ARCADS_*` slots in .env are empty; always confirm credit
+  estimates before firing generations.
+
 ### Analyzed template — contrast_stack (Dan Martell Daxw_ESj8u1)
 "Broke vs Wealthy" A/B contrast: full-frame avatar + keyword-synced PHOTO-card
 pops (one per clause, replace not accumulate), pinned title pill, mid-frame

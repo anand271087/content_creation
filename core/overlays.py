@@ -57,9 +57,15 @@ class OverlayChain:
         self._n_inputs += 1
 
     def add_video(self, mp4: Path, x: int, y: int, start: float, end: float,
-                  w: int, h: int, top_crop: int = 0) -> None:
-        """Overlay a video clip scaled to cover w×h, time-shifted to `start`."""
+                  w: int, h: int, top_crop: int = 0,
+                  chroma: str | None = None) -> None:
+        """Overlay a video clip scaled to cover w×h, time-shifted to `start`.
+
+        chroma="0xFF00FF" keys that color transparent — used for motion
+        overlays rendered on magenta by core/motion.py (key BEFORE scaling so
+        edge blending happens on clean keyed pixels)."""
         pre = ((f"crop=iw:ih-{top_crop}:0:{top_crop}," if top_crop else "")
+               + (f"colorkey={chroma}:0.26:0.08," if chroma else "")
                + f"scale={w}:{h}:force_original_aspect_ratio=increase,"
                + f"crop={w}:{h},setpts=PTS-STARTPTS+{start:.2f}/TB")
         self.inputs += ["-i", str(mp4)]

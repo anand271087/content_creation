@@ -70,8 +70,9 @@ LOOKS: dict[str, Look] = {l.key: l for l in [
          "black crew, bright blinds + plant (standing)", None,
          ["countdown", "checklist"]),
     Look("black_couch_front", "80ec06078fde434f9255da5d6251abc0", "green", "front",
-         "black crew, couch + brick (seated)", None,
-         ["countdown", "moody virals"]),
+         "black crew, couch + brick (seated) — LETTERBOXED (band 1000x608 @ "
+         "x50 y656); use dark_brick palette + blur-fill base", "black_couch_full",
+         ["countdown", "moody virals", "process_walkthrough (dark)"]),
     Look("black_brick_side", "c1e30d196e9042a2b5e52071c15596bc", "green", "side",
          "black crew, brick wall (profile)", None,
          ["b-angle for black looks"], mirror_ui=True),

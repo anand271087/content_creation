@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=760, height=300" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      /* Magenta = chroma-key transparency at composite time (core/motion.py) */
+      html, body { width: 760px; height: 300px; overflow: hidden; background: #FF00FF; }
+      #root {
+        position: relative; width: 760px; height: 300px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+      }
+      #num {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 130px; font-weight: 900;
+        color: __ACCENT__;
+        text-shadow: 0 6px 22px rgba(0,0,0,0.5);
+        opacity: 0;
+      }
+      #cap {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 40px; font-weight: 800; text-transform: uppercase;
+        letter-spacing: 2px; color: __TEXT_COLOR__;
+        text-shadow: 0 3px 12px rgba(0,0,0,0.55);
+        opacity: 0; margin-top: 6px;
+      }
+      #bar {
+        width: 0px; height: 6px; margin-top: 14px; border-radius: 3px;
+        background: __ACCENT__;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="760"
+      data-height="300"
+    >
+      <div id="num">__PREFIX__0__SUFFIX__</div>
+      <div id="cap">__CAPTION__</div>
+      <div id="bar"></div>
+    </div>
+    <script>
+      const D = parseFloat(document.getElementById("root").dataset.duration);
+      const TARGET = parseFloat("__TARGET__");
+      const state = { v: 0 };
+      const el = document.getElementById("num");
+      const fmt = (v) => "__PREFIX__" + Math.round(v).toLocaleString("en-IN") + "__SUFFIX__";
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.to("#num", { opacity: 1, duration: 0.25, ease: "power2.out" }, 0)
+        .to(state, { v: TARGET, duration: 1.1, ease: "power3.out",
+                     onUpdate: () => { el.textContent = fmt(state.v); } }, 0.1)
+        .to("#num", { scale: 1.08, duration: 0.12, ease: "power1.out" }, 1.2)
+        .to("#num", { scale: 1.0, duration: 0.2, ease: "power2.inOut" }, 1.32)
+        .to("#cap", { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.5)
+        .to("#bar", { width: 320, duration: 0.6, ease: "power3.out" }, 0.6)
+        // pad to full composition duration (renderer requirement)
+        .to("#root", { opacity: 1, duration: Math.max(0.01, D - 1.6) }, 1.6);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

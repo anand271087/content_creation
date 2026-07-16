@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=960, height=240" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      /* Magenta = chroma-key transparency at composite time (core/motion.py) */
+      html, body { width: 960px; height: 240px; overflow: hidden; background: #FF00FF; }
+      #root {
+        position: relative; width: 960px; height: 240px;
+        display: flex; align-items: center; justify-content: center;
+      }
+      #pill {
+        display: flex; align-items: center; gap: 18px;
+        background: __PILL_BG__;
+        border: 3px solid __ACCENT__;
+        border-radius: 22px;
+        padding: 26px 44px;
+        opacity: 0;
+        transform-origin: center bottom;
+        box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+      }
+      #dot { width: 18px; height: 18px; border-radius: 50%; background: __ACCENT__; }
+      #label {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 52px; font-weight: 900;
+        text-transform: uppercase; letter-spacing: 0.5px;
+        color: __TEXT_COLOR__;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="__DURATION__"
+      data-width="960"
+      data-height="240"
+    >
+      <div id="pill">
+        <div id="dot"></div>
+        <div id="label">__TEXT__</div>
+      </div>
+    </div>
+    <script>
+      const D = parseFloat(document.getElementById("root").dataset.duration);
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      // spring-land: drop in from above with overshoot, micro settle
+      tl.fromTo("#pill",
+          { y: -140, opacity: 0, scale: 0.72, rotate: -3 },
+          { y: 0, opacity: 1, scale: 1, rotate: 0, duration: 0.55, ease: "back.out(2.2)" }, 0)
+        .to("#pill", { scale: 1.03, duration: 0.12, ease: "power1.inOut" }, 0.55)
+        .to("#pill", { scale: 1.0, duration: 0.18, ease: "power2.out" }, 0.67)
+        .to("#dot", { scale: 1.5, duration: 0.2, ease: "power2.out" }, 0.6)
+        .to("#dot", { scale: 1.0, duration: 0.25, ease: "power2.inOut" }, 0.8)
+        // pad to full composition duration (renderer requirement)
+        .to("#root", { opacity: 1, duration: Math.max(0.01, D - 1.05) }, 1.05);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

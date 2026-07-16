@@ -21,6 +21,11 @@ CROPS = {
     # Green bookshelf look — ALSO letterboxed (band 1080x608 @ y656), seated,
     # face centered x~551; tight 9:16 within band (verified 2026-07-14)
     "green_bookshelf_full": "crop=342:608:380:656,scale=1080:1920",
+    # Black couch look (brick + couch, seated) — letterboxed (band 1000x608 @
+    # x50 y656), face cx~515 (verified 2026-07-15, 5-skills reel). Wide chest
+    # crop for letterbox-base composites: crop=620:544:205:720,scale=1080:947
+    # placed at y≈486 over a blurred band fill (band crop=1000:608:50:656).
+    "black_couch_full": "crop=342:608:344:656,scale=1080:1920",
     # No crop (already-framed source)
     "none": "null",
 }
