@@ -1372,6 +1372,27 @@ pixel-identically (frame-diff 0.00 at sampled timestamps).
 - Rotate looks across the weekly calendar so the feed doesn't look like one
   recording session.
 
+### Video hook — Vaibhav Sisinty style (analyzed DaqBTo1AcvY, 2026-07-16)
+
+4-6s of AI-generated footage acting out the spoken hook line as a VISUAL
+METAPHOR before the real face enters; avatar voice carries over the AI clip;
+light-leak flash lands at the subject name-drop (word_start from Scribe) →
+cut to avatar. Survey: 4/4 of his recent reels open this way (but his two
+pinned mega-virals are talking-head opens — this is his current bet, not his
+proven winner).
+
+- Generator: **Gemini Omni Flash** (`core/gemini_omni.py`, model
+  gemini-omni-flash-preview, Interactions API, ~$0.10/sec, NO free tier,
+  `GEMINI_API_KEY` in .env — dormant until key added). Conversational edits:
+  keep the interaction id, ask for deltas ("make the lighting warmer").
+- Assembler: `formats/video_hook.py` — `hook_prompt()` (metaphor scene, no
+  text/faces/dialogue, single continuous shot) + `apply_hook(reel, hook,
+  until, out)` (replaces visuals 0→until, keeps reel audio, light-leak seam).
+  Run on the raw composite BEFORE the finish chain.
+- **AI-news / story / Format #8 reels ONLY. Never board formats** — their
+  no-hook rule stands (the board is the hook).
+- Omni prompt guide vendored at `.claude/shared/skills/gemini-omni-flash/`.
+
 ### Analyzed template — swap_board (Dan Martell DayaDuKgSfQ)
 2-column "don't say / instead say" paired-reveal board (variant of sort_board):
 each beat drops a matched pair — bad word left (red), better word right (cyan) —
