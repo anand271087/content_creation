@@ -57,6 +57,11 @@ REGISTRY: dict[str, Format] = {f.key: f for f in [
            "time-boxed promise → chained quotables",
            "Virality", "reach play", "demo",
            [r"\b(in under \d+ seconds|60 seconds, so pay attention)\b"]),
+    Format("verdict_board", "formats.verdict_board",
+           "2-column binary verdict board (FUTURE|FINISHED) w/ pop-blur logo cards",
+           "[TOOL]. [VERDICT]. [punchy reason]. (+1 split-verdict beat)",
+           "Virality", "comment-bait verdicts", "production",
+           [r"\b(future|finished|keep|kill|hype|real)\b.*\b(future|finished|keep|kill)\b"]),
 ]}
 
 
