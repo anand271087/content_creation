@@ -33,7 +33,7 @@ import os from "os";
 const ROOT = resolve(new URL(".", import.meta.url).pathname, "..");
 const OUT_DIR = join(ROOT, "assets", "screen_demos");
 mkdirSync(OUT_DIR, { recursive: true });
-const VIEW = { width: 1200, height: 1160 };
+const VIEW = { width: 1200, height: 740 };  // must fit screen: headed Chrome clamps viewport, Playwright grey-pads recordVideo
 
 // ── args ──
 const argv = process.argv.slice(2);
