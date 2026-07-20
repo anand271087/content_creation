@@ -1,0 +1,299 @@
+<meta charset="utf-8">
+<title>The AI Avatar Agency — 3 Tools, Clients Never Film</title>
+<style>
+  :root { --ink:#111827; --mut:#6b7280; --red:#e11a1a; --yellow:#ffd628; --cream:#faf9f6; --line:#e7e5e0; }
+  * { box-sizing:border-box; }
+  body { font-family:-apple-system, "Helvetica Neue", Arial, sans-serif; background:var(--cream);
+         color:var(--ink); margin:0; line-height:1.65; }
+  .page { max-width:780px; margin:0 auto; padding:56px 28px 80px; }
+  .kicker { font-size:14px; letter-spacing:3px; text-transform:uppercase; color:var(--mut); font-weight:700; }
+  h1 { font-size:44px; line-height:1.12; margin:10px 0 6px; font-weight:900; letter-spacing:-1px; }
+  .sub { font-family:Georgia, serif; font-style:italic; font-size:22px; color:var(--mut); margin:0 0 34px; }
+  .slashbox { position:relative; background:#131318; border-radius:14px; padding:22px 26px; margin:26px 0;
+              font-family:"Courier New", monospace; color:#8ce99a; font-size:15px; overflow:hidden; }
+  .slashbox .grey { color:#9aa0a6; }
+  .slashbox::after { content:""; position:absolute; left:-4%; right:-4%; top:50%; height:14px;
+                     background:var(--red); transform:rotate(-8deg); border-radius:7px; opacity:.92; }
+  h2 { font-size:25px; margin:46px 0 8px; font-weight:900; letter-spacing:-.5px; }
+  h2.skill { margin-top:52px; }
+  .stepnum { display:inline-block; background:var(--ink); color:#fff; font-weight:900; border-radius:10px;
+             padding:2px 12px; margin-right:10px; font-size:18px; }
+  .what { font-size:16px; margin:6px 0 4px; }
+  .role { font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--red); font-weight:800; margin:0; }
+  .prompt { background:#fff; border:1px solid var(--line); border-left:5px solid var(--yellow);
+            border-radius:10px; padding:14px 18px; margin:14px 0; font-size:15px; white-space:pre-wrap; }
+  .prompt b { display:block; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--mut); margin-bottom:6px; }
+  .skillmd { background:#fff; border:1px solid var(--line); border-left:5px solid var(--ink);
+             border-radius:10px; padding:14px 18px; margin:14px 0; font-family:"Courier New", monospace;
+             font-size:13.5px; white-space:pre-wrap; }
+  .skillmd b { display:block; font-family:-apple-system,Arial,sans-serif; font-size:12px; letter-spacing:2px;
+               text-transform:uppercase; color:var(--mut); margin-bottom:8px; }
+  .front { color:var(--red); }
+  .term { background:#131318; color:#e9ecef; border-radius:10px; padding:14px 18px; margin:14px 0;
+          font-family:"Courier New", monospace; font-size:14px; white-space:pre-wrap; }
+  .term .c { color:#8ce99a; }
+  .tip { background:#fffbe8; border:1px solid #f0e6b8; border-radius:10px; padding:12px 18px; margin:14px 0; font-size:15px; }
+  .tip b { color:#8a6d00; }
+  .pit { background:#fdecec; border:1px solid #f4c9c9; border-radius:10px; padding:12px 18px; margin:14px 0; font-size:15px; }
+  .pit b { color:var(--red); }
+  ul { padding-left:22px; } li { margin:6px 0; }
+  .divider { border:none; border-top:1px solid var(--line); margin:44px 0; }
+  .quick { background:#fff; border:2px solid var(--ink); border-radius:16px; padding:26px 30px; margin:8px 0 20px; }
+  .quick h3 { margin:0 0 12px; font-size:20px; }
+  .quick ol { margin:0; padding-left:20px; } .quick li { margin:8px 0; font-size:15.5px; }
+  .quick .flow { font-family:"Courier New",monospace; font-size:13px; color:#131318; background:#f3f1ec;
+                 border-radius:8px; padding:12px 14px; margin-top:14px; white-space:pre-wrap; }
+  .zh { background:#fff; border:2px solid var(--ink); border-radius:16px; padding:28px 30px; margin-top:48px; }
+  .zh h3 { margin:0 0 8px; font-size:22px; }
+  .zh .btn { display:inline-block; background:var(--red); color:#fff; font-weight:900;
+             padding:13px 26px; border-radius:12px; text-decoration:none; margin-top:12px; font-size:17px; }
+  .zh .small { color:var(--mut); font-size:14px; margin-top:10px; }
+  .cta { background:var(--ink); color:#fff; border-radius:16px; padding:28px 30px; margin-top:26px; }
+  .cta h3 { margin:0 0 8px; font-size:22px; }
+  .cta a { color:var(--yellow); font-weight:700; text-decoration:none; }
+  .footer { margin-top:26px; color:var(--mut); font-size:14px; }
+  code { background:#f3f1ec; border-radius:5px; padding:1px 6px; font-family:"Courier New",monospace; font-size:13.5px; }
+  @media print { body { background:#fff; } .page { padding:24px; } h2.skill { page-break-inside:avoid; } }
+</style>
+
+<div class="page">
+  <div class="kicker">Free guide · @automatewithanand</div>
+  <h1>The AI Avatar Agency<br>3 Tools. Clients Never Film.</h1>
+  <p class="sub">the exact system I run at ZeroHands — one filming session per client, then video forever</p>
+
+  <div class="slashbox">
+    <span class="grey">$</span> book_studio --every_week --client "busy founder"<br>
+    <span class="grey">$</span> chase_client_for_reshoot --take 7<br>
+    <span class="grey">$</span> hire_editor --per_video "₹₹₹₹"
+  </div>
+  <p>None of that happens in my agency. A client films <b>once</b> — one short session with a
+     videographer — and from that day, every video is built by three tools:
+     <b>HeyGen</b> (their face), <b>ElevenLabs</b> (their timing), and <b>Claude Code</b> (the brain
+     that runs everything). This guide is the full breakdown I promised: what each tool does,
+     the exact setup, the copy-paste prompts and files, and how I run it for clients so they
+     never pick up a camera again.</p>
+
+  <div class="quick">
+    <h3>The system on one page</h3>
+    <ol>
+      <li><b>HeyGen</b> — train a library of avatar "looks" from one filming session. Type a script, get the client on camera.</li>
+      <li><b>ElevenLabs Scribe</b> — word-level timestamps for every render (~$0.013/reel). This is what makes captions and cuts sync <i>without an editor</i>.</li>
+      <li><b>Claude Code</b> — saved skill files write the scripts in the client's voice, pick the edit, and drive the whole build (ffmpeg compositing) from one command.</li>
+    </ol>
+    <div class="flow">client films ONCE (one session, multiple outfits/angles)
+  → HeyGen trains the avatar library
+  → per video: Claude writes script → HeyGen renders → Scribe timestamps
+  → Claude composites captions + graphics (ffmpeg) → posted
+  → repeat weekly. no camera. no editor. no reshoot.</div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- TOOL 1 -->
+  <h2 class="skill"><span class="stepnum">1</span>HeyGen — the avatar library</h2>
+  <p class="role">Tool · the client's face, on demand</p>
+  <p class="what">HeyGen trains a talking avatar from roughly <b>2 minutes of real footage</b>. You type a script,
+     it returns a video of the person saying it — same face, same voice, same set. That's the whole unlock:
+     filming becomes a one-time event, not a weekly chore.</p>
+  <p>But one avatar isn't enough. If every reel comes from the same clip, the feed screams "one recording
+     session." So at the filming session you capture <b>multiple looks</b>: different outfits, different corners
+     of the room, front and side angles. From my own session I trained <b>17 looks across 5 outfits</b> —
+     a warm bookshelf set for framework videos, a dark wall with red accents for dramatic hooks, a bright
+     window for tutorial walkthroughs, seated armchair looks for longer talks. Rotating them makes the
+     account look like it films constantly.</p>
+  <p><b>Setup, step by step:</b></p>
+  <ul>
+    <li>Film ~2 minutes per look: subject talks naturally to camera, hands visible, normal gestures, no cuts.</li>
+    <li>Upload each clip in HeyGen → create an avatar look from it. Name them by outfit + setting
+        (<code>green_bookshelf_front</code>, <code>white_darkwall_side</code>) — you'll thank yourself later.</li>
+    <li>Clone the voice in the same session (HeyGen prompts you for a consent line — the client reads it on camera).</li>
+    <li>Render from the dashboard, or via API once you're doing volume. The API call is one POST with
+        <code>avatar_id</code> + your script text + <code>voice_id</code>, then you poll until the MP4 is ready.</li>
+  </ul>
+  <p>My renders run through one command that wraps the API:</p>
+  <div class="term"><span class="c"># list the trained looks and what each is good for</span>
+python3.11 reel.py looks
+
+<span class="c"># render a script on a specific look (--yes confirms the credit spend)</span>
+python3.11 reel.py render green_bookshelf_front --script-file script.txt --yes</div>
+  <div class="tip"><b>Cost ballpark:</b> HeyGen's creator plans start around the price of a lunch per month;
+     on API plans think roughly <b>one credit ≈ one minute of avatar video</b>. A weekly reel schedule for a
+     client burns a handful of credits a month — trivially cheap next to a videographer per video. Check
+     current pricing before you quote a client.</div>
+  <div class="pit"><b>Pitfall 1 — every look frames the face differently.</b> A seated armchair look and a
+     standing window look put the head in completely different places. Before you build graphics or crops on
+     top of a new look, render one test, pull a frame, and verify the framing. Skipping this is how you ship
+     a video with the client's forehead cut off.</div>
+  <div class="pit"><b>Pitfall 2 — the ~5,000 character script limit.</b> HeyGen caps input text per render.
+     A 60–90 second reel script fits easily; a long-form script doesn't. Split long scripts into parts and
+     stitch them, or keep client deliverables short-form (you should anyway).</div>
+
+  <!-- TOOL 2 -->
+  <h2 class="skill"><span class="stepnum">2</span>ElevenLabs — voice + timing</h2>
+  <p class="role">Tool · the invisible editor</p>
+  <p class="what">This is the tool nobody notices in the reel and the one the whole edit depends on.
+     ElevenLabs <b>Scribe</b> is speech-to-text that returns a timestamp for <b>every single word</b> the avatar
+     says. Once you know exactly when each word lands, everything an editor used to eyeball becomes math:
+     captions light up on the spoken word, graphics pop at the name-drop, cuts land at sentence boundaries.</p>
+  <p>Send the rendered avatar video to the Scribe API (<code>scribe_v1</code> model), get back JSON like:</p>
+  <div class="term">{ "text": "step one, render the avatar...",
+  "words": [
+    { "word": "step",   "start": 0.12, "end": 0.31 },
+    { "word": "one",    "start": 0.35, "end": 0.58 },
+    { "word": "render", "start": 0.90, "end": 1.24 }
+  ] }</div>
+  <p>In my system it's one command, and the output feeds straight into the compositor:</p>
+  <div class="term"><span class="c"># word-level timestamps for the rendered avatar video</span>
+python3.11 reel.py transcribe assets/avatar/avatar_video.mp4 words.json</div>
+  <p>Cost: about <b>$0.013 for a 2-minute reel</b>. One cent. That one cent replaces the sync work of a human
+     editor — it's the best money in the entire stack.</p>
+  <p>ElevenLabs also covers the <b>voice</b> side when you need it: if a client's HeyGen voice clone sounds
+     flat, clone their voice in ElevenLabs from the same filming-session audio and feed that audio into
+     HeyGen instead. For faceless or B-roll content, their stock voices are strong enough to ship.</p>
+  <div class="tip"><b>Why Scribe over free Whisper:</b> I ran local Whisper first. It's free — and it mishears
+     every proper noun ("Claude" → "clot", "n8n" → "n 8 n"), which means broken captions on exactly the
+     words that matter in AI content. Scribe gets the product names right. For one cent per reel, this
+     isn't a decision.</div>
+  <div class="pit"><b>Pitfall 1 — proper nouns still deserve a scan.</b> Even Scribe will trip on a brand-new
+     tool name. Before compositing, grep the transcript for your key nouns and patch any misses — it's a
+     10-second check that saves a re-render.</div>
+  <div class="pit"><b>Pitfall 2 — trim the loading frames first.</b> Avatar renders often open with a few
+     static frames before speech starts. Transcribe the <i>final trimmed</i> video, not the raw one — otherwise
+     every timestamp is offset and every caption fires early.</div>
+
+  <!-- TOOL 3 -->
+  <h2 class="skill"><span class="stepnum">3</span>Claude (Claude Code) — the brain</h2>
+  <p class="role">Tool · writes, plans, and builds — from one command</p>
+  <p class="what">HeyGen is the face, ElevenLabs is the timing, but Claude Code is what makes this an
+     <b>agency</b> instead of a hobby. It writes the scripts in each client's voice, decides how the video
+     should be edited, and then actually runs the build — because the compositing layer is plain
+     <b>ffmpeg</b>, which means every caption, graphic, zoom, and cut is a scriptable command Claude can
+     execute. No timeline software. No render farm. A terminal.</p>
+  <p>The mechanism is a <b>skill</b>: a saved instruction file at
+     <code>.claude/skills/&lt;name&gt;/SKILL.md</code> inside your project. Claude Code auto-discovers it and
+     loads it whenever it's relevant — so the model already knows the client's voice, the tools, and the
+     commands, every time, with zero re-explaining. One skill per job: a script writer, a video builder,
+     a caption writer. Here's the starter skill to create first — paste this file in as-is:</p>
+
+  <div class="skillmd"><b>.claude/skills/script-writer/SKILL.md</b>
+<span class="front">---
+name: script-writer
+description: Write a 45-75 second talking-head reel script in the client's
+  voice, ready to paste into a HeyGen render. Use whenever the user gives a
+  topic or says "write a reel about".
+---</span>
+You write short-form video scripts for [CLIENT NAME], [one line: who they are
+and who they serve]. Voice: confident, direct, friend-to-friend. Never corporate.
+
+VOICE SAMPLE (match this exactly — rhythm, word choice, sentence length):
+[paste 3 of the client's real captions, emails, or a talk transcript here]
+
+RULES
+1. Hook in the first 3 seconds — open a loop, never close it in the hook.
+2. One core idea per script. Two ideas = two scripts.
+3. Spoken 8th-grade English. Short sentences. Active voice. No filler intro.
+4. Name at least ONE specific tool, number, or timeframe (that's the save trigger).
+5. Build to one quotable line near the end — the screenshot line.
+6. End with a comment-keyword CTA: "Comment [KEYWORD] and I'll send you [thing]."
+7. Length: 110-170 words (45-75 seconds spoken). NEVER exceed 5,000 characters —
+   that's the HeyGen input limit.
+
+OUTPUT: the spoken script only, as plain text, ready for the render.
+</div>
+  <p>Then the workflow is a conversation:</p>
+  <div class="prompt"><b>Prompt — write the script</b>
+Use the script-writer skill. Client: [name]. Topic: "why founders waste 10
+hours a week on content." Keyword CTA: SYSTEM. Return the script as plain
+text I can save to script.txt.</div>
+  <p>And the build is three commands Claude runs for you (this is my real production line):</p>
+  <div class="term"><span class="c"># 1. render the avatar on a look from the client's library</span>
+python3.11 reel.py render green_bookshelf_front --script-file script.txt --yes
+
+<span class="c"># 2. word-level timestamps via Scribe</span>
+python3.11 reel.py transcribe assets/avatar/avatar_video.mp4 words.json
+
+<span class="c"># 3. composite captions + graphics, auto-finish (speed pass + thumbnail end-card)</span>
+python3.11 reel.py make authority_stack --avatar assets/avatar/avatar_video.mp4 --captions words.json</div>
+  <p>Under the hood, step 3 is ffmpeg overlays driven by the Scribe timestamps — captions appear at
+     <code>word_start</code>, graphics pop a fraction before the word that names them. Because it's all code,
+     Claude can build it, check it, and rebuild it without you opening an editor once.</p>
+  <div class="tip"><b>The 1.3× trick:</b> avatar renders speak at ~140 words/min, which reads sluggish on a
+     feed. The finish pass speeds the final video to ~185 wpm — the pace top creators actually post at.
+     One ffmpeg flag, massive retention difference. Bake it into the pipeline so you never forget it.</div>
+  <div class="pit"><b>Pitfall 1 — prompts don't compound, skills do.</b> If you re-explain the client's voice
+     in every chat, you're doing the work the SKILL.md should do once. One skill file per client, with their
+     real writing pasted into the voice sample block.</div>
+  <div class="pit"><b>Pitfall 2 — lock the script before you render.</b> Script rewrites are free; avatar
+     renders cost credits. Get the script approved (by you or the client) first, render second. Never
+     render a draft.</div>
+
+  <hr class="divider">
+
+  <!-- RUNNING IT FOR CLIENTS -->
+  <h2 class="skill"><span class="stepnum">4</span>Running it for clients</h2>
+  <p class="role">The agency model · film once, deliver forever</p>
+  <p>Here's how the three tools become a service:</p>
+  <ul>
+    <li><b>Onboarding = one filming session.</b> Book a videographer for a half-day with the client.
+        Capture 4–6 looks: 2–3 outfits, 2 settings, front + side angles, ~2 minutes of natural talking each,
+        plus the voice-consent line. That session is the only time the client ever films.</li>
+    <li><b>Train the library that week.</b> Upload every clip, train every look, verify each one's framing
+        with a test render. Build their <code>script-writer</code> skill from their real captions and emails.</li>
+    <li><b>Then run a weekly calendar.</b> You propose topics, Claude drafts the scripts, the client approves
+        them in a shared doc (approving text takes them 5 minutes — this is the entire client workload),
+        and you render + composite + deliver. Rotate the looks across the week so the feed never looks
+        like one recording session.</li>
+    <li><b>How I structure pricing:</b> a one-time <b>setup fee</b> that covers the filming session, avatar
+        training, and voice/skill setup — then a <b>monthly retainer</b> for the ongoing videos. The setup fee
+        anchors the value of the library (it's a real asset the client keeps); the retainer is where the
+        business compounds, because your marginal cost per video is credits and cents, not hours.</li>
+    <li><b>The pitch writes itself:</b> "You film once. You approve scripts from your phone. You post daily
+        without ever booking a studio again." Show them a sample render of <i>themselves</i> from the trial
+        session — that demo closes more deals than any deck.</li>
+  </ul>
+  <div class="tip"><b>Scale math:</b> the marginal cost of one client video is a few HeyGen credits + one cent
+     of Scribe + zero editing hours. Every new client adds a filming day and a skill file — not headcount.
+     That's why this works as a one-person agency.</div>
+
+  <hr class="divider">
+
+  <h2>Quickstart checklist — your first client (even if it's you)</h2>
+  <div class="quick">
+    <ol>
+      <li>Film one session: 4–6 looks, ~2 min each, natural gestures, plus the voice-consent line.</li>
+      <li>Train each look in HeyGen; name them <code>outfit_setting_angle</code>; test-render each and verify framing.</li>
+      <li>Get an ElevenLabs API key; run one Scribe transcription on a test render and open the words JSON.</li>
+      <li>Install Claude Code; create <code>.claude/skills/script-writer/SKILL.md</code> from the block above with real voice samples pasted in.</li>
+      <li>Produce one full video end-to-end: script → approve → render → transcribe → composite → 1.3× finish.</li>
+      <li>Post it. Then book the calendar: one video per week minimum, looks rotated.</li>
+    </ol>
+  </div>
+
+  <h2>The 5 mistakes that stall beginners</h2>
+  <ul>
+    <li><b>Training one look and calling it done</b> — a single set on repeat reads as AI within a week. The library (outfits × settings × angles) is what makes the feed feel alive.</li>
+    <li><b>Skipping the framing check on a new look</b> — every setting puts the face somewhere different. One un-verified look = one delivered video with a cropped head.</li>
+    <li><b>Eyeballing caption sync instead of using Scribe</b> — hand-timed captions are why edits take hours. One cent of word timestamps replaces the entire sync job.</li>
+    <li><b>Rendering unapproved scripts</b> — text is free, credits aren't. The approval step isn't bureaucracy; it's your margin.</li>
+    <li><b>Charging per video instead of setup + retainer</b> — per-video pricing sells your hours. Setup + retainer sells the system, and the system is the product.</li>
+  </ul>
+
+  <div class="zh">
+    <h3>Want this done FOR you? — ZeroHands</h3>
+    <p>If you'd rather have <b>ZeroHands</b> build and run this whole system for your brand —
+       the filming session, the avatar library, the weekly videos, all of it — book a free
+       20-minute call. You show up once; we handle everything after.</p>
+    <a class="btn" href="https://calendly.com/anand_kaliappan/call">Book a free call &rarr;</a>
+    <p class="small">calendly.com/anand_kaliappan/call · zerohands.co</p>
+  </div>
+
+  <div class="cta">
+    <h3>This is the exact system I run at ZeroHands</h3>
+    <p>Three tools, one filming session per client, video every week. I share the real builds —
+       screens, prompts, and the misses too — one automation at a time.</p>
+    <p>Follow <a href="https://www.instagram.com/automatewithanand/">@automatewithanand</a> on Instagram
+       · Subscribe on YouTube · Comment <b>AGENCY</b> on the reel if you want the next guide first.</p>
+  </div>
+
+  <p class="footer">© 2026 automatewithanand · You're free to share this guide — just keep the credit.</p>
+</div>
