@@ -1,0 +1,312 @@
+<meta charset="utf-8">
+<title>My 2026 Automation Stack — Future or Finished</title>
+<style>
+  :root { --ink:#111827; --mut:#6b7280; --red:#e11a1a; --yellow:#ffd628; --cream:#faf9f6; --line:#e7e5e0; --green:#0e8a4d; }
+  * { box-sizing:border-box; }
+  body { font-family:-apple-system, "Helvetica Neue", Arial, sans-serif; background:var(--cream);
+         color:var(--ink); margin:0; line-height:1.65; }
+  .page { max-width:780px; margin:0 auto; padding:56px 28px 80px; }
+  .kicker { font-size:14px; letter-spacing:3px; text-transform:uppercase; color:var(--mut); font-weight:700; }
+  h1 { font-size:44px; line-height:1.12; margin:10px 0 6px; font-weight:900; letter-spacing:-1px; }
+  .sub { font-family:Georgia, serif; font-style:italic; font-size:22px; color:var(--mut); margin:0 0 34px; }
+  .slashbox { position:relative; background:#131318; border-radius:14px; padding:22px 26px; margin:26px 0;
+              font-family:"Courier New", monospace; color:#8ce99a; font-size:15px; overflow:hidden; }
+  .slashbox .grey { color:#9aa0a6; }
+  .slashbox::after { content:""; position:absolute; left:-4%; right:-4%; top:50%; height:14px;
+                     background:var(--red); transform:rotate(-8deg); border-radius:7px; opacity:.92; }
+  h2 { font-size:25px; margin:46px 0 8px; font-weight:900; letter-spacing:-.5px; }
+  h2.skill { margin-top:52px; }
+  .stepnum { display:inline-block; background:var(--ink); color:#fff; font-weight:900; border-radius:10px;
+             padding:2px 12px; margin-right:10px; font-size:18px; }
+  .what { font-size:16px; margin:6px 0 4px; }
+  .role { font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--red); font-weight:800; margin:0; }
+  .prompt { background:#fff; border:1px solid var(--line); border-left:5px solid var(--yellow);
+            border-radius:10px; padding:14px 18px; margin:14px 0; font-size:15px; white-space:pre-wrap; }
+  .prompt b { display:block; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--mut); margin-bottom:6px; }
+  .term { background:#131318; color:#e9ecef; border-radius:10px; padding:14px 18px; margin:14px 0;
+          font-family:"Courier New", monospace; font-size:14px; white-space:pre-wrap; }
+  .term .c { color:#8ce99a; }
+  .tip { background:#fffbe8; border:1px solid #f0e6b8; border-radius:10px; padding:12px 18px; margin:14px 0; font-size:15px; }
+  .tip b { color:#8a6d00; }
+  .pit { background:#fdecec; border:1px solid #f4c9c9; border-radius:10px; padding:12px 18px; margin:14px 0; font-size:15px; }
+  .pit b { color:var(--red); }
+  ul { padding-left:22px; } li { margin:6px 0; }
+  .divider { border:none; border-top:1px solid var(--line); margin:44px 0; }
+  table.verdict { width:100%; border-collapse:collapse; background:#fff; border:2px solid var(--ink);
+                  border-radius:16px; overflow:hidden; margin:18px 0 8px; font-size:15px; }
+  table.verdict th { background:var(--ink); color:#fff; text-align:left; padding:10px 14px; font-size:12px;
+                     letter-spacing:2px; text-transform:uppercase; }
+  table.verdict td { padding:10px 14px; border-top:1px solid var(--line); vertical-align:top; }
+  table.verdict td.tool { font-weight:800; white-space:nowrap; }
+  .vf, .vd { display:inline-block; font-weight:900; font-size:12px; letter-spacing:1.5px; text-transform:uppercase;
+             border-radius:8px; padding:2px 10px; }
+  .vf { background:#e6f6ed; color:var(--green); }         /* FUTURE */
+  .vd { background:#fdecec; color:var(--red); }           /* FINISHED */
+  .quick { background:#fff; border:2px solid var(--ink); border-radius:16px; padding:26px 30px; margin:8px 0 20px; }
+  .quick h3 { margin:0 0 12px; font-size:20px; }
+  .quick ol { margin:0; padding-left:20px; } .quick li { margin:8px 0; font-size:15.5px; }
+  .quick .flow { font-family:"Courier New",monospace; font-size:13px; color:#131318; background:#f3f1ec;
+                 border-radius:8px; padding:12px 14px; margin-top:14px; white-space:pre-wrap; }
+  .zh { background:#fff; border:2px solid var(--ink); border-radius:16px; padding:28px 30px; margin-top:48px; }
+  .zh h3 { margin:0 0 8px; font-size:22px; }
+  .zh .btn { display:inline-block; background:var(--red); color:#fff; font-weight:900;
+             padding:13px 26px; border-radius:12px; text-decoration:none; margin-top:12px; font-size:17px; }
+  .zh .small { color:var(--mut); font-size:14px; margin-top:10px; }
+  .cta { background:var(--ink); color:#fff; border-radius:16px; padding:28px 30px; margin-top:26px; }
+  .cta h3 { margin:0 0 8px; font-size:22px; }
+  .cta a { color:var(--yellow); font-weight:700; text-decoration:none; }
+  .footer { margin-top:26px; color:var(--mut); font-size:14px; }
+  code { background:#f3f1ec; border-radius:5px; padding:1px 6px; font-family:"Courier New",monospace; font-size:13.5px; }
+  @media print { body { background:#fff; } .page { padding:24px; } h2.skill { page-break-inside:avoid; }
+                 table.verdict { page-break-inside:avoid; } .quick { page-break-inside:avoid; }
+                 .zh { page-break-inside:avoid; } .cta { page-break-inside:avoid; } }
+</style>
+
+<div class="page">
+  <div class="kicker">Free guide · @automatewithanand</div>
+  <h1>My 2026 Automation Stack<br>Future or Finished.</h1>
+  <p class="sub">the 8 verdicts from the reel, in full — and the 5 tools I actually run every single day</p>
+
+  <div class="slashbox">
+    <span class="grey">$</span> zapier upgrade --plan "pay per task, forever"<br>
+    <span class="grey">$</span> pip install langchain --wrappers 47<br>
+    <span class="grey">$</span> chatgpt ask --same_question --again --tomorrow
+  </div>
+  <p>Everything in that terminal is <b>finished</b>. Not because the tools are bad — because their
+     <i>business model</i> is. Per-task pricing and wrapper layers can't survive a world where an AI
+     agent does the task for free. In the reel I gave you the verdicts; this guide is the full
+     breakdown I promised: <b>why</b> each tool lives or dies, the exact 5-tool stack I run at
+     ZeroHands every day, what each one replaces, what it roughly costs, the setup command,
+     and the pitfall that catches everyone the first time.</p>
+
+  <h2>The verdict table</h2>
+  <p>Screenshot this. Then argue with me in the comments.</p>
+  <table class="verdict">
+    <tr><th>Tool</th><th>Verdict</th><th>One-line reason</th></tr>
+    <tr><td class="tool">ChatGPT (chat window)</td><td><span class="vd">Finished</span></td>
+        <td>Asking AI for help is the calculator era — the answer dies in the chat, nothing compounds.</td></tr>
+    <tr><td class="tool">ChatGPT Agent mode</td><td><span class="vf">Future</span></td>
+        <td>The moment it stops answering and starts <i>doing</i>, it's a different product.</td></tr>
+    <tr><td class="tool">Zapier</td><td><span class="vd">Finished</span></td>
+        <td>Per-task pricing dies when an agent runs the same task for free.</td></tr>
+    <tr><td class="tool">n8n</td><td><span class="vf">Future</span></td>
+        <td>Self-hosted, free, and it runs agents — not just triggers.</td></tr>
+    <tr><td class="tool">LangChain</td><td><span class="vd">Finished</span></td>
+        <td>A wrapper layer the models absorbed — the glue became a feature.</td></tr>
+    <tr><td class="tool">Make</td><td><span class="vd">Finished</span></td>
+        <td>Same per-operation meter as Zapier. Same meter, same fate.</td></tr>
+    <tr><td class="tool">HeyGen</td><td><span class="vf">Future</span></td>
+        <td>Film once, publish forever — it makes the camera optional.</td></tr>
+    <tr><td class="tool">Claude Code</td><td><span class="vf">Future</span></td>
+        <td>The terminal that builds everything else on this list.</td></tr>
+    <tr><td class="tool">AI agents</td><td><span class="vf">Future</span></td>
+        <td>Not a tool — the category everything above is being rebuilt around.</td></tr>
+  </table>
+  <p>Notice the pattern: everything <b>finished</b> charges you per task or wraps someone else's model.
+     Everything <b>future</b> either <i>is</i> an agent, <i>runs</i> agents, or produces an asset agents can't
+     (your face, your voice). Keep that filter — it'll outlive this list.</p>
+
+  <hr class="divider">
+
+  <h2>The stack I run daily</h2>
+  <p>Five tools. Together they replace a developer, an ops hire, a videographer, an editor,
+     and four subscriptions to video-gen apps. Here's each one, honestly.</p>
+
+  <!-- TOOL 1 -->
+  <h2 class="skill"><span class="stepnum">1</span>Claude Code — the brain</h2>
+  <p class="role">Replaces · a developer + every "no-code" tool at once</p>
+  <p class="what">Claude Code is Claude running in your terminal with permission to read files, write code,
+     and run commands. It doesn't suggest an automation — it <b>builds and executes</b> it. My entire content
+     pipeline (scripts, video edits, ffmpeg compositing, API calls) runs from one-line commands that
+     Claude Code wrote and now operates.</p>
+  <p>The compounding trick is <b>skills</b>: instruction files saved at
+     <code>.claude/skills/&lt;name&gt;/SKILL.md</code> inside a project. Claude auto-loads them whenever they're
+     relevant — so it permanently knows your tools, your voice, your commands. You explain the job once,
+     then every future session starts already-trained.</p>
+  <div class="term"><span class="c"># install (macOS / Linux), then run it inside any project folder</span>
+npm install -g @anthropic-ai/claude-code
+cd ~/my-project && claude</div>
+  <div class="prompt"><b>Prompt — your first real automation (paste as-is)</b>
+Look at this project folder. Find the most repetitive manual task you can
+see evidence of (file naming, format conversion, copy-paste between files,
+repeated commands). Build a single script that automates it end to end,
+save it as automate.sh (or automate.py), run it once to prove it works,
+and show me the before/after. Then write a one-line command I can run
+any time to repeat it.</div>
+  <p><b>Cost:</b> Claude Pro (~$20/mo) covers real daily use; heavier builders move to Max. Compare that
+     to one hour of a freelance developer and the math ends the conversation.</p>
+  <div class="tip"><b>Setup tip:</b> create one skill file per repeated job (script writer, report builder,
+     video compositor). Prompts don't compound — skills do. If you're re-explaining something in every
+     chat, that explanation belongs in a SKILL.md.</div>
+  <div class="pit"><b>Pitfall:</b> treating it like a chatbot. If you ask questions, you get answers. Give it a
+     <b>goal and permission</b> ("build it, run it, show me the output") and it becomes an employee. The verdict
+     table above is literally this distinction — chat is finished, agents are the future.</div>
+
+  <!-- TOOL 2 -->
+  <h2 class="skill"><span class="stepnum">2</span>n8n — the workflow engine</h2>
+  <p class="role">Replaces · Zapier + Make (and their per-task bills)</p>
+  <p class="what">n8n is the automation canvas that survived my own verdict table, for one structural reason:
+     you can <b>self-host it for free</b>, and it has native AI-agent nodes. Zapier charges you every time a task
+     runs; n8n on your own machine runs 10 or 10,000 executions for the same price: zero. It's where my
+     always-on workflows live — the things that should run at 3am without me: lead capture to CRM,
+     content-posting schedules, inbox triage, report generation.</p>
+  <div class="term"><span class="c"># self-host n8n in one command (needs Docker installed — docker.com, free)</span>
+docker run -it --rm -p 5678:5678 -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n
+
+<span class="c"># then open http://localhost:5678 in your browser — that's it</span></div>
+  <div class="prompt"><b>Prompt — let Claude Code build the workflow for you</b>
+I'm running n8n locally at http://localhost:5678. Design a workflow for
+this task: [describe ONE repetitive task, e.g. "when a new row lands in
+my Google Sheet of leads, draft a personalised intro email and save it
+to Gmail drafts"]. Give me the complete workflow as importable n8n JSON,
+list every credential I need to connect and where to click to add each
+one, then walk me through testing it with one sample row.</div>
+  <p><b>Cost:</b> $0 self-hosted (their cloud plan starts ~€24/mo if you'd rather not run Docker). The real
+     cost is the one evening it takes to ship your first workflow.</p>
+  <div class="tip"><b>Setup tip:</b> pick ONE task that happens at least daily and annoys you every time.
+     One boring workflow that runs every day beats a spectacular one that never ships.</div>
+  <div class="pit"><b>Pitfall:</b> building ten half-finished workflows. The graveyard of automation is full of
+     80%-done canvases. Finish one, watch it run unattended for a week, <i>then</i> start the second.</div>
+
+  <!-- TOOL 3 -->
+  <h2 class="skill"><span class="stepnum">3</span>HeyGen — the face</h2>
+  <p class="role">Replaces · the camera, the studio, the reshoot</p>
+  <p class="what">HeyGen trains a talking avatar from roughly <b>2 minutes of real footage</b>. Type a script,
+     get yourself on camera — same face, same voice. I filmed one session and trained <b>17 looks across
+     5 outfits</b>; every reel on my feed since then was typed, not filmed. This is the "produce an asset"
+     side of the future column: agents can write and edit, but your face is yours.</p>
+  <div class="prompt"><b>Prompt — script it before you render it (paste into Claude Code)</b>
+Write a 45-60 second talking-head reel script on [topic]. Rules: hook in
+the first 3 seconds that opens a loop, one core idea only, spoken
+8th-grade English, short sentences, name one specific tool or number,
+end with "Comment [KEYWORD] and I'll send you [thing]". 110-150 words.
+Plain text only — I'm pasting it straight into a HeyGen avatar render.</div>
+  <p><b>Cost:</b> creator plans start around the price of a lunch per month; on API plans think roughly
+     <b>one credit ≈ one minute of avatar video</b>. A weekly posting schedule burns a handful of credits —
+     trivially cheap next to filming.</p>
+  <div class="tip"><b>Setup tip:</b> at your one filming session, capture <b>multiple looks</b> — 2–3 outfits,
+     2 settings, front and side angles, ~2 minutes of natural talking each. Rotating looks is what makes
+     the feed look alive instead of like one recording session on repeat.</div>
+  <div class="pit"><b>Pitfall:</b> the ~5,000 character input limit, and rendering unapproved drafts. Scripts are
+     free; renders cost credits. Lock the script first, render once.</div>
+
+  <!-- TOOL 4 -->
+  <h2 class="skill"><span class="stepnum">4</span>ElevenLabs — the voice + the timing</h2>
+  <p class="role">Replaces · the video editor's entire sync job</p>
+  <p class="what">Two jobs. <b>Voice:</b> the best voice cloning and text-to-speech available — if an avatar's
+     built-in voice sounds flat, an ElevenLabs clone of your real voice fixes it. <b>Timing:</b> their <b>Scribe</b>
+     speech-to-text returns a timestamp for <i>every single word</i> in a video. Once you know exactly when each
+     word lands, everything an editor used to eyeball becomes math — captions light up on the spoken word,
+     graphics pop at the name-drop, cuts land at sentence ends.</p>
+  <div class="term"><span class="c"># word-level timestamps for any video — one curl (key from elevenlabs.io → API keys)</span>
+curl -s https://api.elevenlabs.io/v1/speech-to-text \
+  -H "xi-api-key: YOUR_API_KEY" \
+  -F model_id=scribe_v1 \
+  -F file=@my_video.mp4 > words.json
+
+<span class="c"># words.json now holds {"word":"step","start":0.12,"end":0.31}, for every word</span></div>
+  <p><b>Cost:</b> Scribe runs about <b>$0.013 for a 2-minute reel</b>. One cent replaces the sync work of a human
+     editor — the single best money in this entire stack. Voice plans start free; the paid tiers begin
+     around $5/mo.</p>
+  <div class="tip"><b>Setup tip:</b> use Scribe over free local Whisper. I ran Whisper first — it mishears
+     every proper noun ("Claude" becomes "clot", "n8n" becomes "n 8 n"), which breaks captions on exactly
+     the words that matter. For a cent per reel this isn't a decision.</div>
+  <div class="pit"><b>Pitfall:</b> transcribing the raw render instead of the final trimmed video. If you trim
+     after transcribing, every timestamp is offset and every caption fires early. Trim first, transcribe last.</div>
+
+  <!-- TOOL 5 -->
+  <h2 class="skill"><span class="stepnum">5</span>Kie.ai — the generation backend</h2>
+  <p class="role">Replaces · four separate subscriptions to video/image apps</p>
+  <p class="what">Kie.ai is one API key that routes to the frontier generation models — Kling for cinematic
+     video, nano-banana for images, ElevenLabs sound effects, and more — <b>pay-per-generation</b> instead of a
+     monthly plan per app. Notice it survives my own "per-task pricing is finished" rule, because it meters
+     GPU output (which genuinely costs money per run), not a workflow step an agent could do for free.
+     All my AI b-roll and generated imagery flows through it.</p>
+  <div class="term"><span class="c"># generate a 5-second vertical b-roll clip (key from kie.ai dashboard)</span>
+curl -s -X POST https://api.kie.ai/api/v1/jobs/createTask \
+  -H "Authorization: Bearer YOUR_KIE_KEY" -H "Content-Type: application/json" \
+  -d '{"model":"kling-2.6/text-to-video","callBackUrl":"","input":{
+    "prompt":"dark server room, slow dolly forward, red accent light, cinematic, no text, no watermarks, no faces",
+    "duration":5,"aspect_ratio":"9:16"}}'
+
+<span class="c"># response gives a taskId — poll until the video URL appears:</span>
+curl -s https://api.kie.ai/api/v1/jobs/task/TASK_ID -H "Authorization: Bearer YOUR_KIE_KEY"</div>
+  <p><b>Cost:</b> credits, cents per generation — a 5-second video clip costs less than a coffee, an image
+     costs less than the sugar in it. You top up when you produce, and pay nothing when you don't.</p>
+  <div class="tip"><b>Setup tip:</b> end every video prompt with <i>"no text, no watermarks, no subtitles,
+     no captions"</i> — generation models love inventing fake UI text, and one watermarked clip ruins an
+     otherwise clean edit.</div>
+  <div class="pit"><b>Pitfall:</b> a 200 OK response means the task was <b>created</b>, not completed. Always poll
+     the task URL until the output appears — treating 200 as "done" is the #1 beginner integration bug.</div>
+
+  <hr class="divider">
+
+  <h2>Why the finished column is finished</h2>
+  <p><b>Per-task pricing is a bet against your own growth.</b> Zapier and Make charge you every time an
+     automation runs — which means the better your automation works, the bigger your bill. That model made
+     sense when connecting two apps required their engineering. It stops making sense the day an agent can
+     write the same integration as a script on your machine and run it a million times for free. You're no
+     longer paying for the task; you're paying rent on not knowing it's now free.</p>
+  <p><b>Wrappers die when the model absorbs them.</b> LangChain's whole value was glue — chaining prompts,
+     managing memory, calling tools — at a moment when raw models couldn't do any of that. Every one of those
+     features now ships inside the models and inside agent products like Claude Code. When the platform
+     absorbs your layer, you don't compete with the platform; you become a changelog entry. The same logic
+     applies to every "AI-powered" app that is a thin prompt over someone else's model.</p>
+  <p><b>What survives is assets and engines.</b> Look at the future column again: an agent (Claude Code),
+     an engine you own and self-host (n8n), and asset factories (HeyGen, ElevenLabs, Kie.ai) that produce
+     things — your face, your voice, footage — that agents consume but can't conjure. That's the durable
+     shape of a 2026 stack: <b>one brain, one engine you own, and assets nobody can meter.</b></p>
+
+  <hr class="divider">
+
+  <h2>Quickstart — your first week</h2>
+  <div class="quick">
+    <h3>Start with 3 of the 5. In this order.</h3>
+    <ol>
+      <li><b>Day 1–2: Claude Code.</b> Install it, open your messiest project folder, and run the "first real
+          automation" prompt from Tool 1. Ship one working script. This is the brain — everything else
+          gets easier once it's in place.</li>
+      <li><b>Day 3–4: n8n.</b> Run the Docker one-liner, then have Claude Code design your first workflow
+          (the Tool 2 prompt). One repetitive daily task, fully finished, running unattended.</li>
+      <li><b>Day 5–7: ElevenLabs.</b> Get an API key, run one Scribe transcription on any video you have, and
+          open the words JSON. The moment you see per-word timestamps, you'll understand how every
+          "how is this edited so fast" video on your feed is actually made.</li>
+    </ol>
+    <div class="flow">week 1: brain (Claude Code) → engine (n8n) → timing (ElevenLabs)
+week 2+: add the face (HeyGen) and the footage (Kie.ai)
+         only when you're ready to publish — not before.</div>
+  </div>
+
+  <h2>The 5 mistakes that stall beginners</h2>
+  <ul>
+    <li><b>Buying the whole stack on day one</b> — five subscriptions and zero shipped automations is the most
+        expensive way to feel productive. Three tools, one week, one thing running.</li>
+    <li><b>Staying in the chat window</b> — if your AI use is still question → answer → copy-paste, you're in
+        the finished column of your own life. Give the agent the goal and the keyboard.</li>
+    <li><b>Paying per task out of habit</b> — every Zapier zap you keep is a subscription to not learning
+        n8n. Migrate the top 3 zaps first; the rest follows.</li>
+    <li><b>Automating the interesting task instead of the boring one</b> — boring + daily beats impressive +
+        occasional, every time. The ROI is in the repetition, not the demo.</li>
+    <li><b>Never letting it run unattended</b> — an automation you babysit is just a slower way of doing it
+        yourself. The test is a full week of it running while you don't watch.</li>
+  </ul>
+
+  <div class="zh">
+    <h3>Want this done FOR you? — ZeroHands</h3>
+    <p>If you'd rather have <b>ZeroHands</b> build and run this whole stack for your business —
+       the agent setup, the workflows, the content system, all of it — book a free
+       20-minute call. You show up once; we handle everything after.</p>
+    <a class="btn" href="https://calendly.com/anand_kaliappan/call">Book a free call &rarr;</a>
+    <p class="small">calendly.com/anand_kaliappan/call · zerohands.co</p>
+  </div>
+
+  <div class="cta">
+    <h3>This is the exact stack I run at ZeroHands</h3>
+    <p>One brain, one engine, three asset factories — and a feed that publishes daily without a camera.
+       I share the real builds — screens, prompts, and the misses too — one automation at a time.</p>
+    <p>Follow <a href="https://www.instagram.com/automatewithanand/">@automatewithanand</a> on Instagram
+       · Subscribe on YouTube · Comment <b>STACK</b> on the reel if you want the next guide first.</p>
+  </div>
+
+  <p class="footer">© 2026 automatewithanand · You're free to share this guide — just keep the credit.</p>
+</div>

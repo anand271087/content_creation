@@ -1,0 +1,5 @@
+Hey! Here's the full 2026 stack guide I promised — all 8 verdicts explained, plus the 5 tools I actually run daily (costs, setup commands, and the pitfalls included): [LINK]
+
+Quick question so I can point you to the right starting tool — are you still paying for Zapier/Make, or starting from scratch?
+
+PS — if you'd rather have us build the whole stack for you, grab a free 20-min call: calendly.com/anand_kaliappan/call
