@@ -157,7 +157,7 @@ def compute_windows(words, duration):
 def build(avatar: Path, captions: Path, out: Path,
           crop_full: str = "crop=560:608:250:656,scale=1080:1174",
           crop_tight: str = "crop=608:400:226:664,scale=1080:710",
-          phases=None, slash_anchor: str | None = None,
+          phases=None, slash_anchor: str | None = None, no_slash: bool = False,
           palette: str = "cream", blur_base: bool = False,
           band_crop: str | None = None,
           full_y: int | None = None, mini_y: int | None = None) -> Path:
@@ -241,10 +241,12 @@ def build(avatar: Path, captions: Path, out: Path,
         n_in += 1
 
     # red slash over the hook card, from the negation word to hook end
-    hs, he = win["hook"]
-    parts.append(f"[{prev}][3:v]overlay=x={CARD_X}:y={CARD_Y}"
-                 f":enable='between(t\\,{slash_t:.2f}\\,{he:.2f})'[oslash]")
-    prev = "oslash"
+    # (no_slash=True for scripts with no negation beat — e.g. pure explainers)
+    if not no_slash:
+        hs, he = win["hook"]
+        parts.append(f"[{prev}][3:v]overlay=x={CARD_X}:y={CARD_Y}"
+                     f":enable='between(t\\,{slash_t:.2f}\\,{he:.2f})'[oslash]")
+        prev = "oslash"
 
     # phrase captions: accumulate inside their phase window
     cap_idx = 0
