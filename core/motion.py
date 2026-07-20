@@ -34,7 +34,28 @@ MAGENTA = "0xFF00FF"
 SIZES = {
     "spring_label": (960, 240),
     "countup": (760, 300),
+    "pop_card": (720, 520),
 }
+
+
+def pop_card(name: str, logo_png: Path | None, out: Path,
+             card_bg: str = "#FFFFFF", text_color: str = "#14120E",
+             duration: float = 3.0) -> Path:
+    """Big logo card that pops center-frame with a motion-blur-in
+    (verdict_board reveal). logo_png=None renders a text-only card."""
+    import base64, io
+    if logo_png and Path(logo_png).exists():
+        b64 = base64.b64encode(Path(logo_png).read_bytes()).decode()
+    else:
+        # genuinely transparent 1x1 for text-only cards (hardcoded strings lie)
+        from PIL import Image as _I
+        buf = io.BytesIO()
+        _I.new("RGBA", (1, 1), (0, 0, 0, 0)).save(buf, format="PNG")
+        b64 = base64.b64encode(buf.getvalue()).decode()
+    logo_uri = f"data:image/png;base64,{b64}"
+    return render_motion("pop_card", out, {
+        "NAME": name, "LOGO": logo_uri, "CARD_BG": card_bg,
+        "TEXT_COLOR": text_color}, duration)
 
 
 def render_motion(template: str, out: Path, subs: dict[str, str],
