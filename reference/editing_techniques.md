@@ -97,3 +97,20 @@ Status: ✅ = existing machinery · 🔨 = small build (≤half day) · 🏗 = m
 - **category_flash** (Dadfan2OglS): many tools grouped by use-case, rapid-fire <15s loop. Decision rule: "N tools by category, no reasons".
 - **chaptered listicle** (DYpUDeCu9xV): "three things" masterclass = Format #8 split + agenda card + evidence grids.
 - **before/after self-demo** (Da5JDSjv7zI): Format #8 variant for any "AI restyles video" topic.
+- **matrix_board** (DXuBKZojyOj, Chris Chung): 2-D grid — labeled row rail × formula columns × accent PAYOFF column, one cell per spoken word; finished grid = cheat-sheet. Decision rule: "formula/cheat-sheet with rows × columns". 🏗 medium (grid compositor + sticky-card PIL).
+- **effect_recipe** (Da0Rpo-R2oj, Joe Anderson): result-first live hook → scope promise → ingredients board → screen-record step chain (1 keyword/action) → callback replay. Decision rule: "build/recreate X in N steps/nodes". 🏗 medium.
+- **keyword_pill_talkinghead** (DA0ua3-yuDg, Mosseri): low-edit authority — pinned frame-1 title pill + phrase sentence-case captions + colored bookmark pill per numbered tip, one shot, no music. Decision rule: authority/meta tip content only (NOT a viral board).
+
+## Batch 2 additions (2026-07-21) — new primitives from IG-education + creator reels
+- **Pinned frame-1 title pill** (Mosseri): persistent "what this reel is" label sets expectations, beats cliffhanger bait for info content. 🔨 `pinned_title_pill(text, corner, until)`.
+- **Phrase-chunked sentence-case captions** (Mosseri): calm 3-5 word phrases, soft shadow, non-Hormozi — for authority tone. 🔨
+- **Two-tone emphasis caption pill** (Reif Harrison): bold lead word + grey trailing in ONE pill, one line — clean alt to karaoke. 🔨 small.
+- **Invisible same-frame jump-cut** (Reif): hard cut on identical crop where Scribe word-gap > ~0.35s → deletes breaths, tightens energy. 🔨 ≤half day, high reuse across ALL talking-head formats. (Distinct from our multi-cam jump cut.)
+- **Colored bookmark pills** (Mosseri): white pill + colored text as section labels per tip. 🔨 ~30min.
+- **Ingredients preview board** (Joe Anderson): floating numbered device mockups = "you need N clips/nodes" TOC. 🏗 (effect_recipe dependency).
+- **Accent payoff-column** (Chris Chung): rightmost result column in a distinct hue = the dopamine. 🔨 (matrix_board dependency).
+- **Live toss/swap hook** (Joe Anderson): physical action (clothing toss) IS the transition — hook and lesson in one moment. 🔨 shoot + ffmpeg cut.
+- **Animated gradient result-frame** (Joe): rainbow border ring on the callback replay clip. 🔨 low.
+- **ANTI-PATTERN logged**: bare grey-wall talking-head monologue with no framework + no CTA (Carly, Reif) — only works on platform authority; beats us 5-10× the wrong way. Harvest the myth-bust hook + expressive delivery + data payoff, execute inside sort_board/swap_board instead.
+
+Full plan + do's/don'ts: `reference/reel_upgrade_plan.md`. Per-reel deep dives: `assets/reference_analysis/{DA0ua3-yuDg,C8U55spveJo,DXuBKZojyOj,DAovc5zPIBj,Da0Rpo-R2oj}/analysis.md`.
